@@ -1,0 +1,36 @@
+.text-highlight {
+  color: red;
+}
+.text-hint {
+  color: #999;
+}
+
+button {
+  padding: 5px 10px;
+  background: #38b7ea;
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+/* 示例区域 */
+.demo-area {
+  border: 1px solid #f8f8f8;
+  padding: 10px;
+}
+.demo-area textarea {
+  display: block;
+  margin-top: 5px;
+  width: 100%;
+  height: 120px;
+}
+.demo-area canvas {
+  width: 200px;
+  height: 100px;
+}
+
+/* 重置样式 */
+.article-entry td {
+  padding: 0;
+}

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Data URL简介与使用 | 歪马行空</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1. 简介Data URL，是以data:模式为前缀的URL，允许内容的创建者将较小的文件嵌入到文档中。与常规的URL使用场合类似（下面会具体介绍可以将Data URL用在哪些地方）。 Data URL由data:前缀、MIME类型（表明数据类型）、base64标志位（如果是文本，则可选）以及数据本身四部分组成。 语法">
+<meta name="keywords" content="沉淀">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data URL简介与使用">
+<meta property="og:url" content="http://verymuch.com/2017/12/14/Data-URL简介与使用/index.html">
+<meta property="og:site_name" content="歪马行空">
+<meta property="og:description" content="1. 简介Data URL，是以data:模式为前缀的URL，允许内容的创建者将较小的文件嵌入到文档中。与常规的URL使用场合类似（下面会具体介绍可以将Data URL用在哪些地方）。 Data URL由data:前缀、MIME类型（表明数据类型）、base64标志位（如果是文本，则可选）以及数据本身四部分组成。 语法格式如下： 1data:[&amp;amp;lt;mediatype&amp;amp;gt">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://verymuch.com/images/data-url.jpeg">
+<meta property="og:updated_time" content="2017-12-14T06:18:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Data URL简介与使用">
+<meta name="twitter:description" content="1. 简介Data URL，是以data:模式为前缀的URL，允许内容的创建者将较小的文件嵌入到文档中。与常规的URL使用场合类似（下面会具体介绍可以将Data URL用在哪些地方）。 Data URL由data:前缀、MIME类型（表明数据类型）、base64标志位（如果是文本，则可选）以及数据本身四部分组成。 语法格式如下： 1data:[&amp;amp;lt;mediatype&amp;amp;gt">
+<meta name="twitter:image" content="http://verymuch.com/images/data-url.jpeg">
+    
+
+    
+        <link rel="alternate" href="/" title="歪马行空" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/css/images/avatar2.jpg" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">歪马行空</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="https://github.com/verymuch">GitHub</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar0.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="https://github.com/verymuch">GitHub</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar0.jpg" />
+            <h2 id="name">verymuch</h2>
+            <h3 id="title">Web Developer ( FE )</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Beijing, China</span>
+            <a id="follow" target="_blank" href="https://github.com/verymuch/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                8
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                5
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/verymuch" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-Data-URL简介与使用" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Data URL简介与使用
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/12/14/Data-URL简介与使用/">
+            <time datetime="2017-12-14T00:34:41.000Z" itemprop="datePublished">2017-12-14</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/沉淀/">沉淀</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><link rel="stylesheet" href="/css/custom.css"></p>
+<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+
+<h2><span id="1-简介">1. 简介</span></h2><p><code>Data URL</code>，是以<code>data:</code>模式为前缀的URL，允许内容的创建者将较小的文件嵌入到文档中。与常规的URL使用场合类似（下面会具体介绍可以将Data URL用在哪些地方）。</p>
+<p><code>Data URL</code>由<strong><code>data:</code>前缀、MIME类型（表明数据类型）、<code>base64</code>标志位（如果是文本，则可选）以及数据本身四部分组成</strong>。</p>
+<p>语法格式如下：
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data:[<span class="string">&amp;lt;mediatype&amp;gt;</span>][<span class="symbol">;base64</span>],data</span><br></pre></td></tr></table></figure></p>
+<p><code>mediatype</code>是一个MIME（Multipurpose Internet Mail Extension）类型字符串，如<code>image/jpeg</code>表示一个JPEG图片文件。如果省略，默认值为<code>text/plain;charset=US-ASCII</code>。</p>
+<a id="more"></a>
+<h2><span id="2-data-url的优缺点">2. Data URL的优缺点</span></h2><ol>
+<li><p>Data URL的优势</p>
+<p>和传统的外部资源引用，Data URL有着以下优势：</p>
+<ul>
+<li>当访问外部资源很麻烦或受限时，可以将外部资源转为Data URL引用(这个比较鸡肋)</li>
+<li>当图片是在服务器端用程序动态生成，每个访问用户显示的都不同时，这是需要返回一个可用的URL（场景较少）</li>
+<li>当图片的体积太小，<strong>占用一个HTTP会话</strong>不是很值得时（雪碧图可以出场了）</li>
+</ul>
+</li>
+<li><p>Data URL的缺点</p>
+<p>虽然Data URL允许使用者将文件嵌入到文档中，这在某些场景下较为合适，但是Data URL也有一些缺点：</p>
+<ul>
+<li>体积更大：Base64编码的<strong>数据体积通常是原数据的体积4/3</strong>，也就是Data URL形式的图片会比二进制格式的图片体积大1/3</li>
+<li>不会缓存：Data URL形式的图片<strong>不会被浏览器缓存</strong>，这意味着每次访问这样页面时都被下载一次。这是一个使用效率方面的问题——尤其当这个图片被整个网站大量使用的时候。</li>
+</ul>
+</li>
+</ol>
+<h2><span id="3-如何获取base64编码">3. 如何获取base64编码</span></h2><ol>
+<li><p>Linux/Mac OS X下可以使用<code>uuencode</code>命令</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uuencode -m <span class="tag">&lt;<span class="name">源文件</span>&gt;</span> <span class="tag">&lt;<span class="name">转码后标识</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如执行<code>uuencode -m hello-base64 hello</code>，会得到如下结果：</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">begin-base64 644 hello</span><br><span class="line">aGVsbG8gYmFzZTY0 // 此处为base64编码，对应文本内容为 <span class="emphasis">'hello base64'</span></span><br><span class="line">====</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实用原生Web API编码/解码</p>
+<p>Javascript中有两个函数负责编码和解码base64字符串，分别是<code>atob</code>和<code>btoa</code>。</p>
+<ul>
+<li><code>atob()</code>: 负责解码已经使用base64编码了的字符串。</li>
+<li><code>btoa()</code>: 将二进制字符串转为base64编码的ASCII字符串。</li>
+</ul>
+<p>两者都只针对Data URL中的data进行处理。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">btoa</span><span class="params">(<span class="string">'hello base64'</span>)</span></span> <span class="comment">// "aGVsbG8gYmFzZTY0"</span></span><br><span class="line"><span class="function"><span class="title">atob</span><span class="params">(<span class="string">'aGVsbG8gYmFzZTY0'</span>)</span></span> <span class="comment">// "hello base64"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Canvas的toDataURL方法</p>
+<p>Canvas提供了<code>toDataURL</code>方法，用于获取canvas绘制内容，将其转为base64格式。</p>
+<p>如下所示，文本框中的内容即为canvas中绘制内容的base64格式。</p>
+<p><div class="demo-area">
+ <canvas id="testCanvas" width="200" height="100"></canvas>
+ <textarea id="testCanvas-content"></textarea>
+</div></p>
+<script>
+var canvas = document.getElementById('testCanvas');
+if (canvas.getContext) {
+ var ctx = canvas.getContext('2d');
+ // 设置字体
+ ctx.font = "Bold 20px Arial"; 
+ // 设置对齐方式
+ ctx.textAlign = "left";
+ // 设置填充颜色
+ ctx.fillStyle = "#000"; 
+ // 设置字体内容，以及在画布上的位置
+ ctx.fillText("hello base64", 10, 30); 
+ // 绘制空心字
+ ctx.strokeText("hello base64", 10, 80);
+ // 获取 Data URL
+ document.getElementById('testCanvas-content').value = canvas.toDataURL();
+}  
+</script>
+
+<p>Html: </p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;canvas <span class="attribute">id</span>=<span class="string">"testCanvas"</span> <span class="attribute">width</span>=<span class="string">"200"</span> <span class="attribute">height</span>=<span class="string">"100"</span>&gt;&lt;/canvas&gt;</span><br><span class="line">&lt;textarea <span class="attribute">id</span>=<span class="string">"testCanvas-content"</span>&gt;&lt;/textarea&gt;</span><br></pre></td></tr></table></figure>
+<p>JS:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'testCanvas'</span>);</span><br><span class="line"><span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">  <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">  <span class="comment">// 设置字体</span></span><br><span class="line">  ctx.font = <span class="string">"Bold 20px Arial"</span>; </span><br><span class="line">  <span class="comment">// 设置对齐方式</span></span><br><span class="line">  ctx.textAlign = <span class="string">"left"</span>;</span><br><span class="line">  <span class="comment">// 设置填充颜色</span></span><br><span class="line">  ctx.fillStyle = <span class="string">"#000"</span>; </span><br><span class="line">  <span class="comment">// 设置字体内容，以及在画布上的位置</span></span><br><span class="line">  ctx.fillText(<span class="string">"hello base64"</span>, <span class="number">10</span>, <span class="number">30</span>); </span><br><span class="line">  <span class="comment">// 绘制空心字</span></span><br><span class="line">  ctx.strokeText(<span class="string">"hello base64"</span>, <span class="number">10</span>, <span class="number">80</span>);</span><br><span class="line">  <span class="comment">// 获取 Data URL</span></span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'testCanvas-content'</span>).value = canvas.toDataURL();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用FileReader API的readAsDataURL方法</p>
+<p>FileReader API提供的readAsDataURL方法能够返回一个基于base64编码的Data URL。</p>
+<p>如下所示，选择文件后返回Data URL。</p>
+<p><div class="demo-area">
+ <input type="file" id="testReadAsDataURL">
+ <textarea id="testReadAsDataURL-content"></textarea>
+</div></p>
+<script>
+ var reader = new FileReader()
+ reader.onload = function(e) {
+   var textarea = document.getElementById('testReadAsDataURL-content');
+   textarea.value = reader.result
+ }
+ document.getElementById('testReadAsDataURL').onchange = function(e) {
+   var file = e.target.files[0]
+   reader.readAsDataURL(file)
+ }
+</script>
+
+<p>Html:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"demo-area"</span>&gt;</span><br><span class="line">  &lt;input type=<span class="string">"file"</span> id=<span class="string">"testReadAsDataURL"</span>&gt;</span><br><span class="line">  &lt;textarea id=<span class="string">"testReadAsDataURL-content"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<p>JS:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader()</span><br><span class="line">reader.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> textarea = <span class="built_in">document</span>.getElementById(<span class="string">'testReadAsDataURL-content'</span>);</span><br><span class="line">  textarea.value = reader.result</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'testReadAsDataURL'</span>).onchange = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> file = e.target.files[<span class="number">0</span>]</span><br><span class="line">  reader.readAsDataURL(file)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2><span id="4-data-url能用在何处呢">4. Data URL能用在何处呢？</span></h2><p>最开始已经说了<code>Data URL</code>，是以<code>data:</code>模式为前缀的URL，使用场合与常规URL相同，即常规URL能够使用的场合，Data URL也可以使用。如：浏览器地址栏、link中引入css文件、script中引入js文件、img src中引入图片、css background url引入背景。</p>
+<ol>
+<li><p>在浏览器地址栏中使用Data URL</p>
+<p><div class="demo-area">
+ <a href="" target="_blank" id="setDataURLInHref">
+ 在浏览器地址栏中使用Data URL，打开上述canvas中绘制的内容</a>
+ <p class="text-hint">注意：chrome 从56开始将Data URL标记为“不安全”，从60开始屏蔽从页面打开的 Data URI 网址，可以<strong>右键新标签打开</strong>。<a href="http://www.cnblogs.com/ziyunfei/p/6753002.html" target="_blank" rel="noopener">详情</a></p>
+</div></p>
+<script>
+ document.getElementById('setDataURLInHref').href = document.getElementById('testCanvas-content').value
+</script>
+
+<p>Html:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a <span class="attribute">href</span>=<span class="string">"base64内容"</span> <span class="attribute">target</span>=<span class="string">"_blank"</span> <span class="attribute">id</span>=<span class="string">"setDataURLInHref"</span>&gt;&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<strong>script/img/video/iframe</strong>等标签的<code>src</code>属性内使用Data URL</p>
+<p>以在script中使用Data URL为例：
+<div class="demo-area">
+ <button id="setDataURLInScriptBtn">点击加入script标签</button>
+</div></p>
+<script>
+ var scriptDataURL = `data:text/javascript;base64,YWxlcnQoJ+WcqHNjcmlwdOS4reS9v+eUqERhdGEgVVJMJykK`
+ // 对应文本为：alert('在script中使用Data URL')
+ $('#setDataURLInScriptBtn').click(function() {
+   $('<script>').attr('src', scriptDataURL).appendTo($('body'))
+ })
+</script>
+
+<p>JS: </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scriptDataURL = <span class="string">`data:text/javascript;base64,YWxlcnQoJ+WcqHNjcmlwdOS4reS9v+eUqERhdGEgVVJMJykK`</span></span><br><span class="line"><span class="comment">// 对应文本为：alert('在script中使用Data URL')</span></span><br><span class="line">$(<span class="string">'#setDataURLInScriptBtn'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">'&lt;script&gt;'</span>).attr(<span class="string">'src'</span>, scriptDataURL).appendTo($(<span class="string">'body'</span>))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>&lt;link&gt;</code>标签的href中使用Data URL</p>
+<div class="demo-area">
+ <button id="setDataURLInLinkBtn">点击将文字的颜色设为红色</button>
+</div>
+
+<script>
+ var linkDataURL = `data:text/css;base64,I3NldERhdGFVUkxJbkxpbmtCdG57Y29sb3I6IHJlZDt9Cg==`
+ // 对应内容为：setDataURLInLinkBtn{color: red;}
+ $('#setDataURLInLinkBtn').click(function() {
+   $('<link rel="stylesheet" type ="text/css">').attr('href', linkDataURL).appendTo($('head'))
+ })
+</script>
+
+<p>JS: </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> linkDataURL = <span class="string">`data:text/css;base64,I3NldERhdGFVUkxJbkxpbmtCdG57Y29sb3I6IHJlZDt9Cg==`</span></span><br><span class="line"><span class="comment">// 对应内容为：setDataURLInLinkBtn&#123;color: red;&#125;</span></span><br><span class="line">$(<span class="string">'#setDataURLInLinkBtn'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">'&lt;link rel="stylesheet" type ="text/css"&gt;'</span>).attr(<span class="string">'href'</span>, linkDataURL).appendTo($(<span class="string">'head'</span>))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在css样式<code>background</code>的url中使用Data URL</p>
+<p><div id="setDataURLInBG" style="width:200px;height:100px;background-size:contain;"></div></p>
+<script>
+ const bgDataURL = $('#testCanvas-content')[0].value
+ $('#setDataURLInBG').css('background-image', `url(${bgDataURL})`)
+</script>
+
+<p>JS: </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bgDataURL = $(<span class="string">'#testCanvas-content'</span>)[<span class="number">0</span>].value</span><br><span class="line">$(<span class="string">'#setDataURLInBG'</span>).css(<span class="string">'background-image'</span>, <span class="string">`url(<span class="subst">$&#123;bgDataURL&#125;</span>)`</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2><span id="5-参考链接">5. 参考链接</span></h2><blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank" rel="noopener">MDN Data URLs</a></p>
+</blockquote>
+<p><a href="http://blog.csdn.net/cuixiping/article/details/45932793" target="_blank" rel="noopener">http://blog.csdn.net/cuixiping/article/details/45932793</a></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://verymuch.com/2017/12/14/Data-URL简介与使用/" data-id="cjb6l2i45000gm13yit7gi4oj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://verymuch.com/2017/12/14/Data-URL简介与使用/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2017/12/14/Data-URL简介与使用/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">escape、encodeURI和encodeURIComponent的区别与使用</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/14/Data-URL简介与使用/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/data-url.jpeg)" alt="Data URL简介与使用" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/12/14/Data-URL简介与使用/" class="title">Data URL简介与使用</a></p>
+                            <p class="item-date"><time datetime="2017-12-14T00:34:41.000Z" itemprop="datePublished">2017-12-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/encode.jpg)" alt="escape、encodeURI和encodeURIComponent的区别与使用" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/" class="title">escape、encodeURI和encodeURIComponent的区别与使用</a></p>
+                            <p class="item-date"><time datetime="2017-12-12T14:51:18.000Z" itemprop="datePublished">2017-12-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/11/01/Javascript-RegExp正则表达式/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/js.jpeg)" alt="Javascript - RegExp正则表达式" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/11/01/Javascript-RegExp正则表达式/" class="title">Javascript - RegExp正则表达式</a></p>
+                            <p class="item-date"><time datetime="2017-11-01T14:28:23.000Z" itemprop="datePublished">2017-11-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/11/01/第二章-ES6-基础/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/practical-modern-javascript.gif)" alt="第二章 ES6 基础" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/11/01/第二章-ES6-基础/" class="title">第二章 ES6 基础</a></p>
+                            <p class="item-date"><time datetime="2017-11-01T08:53:14.000Z" itemprop="datePublished">2017-11-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/10/23/第一章-ECMAScript-和-JavaScript-的未来/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/practical-modern-javascript.gif)" alt="第一章 ECMAScript 和 JavaScript 的未来" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/10/23/第一章-ECMAScript-和-JavaScript-的未来/" class="title">第一章 ECMAScript 和 JavaScript 的未来</a></p>
+                            <p class="item-date"><time datetime="2017-10-23T10:54:46.000Z" itemprop="datePublished">2017-10-23</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/EXERCISE-SPACE/">EXERCISE_SPACE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GROWING-SPACE/">GROWING_SPACE</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/他人经验总结/">他人经验总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作效率/">工作效率</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/有感/">有感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/沉淀/">沉淀</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/他人经验总结/" style="font-size: 10px;">他人经验总结</a> <a href="/tags/工作效率/" style="font-size: 10px;">工作效率</a> <a href="/tags/有感/" style="font-size: 10px;">有感</a> <a href="/tags/沉淀/" style="font-size: 20px;">沉淀</a> <a href="/tags/翻译/" style="font-size: 15px;">翻译</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 verymuch<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://verymuch.com/2017/12/14/Data-URL简介与使用/';
+        
+        this.page.identifier = 'Data-URL简介与使用';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
