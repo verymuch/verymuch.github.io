@@ -5,19 +5,19 @@
     
     <title>escape、encodeURI和encodeURIComponent的区别与使用 | 歪马行空</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="escapeescape是对字符串(string)进行编码(而另外两种是对URL)，作用是让它们在所有电脑上可读。编码之后的效果是%XX或者%uXXXX这种形式。其 ASCII字母、数字、@*/+，这几个字符不会被编码，其余的都会。 注意，当需要对URL编码时，请忘记这个方法，这个方法是针对字符串使用的，不适用于URL">
+    <meta name="description" content="1. escapeescape是对字符串(string)进行编码(而另外两种是对URL)，作用是让它们在所有电脑上可读。编码之后的效果是%XX或者%uXXXX这种形式。其 ASCII字母、数字、@*/+，这几个字符不会被编码，其余的都会。 注意，当需要对URL编码时，请忘记这个方法，这个方法是针对字符串使用的，不适用于">
 <meta name="keywords" content="沉淀">
 <meta property="og:type" content="article">
 <meta property="og:title" content="escape、encodeURI和encodeURIComponent的区别与使用">
 <meta property="og:url" content="http://verymuch.com/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/index.html">
 <meta property="og:site_name" content="歪马行空">
-<meta property="og:description" content="escapeescape是对字符串(string)进行编码(而另外两种是对URL)，作用是让它们在所有电脑上可读。编码之后的效果是%XX或者%uXXXX这种形式。其 ASCII字母、数字、@*/+，这几个字符不会被编码，其余的都会。 注意，当需要对URL编码时，请忘记这个方法，这个方法是针对字符串使用的，不适用于URL。  在实际工作中使用较少，可以先了解功能，待有需求时再使用。 encod">
+<meta property="og:description" content="1. escapeescape是对字符串(string)进行编码(而另外两种是对URL)，作用是让它们在所有电脑上可读。编码之后的效果是%XX或者%uXXXX这种形式。其 ASCII字母、数字、@*/+，这几个字符不会被编码，其余的都会。 注意，当需要对URL编码时，请忘记这个方法，这个方法是针对字符串使用的，不适用于URL。  在实际工作中使用较少，可以先了解功能，待有需求时再使用。 2.">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://verymuch.com/images/encode.jpg">
-<meta property="og:updated_time" content="2017-12-14T00:31:53.000Z">
+<meta property="og:updated_time" content="2017-12-15T01:48:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="escape、encodeURI和encodeURIComponent的区别与使用">
-<meta name="twitter:description" content="escapeescape是对字符串(string)进行编码(而另外两种是对URL)，作用是让它们在所有电脑上可读。编码之后的效果是%XX或者%uXXXX这种形式。其 ASCII字母、数字、@*/+，这几个字符不会被编码，其余的都会。 注意，当需要对URL编码时，请忘记这个方法，这个方法是针对字符串使用的，不适用于URL。  在实际工作中使用较少，可以先了解功能，待有需求时再使用。 encod">
+<meta name="twitter:description" content="1. escapeescape是对字符串(string)进行编码(而另外两种是对URL)，作用是让它们在所有电脑上可读。编码之后的效果是%XX或者%uXXXX这种形式。其 ASCII字母、数字、@*/+，这几个字符不会被编码，其余的都会。 注意，当需要对URL编码时，请忘记这个方法，这个方法是针对字符串使用的，不适用于URL。  在实际工作中使用较少，可以先了解功能，待有需求时再使用。 2.">
 <meta name="twitter:image" content="http://verymuch.com/images/encode.jpg">
     
 
@@ -260,11 +260,11 @@
             <!-- 自定义通用样式，及覆盖样式 -->
 <link rel="stylesheet" href="/css/custom.css">
 
-<h2><span id="escape">escape</span></h2><p>escape是对字符串(string)进行编码(而另外两种是对URL)，作用是让它们在所有电脑上可读。编码之后的效果是%XX或者%uXXXX这种形式。其 <code>ASCII字母、数字、@*/+</code>，这几个字符不会被编码，其余的都会。</p>
+<h2><span id="1-escape">1. escape</span></h2><p>escape是对字符串(string)进行编码(而另外两种是对URL)，作用是让它们在所有电脑上可读。编码之后的效果是%XX或者%uXXXX这种形式。其 <code>ASCII字母、数字、@*/+</code>，这几个字符不会被编码，其余的都会。</p>
 <p class="text-highlight">注意，当需要对URL编码时，请忘记这个方法，这个方法是针对字符串使用的，不适用于URL。</p>
 
 <p>在实际工作中使用较少，可以先了解功能，待有需求时再使用。</p>
-<h2><span id="encodeuri-和-encodeuricomponent">encodeURI 和 encodeURIComponent</span></h2><p>对URL编码是常见的事，所以这两个方法应该是实际中要特别注意的。</p>
+<h2><span id="2-encodeuri-和-encodeuricomponent">2. encodeURI 和 encodeURIComponent</span></h2><p>对URL编码是常见的事，所以这两个方法应该是实际中要特别注意的。</p>
 <p>它们都是编码URL，<strong>唯一区别</strong>就是编码的字符范围：</p>
 <ol>
 <li><code>encodeURI</code>方法不会对下列字符编码<code>ASCII字母、数字、~!@#$&amp;*()=:/,;?+&#39;</code></li>
@@ -272,7 +272,7 @@
 </ol>
 <p>由此可见<code>encodeURIComponent</code>比<code>encodeURI</code>编码范围更大。如，<code>encodeURIComponent</code>会把<code>http://</code>编码 <code>http%3A%2F%2F</code>而<code>encodeURI</code>却不会。</p>
 <a id="more"></a>
-<h2><span id="总结适用场合">总结：适用场合</span></h2><p>三个方法的区别从上面已经能够看出，但是说实话，估计具体哪些字符会被编码没人能记得住，所以化简为繁，只要记住三种方法的使用场合就行了。
+<h2><span id="3-总结适用场合">3. 总结：适用场合</span></h2><p>三个方法的区别从上面已经能够看出，但是说实话，估计具体哪些字符会被编码没人能记得住，所以化简为繁，只要记住三种方法的使用场合就行了。
 　　　 </p>
 <ol>
 <li><p>如果只是编码字符串，不和URL有半毛钱关系，那么用<code>escape</code>。</p>
@@ -285,10 +285,10 @@
 看到了区别吗，连<code>/</code>都被编码了，整个URL已经没法用了。</p>
 </li>
 <li><p>当你需要编码URL中的参数（如rdurl）的时候，那么encodeURIComponent是最好方法。</p>
-</li>
-</ol>
 <figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> param = <span class="string">"http://www.cnblogs.com/season-huang/"</span>; <span class="comment">//param为参数</span></span><br><span class="line">param = <span class="built_in">encodeURIComponent</span>(param);</span><br><span class="line"><span class="keyword">var</span> <span class="built_in">url</span> = <span class="string">"http://www.cnblogs.com?next="</span> + param;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">url</span>) </span><br><span class="line"><span class="comment">// "http://www.cnblogs.com?next=http%3A%2F%2Fwww.cnblogs.com%2Fseason-huang%2F"</span></span><br></pre></td></tr></table></figure>
 <p>从上例可以看出，参数中的<code>/</code>被编码了，如果用encodeURI肯定要出问题，因为后面的<code>/</code>是需要编码的。</p>
+</li>
+</ol>
 
         
         </div>
@@ -299,7 +299,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/" data-id="cjb76j5hl000ixqs6fyv4j8ij" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/" data-id="cjb6jwl2d00078c3yrbfw0km5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -425,7 +425,7 @@
                             <a href="/2017/12/14/Data-URL简介与使用/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/data-url.jpeg)" alt="Data URL简介与使用" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/URL.png)" alt="Data URL简介与使用" class="thumbnail-image"></span>
     
 </a>
 

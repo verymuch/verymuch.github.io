@@ -329,7 +329,7 @@
 <h3><span id="32-正则表达式对象的方法">3.2 正则表达式对象的方法</span></h3><h4><span id="321-test">3.2.1 test()</span></h4><p>该方法表示当前模式是否匹配参数字符串，返回值为布尔值。</p>
 <ol>
 <li><p>常规用法</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/cat/.test(<span class="symbol">'cats</span> <span class="keyword">and</span> dogs') // <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/cat/.<span class="built_in">test</span>(<span class="string">'cats and dogs'</span>) // <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>正则表达式带有<code>g</code>修饰符，每次<code>test</code>方法都<strong>从上次结束的位置开始向后匹配</strong>。</p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> r = /x/<span class="keyword">g</span>;</span><br><span class="line"><span class="keyword">var</span> s = '_x_x';</span><br><span class="line"></span><br><span class="line">r.lastIndex <span class="comment">// 0</span></span><br><span class="line">r.<span class="keyword">test</span>(s) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">r.lastIndex <span class="comment">// 2</span></span><br><span class="line">r.<span class="keyword">test</span>(s) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">r.lastIndex <span class="comment">// 4</span></span><br><span class="line">r.<span class="keyword">test</span>(s) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
@@ -459,14 +459,14 @@
 <li><code>\uhhhh</code> 匹配一个以四位十六进制数（\u0000-\uFFFF）表示的unicode字符。</li>
 </ul>
 <h3><span id="54-字符类">5.4 字符类</span></h3><p>字符类（Class）有一系列字符可供选择，只要匹配其中一个就可以了。所有可供选择的字符都放在<strong>方括号</strong>内，比如<code>[very]</code>表示匹配<code>v</code>,<code>e</code>、<code>r</code>、<code>y</code>之中的任意一个。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/[m]/</span>.test(<span class="string">'very'</span>) <span class="regexp">//</span> false</span><br><span class="line"><span class="regexp">/[m]/</span>.test(<span class="string">'much'</span>) <span class="regexp">//</span> true</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/[m]/.<span class="built_in">test</span>(<span class="string">'very'</span>) // <span class="literal">false</span></span><br><span class="line">/[m]/.<span class="built_in">test</span>(<span class="string">'much'</span>) // <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 <p>在字符类中有两个字符有特殊含义</p>
 <ol>
 <li><p>脱字符(^)</p>
 <p>如果方括号内的第一个字符是<code>[^]</code>，则表示除了字符类之中的字符，匹配其他任意字符。比<code>[^very]</code>表示匹配<code>v</code>,<code>e</code>、<code>r</code>、<code>y</code>之外的任意一个。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/[^m]/</span>.test(<span class="string">'very'</span>) <span class="regexp">//</span> true</span><br><span class="line"><span class="regexp">/[^m]/</span>.test(<span class="string">'much'</span>) <span class="regexp">//</span> false</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/[^m]/.<span class="built_in">test</span>(<span class="string">'very'</span>) // <span class="literal">true</span></span><br><span class="line">/[^m]/.<span class="built_in">test</span>(<span class="string">'much'</span>) // <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 <p>如果方括号内没有其他字符，只有<code>[^]</code>，则匹配一切字符，其中包括换行符，而点号(<code>.</code>)是不包括换行符。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/./</span>.test(<span class="string">'\n'</span>); <span class="regexp">//</span> false</span><br><span class="line"><span class="regexp">/^/</span>.test(<span class="string">'\n'</span>); <span class="regexp">//</span> true</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/./.<span class="built_in">test</span>(<span class="string">'\n'</span>); // <span class="literal">false</span></span><br><span class="line">/^/.<span class="built_in">test</span>(<span class="string">'\n'</span>); // <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 <p>注意，脱字符只有在字符类的第一个位置才有特殊含义，其他位置为字面含义</p>
 </li>
 <li><p>连字符(-)</p>
@@ -566,7 +566,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2017/11/01/Javascript-RegExp正则表达式/" data-id="cjb76j5hk000fxqs6qoht6fhh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2017/11/01/Javascript-RegExp正则表达式/" data-id="cjb6jwl2c00068c3yl4bnxszd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -692,7 +692,7 @@
                             <a href="/2017/12/14/Data-URL简介与使用/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/data-url.jpeg)" alt="Data URL简介与使用" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/URL.png)" alt="Data URL简介与使用" class="thumbnail-image"></span>
     
 </a>
 
