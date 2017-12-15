@@ -11,13 +11,13 @@
 <meta property="og:title" content="Data URL简介与使用">
 <meta property="og:url" content="http://verymuch.com/2017/12/14/Data-URL简介与使用/index.html">
 <meta property="og:site_name" content="歪马行空">
-<meta property="og:description" content="1. 简介Data URL，是以data:模式为前缀的URL，允许内容的创建者将较小的文件嵌入到文档中。与常规的URL使用场合类似（下面会具体介绍可以将Data URL用在哪些地方）。 Data URL由data:前缀、MIME类型（表明数据类型）、base64标志位（如果是文本，则可选）以及数据本身四部分组成。 语法格式如下： 1data:[&amp;amp;lt;mediatype&amp;amp;gt">
+<meta property="og:description" content="1. 简介Data URL，是以data:模式为前缀的URL，允许内容的创建者将较小的文件嵌入到文档中。与常规的URL使用场合类似（下面会具体介绍可以将Data URL用在哪些地方）。 Data URL由data:前缀、MIME类型（表明数据类型）、base64标志位（如果是文本，则可选）以及数据本身四部分组成。 语法格式如下： 1data:[&amp;lt;mediatype&amp;gt;][;base">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://verymuch.com/images/data-url.jpeg">
-<meta property="og:updated_time" content="2017-12-14T06:18:13.000Z">
+<meta property="og:updated_time" content="2017-12-15T00:32:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Data URL简介与使用">
-<meta name="twitter:description" content="1. 简介Data URL，是以data:模式为前缀的URL，允许内容的创建者将较小的文件嵌入到文档中。与常规的URL使用场合类似（下面会具体介绍可以将Data URL用在哪些地方）。 Data URL由data:前缀、MIME类型（表明数据类型）、base64标志位（如果是文本，则可选）以及数据本身四部分组成。 语法格式如下： 1data:[&amp;amp;lt;mediatype&amp;amp;gt">
+<meta name="twitter:description" content="1. 简介Data URL，是以data:模式为前缀的URL，允许内容的创建者将较小的文件嵌入到文档中。与常规的URL使用场合类似（下面会具体介绍可以将Data URL用在哪些地方）。 Data URL由data:前缀、MIME类型（表明数据类型）、base64标志位（如果是文本，则可选）以及数据本身四部分组成。 语法格式如下： 1data:[&amp;lt;mediatype&amp;gt;][;base">
 <meta name="twitter:image" content="http://verymuch.com/images/data-url.jpeg">
     
 
@@ -263,7 +263,7 @@
 <h2><span id="1-简介">1. 简介</span></h2><p><code>Data URL</code>，是以<code>data:</code>模式为前缀的URL，允许内容的创建者将较小的文件嵌入到文档中。与常规的URL使用场合类似（下面会具体介绍可以将Data URL用在哪些地方）。</p>
 <p><code>Data URL</code>由<strong><code>data:</code>前缀、MIME类型（表明数据类型）、<code>base64</code>标志位（如果是文本，则可选）以及数据本身四部分组成</strong>。</p>
 <p>语法格式如下：
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data:[<span class="string">&amp;lt;mediatype&amp;gt;</span>][<span class="symbol">;base64</span>],data</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data:[<span class="string">&lt;mediatype&gt;</span>][<span class="symbol">;base64</span>],data</span><br></pre></td></tr></table></figure></p>
 <p><code>mediatype</code>是一个MIME（Multipurpose Internet Mail Extension）类型字符串，如<code>image/jpeg</code>表示一个JPEG图片文件。如果省略，默认值为<code>text/plain;charset=US-ASCII</code>。</p>
 <a id="more"></a>
 <h2><span id="2-data-url的优缺点">2. Data URL的优缺点</span></h2><ol>
@@ -289,7 +289,7 @@
 <p>如执行<code>uuencode -m hello-base64 hello</code>，会得到如下结果：</p>
 <figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">begin-base64 644 hello</span><br><span class="line">aGVsbG8gYmFzZTY0 // 此处为base64编码，对应文本内容为 <span class="emphasis">'hello base64'</span></span><br><span class="line">====</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>实用原生Web API编码/解码</p>
+<li><p>使用原生Web API编码/解码</p>
 <p>Javascript中有两个函数负责编码和解码base64字符串，分别是<code>atob</code>和<code>btoa</code>。</p>
 <ul>
 <li><code>atob()</code>: 负责解码已经使用base64编码了的字符串。</li>
@@ -298,7 +298,7 @@
 <p>两者都只针对Data URL中的data进行处理。</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">btoa</span><span class="params">(<span class="string">'hello base64'</span>)</span></span> <span class="comment">// "aGVsbG8gYmFzZTY0"</span></span><br><span class="line"><span class="function"><span class="title">atob</span><span class="params">(<span class="string">'aGVsbG8gYmFzZTY0'</span>)</span></span> <span class="comment">// "hello base64"</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Canvas的toDataURL方法</p>
+<li><p>Canvas的<code>toDataURL</code>方法</p>
 <p>Canvas提供了<code>toDataURL</code>方法，用于获取canvas绘制内容，将其转为base64格式。</p>
 <p>如下所示，文本框中的内容即为canvas中绘制内容的base64格式。</p>
 <p><div class="demo-area">
@@ -329,8 +329,8 @@ if (canvas.getContext) {
 <p>JS:</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'testCanvas'</span>);</span><br><span class="line"><span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">  <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">  <span class="comment">// 设置字体</span></span><br><span class="line">  ctx.font = <span class="string">"Bold 20px Arial"</span>; </span><br><span class="line">  <span class="comment">// 设置对齐方式</span></span><br><span class="line">  ctx.textAlign = <span class="string">"left"</span>;</span><br><span class="line">  <span class="comment">// 设置填充颜色</span></span><br><span class="line">  ctx.fillStyle = <span class="string">"#000"</span>; </span><br><span class="line">  <span class="comment">// 设置字体内容，以及在画布上的位置</span></span><br><span class="line">  ctx.fillText(<span class="string">"hello base64"</span>, <span class="number">10</span>, <span class="number">30</span>); </span><br><span class="line">  <span class="comment">// 绘制空心字</span></span><br><span class="line">  ctx.strokeText(<span class="string">"hello base64"</span>, <span class="number">10</span>, <span class="number">80</span>);</span><br><span class="line">  <span class="comment">// 获取 Data URL</span></span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'testCanvas-content'</span>).value = canvas.toDataURL();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>使用FileReader API的readAsDataURL方法</p>
-<p>FileReader API提供的readAsDataURL方法能够返回一个基于base64编码的Data URL。</p>
+<li><p>使用FileReader API的<code>readAsDataURL</code>方法</p>
+<p>FileReader API提供的<code>readAsDataURL</code>方法能够返回一个基于base64编码的Data URL。</p>
 <p>如下所示，选择文件后返回Data URL。</p>
 <p><div class="demo-area">
  <input type="file" id="testReadAsDataURL">
@@ -354,7 +354,7 @@ if (canvas.getContext) {
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader()</span><br><span class="line">reader.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> textarea = <span class="built_in">document</span>.getElementById(<span class="string">'testReadAsDataURL-content'</span>);</span><br><span class="line">  textarea.value = reader.result</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'testReadAsDataURL'</span>).onchange = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> file = e.target.files[<span class="number">0</span>]</span><br><span class="line">  reader.readAsDataURL(file)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2><span id="4-data-url能用在何处呢">4. Data URL能用在何处呢？</span></h2><p>最开始已经说了<code>Data URL</code>，是以<code>data:</code>模式为前缀的URL，使用场合与常规URL相同，即常规URL能够使用的场合，Data URL也可以使用。如：浏览器地址栏、link中引入css文件、script中引入js文件、img src中引入图片、css background url引入背景。</p>
+<h2><span id="4-data-url能用在何处呢">4. Data URL能用在何处呢？</span></h2><p>最开始已经说了<code>Data URL</code>，是以<code>data:</code>模式为前缀的URL，使用场合与常规URL相同，即常规URL能够使用的场合，Data URL也可以使用。如：浏览器地址栏、link中引入css文件、script中引入js文件、img src中引入图片、video中引入视频、iframe中引入网页、css background url引入背景。</p>
 <ol>
 <li><p>在浏览器地址栏中使用Data URL</p>
 <p><div class="demo-area">
@@ -415,7 +415,6 @@ if (canvas.getContext) {
 <h2><span id="5-参考链接">5. 参考链接</span></h2><blockquote>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs" target="_blank" rel="noopener">MDN Data URLs</a></p>
 </blockquote>
-<p><a href="http://blog.csdn.net/cuixiping/article/details/45932793" target="_blank" rel="noopener">http://blog.csdn.net/cuixiping/article/details/45932793</a></p>
 
         
         </div>
@@ -426,7 +425,7 @@ if (canvas.getContext) {
 
 </div>
 
-    <a data-url="http://verymuch.com/2017/12/14/Data-URL简介与使用/" data-id="cjb6l2i45000gm13yit7gi4oj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2017/12/14/Data-URL简介与使用/" data-id="cjb76j5hl000hxqs6yokqb5tn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
