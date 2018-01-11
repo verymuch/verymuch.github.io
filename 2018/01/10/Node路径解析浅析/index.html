@@ -3,21 +3,21 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Hello World | 歪马行空</title>
+    <title>Node路径解析浅析 | 歪马行空</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troublesho">
+    <meta name="description" content="1. 疑惑这两天看了下之前项目里的webpack配置，想将之前的alias命名统一起来，遂在alias命名前统一使用_开头，这样在项目中看到这样的引用一眼就能知道是通过别名查找的。如下图所示，css目录在fesrc目录下，webpack配置所在目录与fesrc平级，在配置中如果使用相对路径，应该使用_css: path">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://verymuch.com/2017/01/07/hello-world/index.html">
+<meta property="og:title" content="Node路径解析浅析">
+<meta property="og:url" content="http://verymuch.com/2018/01/10/Node路径解析浅析/index.html">
 <meta property="og:site_name" content="歪马行空">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="1. 疑惑这两天看了下之前项目里的webpack配置，想将之前的alias命名统一起来，遂在alias命名前统一使用_开头，这样在项目中看到这样的引用一眼就能知道是通过别名查找的。如下图所示，css目录在fesrc目录下，webpack配置所在目录与fesrc平级，在配置中如果使用相对路径，应该使用_css: path.resolve(&amp;#39;../fesrc/css&amp;#39;)，但是试一">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://p6.qhimg.com/t01559a4f6ea74e587a.jpg">
-<meta property="og:updated_time" content="2017-01-10T11:04:50.000Z">
+<meta property="og:image" content="http://verymuch.com/images/webpack-alias-bug.png">
+<meta property="og:updated_time" content="2018-01-11T01:25:49.260Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
-<meta name="twitter:image" content="http://p6.qhimg.com/t01559a4f6ea74e587a.jpg">
+<meta name="twitter:title" content="Node路径解析浅析">
+<meta name="twitter:description" content="1. 疑惑这两天看了下之前项目里的webpack配置，想将之前的alias命名统一起来，遂在alias命名前统一使用_开头，这样在项目中看到这样的引用一眼就能知道是通过别名查找的。如下图所示，css目录在fesrc目录下，webpack配置所在目录与fesrc平级，在配置中如果使用相对路径，应该使用_css: path.resolve(&amp;#39;../fesrc/css&amp;#39;)，但是试一">
+<meta name="twitter:image" content="http://verymuch.com/images/webpack-alias-bug.png">
     
 
     
@@ -218,7 +218,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-Node路径解析浅析" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -226,7 +226,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Hello World
+            Node路径解析浅析
         </h1>
     
 
@@ -235,8 +235,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/01/07/hello-world/">
-            <time datetime="2017-01-07T00:40:48.000Z" itemprop="datePublished">2017-01-07</time>
+        <a href="/2018/01/10/Node路径解析浅析/">
+            <time datetime="2018-01-10T09:08:05.000Z" itemprop="datePublished">2018-01-10</time>
         </a>
     </div>
 
@@ -251,16 +251,45 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<a id="more"></a>
-<h2><span id="quick-start">Quick Start</span></h2><h3><span id="create-a-new-post">Create a new post</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3><span id="run-server">Run server</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3><span id="generate-static-files">Generate static files</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3><span id="deploy-to-remote-sites">Deploy to remote sites</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+            <p><link rel="stylesheet" href="/css/custom.css"></p>
+<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+
+<h2><span id="1-疑惑">1. 疑惑</span></h2><p>这两天看了下之前项目里的webpack配置，想将之前的alias命名统一起来，遂在alias命名前统一使用<code>_</code>开头，这样在项目中看到这样的引用一眼就能知道是通过别名查找的。如下图所示，<code>css</code>目录在<code>fesrc</code>目录下，webpack配置所在目录与fesrc平级，在配置中如果使用相对路径，应该使用<code>_css: path.resolve(&#39;../fesrc/css&#39;)</code>，但是试一下就会发现这么做webpack无法找到指定目录。相反如下图用法，使用<code>_css: path.resolve(&#39;./fesrc/css&#39;)</code>则能够找到。因此，我猜想可能是相对于运行该文件的目录，就了解并总结了一下相关的内容。</p>
+<p><img src="/images/webpack-alias-bug.png" alt="webpack alias 配置"></p>
+<h2><span id="2-五类路径__dirname-__filename-processcwd">2. 五类路径<code>__dirname</code>、<code>__filename</code>、<code>process.cwd()</code>、<code>./</code>、<code>../</code></span></h2><p><code>Node</code>中的文件路径大概有<code>__dirname</code>、<code>__filename</code>、<code>process.cwd()</code>、<code>./</code>或者<code>../</code>五类，前三个都是绝对路径，为了便于比较，我们将通过<code>path.resolve(&#39;./&#39;)</code>将<code>./</code>和<code>../</code>转换为绝对路径。</p>
+<p>先看一个简单的例子。</p>
+<p>假设有以下文件结构：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test-path</span><br><span class="line">├── js</span><br><span class="line">│   └── test.js</span><br><span class="line">└── <span class="class"><span class="keyword">lib</span></span></span><br><span class="line">    └── common.js</span><br></pre></td></tr></table></figure>
+<p>在<code>test.js</code>下编写一下代码：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">path</span> = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line">console.<span class="built_in">log</span>(__dirname);</span><br><span class="line">console.<span class="built_in">log</span>(__filename);</span><br><span class="line">console.<span class="built_in">log</span>(process.cwd());</span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">path</span>.resolve(<span class="string">'./'</span>));</span><br></pre></td></tr></table></figure>
+<p>在<code>js</code>目录下运行<code>node test.js</code>会输出以下内容：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/Users/</span>verymuch<span class="regexp">/devspace/</span>test-path/js</span><br><span class="line"><span class="regexp">/Users/</span>verymuch<span class="regexp">/devspace/</span>test-path<span class="regexp">/js/</span>test.js</span><br><span class="line"><span class="regexp">/Users/</span>verymuch<span class="regexp">/devspace/</span>test-path/js</span><br><span class="line"><span class="regexp">/Users/</span>verymuch<span class="regexp">/devspace/</span>test-path/js</span><br></pre></td></tr></table></figure>
+<p>而在<code>test-path</code>目录下，执行<code>node js/test.js</code>会输出以下内容：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/Users/</span>verymuch<span class="regexp">/devspace/</span>test-path/js</span><br><span class="line"><span class="regexp">/Users/</span>verymuch<span class="regexp">/devspace/</span>test-path<span class="regexp">/js/</span>test.js</span><br><span class="line"><span class="regexp">/Users/</span>verymuch<span class="regexp">/devspace/</span>test-path</span><br><span class="line"><span class="regexp">/Users/</span>verymuch<span class="regexp">/devspace/</span>test-path</span><br></pre></td></tr></table></figure>
+<p>由上述内容，我们可以先做出以下假设：</p>
+<ul>
+<li><code>__dirname</code>: <strong>总是返回被执行的<code>js</code>所在文件夹的绝对路径</strong></li>
+<li><code>__filename</code>: <strong>总是返回被执行的<code>js</code>的绝对路径</strong></li>
+<li><code>process.cwd()</code>: <strong>总是返回运行<code>node</code>命令时所在的文件夹的绝对路径</strong></li>
+<li><code>./</code>: 似乎与<code>process.cwd()</code>一样。</li>
+</ul>
+<p>值得注意的是，在<code>require(&#39;../lib/common&#39;)</code>里使用相对路径似乎并没有问题，参考下例，将’js/test.js’ 里的代码改成：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> common = <span class="built_in">require</span>(<span class="string">'../lib/common'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'require is OK!'</span>);</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">'../lib/common.js'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err);</span><br><span class="line">    <span class="built_in">console</span>.log(data.toString());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在<code>js</code>目录下运行<code>node test.js</code>，会发现并没有问题。但是在<code>test-path</code>目录下运行<code>node js/test.js</code>，就会报错，运行结果如下：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">require</span> <span class="selector-tag">is</span> <span class="selector-tag">OK</span>!</span><br><span class="line">&#123; <span class="attribute">Error</span>: <span class="attribute">ENOENT</span>: no such file or directory, open <span class="string">'../lib/common.js'</span></span><br><span class="line">  <span class="attribute">errno</span>: -<span class="number">2</span>,</span><br><span class="line">  <span class="attribute">code</span>: <span class="string">'ENOENT'</span>,</span><br><span class="line">  <span class="attribute">syscall</span>: <span class="string">'open'</span>,</span><br><span class="line">  <span class="attribute">path</span>: <span class="string">'../lib/common.js'</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>按照上面暂定的理论，在<code>test-path</code>下运行时，<code>../lib/common.js</code>会被转成<code>/Users/verymuch/devspace/lib/common.js</code>，显然，这个路径是不存在的，但是从运行结果可以看出<code>require(&#39;../lib/common&#39;)</code>并没有问题，只是<code>readFile</code>报错了。</p>
+<p>因此关于<code>./</code>正确的结论是：</p>
+<ol>
+<li>在<code>require()</code>中使用是跟<code>__dirname</code>的效果相同，<span class="text-highlight">相对于文件所在目录</span>，不会因为启动脚本的目录不一样而改变</li>
+<li>在其他情况下跟<code>process.cwd()</code>效果相同，<span class="text-highlight">相对于启动脚本所在目录</span>。</li>
+</ol>
+<h2><span id="3-总结">3. 总结</span></h2><p>鉴于相对路径(<code>./</code>, <code>../</code>)的特殊，建议只在<code>require()</code>中使用相对路径的写法，其他地方一律使用绝对路径，如下：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当前目录下</span></span><br><span class="line"><span class="selector-tag">path</span><span class="selector-class">.resolve</span>(__dirname, <span class="string">'./lib/common.js'</span>);</span><br><span class="line"><span class="comment">// 相邻目录下</span></span><br><span class="line"><span class="selector-tag">path</span><span class="selector-class">.resolve</span>(__dirname, <span class="string">'../lib/common.js'</span>);</span><br></pre></td></tr></table></figure>
+<h2><span id="4-参考链接">4. 参考链接</span></h2><blockquote>
+<ol>
+<li><a href="https://github.com/imsobear/blog/issues/48" target="_blank" rel="noopener">浅析 NodeJs 的几种文件路径</a></li>
+</ol>
+</blockquote>
 
         
         </div>
@@ -271,7 +300,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2017/01/07/hello-world/" data-id="cjc9sr0vf000jib3yxbj8jkld" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/01/10/Node路径解析浅析/" data-id="cjc9sr0vk000pib3yh53dmq77" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -339,7 +368,7 @@
 
             
     
-        <a href="http://verymuch.com/2017/01/07/hello-world/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2017/01/07/hello-world/">评论</a>
+        <a href="http://verymuch.com/2018/01/10/Node路径解析浅析/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2018/01/10/Node路径解析浅析/">评论</a>
     
 
         </footer>
@@ -348,15 +377,11 @@
         
 <nav id="article-nav">
     
-        <a href="/2017/02/09/实现墨刀首页两个弹跳的圆的效果/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    实现墨刀首页两个弹跳的圆的效果
-                
-            </div>
-        </a>
     
+        <a href="/2018/01/03/CSS-Mixin/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">CSS Mixin</div>
+        </a>
     
 </nav>
 
@@ -555,9 +580,9 @@
     <script>
     var disqus_config = function () {
         
-            this.page.url = 'http://verymuch.com/2017/01/07/hello-world/';
+            this.page.url = 'http://verymuch.com/2018/01/10/Node路径解析浅析/';
         
-        this.page.identifier = 'hello-world';
+        this.page.identifier = 'Node路径解析浅析';
     };
     (function() { 
         var d = document, s = d.createElement('script');  

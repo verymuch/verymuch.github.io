@@ -3,15 +3,22 @@
 <head>
     <meta charset="utf-8">
     
-    <title>歪马行空</title>
+    <title>第2章 ES6基础(总结与扩展) | 歪马行空</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta property="og:type" content="website">
-<meta property="og:title" content="歪马行空">
-<meta property="og:url" content="http://verymuch.com/index.html">
+    <meta name="description" content="2.3 解构赋值解构赋值是ES6中最灵活最有表现力的特性之一。同时，它也最为简单。它可以将对象的属性值绑定到任意多的变量上。解构赋值可以用于对象、数组以及函数参数列表中。 2.3.1 对象的解构通过对象的解构赋值，能够更加语义化地抽取对象的属性声明为变量，避免重复输入属性名。如下将character.pseudonym">
+<meta name="keywords" content="沉淀">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第2章 ES6基础(总结与扩展)">
+<meta property="og:url" content="http://verymuch.com/2017/12/30/第2章-ES6基础-总结与扩展/index.html">
 <meta property="og:site_name" content="歪马行空">
+<meta property="og:description" content="2.3 解构赋值解构赋值是ES6中最灵活最有表现力的特性之一。同时，它也最为简单。它可以将对象的属性值绑定到任意多的变量上。解构赋值可以用于对象、数组以及函数参数列表中。 2.3.1 对象的解构通过对象的解构赋值，能够更加语义化地抽取对象的属性声明为变量，避免重复输入属性名。如下将character.pseudonym赋值给pseudonym变量。 123456789101112131415">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://verymuch.com/images/practical-modern-javascript.gif">
+<meta property="og:updated_time" content="2017-12-31T14:52:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="歪马行空">
+<meta name="twitter:title" content="第2章 ES6基础(总结与扩展)">
+<meta name="twitter:description" content="2.3 解构赋值解构赋值是ES6中最灵活最有表现力的特性之一。同时，它也最为简单。它可以将对象的属性值绑定到任意多的变量上。解构赋值可以用于对象、数组以及函数参数列表中。 2.3.1 对象的解构通过对象的解构赋值，能够更加语义化地抽取对象的属性声明为变量，避免重复输入属性名。如下将character.pseudonym赋值给pseudonym变量。 123456789101112131415">
+<meta name="twitter:image" content="http://verymuch.com/images/practical-modern-javascript.gif">
     
 
     
@@ -212,299 +219,15 @@
 </aside>
 
             
-            <section id="main">
-    <article id="post-Node路径解析浅析" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-第2章-ES6基础-总结与扩展" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
             <header class="article-header">
                 
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/01/10/Node路径解析浅析/">Node路径解析浅析</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/01/10/Node路径解析浅析/">
-            <time datetime="2018-01-10T09:08:05.000Z" itemprop="datePublished">2018-01-10</time>
-        </a>
-    </div>
-
-
-                        
-                        
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p><link rel="stylesheet" href="/css/custom.css"></p>
-<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
-
-<h2><span id="1-疑惑">1. 疑惑</span></h2><p>这两天看了下之前项目里的webpack配置，想将之前的alias命名统一起来，遂在alias命名前统一使用<code>_</code>开头，这样在项目中看到这样的引用一眼就能知道是通过别名查找的。如下图所示，<code>css</code>目录在<code>fesrc</code>目录下，webpack配置所在目录与fesrc平级，在配置中如果使用相对路径，应该使用<code>_css: path.resolve(&#39;../fesrc/css&#39;)</code>，但是试一下就会发现这么做webpack无法找到指定目录。相反如下图用法，使用<code>_css: path.resolve(&#39;./fesrc/css&#39;)</code>则能够找到。因此，我猜想可能是相对于运行该文件的目录，就了解并总结了一下相关的内容。</p>
-<p><img src="/images/webpack-alias-bug.png" alt="webpack alias 配置"></p>
-<h2><span id="2-五类路径__dirname-__filename-processcwd">2. 五类路径<code>__dirname</code>、<code>__filename</code>、<code>process.cwd()</code>、<code>./</code>、<code>../</code></span></h2><p><code>Node</code>中的文件路径大概有<code>__dirname</code>、<code>__filename</code>、<code>process.cwd()</code>、<code>./</code>或者<code>../</code>五类，前三个都是绝对路径，为了便于比较，我们将通过<code>path.resolve(&#39;./&#39;)</code>将<code>./</code>和<code>../</code>转换为绝对路径。</p>
-<p>先看一个简单的例子。</p>
-<p>假设有以下文件结构：</p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test-path</span><br><span class="line">├── js</span><br><span class="line">│   └── test.js</span><br><span class="line">└── <span class="class"><span class="keyword">lib</span></span></span><br><span class="line">    └── common.js</span><br></pre></td></tr></table></figure>
-<p>在<code>test.js</code>下编写一下代码：</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">path</span> = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line">console.<span class="built_in">log</span>(__dirname);</span><br><span class="line">console.<span class="built_in">log</span>(__filename);</span><br><span class="line">console.<span class="built_in">log</span>(process.cwd());</span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">path</span>.resolve(<span class="string">'./'</span>));</span><br></pre></td></tr></table></figure>
-<p>在<code>js</code>目录下运行<code>node test.js</code>会输出以下内容：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/Users/</span>verymuch<span class="regexp">/devspace/</span>test-path/js</span><br><span class="line"><span class="regexp">/Users/</span>verymuch<span class="regexp">/devspace/</span>test-path<span class="regexp">/js/</span>test.js</span><br><span class="line"><span class="regexp">/Users/</span>verymuch<span class="regexp">/devspace/</span>test-path/js</span><br><span class="line"><span class="regexp">/Users/</span>verymuch<span class="regexp">/devspace/</span>test-path/js</span><br></pre></td></tr></table></figure>
-<p>而在<code>test-path</code>目录下，执行<code>node js/test.js</code>会输出以下内容：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/Users/</span>verymuch<span class="regexp">/devspace/</span>test-path/js</span><br><span class="line"><span class="regexp">/Users/</span>verymuch<span class="regexp">/devspace/</span>test-path<span class="regexp">/js/</span>test.js</span><br><span class="line"><span class="regexp">/Users/</span>verymuch<span class="regexp">/devspace/</span>test-path</span><br><span class="line"><span class="regexp">/Users/</span>verymuch<span class="regexp">/devspace/</span>test-path</span><br></pre></td></tr></table></figure>
-<p>由上述内容，我们可以先做出以下假设：</p>
-<ul>
-<li><code>__dirname</code>: <strong>总是返回被执行的<code>js</code>所在文件夹的绝对路径</strong></li>
-<li><code>__filename</code>: <strong>总是返回被执行的<code>js</code>的绝对路径</strong></li>
-<li><code>process.cwd()</code>: <strong>总是返回运行<code>node</code>命令时所在的文件夹的绝对路径</strong></li>
-<li><code>./</code>: 似乎与<code>process.cwd()</code>一样。</li>
-</ul>
-<p>值得注意的是，在<code>require(&#39;../lib/common&#39;)</code>里使用相对路径似乎并没有问题，参考下例，将’js/test.js’ 里的代码改成：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> common = <span class="built_in">require</span>(<span class="string">'../lib/common'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'require is OK!'</span>);</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">'../lib/common.js'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err);</span><br><span class="line">    <span class="built_in">console</span>.log(data.toString());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>在<code>js</code>目录下运行<code>node test.js</code>，会发现并没有问题。但是在<code>test-path</code>目录下运行<code>node js/test.js</code>，就会报错，运行结果如下：</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">require</span> <span class="selector-tag">is</span> <span class="selector-tag">OK</span>!</span><br><span class="line">&#123; <span class="attribute">Error</span>: <span class="attribute">ENOENT</span>: no such file or directory, open <span class="string">'../lib/common.js'</span></span><br><span class="line">  <span class="attribute">errno</span>: -<span class="number">2</span>,</span><br><span class="line">  <span class="attribute">code</span>: <span class="string">'ENOENT'</span>,</span><br><span class="line">  <span class="attribute">syscall</span>: <span class="string">'open'</span>,</span><br><span class="line">  <span class="attribute">path</span>: <span class="string">'../lib/common.js'</span> &#125;</span><br></pre></td></tr></table></figure>
-<p>按照上面暂定的理论，在<code>test-path</code>下运行时，<code>../lib/common.js</code>会被转成<code>/Users/verymuch/devspace/lib/common.js</code>，显然，这个路径是不存在的，但是从运行结果可以看出<code>require(&#39;../lib/common&#39;)</code>并没有问题，只是<code>readFile</code>报错了。</p>
-<p>因此关于<code>./</code>正确的结论是：</p>
-<ol>
-<li>在<code>require()</code>中使用是跟<code>__dirname</code>的效果相同，<span class="text-highlight">相对于文件所在目录</span>，不会因为启动脚本的目录不一样而改变</li>
-<li>在其他情况下跟<code>process.cwd()</code>效果相同，<span class="text-highlight">相对于启动脚本所在目录</span>。</li>
-</ol>
-<h2><span id="3-总结">3. 总结</span></h2><p>鉴于相对路径(<code>./</code>, <code>../</code>)的特殊，建议只在<code>require()</code>中使用相对路径的写法，其他地方一律使用绝对路径，如下：</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当前目录下</span></span><br><span class="line"><span class="selector-tag">path</span><span class="selector-class">.resolve</span>(__dirname, <span class="string">'./lib/common.js'</span>);</span><br><span class="line"><span class="comment">// 相邻目录下</span></span><br><span class="line"><span class="selector-tag">path</span><span class="selector-class">.resolve</span>(__dirname, <span class="string">'../lib/common.js'</span>);</span><br></pre></td></tr></table></figure>
-<h2><span id="4-参考链接">4. 参考链接</span></h2><blockquote>
-<ol>
-<li><a href="https://github.com/imsobear/blog/issues/48" target="_blank" rel="noopener">浅析 NodeJs 的几种文件路径</a></li>
-</ol>
-</blockquote>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://verymuch.com/2018/01/10/Node路径解析浅析/" data-id="cjc9sr0vk000pib3yh53dmq77" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="http://verymuch.com/2018/01/10/Node路径解析浅析/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2018/01/10/Node路径解析浅析/">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-CSS-Mixin" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/01/03/CSS-Mixin/">CSS Mixin</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/01/03/CSS-Mixin/">
-            <time datetime="2018-01-03T07:43:49.000Z" itemprop="datePublished">2018-01-03</time>
-        </a>
-    </div>
-
-
-                        
-                        
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p><link rel="stylesheet" href="/css/custom.css"></p>
-<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://verymuch.com/2018/01/03/CSS-Mixin/" data-id="cjc9sr0vm000sib3y0y8a6wig" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="http://verymuch.com/2018/01/03/CSS-Mixin/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2018/01/03/CSS-Mixin/">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-第2章-ES6基础-总结与扩展" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/12/30/第2章-ES6基础-总结与扩展/">第2章 ES6基础(总结与扩展)</a>
+        <h1 class="article-title" itemprop="name">
+            第2章 ES6基础(总结与扩展)
         </h1>
     
 
@@ -750,289 +473,42 @@ console.log(text)
         </footer>
     </div>
     
-</article>
-
-
-
-    <article id="post-Data-URL简介与使用" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
         
-        
-            <header class="article-header">
-                
+<nav id="article-nav">
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/12/14/Data-URL简介与使用/">Data URL简介与使用</a>
-        </h1>
-    
-
+        <a href="/2018/01/03/CSS-Mixin/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
                 
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/12/14/Data-URL简介与使用/">
-            <time datetime="2017-12-14T00:34:41.000Z" itemprop="datePublished">2017-12-14</time>
+                    CSS Mixin
+                
+            </div>
         </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/沉淀/">沉淀</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><p><link rel="stylesheet" href="/css/custom.css"></p>
-<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
-
-<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p><code>Data URL</code>，是以<code>data:</code>模式为前缀的URL，允许内容的创建者将较小的文件嵌入到文档中。与常规的URL使用场合类似（下面会具体介绍可以将Data URL用在哪些地方）。</p>
-<p><code>Data URL</code>由<strong><code>data:</code>前缀、MIME类型（表明数据类型）、<code>base64</code>标志位（如果是文本，则可选）以及数据本身四部分组成</strong>。</p>
-<p>语法格式如下：
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data:[<span class="string">&lt;mediatype&gt;</span>][<span class="symbol">;base64</span>],data</span><br></pre></td></tr></table></figure></p>
-<p><code>mediatype</code>是一个MIME（Multipurpose Internet Mail Extension）类型字符串，如<code>image/jpeg</code>表示一个JPEG图片文件。如果省略，默认值为<code>text/plain;charset=US-ASCII</code>。</p></p>
-            <p class="article-more-link">
-                <a href="/2017/12/14/Data-URL简介与使用/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://verymuch.com/2017/12/14/Data-URL简介与使用/" data-id="cjc9sr0vh000lib3ybl11bcju" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
     
-        <a href="http://verymuch.com/2017/12/14/Data-URL简介与使用/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2017/12/14/Data-URL简介与使用/">评论</a>
     
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-escape、encodeURI和encodeURIComponent的区别与使用" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/">escape、encodeURI和encodeURIComponent的区别与使用</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/">
-            <time datetime="2017-12-12T14:51:18.000Z" itemprop="datePublished">2017-12-12</time>
+        <a href="/2017/12/14/Data-URL简介与使用/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Data URL简介与使用</div>
         </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/沉淀/">沉淀</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><!-- 自定义通用样式，及覆盖样式 -->
-<link rel="stylesheet" href="/css/custom.css">
-
-<h2 id="1-escape"><a href="#1-escape" class="headerlink" title="1. escape"></a>1. escape</h2><p>escape是对字符串(string)进行编码(而另外两种是对URL)，作用是让它们在所有电脑上可读。编码之后的效果是%XX或者%uXXXX这种形式。其 <code>ASCII字母、数字、@*/+</code>，这几个字符不会被编码，其余的都会。</p>
-<p class="text-highlight">注意，当需要对URL编码时，请忘记这个方法，这个方法是针对字符串使用的，不适用于URL。</p>
-
-<p>在实际工作中使用较少，可以先了解功能，待有需求时再使用。</p>
-<h2 id="2-encodeURI-和-encodeURIComponent"><a href="#2-encodeURI-和-encodeURIComponent" class="headerlink" title="2. encodeURI 和 encodeURIComponent"></a>2. encodeURI 和 encodeURIComponent</h2><p>对URL编码是常见的事，所以这两个方法应该是实际中要特别注意的。</p>
-<p>它们都是编码URL，<strong>唯一区别</strong>就是编码的字符范围：</p>
-<ol>
-<li><code>encodeURI</code>方法不会对下列字符编码<code>ASCII字母、数字、~!@#$&amp;*()=:/,;?+&#39;</code></li>
-<li><code>encodeURIComponent</code>方法不会对下列字符编码<code>ASCII字母、数字、~!*()&#39;</code></li>
-</ol>
-<p>由此可见<code>encodeURIComponent</code>比<code>encodeURI</code>编码范围更大。如，<code>encodeURIComponent</code>会把<code>http://</code>编码 <code>http%3A%2F%2F</code>而<code>encodeURI</code>却不会。</p></p>
-            <p class="article-more-link">
-                <a href="/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://verymuch.com/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/" data-id="cjc9sr0vj000oib3yi9upmsz2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
     
-        <a href="http://verymuch.com/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/">评论</a>
-    
+</nav>
 
-        </footer>
-    </div>
+
     
 </article>
 
 
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
 
-    <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
-    </nav>
+    
+    </section>
+
 </section>
             
                 <aside id="sidebar">
@@ -1212,11 +688,13 @@ console.log(text)
     <script>
     var disqus_config = function () {
         
-        this.page.identifier = 'undefined';
+            this.page.url = 'http://verymuch.com/2017/12/30/第2章-ES6基础-总结与扩展/';
+        
+        this.page.identifier = '第2章-ES6基础-总结与扩展';
     };
     (function() { 
         var d = document, s = d.createElement('script');  
-        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/count.js';
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();

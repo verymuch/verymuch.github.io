@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>第2章 ES6基础 | 歪马行空</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="ES6中引入了大量的非破坏性语法变更，我们将在本章逐一讨论。大部分变更都是语法糖，使用更多更复杂的ES5代码也能够实现。还有一部分不仅仅是语法糖，如let和const这两种完全不同的变量声明方式，在本章最后会对其进行介绍。 ES6中，对象字面量语法有了一些调整，我们从这部分开始说起。">
+<meta name="keywords" content="翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第2章 ES6基础">
+<meta property="og:url" content="http://verymuch.com/2017/11/01/第2章-ES6基础/index.html">
+<meta property="og:site_name" content="歪马行空">
+<meta property="og:description" content="ES6中引入了大量的非破坏性语法变更，我们将在本章逐一讨论。大部分变更都是语法糖，使用更多更复杂的ES5代码也能够实现。还有一部分不仅仅是语法糖，如let和const这两种完全不同的变量声明方式，在本章最后会对其进行介绍。 ES6中，对象字面量语法有了一些调整，我们从这部分开始说起。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://verymuch.com/images/practical-modern-javascript.gif">
+<meta property="og:updated_time" content="2018-01-01T07:58:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第2章 ES6基础">
+<meta name="twitter:description" content="ES6中引入了大量的非破坏性语法变更，我们将在本章逐一讨论。大部分变更都是语法糖，使用更多更复杂的ES5代码也能够实现。还有一部分不仅仅是语法糖，如let和const这两种完全不同的变量声明方式，在本章最后会对其进行介绍。 ES6中，对象字面量语法有了一些调整，我们从这部分开始说起。">
+<meta name="twitter:image" content="http://verymuch.com/images/practical-modern-javascript.gif">
+    
+
+    
+        <link rel="alternate" href="/" title="歪马行空" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/css/images/avatar2.jpg" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">歪马行空</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="https://github.com/verymuch">GitHub</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar0.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="https://github.com/verymuch">GitHub</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar0.jpg" />
+            <h2 id="name">verymuch</h2>
+            <h3 id="title">Web Developer ( FE )</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Beijing, China</span>
+            <a id="follow" target="_blank" href="https://github.com/verymuch/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                11
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                5
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/verymuch" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-第2章-ES6基础" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            第2章 ES6基础
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/11/01/第2章-ES6基础/">
+            <time datetime="2017-11-01T08:53:14.000Z" itemprop="datePublished">2017-11-01</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/翻译/">翻译</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>ES6中引入了大量的非破坏性语法变更，我们将在本章逐一讨论。大部分变更都是语法糖，使用更多更复杂的ES5代码也能够实现。还有一部分不仅仅是语法糖，如<code>let</code>和<code>const</code>这两种完全不同的变量声明方式，在本章最后会对其进行介绍。</p>
+<p>ES6中，对象字面量语法有了一些调整，我们从这部分开始说起。</p>
+<a id="more"></a>
+<h2><span id="21-对象字面量">2.1 对象字面量</span></h2><p><strong>对象字面量</strong>是指使用<code>{}</code>简写语法进行对象声明的形式，具体语法格式如下：</p>
+<p>[P19 代码1]</p>
+<p>ES6中对象字面量语法有一些小的改进：属性值简写、可计算属性名和方法定义。下面来学习一下这些内容及其用法。</p>
+<h3><span id="211-属性值简写">2.1.1 属性值简写</span></h3><p>有时我们会声明这样一个对象，该对象有一个或多个属性的属性名和所引用的变量名相同。比如，有一个<code>listeners</code>数组，要将其赋给对象字面量中名为<code>listeners</code>的属性，必须重复输入该名称。以下代码中的对象字面量中就包含下两个名称与值重复的属性：</p>
+<p>[P20 代码1]</p>
+<p>在ES6中，借助新的属性值简写语法就可以省略属性值和分号，属性值简写会进行隐性赋值，如下例所示：</p>
+<p>[P20 代码2]</p>
+<p>随着对于本书第二章的学习，我们会发现属性值简写在不影响代码含义的情况下，能有效减少重复代码。如以下代码，我重新实现了浏览器中的持久存储API <code>localStorage</code>的部分内容，可以将其看成是内存存储的填充实现[注释 1]。如果没有使用简写语法，<code>storage</code>对象看起来会更加冗长：</p>
+<p>[P20 代码3]</p>
+<p>ES6中有很多旨在减少所维护代码复杂性的特性，属性值简写只是其中之一。一旦习惯了这一新语法，你就会发现代码的可读性和开发者的生产效率都会得到提升。</p>
+<h3><span id="212-可计算属性名">2.1.2 可计算属性名</span></h3><p>有时，我们可能需要声明这样一个对象：属性名基于其他变量或者表达式。如下面的ES5代码所示，假设<code>expertise</code>作为一个函数参数提供，我们事先并不知道它的值：</p>
+<p>[P21 代码1]</p>
+<p>在ES6中，对象字面量不再只能使用静态名称来声明。可以使用可计算属性名，用方括号将表达式包裹起来，即可作为属性名使用。当声明执行时，表达式才会被计算，并被当做属性名使用。下面的例子向我们展示了如何一步完成上例中<code>person</code>对象的声明，而不需要借助第二个声明来添加<code>expertise</code>属性。</p>
+<p>[P21 代码2]</p>
+<p>属性值简写和可计算属性名不能同时使用。属性值简写是在编译时执行的简单语法糖，可以避免重复，而可计算属性名是在运行时进行计算的。如果试图同时使用这两个特性时，系统会抛出一个语法错误的异常。多数情况下，这种组合使用会导致代码难以理解，所以最好不要同时使用这两个特性。</p>
+<p>[P22 代码1]
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// this is a syntax error!</span></span><br><span class="line"><span class="comment">// 语法错误</span></span><br></pre></td></tr></table></figure></p>
+<p>可计算属性名有一个常用的使用场景，如当我们想要将一个实体添加到一个对象映射中，并且想使用实体的<code>id</code>字段作为键值，就可以使用可计算属性名。直接在<code>groceries</code>对象字面量中进行内联声明，而不需要单独使用第三条声明语句将<code>grocery</code>添加到<code>groceries</code>映射中。</p>
+<p>[P22 代码2]</p>
+<p>还有一种使用场景：当一个函数接受一个参数，并将该参数用于构建返回值对象。如果使用ES5，则需要分配一个变量进行对象字面量的声明，添加一个属性，最后返回这个对象。下例展示了这一使用场景，创建一个信封，之后能够用于Ajax返回值，这些返回值遵循以下约定：有一个<code>error</code>属性，用于描述发生的错误；有一个<code>success</code>属性表示成功：</p>
+<p>[P22 代码3，P23 代码1]</p>
+<p>使用可计算属性名能够更简明地实现上例中的函数，仅使用一条语句就能够实现：</p>
+<p>[P23 代码2]</p>
+<h3><span id="方法定义">方法定义</span></h3><p>通常，我们通过添加属性来为对象声明方法。以下代码中，创建了一个能够支持多种事件类型的小型事件发射器。<code>emitter#on</code>方法可以用来注册事件监听函数，<code>emitter#emit</code>方法可以用来触发事件。</p>
+<p>[P23 代码3]</p>
+<p>从ES6开始，在对象字面量中可以使用新的方法定义语法进行方法的声明，省略分号和<code>function</code>关键字，这样更加简洁。以下代码即为使用方法定义进行声明的<code>emitter</code>对象。</p>
+<p>[P24 代码1]</p>
+<p>箭头函数是ES6中的另一种函数声明方式，它有好几种形式。现在让我们来探究一下箭头函数到底是什么、它们是如何声明的以及它们的语法形式。</p>
+<h2><span id="22-箭头函数">2.2 箭头函数</span></h2><p>在JavaScript中，我们通常使用类似下面的代码进行函数声明，包括函数名，参数列表和函数体。</p>
+<p>[P24 代码2]</p>
+<p>也可以创建一个匿名函数，省略函数的名称，并将其赋值给一个变量或者对象的属性，也可以直接进行调用。</p>
+<p>[P24 代码3]</p>
+<p>从ES6开始，我们可以使用箭头函数作为声明匿名函数另一种方式。值得一提的是，箭头函数有几种不同的写法。如下代码中的箭头函数和上面的匿名函数非常相似。唯一的不同就是缺少了<code>function</code>关键字，并且在参数列表的右侧多了个<code>=&gt;</code>箭头。</p>
+<p>[P25 代码1]</p>
+<p>尽管箭头函数看起来和常规的匿名函数很相似，但是本质上它们是完全不同的：箭头函数不能显示地命名，尽管现代运行环境会将箭头函数所赋予的变量名作为函数名；不能用作构造函数，也没有<code>prototype</code>属性，所以不能使用<code>new</code>关键字调用箭头函数；箭头函数被绑定到所在词法作用域中，这也是为什么它们不会改变<code>this</code>指向的原因。</p>
+<p>接下来，让我们深入了解它们在语义上与传统函数的不同、声明箭头函数的多种方法以及实际用例。</p>
+<h3><span id="221-词法作用域">2.2.1 词法作用域</span></h3><p>箭头函数不会创建新的作用域，在箭头函数的函数体内，<code>this</code>、<code>arguments</code>以及<code>super</code>均指向所在的父级作用域。如下示例，有一个<code>timer</code>计时器对象，对象上有一个<code>seconds</code>计数器属性和一个<code>start</code>方法，这个方法就是用我们前面所学习的方法定义语法创建的。然后我们开启这个计时器，等待几秒钟后，打印已经过去的秒数。</p>
+<p>[P25 代码1]</p>
+<p>如果我们不使用箭头函数，而是使用常规的匿名函数定义传入<code>setInterval</code>的函数的话，<code>this</code>将绑定到匿名函数的上下文上，而不是<code>start</code>方法的上下文上。这时，如果想实现上面的<code>timer</code>计时器，可以在<code>start</code>方法的开头加上类似<code>var self = this</code>的声明语句，然后在<code>setInterval</code>函数内部引用<code>self</code>即可。由此可见，使用箭头函数，能够避免为保持上下文引用而额外增加的复杂性，只需关注代码的功能即可。</p>
+<p>同样地，ES6中箭头函数的作用域绑定也意味着使用<code>.call</code>、<code>.apply</code>、<code>.bind</code>等方法调用函数时也无法改变<code>this</code>的指向。这一限制通常是很有用的，因为这能够保证上下文不被修改。</p>
+<p>现在再看一下下面这个例子。你认为<code>console.log</code>会输出出什么呢？</p>
+<p>[P26 代码1]</p>
+<p>答案是<code>arguments</code>指向匿名函数的上下文，因此传入匿名函数的参数会被输出。在本例中，这些参数是<code>1, 2, 3</code>。</p>
+<p>如果将上例中的匿名函数换为箭头函数，结果又会是怎样的呢？</p>
+<p>[P26 代码2]</p>
+<p>这时，<code>arguments</code>对象指向<code>puzzle</code>函数的上下文，因为箭头函数并不会创建闭包。因此，输出结果为<code>&#39;a&#39;, &#39;b&#39;, &#39;c&#39;</code>。</p>
+<p>前面有提到箭头函数有多种写法，但到目前为止，我们只使用了完整版的写法。其他几种写法是什么样的呢？</p>
+<h3><span id="222-箭头函数的写法">2.2.2 箭头函数的写法</span></h3><p>让我们再一起回顾下目前所学的箭头函数语法：</p>
+<p>[P26 代码3]</p>
+<p>如果箭头函数只有一个参数，则可以省略圆括号。当然，这不是必须的。当将箭头函数传递到其他方法中时，这么做很有用，因为这样能够减少圆括号的数量，使得代码更加可读。</p>
+<p>[P27 代码1]</p>
+<p>如前面的<code>double</code>方法一样，当使用箭头函数声明简单函数时，完整写法较为繁琐。可以使用<code>value * 2</code>表达式来代替整个函数体。当函数被调用时，表达式会被计算，结果则作为返回值返回。这时，<code>return</code>语句是隐式的，并且不需要使用花括号包裹函数体：</p>
+<p>[P27 代码2]</p>
+<p>我们还可以同时省略括号和return语句，这样箭头函数会更加简洁：</p>
+<p>[P27 代码3]</p>
+<blockquote>
+<h4><span id="隐式返回对象字面量">隐式返回对象字面量</span></h4><p>当想要隐式返回对象字面量时，则需要使用圆括号将对象字面量包裹起来。否则，编译器会将花括号当成函数体的开始和结束标志。
+[P27 代码4]
+下例中，JavaScript就将花括号当成了箭头函数的函数体。此外，<code>number</code>会被当作一个<code>label</code>[注释 2]，然后有一个没有做任何事的<code>value</code>表达式。由于函数体没有返回任何内容，所以映射得到的值为<code>undefined</code>：
+[P27 代码5]
+如果我们作为隐式返回的对象字面量具有多个属性，编译器无法识别第二个属性，则会抛出<code>SyntaxError</code>异常：
+[P28 代码1]
+在对象字面量外添加圆括号可以解决该问题，这样编译器就不会再将其当做函数体，此时的对象声明即为我们想要隐式返回的对象字面量。
+[P28 代码2]</p>
+</blockquote>
+<p>现在已经理解了什么是箭头函数，接下来看一下箭头函数的优点以及正确的用法。</p>
+<h3><span id="223-优点和使用场景">2.2.3 优点和使用场景</span></h3><p>一般来说，我们不应该盲目地使用ES6的特性。相反地，最好在使用每个特性前都仔细思考下使用了新特性后是否真的能提高代码的可读性和可维护性。严格来说，ES6特性并不总是比现有特性好，因此最好不要随意使用它们。</p>
+<p>箭头函数在某些情况下并不适用。比如，当一个函数包含很多行代码时，这时候使用箭头函数对代码并不能起到改进作用。箭头函数更适合用于简短的实例中，比如当<code>function</code>关键字和语法模板占函数表达式的很大一部分时。</p>
+<p>适当地为函数命名能使得人类理解起来更容易。箭头函数不能显示地命名，但是可以通过赋值给其他变量，隐式地命名。在下例中，我们将箭头函数赋值给了<code>throwError</code>变量。当调用函数式的过程中发生错误时，调用栈能够正确地定位到<code>throwError</code>：</p>
+<p>[P29 代码1]</p>
+<p>当需要定义一个在任何情况下词法作用域都不改变的匿名函数时，使用箭头函数是很整适合的，并且在某些情况下，它还可以使代码更加整洁。此外，在大多数函数式编程的情况下，箭头函数是特别有用的，比如使用数组对象的<code>.map</code>、<code>.filter</code>或者<code>.reduce</code>等方法。具体示例如下图所示：</p>
+<p>[P29 代码2]</p>
+<h2><span id="23-解构赋值">2.3 解构赋值</span></h2><p>解构赋值是ES6中最灵活最有表现力的特性之一。同时，它也最为简单。它可以将对象的属性值绑定到任意多的变量上。解构赋值可以用于对象、数组以及函数参数列表中。我们先从对象的解构开始逐一介绍。</p>
+<h3><span id="231-对象的解构">2.3.1 对象的解构</span></h3><p>假设我们有一个程序，程序中有一些漫画书的角色，Bruce Wayne是这些角色中的一个，我们想要引用用于描述Bruce Wayne的对象中的属性。下面的代码就是用于描述蝙蝠侠的示例对象：</p>
+<p>[P29 代码3]</p>
+<p>如果我们想要声明一个<code>pseudonym</code>变量，并引用<code>character.pseudonym</code>的值，我们可能会写出以下ES5代码。如果我们需要在多个地方引用<code>pseudonym</code>，我们更希望能够避免每次都输入<code>character.pseudonym</code>：</p>
+<p>[P30 代码1]</p>
+<p>如果在赋值语句中使用解构赋值，语法会变得更加清晰。在下例中能够看出，使用解构赋值后，我们不需要重复两次输入<code>pseudonym</code>，并且仍能清晰地表达含义。下面的这段代码和上面用ES5编写的代码是等价的。</p>
+<p>[P30 代码2]</p>
+<p>通过<code>var</code>声明时，使用逗号隔开能一次声明多个变量。同样地，在解构赋值的花括号中也可以声明多个变量。</p>
+<p>[P30 代码3]</p>
+<p>此外，我们可以在同一个<code>var</code>语句中同时使用常规的变量声明和解构赋值。这种用法一开始看起来可能很奇怪，而且还要看我们所使用的JavaScript代码样式规范是否允许在单个语句中声明多个变量。不管如何，从这一点还是能够看出解构语法的灵活性。</p>
+<p>[P30 代码4]</p>
+<p>如果想要提取<code>pseudonym</code>属性，并将其声明为<code>alias</code>变量，我们可以使用下面这种解构语法，可以称之为<strong>别名</strong>语法。除了<code>alias</code>之外，我们可以使用任何其他合法的变量名。</p>
+<p>[P30 代码5]</p>
+<p>别名语法看起来并不比ES5的写法<code>alias = character.pseudonym</code>简单。不过如果解构赋值支持深度解构的话，就另当别论了。如下面代码所示：</p>
+<p>[P30 代码6]</p>
+<p>在类似上面这种情况，当我们需要解构一个嵌套较深的属性值时，使用别名能够更清晰地传递属性名。试想一下，一个叫<code>gender</code>的属性名，并不能如<code>characterGender</code>一样清晰表达所指的内容。</p>
+<p>[P31 代码1]</p>
+<p>如上我们所看到的这种情况是很常见的，因为属性通常是基于其宿主对象命名的。<code>character.metadata.gender</code>的含义很清楚，而单独使用<code>gender</code>则可以表示很多内容，所以在结构赋值中使用类似<code>characterGender</code>的别名能够将上下文含义带入到变量中。</p>
+<p>在ES5中，访问一个不存在的属性时，会返回<code>undefined</code>。</p>
+<p>[P31 代码2]</p>
+<p>在解构赋值中也同样如此。当进行解构赋值的属性不存在时，同样会得到<code>undefined</code>。</p>
+<p>[P31 代码3]</p>
+<p>当解构声明中访问的是一个嵌套属性，并且嵌套属性的父对象是<code>null</code>或<code>undefined</code>时，会抛出异常，就像在其他情况下访问<code>null</code>或<code>undefined</code>的属性会报错一样。</p>
+<p>[P31 代码4]</p>
+<p>由于解构赋值主要是语法糖，所以看一下下面的ES5等价代码，就能够清楚地知道上述代码为何会抛出异常了。</p>
+<p>[P31 代码5]</p>
+<p>在解构赋值中，可以为这些值为<code>undefined</code>的属性解构提供默认值。默认值可以使任何类型的值：如数值、字符串、函数、对象或者对其他变量的引用等。</p>
+<p>[P32 代码1]</p>
+<p>默认值在嵌套属性的解构中也可以使用。</p>
+<p>[P32 代码2]</p>
+<p>当和别名结合使用时，应如下所示，将别名放在前面，默认值放在后面：</p>
+<p>[P32 代码3]</p>
+<p>在解构的模式部分可以使用可计算属性名语法。不过，这种情况下，必须提供一个别名作为变量名。这是因为可计算属性名中允许任意表达式，所以编译器无法推断出变量的名称。下例中，即为使用了别名和可计算属性从<code>character</code>对象中提取出了<code>boots</code>属性。</p>
+<p>[P32 代码4]</p>
+<p>这一写法并没有什么优势，因为<code>characterBoots = character[type]</code>比<code>{ [type]: characterBoots } = character</code>简单很多。也就是说，可计算属性名声明对象字面量的属性名时很有用，但是在解构赋值中却恰恰相反。</p>
+<p>这些就是对象解构的相关内容。那么数组的解构又是怎么样的呢？</p>
+<h3><span id="232-数组的解构">2.3.2 数组的解构</span></h3><p>数组的解构语法和对象解构相似。下例中，展示了如何将<code>coordinates</code>数组解构成<code>x</code>和<code>y</code>两个变量。可以看到，我们不再是使用花括号，而是使用了方括号，这就表示我们使用的是数组解构，而不是对象解构。使用解构我们能够在不显示引用索引情况下清晰地为数组中的值命名，即不需要使用类似<code>x = coordi nates[0]</code>这样的代码。</p>
+<p>[P33 代码1]</p>
+<p>使用数组解构时，我们可以跳过不感兴趣或者不需要引用的值。</p>
+<p>[P33 代码2]</p>
+<p>和对象解构相似，数组解构也可以设定默认值。</p>
+<p>[P33 代码3]</p>
+<p>在ES5中，当我们需要交换两个变量的值时，通常需要借助第三个临时变量。如下所示。</p>
+<p>[P33 代码4]</p>
+<p>解构使我们可以不用声明<code>aux</code>变量，而是专注于原本的意图。这也是解构能够使我们的表达更加清晰有效率的一种使用场景。</p>
+<p>[P33 代码5]</p>
+<p>我们将要讨论最后一个关于解构的内容，即函数的参数。</p>
+<h3><span id="233-函数参数的默认值">2.3.3 函数参数的默认值</span></h3><p>ES6中，函数的参数也能够指定默认值。下面的这个例子中，就为<code>exponent</code>参数定义了一个最常用的默认值。</p>
+<p>[P34 代码1]</p>
+<p>箭头函数的参数也可以指定默认值。当为箭头函数的参数指定默认值时，哪怕只有一个参数，也要用圆括号将箭头函数的参数列表包裹起来。</p>
+<p>[P34 代码2]</p>
+<p>和一些其他编程语言不同，默认值不限制只能给函数的最后一个参数设置。可以为任何一个参数设置默认值。</p>
+<p>[P34 代码3]</p>
+<p>在JavaScript中，向函数传递一个包含多个属性的<code>options</code>对象参数的情况是再常见不过的了。如果使用函数的时候没有传递<code>options</code>，我们可以为其设定一个默认值。具体代码如下所示。</p>
+<p>[P34 代码4]</p>
+<p>这一方法存在一个问题，如果<code>carFactory</code>的使用者传入了一个<code>options</code>对象，则所有的默认值都会失效。</p>
+<p>[P34 代码5]</p>
+<p>结合使用函数参数的默认值和解构赋值，能够解决这一问题。</p>
+<h3><span id="234-函数参数的解构">2.3.4 函数参数的解构</span></h3><p>与只提供一个默认值相比，更好的方法是对整个<code>options</code>进行解构，并在解构模式中，为每个属性都指定默认值。这个方法使我们不通过<code>options</code>对象就能引用<code>options</code>中的每个选项，但我们也因此不能直接引用<code>options</code>，在某些情况下可能会产生问题。</p>
+<p>[P35 代码1]</p>
+<p>然而，这种情况下，如果使用者没有传入<code>options</code>对象，默认值会再一次缺失。也就是说，如果没有传入<code>options</code>对象参数，<code>carFactory</code>就会报错。如下所示，可以为<code>options</code>添加一个空对象作为默认值，即可避免这一问题。然后这个空对象就会被解构模式中设定了默认值的属性一一填充。</p>
+<p>[P35 代码2]</p>
+<p>除了默认值以外，我们还可以在函数参数中使用解构来描述函数能够处理的对象结构。参考以下代码，假设有一个<code>car</code>对象，对象上包含多个属性。<code>car</code>对象中描述了它的拥有者、类型、品牌、制造时间以及拥有者购买时的偏好。</p>
+<p>[P35 代码3 - P36 代码1]</p>
+<p>如果在某个函数中只想提取对象中的某些属性作为参数，则可以通过解构来提前显示地引用这些属性。这样做的好处就是在看到函数声明时，我们就能知道函数中需要使用哪些属性。</p>
+<p>当我们提前解构所需要的每个属性时，当输入不正确时，就很容易发现。下例向我们展示了如何在参数列表中指定我们所需的每一个属性，从而表明<code>getCarProductiModel</code>结构方法能够处理的参数对象结构。</p>
+<p>[P36 代码2]</p>
+<p>除了设置默认值和填充<code>options</code>对象外，解构还有很多其他的有用之处。下面让我们一起来看看。</p>
+<h3><span id="235-解构的用法">2.3.5 解构的用法</span></h3><p>当一个函数返回一个对象或者数组时，解构使我们能够更简洁地处理返回值。
+如下例所示，函数返回一个包含一些坐标的对象，而我们只对其中的<code>x</code>和<code>y</code>感兴趣。我们可以不用借助中间变量<code>point</code>，并且不会影响代码的可读性。</p>
+<p>[P36 代码3]</p>
+<p>默认值的使用会产生一定的重复。假设存在一个<code>random</code>函数，函数会生成一个值在<code>min</code>和<code>max</code>之间的随机整数，默认生成1和10之间的值。在类似Python和C#的强类型语言里，使用这样一种方式来作为命名参数的替代方案是一件特别有趣的事情。这种能够为选项参数定义默认值，并且允许使用者分别覆盖的模式使用起来是非常灵活的。</p>
+<p>[P37 代码1]</p>
+<p>解构也非常适合用于正则表达式中。解构使我们能够在不使用索引值的情况下命名匹配结果数组中的数据。下面就有这样一个例子：通过正则表达式解析一个简单的日期，并且使用解构将解析出来的值分别赋值给对用的日期组成部分，即年月日等。在本例子中，匹配结果数组的第一个元素是原始输入，所以我们直接丢弃即可。</p>
+<p>[P37 代码2]</p>
+<p>需要注意的是正则表达式未匹配的情况，这时匹配结果为<code>null</code>。所以如下例所示，最好在解构之前进行错误处理。</p>
+<p>[P37 代码3]</p>
+<p>接下来我们来关注一下扩展运算符和reset参数。</p>
+<h2><span id="24-剩余参数和扩展运算符">2.4 剩余参数和扩展运算符</span></h2><p>在ES6之前，处理任意数量的函数参数必须借助<code>arguments</code>来处理。<code>arguments</code>不是一个数组，但是具有<code>length</code>属性。通常，我们会使用<code>Array#slice.call</code>方法来将<code>arguments</code>对象转换为真正的数组。具体代码如下。</p>
+<p>[P38 代码1]</p>
+<p>ES6中引入了剩余参数，能够更好地方式解决这一问题。</p>
+<h3><span id="241-剩余参数">2.4.1 剩余参数</span></h3><p>在函数的最后一个参数前添加三个点，可以将该参数转变为一个特殊的“剩余参数”。当剩余参数是函数中的唯一一个参数时，它会获取到所有传入函数的参数。这和上述使用<code>.slice</code>处理的结果是一样的，但不需要依赖于<code>arguments</code>，在参数列表中指定即可。</p>
+<p>[P38 代码2]</p>
+<p>剩余参数之前的参数不会被包含在<code>list</code>参数中。</p>
+<p>[P38 代码3]</p>
+<p>注意，如果是箭头函数中包含剩余参数，哪怕只有一个参数，也必须放置在圆括号内。否则，会抛出<code>SyntaxError</code>异常。由下例可以看出，结合箭头函数和剩余参数能够写出更简洁的函数式表达式。</p>
+<p>[P38 代码4]</p>
+<p>可以看出，与上面的代码相比，使用ES5实现相同的函数明显要更加复杂。虽然上面的实现方式较为简洁，但是这样的<code>sumAll</code>函数会对没有使用过<code>.reduce</code>方法的使用者产生困扰，并且同时使用两个箭头函数也会带来一定的困扰。我们将在本书第二部分讨论如何对这种情况进行权衡。</p>
+<p>[P39 代码1]</p>
+<p>接下来将会学习扩展运算符。它也会用到<code>...</code>，但用法会稍有不同。</p>
+<h3><span id="242-扩展运算符">2.4.2 扩展运算符</span></h3><p>扩展运算符可以将可遍历对象转换为数组。扩展运算符能够方便地在数组或者函数调用中展开表达式。下例则在数组字面量中使用<code>...arguments</code>对函数参数进行了转换。</p>
+<p>[P39 代码2]</p>
+<p>使用扩展运算符可以将一个字符串分割成数组，数组中的元素为组成字符串的每个字符。</p>
+<p>[P39 代码3]</p>
+<p>扩展运算符的左右还可以添加其他内容，结果正如所期待的那样。</p>
+<p>[P39 代码4]</p>
+<p>扩展运算符非常适合用来拼接多个数组。如下例所示，可以在数组字面量中展开任意数组，其中的元素会添加到相应位置。</p>
+<p>[P40 代码1]</p>
+<p>值得一提的是，扩展运算符不仅能用于数组和<code>arguments</code>中，还可以用于任何可遍历对象中。可遍历是ES6中新引入的一种机制，它允许我们将对象转换成可被遍历的内容，我们将在第4章深入讨论这一部分的内容。</p>
+<blockquote>
+<h2><span id="shift操作和扩展运算">shift操作和扩展运算</span></h2><p>当我们想要从一个数组的开头处获取一个或者两个元素时，通常会使用<code>.shift</code>方法。下面的代码虽然实现了这一功能，但是却难以很快理解，因为代码中使用了两次<code>.shift</code>方法，而每次从数组的开头取到的是不同的值。在ES6之前有很多类似的情况，侧重点往往放在了如何让代码达到我们想要的目的。
+[P40 代码2]
+ES6中，数组的解构和扩展运算符可以结合使用。下面的代码和前面的代码相似。我们仅用一句代码即可实现，并且比重复使用<code>list.shift</code>方法更具表达力。
+[P40 代码3]
+使用扩展运算符我们可以只关注所要实现的功能，而不用关心语言本身。ES6的很多新特性都能够提高代码的表达力并减少在语言限制上的时间话费。</p>
+</blockquote>
+<p>在ES6之前，当某个函数调用的参数是个动态的参数列表时，我们通常会使用<code>.aplly</code>方法。这么做并不优雅，<code>.apply</code>会改变this的指向，而此时，我们并不希望<code>this</code>指向自身。</p>
+<p>[P41 代码1]</p>
+<p>除了在数组中使用扩展运算符之外，我们还可以在函数调用中使用扩展运算符。如下例所示，我们可以使用扩展运算符向<code>multiply</code>函数传递任意数值作为参数。</p>
+<p>[P41 代码2]</p>
+<p>如同上文在数组字面量中一样，在函数调用中扩展参数可以和常规参数一起使用，必要时，可以使用任意多的扩展参数。下例中，调用了<code>print</code>方法，并传入了一对常规参数和一对在参数列表中扩展开的数组。注意，使用剩余参数<code>list</code>能够取到所有传入的参数。扩展运算符和剩余参数可以在不增加代码的前提下，更清晰地展示代码意图。</p>
+<p>[P41 代码3]</p>
+<p><code>.apply</code>方法还有一个不足，当使用<code>new</code>关键字实例化对象时，会非常冗长。下例中使用<code>new</code>和<code>.apply</code>创建了<code>Date</code>对象。先不管在JavaScript中日期中的月份是从0开始的，即<code>11</code>指12月。除此之外，想一想，为了实例化一个对象，我们向语言做了多少妥协。</p>
+<p>[P41 代码4]</p>
+<p>如下所示，扩展运算符能够避免这些问题，我们只需要关注最重要的内容。下例的<code>new</code>实例中，在<code>Date</code>函数使用了<code>...</code>来扩展动态的参数列表。</p>
+<p>[P41 代码5]</p>
+<p>下表总结了上述所讨论的扩展运算符的使用场景。</p>
+<table>
+<thead>
+<tr>
+<th>使用场景</th>
+<th>ES5</th>
+<th>ES6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数组的连接</td>
+<td>[1, 2].concat(more)</td>
+<td>[1, 2, …more]</td>
+</tr>
+<tr>
+<td>将一个数组放入列表中</td>
+<td>list.push.apply(list, items)</td>
+<td>list.push(…items)</td>
+</tr>
+<tr>
+<td>解构</td>
+<td>a = list[0], other = list.slice(1)</td>
+<td>[a, …other] = list</td>
+</tr>
+<tr>
+<td><code>new</code>关键字和<code>apply</code>方法</td>
+<td>new (Date.bind.apply(Date, [null,2015,31,8]))</td>
+<td>new Date(… [2015,31,8])</td>
+</tr>
+</tbody>
+</table>
+<h2><span id="25-模板字符串">2.5 模板字符串</span></h2><p>和JavaScript中的常规字符串相比，模板字符串有很大改进。如模板字符串不是使用单引号或者双引号进行声明，而是使用反引号”`”。</p>
+<p>[P42 代码1]</p>
+<p>由于模板字符串使用反引号作为定界符，在使用模板字符串声明字符串时就不需要再转义其中的<code>&#39;</code>和<code>&quot;</code>。具体示例如下：</p>
+<p>[P42 代码2]</p>
+<p>最值得一提的是，模板字符串中可以插入JavaScript表达式。</p>
+<h3><span id="251-字符串插值">2.5.1 字符串插值</span></h3><p>使用模板字符串，可以在模板中插入任意的JavaScript表达式。当执行到模板字符串表达式时，计算表达式，并将结果返回。下例中，在模板字符串内插入了一个<code>name</code>变量。</p>
+<p>[P42 代码3]</p>
+<p>前面已经说了，除了变量之外，还可以使用任意的JavaScript表达式。可以将模板字符串的表达式当做是模板执行之前定义的一个变量，执行结果是将各变量和其余字符串连接起来。这么做的好处就是代码更容易维护，不需要再手动将各字符串和表达式拼接起来。不过表达式中所使用的变量、所调用的函数等都必须在当前作用域内可用。</p>
+<p>想要在模板字符串中插入怎样的内置表达式逻辑，都取决于自己的编码风格。下面的代码片段在模板字符串中实例化了一个<code>Date</code>对象</p>
+<p>[P43 代码1]</p>
+<p>同样也可以在模板字符串中插入数学运算。</p>
+<p>[P43 代码2]</p>
+<p>甚至可以嵌套模板字符串，因为它们也是合法的JavaScript表达式。</p>
+<p>[P43 代码3]</p>
+<p>模板字符串还有另一个好处，它支持多行字符串。</p>
+<h3><span id="252-多行模板字符串">2.5.2 多行模板字符串</span></h3><p>在模板字符串之前，如果想要在JavaScript中表示一个多行字符串，必须借助转义符、字符串连接、数组，甚至是借助注释。以下代码总结了ES6之前多行字符串最常见的几种表示法。</p>
+<p>[P43 代码4]</p>
+<p>在ES6中，可以使用反引号来表示。模板字符串默认支持多行字符串。如下可以看出，代码中不再需要借助<code>\n</code>、连接符和数组。</p>
+<p>[P44 代码1]</p>
+<p>在一系列HTML中插入多个变量时，多行字符串非常实用。如果需要在模板中展示一个列表，可以直接遍历这个列表，将对应的内容添加到相应的标签内。如下所示，这么做使得在模板中声明子组件变得非常容易。</p>
+<p>[P44 代码2]</p>
+<p>上述代码会生出如下所示的HTML结构。可以看到空格被保留下来了[注释 3]，并且通过<code>join</code>方法中的一连串空格，保证了<code>&lt;li&gt;</code>标签正确缩进。</p>
+<p>[P45 代码1]</p>
+<p>多行模板字符串在缩进方面存在问题。下例中，函数内包含一个模板字符串，模板字符串内的代码有着同样的缩进。期待的结果可能是没有缩进的，但是最后字符串的前面会保留有四个空格的缩进。</p>
+<p>[P45 代码2]</p>
+<p>可以通过下面的通用函数来将结果字符串中每一行的缩进移除，虽然这么做并不明智。</p>
+<p>[P45 代码3]</p>
+<p>有些时候，最好是在将插值表达式的结果插入模板之前进行预处理。对于这些更进一步的使用场景，就需要用到另一种模板字符串，即<strong>标签模板</strong>。</p>
+<h3><span id="253-标签模板">2.5.3 标签模板</span></h3><p>通常情况下，JavaScript中<code>\</code>具有特殊的含义，代表转义符。比如，<code>\n</code>表示换行，<code>\uoof1</code>表示<code>ñ</code>等。通过<code>String.raw</code>标签模板可以使得转义字符不进行转义。下面代码展示了如何使用<code>String.raw</code>，其中<code>\n</code>并没有被解释成换行。</p>
+<p>[P46 代码1]</p>
+<p>模板字符串的前缀<code>String.raw</code>是一个标签模板，用于解析模板字符串。标签模板接受一个数组参数和其他参数，数组中包含模板的每一个静态部分，其他参数对应每个表达式的计算结果。</p>
+<p>思考一下以下代码中的标签模板。</p>
+<p>[P46 代码2]</p>
+<p>实际上，标签模板最终会被解释为如下所示的函数调用。</p>
+<p>[P46 代码3]</p>
+<p>依次取出模板中的每个部分，并和相邻的表达式拼凑在一起，直到最终拼凑完模板中的所有部分，则为结果字符串。如果不知道默认模板字符串<code>tag</code>内部是如何实现的，参数列表理解起来比较困难。所以我们先学习一下<code>tag</code>的内部实现。</p>
+<p>以下代码是默认标签<code>tag</code>的一种可能实现方式。它的功能与不显式指定标签模板进行模板字符串处理时功能相同。它会将<code>parts</code>数组归纳为一个值，以模板的第一部分开头，依次连接<code>values</code>中的值和模板中的内容，最终的值就是模板字符串的计算结果。通过剩余参数语法来获取<code>...values</code>，更便捷地获取了到模板字符串中每个表达式的计算结果，并且还使用了隐式<code>return</code>的箭头函数，这样函数语句看起来更加简单。</p>
+<p>[P47 代码1]</p>
+<p>可以通过以下代码来试运行上述的<code>tag</code>模板。可以看到，运行结果和不适用<code>tag</code>时相同，这是因为上述代码正是对默认模板行为的实现。</p>
+<p>[P47 代码2]</p>
+<p>标签模板还有很多其他用法。比如，可以用来将用户输入变为大写。以下代码实现了这一功能。相比与前面的<code>tag</code>，只是做了一些简单的修改，从而使得任意插入的字符串都转为大写形式。</p>
+<p>[P47 代码3]</p>
+<p>标签模板还有一个更加有用的用法，即可以通过标签模板来保证模板中插入表达式的安全性。假设有一个模板，其中所有表达式都是用户输入的内容，可以虚构一个<code>sanitize</code>库来移除HTML标签和类似的危害，从而阻止用户在网站中注入恶意的HTML，防止跨域脚本攻击(XSS)。</p>
+<p>[P47 代码4 - P48 代码1]</p>
+<p>看，恶意的<code>&lt;ifram&gt;</code>差点就得逞了。接下来，我们继续学习ES6中的<code>let</code>和<code>const</code>声明。</p>
+<h2><span id="26-let和const声明">2.6 let和const声明</span></h2><p><code>let</code>声明是ES6中最广为人知的特性之一。它和<code>var</code>声明功能相似，但是它有着不同的作用域规则。</p>
+<p>关于作用域，JavaScript有着一套非常复杂的规则集，以致于能弄疯很多初次尝试弄懂JavaScript变量工作原理的程序员。直到知道了变量提升后，才能够逐渐了解。<strong>变量提升</strong>是指不管变量声明在代码的哪个位置，都会提升到所在作用域的顶部。参考以下示例代码：</p>
+<p>[P48 代码2]</p>
+<p>尽管<code>two</code>是在if代码分支语句中声明的，但它可以在分支语句外访问到，所以上面的代码能够正常工作。这一行为是因为<code>var</code>声明会绑定到所在封闭作用域，如函数作用域或者顶级作用域。结合变量的提升，前面的代码等同于如下所示代码。</p>
+<p>[P48 代码3]</p>
+<p>不管我们喜欢与否，与使用块级作用域的变量相比，变量提升很让人困惑。块级作用域通过花括号来声明，而不是函数。</p>
+<h3><span id="261-块级作用域和let声明">2.6.1 块级作用域和let声明</span></h3><p>通过块级作用域，在现有分支代码语句(如<code>if</code>、<code>for</code>或<code>while</code>)的基础上，嵌套任意新的<code>{}</code>块即可创建更深的作用域，而不需要声明新的函数。只要我们愿意，JavaScript允许创建任意数量的块。</p>
+<p>[P49 代码1]</p>
+<p>使用<code>var</code>声明的变量是基于词法作用域的，在<code>deep</code>变量声明所在块的外部仍然可以访问到该变量，并不会报错。但在以下几种情况下，如果能够抛出异常会更好：</p>
+<ul>
+<li>访问内部变量会破坏代码的封装性</li>
+<li>内部变量和外部变量没有任何关联</li>
+<li>同级的兄弟块中也可能使用相同的变量名</li>
+<li>某个父级块中已经存在名称相同的变量，但是仍需在内部使用该变量。</li>
+</ul>
+<p><code>let</code>声明是<code>var</code>声明的一个替代方案。它遵循块级作用域规则而不是默认的词法作用域规则。使用<code>var</code>时，只能通过嵌套函数来创建更深的作用域。但是使用<code>let</code>时，新增一对花括号即可创建更深的作用域。这就意味着通过<code>{}</code>块即可创建新的作用域，而不需要创建新的函数。</p>
+<p>[P49 代码2 - P50 代码1]
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// attempts to access innermost here would throw</span></span><br><span class="line">  <span class="comment">// 在此处尝试访问innermost，会抛出异常</span></span><br><span class="line"><span class="comment">// attempts to access inner here would throw</span></span><br><span class="line"><span class="comment">// 在此处尝试访问inner，会抛出异常</span></span><br><span class="line"><span class="comment">// attempts to access innermost here would throw</span></span><br><span class="line"><span class="comment">// 在此处尝试访问innermost，会抛出异常</span></span><br></pre></td></tr></table></figure></p>
+<p><code>let</code>声明有一个非常有用的用法，如果在<code>for</code>循环中使用<code>let</code>，则变量的作用域会封闭在循环体内。如下：</p>
+<p>[P50 代码2]</p>
+<p>在循环内声明的<code>let</code>变量会被封闭在每一次的循环内部，哪怕在函数体异步函数调用中使用这些变量也能够像预期一样工作，这一点和使用<code>var</code>声明的变量恰恰相反。一起看一下具体的例子。</p>
+<p>首先，看一个关于<code>var</code>作用域工作原理的典型示例。下例中，<code>i</code>变量会绑定到<code>printNumbers</code>函数作用域，在循环添加每个timeout回调时，它的值会一直增加到<code>10</code>。等到每隔100毫秒执行每个回调函数时，<code>i</code>的值就是10，所以每次都会输出10。</p>
+<p>[P50 代码3]</p>
+<p>相反地，如果使用<code>let</code>声明，会将变量绑定到块级作用域。虽然每次循环仍然会递增变量的值，但是每一次循环中都会创建一个新的绑定。也就是说每次添加timeout回调时，每个回调函数都会持有一个绑定保存当前变量<code>i</code>的引用，所以最终会输出期望中的结果：<code>0</code>到<code>9</code>。</p>
+<p>[P50 代码4 - P51 代码1]</p>
+<p>除了上面这些内容之外，<code>let</code>还涉及“暂时性死区”这一概念。</p>
+<h3><span id="262-暂时性死区">2.6.2 暂时性死区</span></h3><p>毫无疑问：下面这样的代码片段，必然会抛出异常。从作用域的开始，到<code>let</code>声明的执行之前，访问<code>let</code>声明的变量都会报错。这就是所谓的暂时性死区(TDZ，Temporal Dead Zone)。</p>
+<p>[P51 代码2]</p>
+<p>如果在<code>let name</code>声明执行之前访问该变量，程序会抛出异常。在<code>name</code>变量定义之前，声明一个函数，在函数内引用<code>name</code>变量没问题，只要不在暂时性死区内执行函数即可。在<code>let name</code>声明之前，都是<code>name</code>的暂时性死区。下面的代码并不会报错，因为<code>return name</code>并没有在<code>name</code>的暂时性死区内执行。</p>
+<p>[P51 代码3]</p>
+<p>相反，下面的代码会报错，因为在<code>name</code>离开暂时性死区之前就访问了<code>name</code>变量。</p>
+<p>[P51 代码4]</p>
+<p>注意，即使声明时没有对<code>name</code>赋值，上例的结果并不会发生改变。以下代码同样会抛出异常，同样因为在暂时性死区内访问了<code>name</code>变量。</p>
+<p>[P52 代码1]</p>
+<p>下面的代码能够正常工作，是因为它在离开暂时性死区后才访问<code>name</code>变量。</p>
+<p>[P52 代码2]</p>
+<p>只有一点需要特别记住，即在函数声明中访问暂时性死区中的变量时没问题的，只要访问暂时性死区中变量的语句在<code>let</code>声明语句之后执行即可。</p>
+<p>TDZ的主要目的是为了更容易地捕获错误，防止在用户代码声明变量前就访问变量，从而避免一些不可预期的行为。在ES6之前，由于变量的提升和不良的编码习惯，这一情况是非常常见的。在ES6中能够很简单地避免该问题。要记住提升仍然适用于<code>let</code>，即变量在作用域的开始就会创建，但是会产生暂时性死区，这些变量在声明语句没有执行前无法访问，在离开暂时性死区之后才能够访问。</p>
+<p>我们已经学习了暂时性死区，是时候学习<code>const</code>声明了。它与<code>let</code>相似，但是也有很多不同。</p>
+<h3><span id="263-const声明">2.6.3 Const声明</span></h3><p><code>const</code>声明和<code>let</code>相似，都只在块级作用域内有效，也存在暂时性死区。实际上，暂时性死区就是为了<code>const</code>而实现的，之后为了保持统一，也应用在了<code>let</code>上。<code>const</code>之所以需要暂时性死区，是因为如果没有暂时性死区，则可以在<code>const</code>声明执行之前给提升的<code>const</code>变量赋值，这样执行声明语句时就会报错。暂时性死区就是为了保证只在<code>const</code>声明时进行赋值而实现的，可以避免使用<code>let</code>的一些潜在问题，并且使得其他依赖于暂时性死区的特性更容易实现。</p>
+<p>由下例可以看出，<code>const</code>和<code>let</code>一样，只在块级作用域内有效。</p>
+<p>[P53 代码1]</p>
+<p>前面提到<code>let</code>和<code>const</code>有很多不同之处。第一个不同之处就是使用<code>const</code>声明的变量必须在声明时就进行初始化，如下例所示：</p>
+<p>[P53 代码2]</p>
+<p>除了在声明时初始化外，使用<code>const</code>声明的变量无法重复赋值，即<code>const</code>初始化之后，无法再改变它的值。在严格模式下，改变<code>const</code>变量的值会报错。非严格模式下，不会报错，但改变不生效，如下所示。</p>
+<p>[P53 代码3]</p>
+<p>需要注意的是，创建一个<code>const</code>变量并不意味值所赋的值不可改变。这是一个常见的混淆点，强烈建议仔细阅读以下警告信息。</p>
+<blockquote>
+<h2><span id="使用const声明的变量并不是不可变的">使用<code>const</code>声明的变量并不是不可变的</span></h2><p>使用<code>const</code>声明只是意味着所声明的变量会一直持有对同一个对象或原始值的引用，保持不变的只是这个引用。引用保持不变，但是引用所指向值并不是不可变的。
+从下例可以看出，尽管<code>people</code>的引用不能被改变，但是数组本身确实可以修改。如果数组是不可变的，不可能产生下面的结果。
+[P54 代码1]
+<code>const</code>声明只会禁止变量绑定到一个新的引用。以下代码从另一方面说明了该问题。使用<code>const</code>创建了一个<code>people</code>变量，然后将这个变量赋值给了一个普通的用<code>var</code>声明的<code>humans</code>变量。我们可以给<code>humans</code>重新赋值其他引用，是因为它并不是使用<code>const</code>声明的。但是我们不能将其他引用赋给<code>people</code>，因为它是通过<code>const</code>声明的。
+[P54 代码2]
+如果想要确保值不变，可以使用<code>Object.freeze</code>函数。使用<code>Object.freeze</code>可以禁止对传入的对象进行扩展，如下例所示：
+[P54 代码3]</p>
+</blockquote>
+<p>接下来我们一起讨论下<code>const</code>和<code>let</code>的优势。</p>
+<h3><span id="264-const和let的优势">2.6.4 const和let的优势</span></h3><p>永远不要为了使用新特性而使用新特性。ES6特性应该合理应用在能够真正提升代码可读性和可维护性的地方。很多情况下，<code>let</code>声明能够简化一部分代码逻辑，比如当我们需要在函数的顶部进行<code>var</code>声明，从而保证变量的提升不会产生意想不到的结果时，使用<code>let</code>就可以不用在整个函数的顶部进行声明，可以在块级作用域的顶部声明，可以减少思维从作用域顶部开始所延续的范围。</p>
+<p>使用<code>const</code>声明能够有效地避免一些问题。以下代码展示一个可能会出错的场景：当我们将<code>items</code>的引用传递给<code>checklist</code>函数，这个函数会返回一个<code>todo</code>API用于操作传入的<code>items</code>引用。当<code>items</code>变量被改变，引用指向其他数组时，情况就完全不一样了——<code>todo</code>API仍然会从操作<code>items</code>之前引用的值，而<code>items</code>引用了其他的值。</p>
+<p>[P55 代码1]</p>
+<p>这种问题是很难调试的，可能需要花不短的时间，才能查出引用被改变而导致的问题。如果使用<code>const</code>声明能够防止发生这一错误，因为使用<code>const</code>会在运行时报错（严格模式下），从而能够在问题发生时定位到问题所在。</p>
+<p>使用<code>const</code>声明还有一个相似的好处就是能够显示地定义不可重复赋值的变量。<code>const</code>表明变量引用的绑定是只读的，这样我们在阅读代码时就不用关心这些常量了。</p>
+<p>如果我们默认使用<code>const</code>来声明变量，使用<code>let</code>来声明需要重复赋值的变量，所有的变量都会遵循相同的作用域规则，会使代码变得更加易于理解。为什么会提议默认使用<code>const</code>声明方式呢，是因为只需要使用它就能达成以下几点目标：禁止重新赋值，遵循块级作用域，并且在变量声明语句执行之前不能访问变量。<code>let</code>语句虽然允许重新赋值，但是它的行为和<code>const</code>类似，所以如果需要一个可以重新赋值的变量可以选择使用<code>let</code>声明。</p>
+<p>另一方面，<code>var</code>声明方式更加复杂，如由于函数作用域规则，在分支语句中使用较为困难；并且<code>var</code>允许重新赋值，且可以在变量声明语句执行前访问变量。由于<code>var</code>做的事情并不如<code>const</code>和<code>let</code>多，所以在现代JavaScript代码库中<code>var</code>声明并不常见。</p>
+<p>通过本章，我们学习了默认使用<code>const</code>，在需要重新赋值时使用<code>let</code>。第九章我们将会学习更多关于这一选择的原因。</p>
+<blockquote>
+<p>注1 和polyfill一样，ponyfill（<a href="https://ponyfoo.com/articles/polyfills-or-ponyfills）是对尚未被所有JavaScript运行环境所支持的功能的用户实现。polyfill主要是试图修补运行环境，从而使某一特性看起来像是原生支持一样，而ponyfill是将运行环境所缺失的功能实现成为一个独立的模块，并且不会污染运行环境。这样做的好处是不会超出第三方库对于运行环境的期望，因为它们可能并不知道我们所使用的polyfill。" target="_blank" rel="noopener">https://ponyfoo.com/articles/polyfills-or-ponyfills）是对尚未被所有JavaScript运行环境所支持的功能的用户实现。polyfill主要是试图修补运行环境，从而使某一特性看起来像是原生支持一样，而ponyfill是将运行环境所缺失的功能实现成为一个独立的模块，并且不会污染运行环境。这样做的好处是不会超出第三方库对于运行环境的期望，因为它们可能并不知道我们所使用的polyfill。</a></p>
+<p>注2 Label（<a href="https://mjavascript.com/out/label）用于定义指令。可以用在`goto`语句中，用来指明需要跳转的指令；也可以用在`break`语句中，表示所要跳出的序列；还有`continue`语句中，表示想要执行的序列。" target="_blank" rel="noopener">https://mjavascript.com/out/label）用于定义指令。可以用在`goto`语句中，用来指明需要跳转的指令；也可以用在`break`语句中，表示所要跳出的序列；还有`continue`语句中，表示想要执行的序列。</a></p>
+<p>[注释 3] 在使用多行模板字符串时，空格并不会被自动保留。不过多数情况下，只需要提供足够多的缩进就能使其保留空格。所以缩进时需要注意，避免在代码块嵌套时产生不正确的缩进。</p>
+</blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://verymuch.com/2017/11/01/第2章-ES6基础/" data-id="cjc9sr0vi000nib3y01md97to" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://verymuch.com/2017/11/01/第2章-ES6基础/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2017/11/01/第2章-ES6基础/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/11/01/Javascript-RegExp正则表达式/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    Javascript - RegExp正则表达式
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2017/10/23/第1章-ECMAScript-和-JavaScript-的未来/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">第1章 ECMAScript 和 JavaScript 的未来</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/10/Node路径解析浅析/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/01/10/Node路径解析浅析/" class="title">Node路径解析浅析</a></p>
+                            <p class="item-date"><time datetime="2018-01-10T09:08:05.000Z" itemprop="datePublished">2018-01-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/01/03/CSS-Mixin/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/01/03/CSS-Mixin/" class="title">CSS Mixin</a></p>
+                            <p class="item-date"><time datetime="2018-01-03T07:43:49.000Z" itemprop="datePublished">2018-01-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/30/第2章-ES6基础-总结与扩展/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/practical-modern-javascript.gif)" alt="第2章 ES6基础(总结与扩展)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/12/30/第2章-ES6基础-总结与扩展/" class="title">第2章 ES6基础(总结与扩展)</a></p>
+                            <p class="item-date"><time datetime="2017-12-30T14:01:04.000Z" itemprop="datePublished">2017-12-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/14/Data-URL简介与使用/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/URL.png)" alt="Data URL简介与使用" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/12/14/Data-URL简介与使用/" class="title">Data URL简介与使用</a></p>
+                            <p class="item-date"><time datetime="2017-12-14T00:34:41.000Z" itemprop="datePublished">2017-12-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/encode.jpg)" alt="escape、encodeURI和encodeURIComponent的区别与使用" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/" class="title">escape、encodeURI和encodeURIComponent的区别与使用</a></p>
+                            <p class="item-date"><time datetime="2017-12-12T14:51:18.000Z" itemprop="datePublished">2017-12-12</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/EXERCISE-SPACE/">EXERCISE_SPACE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GROWING-SPACE/">GROWING_SPACE</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/他人经验总结/">他人经验总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作效率/">工作效率</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/有感/">有感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/沉淀/">沉淀</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/他人经验总结/" style="font-size: 10px;">他人经验总结</a> <a href="/tags/工作效率/" style="font-size: 10px;">工作效率</a> <a href="/tags/有感/" style="font-size: 10px;">有感</a> <a href="/tags/沉淀/" style="font-size: 20px;">沉淀</a> <a href="/tags/翻译/" style="font-size: 15px;">翻译</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 verymuch<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://verymuch.com/2017/11/01/第2章-ES6基础/';
+        
+        this.page.identifier = '第2章-ES6基础';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
