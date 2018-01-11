@@ -238,6 +238,11 @@
 
                         
                         
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/沉淀/">沉淀</a>
+    </div>
+
                     </div>
                 
             </header>
@@ -262,7 +267,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/01/10/Node路径解析浅析/" data-id="cjc9utjnx000mq83yrddrrzlh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/01/10/Node路径解析浅析/" data-id="cjc9v0s9y000luq3yrsx4l346" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -385,7 +390,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/01/03/CSS-Mixin/" data-id="cjc9utjnw000lq83y3owb28yz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/01/03/CSS-Mixin/" data-id="cjc9v0s9w000juq3y6d29rgmh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -500,140 +505,13 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            
-            <p><link rel="stylesheet" href="/css/custom.css"></p>
+            <p><p><link rel="stylesheet" href="/css/custom.css"></p>
 <script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
 
-<h2><span id="23-解构赋值">2.3 解构赋值</span></h2><p>解构赋值是ES6中最灵活最有表现力的特性之一。同时，它也最为简单。它可以将对象的属性值绑定到任意多的变量上。解构赋值可以用于<strong>对象</strong>、<strong>数组</strong>以及<strong>函数参数列表</strong>中。</p>
-<h3><span id="231-对象的解构">2.3.1 对象的解构</span></h3><p>通过对象的解构赋值，能够更加语义化地抽取对象的属性声明为变量，避免重复输入属性名。如下将<code>character.pseudonym</code>赋值给<code>pseudonym</code>变量。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> character = &#123; </span><br><span class="line">  name: <span class="string">'Bruce'</span>, </span><br><span class="line">  pseudonym: <span class="string">'Batman'</span>, </span><br><span class="line">  metadata: &#123;</span><br><span class="line">    age: <span class="number">34</span>,</span><br><span class="line">    gender: <span class="string">'male'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  batarang: [<span class="string">'gas pellet'</span>, <span class="string">'bat-mobile control'</span>, <span class="string">'bat-cuffs'</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ES5写法</span></span><br><span class="line"><span class="selector-tag">var</span> pseudonym = character.pseudonym</span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6写法</span></span><br><span class="line"><span class="selector-tag">var</span> &#123; pseudonym &#125; = character</span><br></pre></td></tr></table></figure>
-<p>通过<code>var</code>声明时，使用逗号隔开能一次声明多个变量。同样地，在解构赋值的花括号中也可以<strong>通过逗号分隔声明多个变量</strong>。</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var &#123; pseudonym, <span class="built_in">name</span> &#125; = <span class="built_in">character</span></span><br></pre></td></tr></table></figure>
-<p>此外，我们可以在同一个<code>var</code>语句中<strong>同时使用常规的变量声明和解构赋值</strong>。</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">var</span> &#123; <span class="attribute">pseudonym</span> &#125; = character, two = <span class="number">2</span></span><br></pre></td></tr></table></figure>
-<p>如果想要提取<code>pseudonym</code>属性，并将其声明为<code>alias</code>变量，我们可以使用下面这种解构语法，可以称之为<strong>别名</strong>语法。除了<code>alias</code>之外，我们可以使用任何其他合法的变量名。</p>
-<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var &#123; pseudonym: <span class="keyword">alias</span> &#125; = <span class="keyword">character</span> </span><br><span class="line">console.<span class="keyword">log</span>(<span class="keyword">alias</span>)</span><br><span class="line"><span class="comment">// &lt;- 'Batman'</span></span><br></pre></td></tr></table></figure>
-<p>别名语法看起来并不比ES5的写法<code>alias = character.pseudonym</code>简单。不过如果解构赋值支持深度解构的话，就另当别论了。如下面代码所示：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> &#123; metadata: &#123; gender &#125; &#125; = character</span><br></pre></td></tr></table></figure>
-<p>在类似上面这种情况，当我们需要解构一个嵌套较深的属性值时，使用别名能够更清晰地传递属性名。试想一下，一个叫<code>gender</code>的属性名，并不能如<code>characterGender</code>一样清晰表达所指的内容。</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var &#123; <span class="string">metadata:</span> &#123; <span class="string">gender:</span> characterGender &#125; &#125; = character</span><br></pre></td></tr></table></figure>
-<p>在ES5中，访问一个不存在的属性时，会返回<code>undefined</code>。</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">console.<span class="built_in">log</span>(<span class="keyword">character</span>.boots) </span><br><span class="line">// &lt;- undefined </span><br><span class="line">console.<span class="built_in">log</span>(<span class="keyword">character</span>[<span class="string">'boots'</span>]) </span><br><span class="line">// &lt;- undefined</span><br></pre></td></tr></table></figure>
-<p>在解构赋值中也同样如此。<strong>当进行解构赋值的属性不存在时，同样会得到<code>undefined</code></strong>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123; boots &#125; = character </span><br><span class="line"><span class="built_in">console</span>.log(boots)</span><br><span class="line"><span class="comment">// &lt;- undefined</span></span><br></pre></td></tr></table></figure>
-<p>当解构声明中访问的是一个嵌套属性，并且嵌套属性的父对象是<code>null</code>或<code>undefined</code>时，会抛出异常，就像在其他情况下访问<code>null</code>或<code>undefined</code>的属性会报错一样。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> &#123; boots: &#123; size &#125; &#125; = character </span><br><span class="line"><span class="comment">// &lt;- Exception</span></span><br><span class="line"><span class="selector-tag">var</span> &#123; missing &#125; = null</span><br><span class="line"><span class="comment">// &lt;- Exception</span></span><br></pre></td></tr></table></figure>
-<p>在解构赋值中，可以<strong>为这些值为<code>undefined</code>的属性解构提供默认值</strong>。默认值可以使任何类型的值：如数值、字符串、函数、对象或者对其他变量的引用等。</p>
-<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var &#123; boots = &#123; <span class="built_in">size</span>: <span class="number">10</span> &#125; &#125;=<span class="keyword">character</span></span><br><span class="line">console.<span class="built_in">log</span>(boots)</span><br><span class="line">// &lt;- &#123; <span class="built_in">size</span>: <span class="number">10</span> &#125;</span><br></pre></td></tr></table></figure>
-<p>默认值在嵌套属性的解构中也可以使用。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123; <span class="attr">metadata</span>: &#123; enemy = <span class="string">'Satan'</span> &#125; &#125; = character </span><br><span class="line"><span class="built_in">console</span>.log(enemy)</span><br><span class="line"><span class="comment">// &lt;- 'Satan'</span></span><br></pre></td></tr></table></figure>
-<p>当和别名结合使用时，应如下所示，将别名放在前面，默认值放在后面：</p>
-<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var &#123; boots: footwear = &#123; <span class="built_in">size</span>: <span class="number">10</span> &#125; &#125; = <span class="keyword">character</span></span><br></pre></td></tr></table></figure>
-<p>在解构的模式部分可以使用可计算属性名语法。不过，这种情况下，必须提供一个别名作为变量名。这是因为可计算属性名中允许任意表达式，所以编译器无法推断出变量的名称。下例中，即为使用了别名和可计算属性从<code>character</code>对象中提取出了<code>boots</code>属性。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123; [<span class="string">'boo'</span> + <span class="string">'ts'</span>]: characterBoots &#125; = character </span><br><span class="line"><span class="built_in">console</span>.log(characterBoots)</span><br><span class="line"><span class="comment">// &lt;- undefined</span></span><br></pre></td></tr></table></figure>
-<p>这一写法并没有什么优势，因为<code>characterBoots = character[type]</code>比<code>{ [type]: characterBoots } = character</code>简单很多。也就是说，<strong>可计算属性名声明对象字面量的属性名时很有用，但是在解构赋值中却恰恰相反</strong>。</p>
-<h3><span id="232-数组的解构">2.3.2 数组的解构</span></h3><p>数组的解构语法和对象解构相似。下例中，展示了如何将<code>coordinates</code>数组解构成<code>x</code>和<code>y</code>两个变量。数组解构不再是使用花括号，而是使用了方括号。使用解构我们能够在不显示引用索引情况下清晰地为数组中的值命名，即不需要使用类似<code>x = coordi nates[0]</code>这样的代码。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> coordinates = [<span class="number">12</span>, -<span class="number">7</span>] </span><br><span class="line"><span class="selector-tag">var</span> [x, y] = coordinates </span><br><span class="line">console.log(x)</span><br><span class="line"><span class="comment">// &lt;- 12</span></span><br></pre></td></tr></table></figure>
-<p>使用数组解构时，我们可以跳过不感兴趣或者不需要引用的值。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> names = [<span class="string">'James'</span>, <span class="string">'L.'</span>, <span class="string">'Howlett'</span>] </span><br><span class="line"><span class="selector-tag">var</span> [ firstName, , lastName ] = names </span><br><span class="line">console.log(lastName)</span><br><span class="line"><span class="comment">// &lt;- 'Howlett'</span></span><br></pre></td></tr></table></figure>
-<p>和对象解构相似，数组解构也可以设定默认值。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> names = [<span class="string">'James'</span>, <span class="string">'L.'</span>]</span><br><span class="line"><span class="selector-tag">var</span> [ firstName = <span class="string">'John'</span>, , lastName = <span class="string">'Doe'</span> ] = names </span><br><span class="line">console.log(lastName)</span><br><span class="line"><span class="comment">// &lt;- 'Doe'</span></span><br></pre></td></tr></table></figure>
-<p>在ES5中，当我们需要<strong>交换两个变量的值</strong>时，通常需要借助第三个临时变量。如下所示。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> <span class="attribute">left</span>=<span class="number">5</span></span><br><span class="line"><span class="selector-tag">var</span> <span class="attribute">right</span> = <span class="number">7</span> </span><br><span class="line"><span class="selector-tag">var</span> aux = <span class="attribute">left</span> </span><br><span class="line"><span class="attribute">left</span> = right </span><br><span class="line"><span class="attribute">right</span> = aux</span><br></pre></td></tr></table></figure>
-<p>解构使我们可以不用声明<code>aux</code>变量，而是专注于原本的意图。这也是解构能够使我们的表达更加清晰有效率的一种使用场景。</p>
-<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> <span class="built_in">left</span>=<span class="number">5</span></span><br><span class="line"><span class="built_in">var</span> <span class="built_in">right</span> = <span class="number">7</span></span><br><span class="line">[<span class="built_in">left</span>, <span class="built_in">right</span>] = [<span class="built_in">right</span>, <span class="built_in">left</span>]</span><br></pre></td></tr></table></figure>
-<p>数组也可以<strong>嵌套解构</strong>。如：</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var coordinates = <span class="string">[[12, -7]]</span> </span><br><span class="line">var <span class="string">[[x, y]]</span> = coordinates</span><br></pre></td></tr></table></figure>
-<h3><span id="233-函数参数的默认值">2.3.3 函数参数的默认值</span></h3><p>ES6中，函数的参数也能够指定默认值。</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title">powerOf</span>(base, exponent = 2) &#123; </span><br><span class="line">  <span class="keyword">return</span> <span class="type">Math.pow(base,</span> exponent)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>箭头函数的参数也可以指定默认值。当为箭头函数的参数指定默认值时，哪怕只有一个参数，也要用圆括号将箭头函数的参数列表包裹起来。</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var double = <span class="function"><span class="params">(input = <span class="number">0</span>)</span> =&gt;</span> input * <span class="number">2</span></span><br></pre></td></tr></table></figure>
-<p>在JavaScript中，向函数传递一个包含多个属性的<code>options</code>对象参数的情况是再常见不过的了。如果使用函数的时候没有传递<code>options</code>，我们可以为其设定一个默认值。具体代码如下所示。</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var defaultOptions = &#123; brand: <span class="string">'Volkswagen'</span>, <span class="keyword">make</span>: <span class="number">1999</span> &#125; </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">carFactory</span><span class="params">(options = defaultOptions)</span> &#123;</span></span><br><span class="line">  console.<span class="built_in">log</span>(<span class="keyword">options</span>.brand)</span><br><span class="line">  console.<span class="built_in">log</span>(<span class="keyword">options</span>.<span class="keyword">make</span>)</span><br><span class="line">&#125;</span><br><span class="line">carFactory()</span><br><span class="line">// &lt;- <span class="string">'Volkswagen'</span> </span><br><span class="line">// &lt;- <span class="number">1999</span></span><br></pre></td></tr></table></figure>
-<p>这一方法存在一个问题，如果<code>carFactory</code>的使用者传入了一个<code>options</code>对象，则所有的默认值都会失效。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">carFactory</span><span class="params">(&#123; make: <span class="number">2000</span> &#125;)</span></span> </span><br><span class="line"><span class="comment">// &lt;- undefined</span></span><br><span class="line"><span class="comment">// &lt;- 2000</span></span><br></pre></td></tr></table></figure>
-<p>结合使用函数参数的默认值和解构赋值，能够解决这一问题。</p>
-<h3><span id="234-函数参数的解构">2.3.4 函数参数的解构</span></h3><p>与只提供一个默认值相比，更好的方法是对整个<code>options</code>进行解构，并在解构模式中，为每个属性都指定默认值。这个方法使我们不通过<code>options</code>对象就能引用<code>options</code>中的每个选项，但我们也因此不能直接引用<code>options</code>，在某些情况下可能会产生问题。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">carFactory</span>(<span class="params">&#123; brand = <span class="string">'Volkswagen'</span>, make = <span class="number">1999</span> &#125;</span>) </span>&#123; </span><br><span class="line">  <span class="built_in">console</span>.log(brand)</span><br><span class="line">  <span class="built_in">console</span>.log(make)</span><br><span class="line">&#125;</span><br><span class="line">carFactory(&#123; <span class="attr">make</span>: <span class="number">2000</span> &#125;) </span><br><span class="line"><span class="comment">// &lt;- 'Volkswagen'</span></span><br><span class="line"><span class="comment">// &lt;- 2000</span></span><br></pre></td></tr></table></figure>
-<p><strong>然而，这种情况下，如果使用者没有传入<code>options</code>对象，默认值会再一次缺失</strong>。也就是说，如果没有传入<code>options</code>对象参数，<code>carFactory</code>就会报错。如下所示，可以为<code>options</code>添加一个空对象作为默认值，即可避免这一问题。然后这个空对象就会被解构模式中设定了默认值的属性一一填充。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">carFactory</span>(<span class="params">&#123; </span></span></span><br><span class="line"><span class="function"><span class="params">  brand = <span class="string">'Volkswagen'</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  make = <span class="number">1999</span></span></span></span><br><span class="line"><span class="function"><span class="params">&#125; = &#123;&#125;</span>) </span>&#123; </span><br><span class="line">  <span class="built_in">console</span>.log(brand) </span><br><span class="line">  <span class="built_in">console</span>.log(make)</span><br><span class="line">&#125;</span><br><span class="line">carFactory()</span><br><span class="line"><span class="comment">// &lt;- 'Volkswagen' </span></span><br><span class="line"><span class="comment">// &lt;- 1999</span></span><br></pre></td></tr></table></figure>
-<h3><span id="235-解构的用法">2.3.5 解构的用法</span></h3><ol>
-<li>更加灵活地处理对象或者数组返回值</li>
-<li>为函数设置默认值</li>
-</ol>
-<h2><span id="24-剩余参数和扩展运算符">2.4 剩余参数和扩展运算符</span></h2><p>在ES6之前，处理任意数量的函数参数必须借助<code>arguments</code>来处理。<code>arguments</code>不是一个数组，但是具有<code>length</code>属性。通常，我们会使用<code>Array#slice.call</code>方法来将<code>arguments</code>对象转换为真正的数组。具体代码如下。</p>
-<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">join</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="built_in">list</span> = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>) </span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">list</span>.join(<span class="string">', '</span>)</span><br><span class="line">&#125;</span><br><span class="line">join(<span class="string">'first'</span>, <span class="string">'second'</span>, <span class="string">'third'</span>) </span><br><span class="line"><span class="comment">// &lt;- 'first, second, third'</span></span><br></pre></td></tr></table></figure>
-<p>ES6中引入了剩余参数，能够更好地方式解决这一问题。</p>
-<h3><span id="241-剩余参数">2.4.1 剩余参数</span></h3><p>在函数的最后一个参数前添加三个点，可以将该参数转变为一个特殊的“剩余参数”。当剩余参数是函数中的唯一一个参数时，它会获取到所有传入函数的参数。这和上述使用<code>.slice</code>处理的结果是一样的，但不需要依赖于<code>arguments</code>，在参数列表中指定即可。</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">join</span><span class="params">(<span class="rest_arg">...list</span>)</span> </span>&#123; </span><br><span class="line">  <span class="keyword">return</span> list.join(<span class="string">', '</span>)</span><br><span class="line">&#125;</span><br><span class="line">join(<span class="string">'first'</span>, <span class="string">'second'</span>, <span class="string">'third'</span>) </span><br><span class="line"><span class="comment">// &lt;- 'first, second, third'</span></span><br></pre></td></tr></table></figure>
-<p>剩余参数之前的参数不会被包含在<code>list</code>参数中。</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">join</span><span class="params">(separator, <span class="rest_arg">...list</span>)</span> </span>&#123; </span><br><span class="line">  <span class="keyword">return</span> list.join(separator)</span><br><span class="line">&#125;</span><br><span class="line">join(<span class="string">'; '</span>, <span class="string">'first'</span>, <span class="string">'second'</span>, <span class="string">'third'</span>) </span><br><span class="line"><span class="comment">// &lt;- 'first; second; third'</span></span><br></pre></td></tr></table></figure>
-<p>注意，<strong>如果是箭头函数中包含剩余参数，哪怕只有一个参数，也必须放置在圆括号内</strong>。否则，会抛出<code>SyntaxError</code>异常。由下例可以看出，结合箭头函数和剩余参数能够写出更简洁的函数式表达式。</p>
-<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var sumAll = <span class="function"><span class="params">(...numbers)</span> =&gt;</span> numbers.reduce( </span><br><span class="line">  (total, <span class="built_in">next</span>) =&gt; total + <span class="built_in">next</span></span><br><span class="line">)</span><br><span class="line">console.log(sumAll(<span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>)) // &lt;- <span class="number">8</span></span><br></pre></td></tr></table></figure>
-<h3><span id="242-扩展运算符">2.4.2 扩展运算符</span></h3><p>扩展运算符可以将可遍历对象转换为数组。扩展运算符能够方便地在数组或者函数调用中展开表达式。下例则在数组字面量中使用<code>...arguments</code>对函数的参数进行了转换。</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title">cast</span>() &#123; </span><br><span class="line">  <span class="keyword">return</span> <span class="type">[...arguments]</span></span><br><span class="line">&#125;</span><br><span class="line">cast(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>) </span><br><span class="line">// &lt;- [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br></pre></td></tr></table></figure>
-<p>使用扩展运算符可以将一个字符串分割成数组，数组中元素为组成字符串的每个字符。</p>
-<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[...<span class="string">'show me'</span>]</span><br><span class="line">// &lt;- [<span class="string">'s'</span>, <span class="string">'h'</span>, <span class="string">'o'</span>, <span class="string">'w'</span>, <span class="string">' '</span>, <span class="string">'m'</span>, <span class="string">'e'</span>]</span><br></pre></td></tr></table></figure>
-<p>扩展运算符的左右还可以添加其他内容，结果正如所期待的那样。</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title">cast</span>() &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="type">['left',</span> ...arguments, <span class="symbol">'right</span>']</span><br><span class="line">&#125;</span><br><span class="line">cast(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>)</span><br><span class="line">// &lt;- [<span class="symbol">'left</span>', <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="symbol">'right</span>']</span><br><span class="line"></span><br><span class="line">扩展运算符非常适合用来拼接多个数组。如下例所示，可以在数组字面量中展开任意数组，其中的元素会添加到相应位置。</span><br></pre></td></tr></table></figure>
-<p>var all = [1, …[2, 3], 4, …[5], 6, 7] 
-console.log(all)
-// &lt;- [1, 2, 3, 4, 5, 6, 7]</p>
-<p>值得一提的是，扩展运算符不仅能用于数组和<code>arguments</code>中，还可以用于任何可遍历对象中。可遍历是ES6中新引入的一种机制，它允许我们将对象转换成可被遍历的内容，我们将在第4章深入讨论这一部分的内容。</p>
-<p>在ES6之前，当某个函数调用的参数是个动态的参数列表时，我们通常会使用<code>.aplly</code>方法。这么做并不优雅，<code>.apply</code>会改变this的指向，而此时，我们并不希望<code>this</code>指向自身。</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span>.<span class="title">apply</span></span>(null, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>])</span><br></pre></td></tr></table></figure>
-<p>除了在数组中使用扩展运算符之外，我们还可以在函数调用中使用扩展运算符。如下例所示，我们可以使用扩展运算符向<code>multiply</code>函数传递任意数值作为参数。</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">multiply</span>(<span class="title">left</span>, <span class="title">right</span>) &#123; </span></span><br><span class="line">  <span class="literal">return</span> left * <span class="literal">right</span></span><br><span class="line">&#125;</span><br><span class="line">var <span class="built_in">result</span> = <span class="built_in">multiply</span>(...[<span class="number">2</span>, <span class="number">3</span>]) </span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">result</span>)</span><br><span class="line">// &lt;- <span class="number">6</span></span><br></pre></td></tr></table></figure>
-<p>如同上文在数组字面量中一样，在函数调用中扩展参数可以和常规参数一起使用，必要时，可以使用任意多的扩展参数。下例中，调用了<code>print</code>方法，并传入了一对常规参数和一对在参数列表中扩展开的数组。注意，使用剩余参数<code>list</code>能够取到所有传入的参数。扩展运算符和剩余参数可以在不增加代码的前提下，更清晰地展示代码意图。</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">print</span><span class="params">(<span class="rest_arg">...list</span>)</span> </span>&#123; </span><br><span class="line">  console.log(list)</span><br><span class="line">&#125;</span><br><span class="line">print(<span class="number">1</span>, ...[<span class="number">2</span>, <span class="number">3</span>], <span class="number">4</span>, ...[<span class="number">5</span>]) </span><br><span class="line"><span class="comment">// &lt;- [1, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure>
-<p><code>.apply</code>方法还有一个不足，当使用<code>new</code>关键字实例化对象时，会非常冗长。下例中使用<code>new</code>和<code>.apply</code>创建了<code>Date</code>对象。先不管在JavaScript中日期中的月份是从0开始的，即<code>11</code>指12月。除此之外，想一想，为了实例化一个对象，我们向语言做了多少妥协。</p>
-<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> (<span class="built_in">Date</span>.bind.apply(<span class="built_in">Date</span>, [<span class="built_in">null</span>, <span class="number">2015</span>, <span class="number">11</span>, <span class="number">31</span>])) </span><br><span class="line"><span class="comment">// &lt;- Thu Dec 31 2015</span></span><br></pre></td></tr></table></figure>
-<p>如下所示，扩展运算符能够避免这些问题，我们只需要关注最重要的内容。下例的<code>new</code>实例中，在<code>Date</code>函数使用了<code>...</code>来扩展动态的参数列表。</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">new Date(...[<span class="number">2015</span>, <span class="number">11</span>, <span class="number">31</span>]) </span><br><span class="line"><span class="comment">// &lt;- Thu Dec 31 2015</span></span><br></pre></td></tr></table></figure>
-<p>下表总结了上述所讨论的扩展运算符的使用场景。</p>
-<table>
-<thead>
-<tr>
-<th>使用场景</th>
-<th>ES5</th>
-<th>ES6</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>数组的连接</td>
-<td>[1, 2].concat(more)</td>
-<td>[1, 2, …more]</td>
-</tr>
-<tr>
-<td>将一个数组放入列表中</td>
-<td>list.push.apply(list, items)</td>
-<td>list.push(…items)</td>
-</tr>
-<tr>
-<td>解构</td>
-<td>a = list[0], other = list.slice(1)</td>
-<td>[a, …other] = list</td>
-</tr>
-<tr>
-<td><code>new</code>关键字和<code>apply</code>方法</td>
-<td>new (Date.bind.apply(Date, [null,2015,31,8]))</td>
-<td>new Date(… [2015,31,8])</td>
-</tr>
-</tbody>
-</table>
-<h2><span id="25-模板字符串">2.5 模板字符串</span></h2><p>和JavaScript中的常规字符串相比，模板字符串有很大改进。如模板字符串不是使用单引号或者双引号进行声明，而是使用反引号”`”。</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">text</span> = `This <span class="keyword">is</span> <span class="keyword">my</span> <span class="keyword">first</span> template literal`</span><br></pre></td></tr></table></figure>
-<p>由于模板字符串使用反引号作为定界符，在使用模板字符串声明字符串时就不需要再转义其中的<code>&#39;</code>和<code>&quot;</code>。具体示例如下：</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var text = `I<span class="symbol">'m</span> <span class="string">"amazed"</span> <span class="keyword">at</span> these opportunities!`</span><br></pre></td></tr></table></figure>
-<p>最值得一提的是，模板字符串中可以插入JavaScript表达式。</p>
-<h3><span id="251-字符串插值">2.5.1 字符串插值</span></h3><p>使用模板字符串，可以在模板中插入任意的JavaScript表达式。当执行到模板字符串表达式时，计算表达式，并将结果返回。下例中，在模板字符串内插入了一个<code>name</code>变量。</p>
-<p><code>``
-var name = &#39;Shannon&#39;
-var text =</code>Hello, ${ name }!` 
-console.log(text)
-// &lt;</p>
-
+<h2 id="2-3-解构赋值"><a href="#2-3-解构赋值" class="headerlink" title="2.3 解构赋值"></a>2.3 解构赋值</h2><p>解构赋值是ES6中最灵活最有表现力的特性之一。同时，它也最为简单。它可以将对象的属性值绑定到任意多的变量上。解构赋值可以用于<strong>对象</strong>、<strong>数组</strong>以及<strong>函数参数列表</strong>中。</p></p>
+            <p class="article-more-link">
+                <a href="/2017/12/30/第2章-ES6基础-总结与扩展/#more">查看更多</a>
+            </p>
         
         </div>
         <footer class="article-footer">
@@ -643,7 +521,7 @@ console.log(text)
 
 </div>
 
-    <a data-url="http://verymuch.com/2017/12/30/第2章-ES6基础-总结与扩展/" data-id="cjc9utjnw000kq83yzgtfsr9h" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2017/12/30/第2章-ES6基础-总结与扩展/" data-id="cjc9v0s9x000kuq3y1awjosni" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -778,7 +656,7 @@ console.log(text)
 
 </div>
 
-    <a data-url="http://verymuch.com/2017/12/14/Data-URL简介与使用/" data-id="cjc9utjnv000jq83yqouzkn1y" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2017/12/14/Data-URL简介与使用/" data-id="cjc9v0s9v000iuq3y0u9bs919" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -919,7 +797,7 @@ console.log(text)
 
 </div>
 
-    <a data-url="http://verymuch.com/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/" data-id="cjc9utjnt000hq83ydu9hr2kn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/" data-id="cjc9v0s9u000guq3ynxyqjlar" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1132,7 +1010,7 @@ console.log(text)
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/他人经验总结/">他人经验总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作效率/">工作效率</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/有感/">有感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/沉淀/">沉淀</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">2</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/他人经验总结/">他人经验总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作效率/">工作效率</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/有感/">有感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/沉淀/">沉淀</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">2</span></li></ul>
         </div>
     </div>
 
