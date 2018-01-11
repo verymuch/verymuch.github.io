@@ -13,7 +13,7 @@
 <meta property="og:description" content="1. 疑惑这两天看了下之前项目里的webpack配置，想将之前的alias命名统一起来，遂在alias命名前统一使用_开头，这样在项目中看到这样的引用一眼就能知道是通过别名查找的。如下图所示，css目录在fesrc目录下，webpack配置所在目录与fesrc平级，在配置中如果使用相对路径，应该使用_css: path.resolve(&amp;#39;../fesrc/css&amp;#39;)，但是试一">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://verymuch.com/images/webpack-alias-bug.png">
-<meta property="og:updated_time" content="2018-01-11T01:25:49.260Z">
+<meta property="og:updated_time" content="2018-01-11T02:07:35.285Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node路径解析浅析">
 <meta name="twitter:description" content="1. 疑惑这两天看了下之前项目里的webpack配置，想将之前的alias命名统一起来，遂在alias命名前统一使用_开头，这样在项目中看到这样的引用一眼就能知道是通过别名查找的。如下图所示，css目录在fesrc目录下，webpack配置所在目录与fesrc平级，在配置中如果使用相对路径，应该使用_css: path.resolve(&amp;#39;../fesrc/css&amp;#39;)，但是试一">
@@ -256,6 +256,7 @@
 
 <h2><span id="1-疑惑">1. 疑惑</span></h2><p>这两天看了下之前项目里的webpack配置，想将之前的alias命名统一起来，遂在alias命名前统一使用<code>_</code>开头，这样在项目中看到这样的引用一眼就能知道是通过别名查找的。如下图所示，<code>css</code>目录在<code>fesrc</code>目录下，webpack配置所在目录与fesrc平级，在配置中如果使用相对路径，应该使用<code>_css: path.resolve(&#39;../fesrc/css&#39;)</code>，但是试一下就会发现这么做webpack无法找到指定目录。相反如下图用法，使用<code>_css: path.resolve(&#39;./fesrc/css&#39;)</code>则能够找到。因此，我猜想可能是相对于运行该文件的目录，就了解并总结了一下相关的内容。</p>
 <p><img src="/images/webpack-alias-bug.png" alt="webpack alias 配置"></p>
+<a id="more"></a>
 <h2><span id="2-五类路径__dirname-__filename-processcwd">2. 五类路径<code>__dirname</code>、<code>__filename</code>、<code>process.cwd()</code>、<code>./</code>、<code>../</code></span></h2><p><code>Node</code>中的文件路径大概有<code>__dirname</code>、<code>__filename</code>、<code>process.cwd()</code>、<code>./</code>或者<code>../</code>五类，前三个都是绝对路径，为了便于比较，我们将通过<code>path.resolve(&#39;./&#39;)</code>将<code>./</code>和<code>../</code>转换为绝对路径。</p>
 <p>先看一个简单的例子。</p>
 <p>假设有以下文件结构：</p>
@@ -300,7 +301,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/01/10/Node路径解析浅析/" data-id="cjc9sr0vk000pib3yh53dmq77" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/01/10/Node路径解析浅析/" data-id="cjc9utjnx000mq83yrddrrzlh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
