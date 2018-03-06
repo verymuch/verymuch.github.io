@@ -238,6 +238,11 @@
 
                         
                         
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/沉淀/">沉淀</a>
+    </div>
+
                     </div>
                 
             </header>
@@ -245,44 +250,18 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            
-            <p><link rel="stylesheet" href="/css/custom.css"></p>
+            <p><p><link rel="stylesheet" href="/css/custom.css"></p>
 <script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/generate-toc.js"></script>
 
 <p>使用<code>for in</code>遍历对象时，会遍历原型链上的可枚举实行，而这些往往会导致一些意想不到的问题。</p>
 <p>鉴于上面这个原因，我们团队在之前的几个项目里，通过<code>eslint</code>禁止在代码中使用<code>for in</code>。虽然在大部分情况，我们都能按照约定不使用<code>for in</code>，但是偶尔仍会需要在<code>forEach</code>中中断循环的情况。</p>
 <p>有需求就有解决方案。</p>
 <p>遇到这个问题时，笔者最简单的思路就是，在<code>forEach</code>外层设置标志位为<code>false</code>，然后在需要break时，将标志位置为<code>true</code>，循环内判断<code>true</code>则直接返回。这样做虽然能够减少循环内部的逻辑处理，但是还是会空跑整个循环，造成资源浪费。</p>
-<p>既然自己想的方法是最简单的，并且存在弊端，那么就搜搜其他大神的有哪些思路吧。于是乎就有了以下的总结：</p>
-<p><strong>当需要在<code>for in</code>中使用<code>break</code>时，可以采用以下几种方案：</strong></p>
-<h2><span id="1-throw法">1. throw法</span></h2><p>抛出一个错误，但是需要注意的是要抛出一个可以与别的错误区别开的错误，这样不会干扰别的代码抛出的错误</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> BreakException = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].forEach(<span class="function"><span class="keyword">function</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(v); <span class="comment">//只输出1,2</span></span><br><span class="line">    <span class="keyword">if</span> (v === <span class="number">2</span>) <span class="keyword">throw</span> BreakException;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="keyword">if</span> (e !== BreakException) <span class="keyword">throw</span> e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此法有点丑陋，加了不少代码</p>
-<h2><span id="2-空跑循环">2. 空跑循环</span></h2><p>在外层加一个标识，如果此标识为true，接下来的循环空跑，如下：</p>
-<p>（空跑循环，也就是笔者自己想到的思路，不过笔者还是Low一点的。）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> breakFlag = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].forEach(<span class="function"><span class="keyword">function</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (breakFlag === <span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (v === <span class="number">2</span>) &#123;</span><br><span class="line">    breakFlag = <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(v) <span class="comment">//只输出1,2</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>这个方法在外层加了一个变量，为了不污染外层的环境，我们可以使用forEach的第二个参数context，把标识放在这里（<strong>高就高在了这里</strong>）。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].forEach(<span class="function"><span class="keyword">function</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.breakFlag === <span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (v === <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.breakFlag = <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(v) <span class="comment">//只输出1,2</span></span><br><span class="line">&#125;, &#123;&#125;);</span><br></pre></td></tr></table></figure>
-<p>注意，forEach的第二个参数context，只有在使用非箭头函数时有效，如果是箭头函数，无法改变context的指向。</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].forEach(<span class="function"><span class="params">(v)</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.breakFlag === <span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (v === <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>) <span class="regexp">//</span> 运行会发现，结果并不是&#123;test: <span class="string">'test'</span>&#125;</span><br><span class="line">    <span class="keyword">this</span>.breakFlag = <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(v) <span class="regexp">//</span>只输出<span class="number">1</span>,<span class="number">2</span></span><br><span class="line">&#125;, &#123;test: <span class="string">'test'</span>&#125;);</span><br></pre></td></tr></table></figure>
-<p>当然，上述这种方法不可避免的导致了不必要的运行,有点浪费cpu的感觉</p>
-<h2><span id="3-神奇改数组大法">3. 神奇改数组大法</span></h2><p>下面出场的这位选手，稍微有点技术含量，笔者还是问了大佬才知道的，一定是我太过愚钝了。</p>
-<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var<span class="built_in"> array </span>= [1, 2, 3, 4, 5];</span><br><span class="line">array.forEach(function(item, index) &#123;</span><br><span class="line"> <span class="built_in"> if </span>(item === 2) &#123;</span><br><span class="line">   <span class="built_in"> array </span>= array.concat(array.splice(index, array.length - index));</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(item); //只输出1,2</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>这种方法相当于在item === 2的时候，改变了原数组引用的值，但是将array指向了一个新的引用，值保持不变。</p>
-<h2><span id="4-最应该使用的every">4. 最应该使用的every</span></h2><p>前面啰嗦了这么多，真正的主角登场，<em>*最推荐的方式是在需要break的场景下，使用every或者some</em></p>
-<ul>
-<li>every: 碰到return false的时候，循环中止</li>
-<li>some: 碰到return ture的时候，循环中止</li>
-</ul>
-<p>两者的代码分别如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">a.every(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, arry</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item); <span class="comment">//返回1,2</span></span><br><span class="line">    <span class="keyword">if</span> (item === <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">a.some(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, arry</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item); <span class="comment">//返回1,2</span></span><br><span class="line">    <span class="keyword">if</span> (item === <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h2><span id="参考内容">参考内容</span></h2><blockquote>
-<ol>
-<li><a href="http://jser.me/2014/04/02/%E5%A6%82%E4%BD%95%E5%9C%A8Array.forEach%E7%9A%84%E5%BE%AA%E7%8E%AF%E9%87%8Cbreak.html" target="_blank" rel="noopener">http://jser.me/2014/04/02/%E5%A6%82%E4%BD%95%E5%9C%A8Array.forEach%E7%9A%84%E5%BE%AA%E7%8E%AF%E9%87%8Cbreak.html</a></li>
-</ol>
-</blockquote>
-
+<p>既然自己想的方法是最简单的，并且存在弊端，那么就搜搜其他大神的有哪些思路吧。于是乎就有了以下的总结：</p></p>
+            <p class="article-more-link">
+                <a href="/2018/02/09/如何在Array-forEach中实现break/#more">查看更多</a>
+            </p>
         
         </div>
         <footer class="article-footer">
@@ -292,7 +271,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/02/09/如何在Array-forEach中实现break/" data-id="cjdfpfpe3000i1v3ym7y7ee4y" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/02/09/如何在Array-forEach中实现break/" data-id="cjdh4q2zt000pb03yoi1crg3r" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -409,6 +388,7 @@
         
             <p><p><link rel="stylesheet" href="/css/custom.css"></p>
 <script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/generate-toc.js"></script>
 
 <h2 id="1-疑惑"><a href="#1-疑惑" class="headerlink" title="1. 疑惑"></a>1. 疑惑</h2><p>这两天看了下之前项目里的webpack配置，想将之前的alias命名统一起来，遂在alias命名前统一使用<code>_</code>开头，这样在项目中看到这样的引用一眼就能知道是通过别名查找的。如下图所示，<code>css</code>目录在<code>fesrc</code>目录下，webpack配置所在目录与fesrc平级，在配置中如果使用相对路径，应该使用<code>_css: path.resolve(&#39;../fesrc/css&#39;)</code>，但是试一下就会发现这么做webpack无法找到指定目录。相反如下图用法，使用<code>_css: path.resolve(&#39;./fesrc/css&#39;)</code>则能够找到。因此，我猜想可能是相对于运行该文件的目录，就了解并总结了一下相关的内容。</p>
 <p><img src="/images/webpack-alias-bug.png" alt="webpack alias 配置"></p></p>
@@ -424,7 +404,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/01/10/Node路径解析浅析/" data-id="cjdfpfpe4000k1v3ygyq4yczk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/01/10/Node路径解析浅析/" data-id="cjdh4q2zt000ob03yfnjr7sre" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -537,6 +517,7 @@
             
             <p><link rel="stylesheet" href="/css/custom.css"></p>
 <script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/generate-toc.js"></script>
 
         
         </div>
@@ -547,7 +528,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/01/03/CSS-Mixin/" data-id="cjdfpfpe5000l1v3yozyag9p0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/01/03/CSS-Mixin/" data-id="cjdh4q2zs000nb03ys7a95dvw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -664,6 +645,7 @@
         
             <p><p><link rel="stylesheet" href="/css/custom.css"></p>
 <script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/generate-toc.js"></script>
 
 <h2 id="2-3-解构赋值"><a href="#2-3-解构赋值" class="headerlink" title="2.3 解构赋值"></a>2.3 解构赋值</h2><p>解构赋值是ES6中最灵活最有表现力的特性之一。同时，它也最为简单。它可以将对象的属性值绑定到任意多的变量上。解构赋值可以用于<strong>对象</strong>、<strong>数组</strong>以及<strong>函数参数列表</strong>中。</p></p>
             <p class="article-more-link">
@@ -678,7 +660,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2017/12/30/第2章-ES6基础-总结与扩展/" data-id="cjdfpfpe4000j1v3ydxy74glx" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2017/12/30/第2章-ES6基础-总结与扩展/" data-id="cjdh4q2zq000jb03y7sy7kii4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -795,6 +777,7 @@
         
             <p><p><link rel="stylesheet" href="/css/custom.css"></p>
 <script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/generate-toc.js"></script>
 
 <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p><code>Data URL</code>，是以<code>data:</code>模式为前缀的URL，允许内容的创建者将较小的文件嵌入到文档中。与常规的URL使用场合类似（下面会具体介绍可以将Data URL用在哪些地方）。</p>
 <p><code>Data URL</code>由<strong><code>data:</code>前缀、MIME类型（表明数据类型）、<code>base64</code>标志位（如果是文本，则可选）以及数据本身四部分组成</strong>。</p>
@@ -813,7 +796,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2017/12/14/Data-URL简介与使用/" data-id="cjdfpfpe2000g1v3yj1hed4we" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2017/12/14/Data-URL简介与使用/" data-id="cjdh4q2zs000mb03ylvi7w0sp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -929,7 +912,7 @@
                             <a href="/2018/01/10/Node路径解析浅析/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(http://satyr.io/80x80/70/edf4ef?text=PATH)" alt="Node路径解析浅析" class="thumbnail-image"></span>
     
 </a>
 
@@ -1026,7 +1009,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/他人经验总结/">他人经验总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作效率/">工作效率</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/有感/">有感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/沉淀/">沉淀</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">2</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/他人经验总结/">他人经验总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作效率/">工作效率</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/有感/">有感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/沉淀/">沉淀</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">2</span></li></ul>
         </div>
     </div>
 

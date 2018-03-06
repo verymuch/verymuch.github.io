@@ -1,3 +1,5 @@
+@import './custom-toc.css';
+
 .text-highlight {
   color: red;
 }
