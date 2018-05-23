@@ -3,15 +3,22 @@
 <head>
     <meta charset="utf-8">
     
-    <title>归档 | 歪马行空</title>
+    <title>npm unmet dependency 解决方案 | 歪马行空</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta property="og:type" content="website">
-<meta property="og:title" content="歪马行空">
-<meta property="og:url" content="http://verymuch.com/archives/page/3/index.html">
+    <meta name="description" content="1. 引言之前使用框架，一直需要编译后发布，代码库中因此就有了一大堆编译后的文件，每次更新服务端的代码都会导致眼花缭乱。最近就升级了下服务器上的node版本，然后在服务端进行编译，这样就不用维护编译后的代码了。 然鹅，好事多磨，升级好，新上线的代码中包含的新依赖，总是无法成功。通过npm ls package_name">
+<meta name="keywords" content="沉淀">
+<meta property="og:type" content="article">
+<meta property="og:title" content="npm unmet dependency 解决方案">
+<meta property="og:url" content="http://verymuch.com/2018/05/11/npm-unmet-dependency-解决方案/index.html">
 <meta property="og:site_name" content="歪马行空">
+<meta property="og:description" content="1. 引言之前使用框架，一直需要编译后发布，代码库中因此就有了一大堆编译后的文件，每次更新服务端的代码都会导致眼花缭乱。最近就升级了下服务器上的node版本，然后在服务端进行编译，这样就不用维护编译后的代码了。 然鹅，好事多磨，升级好，新上线的代码中包含的新依赖，总是无法成功。通过npm ls package_name查看看到了UNMET DEPENDENCY错误。 2. 解决方案 清缓存">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://satyr.io/80x80/80/edf4ef?text=UNMET">
+<meta property="og:updated_time" content="2018-05-11T06:12:47.552Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="歪马行空">
+<meta name="twitter:title" content="npm unmet dependency 解决方案">
+<meta name="twitter:description" content="1. 引言之前使用框架，一直需要编译后发布，代码库中因此就有了一大堆编译后的文件，每次更新服务端的代码都会导致眼花缭乱。最近就升级了下服务器上的node版本，然后在服务端进行编译，这样就不用维护编译后的代码了。 然鹅，好事多磨，升级好，新上线的代码中包含的新依赖，总是无法成功。通过npm ls package_name查看看到了UNMET DEPENDENCY错误。 2. 解决方案 清缓存">
+<meta name="twitter:image" content="http://satyr.io/80x80/80/edf4ef?text=UNMET">
     
 
     
@@ -212,178 +219,184 @@
 </aside>
 
             
-            <section id="main"><div class="timeline timeline-wrap">
-    
-            <div class="timeline-row timeline-row-major">
-                <span class="node"><i class="fa fa-calendar"></i></span>
-                <h1 class="title">2017</h1>
-            </div>
+            <section id="main"><article id="post-npm-unmet-dependency-解决方案" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+        
+            <header class="article-header">
                 
     
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/11/01/Javascript-RegExp正则表达式/">Javascript - RegExp正则表达式</a>
+        <h1 class="article-title" itemprop="name">
+            npm unmet dependency 解决方案
         </h1>
     
 
-                <div class="article-meta">
-                    
+                
+                    <div class="article-meta">
+                        
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/11/01/Javascript-RegExp正则表达式/">
-            <time datetime="2017-11-01T14:28:23.000Z" itemprop="datePublished">2017-11-01</time>
+        <a href="/2018/05/11/npm-unmet-dependency-解决方案/">
+            <time datetime="2018-05-11T03:49:44.000Z" itemprop="datePublished">2018-05-11</time>
         </a>
     </div>
 
 
-                    
-                    
+                        
+                        
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link" href="/tags/沉淀/">沉淀</a>
     </div>
 
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+                    </div>
                 
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/11/01/第2章-ES6基础/">第2章 ES6基础</a>
-        </h1>
-    
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><link rel="stylesheet" href="/css/custom.css"></p>
+<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/generate-toc.js"></script>
 
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/11/01/第2章-ES6基础/">
-            <time datetime="2017-11-01T08:53:14.000Z" itemprop="datePublished">2017-11-01</time>
-        </a>
-    </div>
+<h2><span id="1-引言">1. 引言</span></h2><p>之前使用框架，一直需要编译后发布，代码库中因此就有了一大堆编译后的文件，每次更新服务端的代码都会导致眼花缭乱。最近就升级了下服务器上的node版本，然后在服务端进行编译，这样就不用维护编译后的代码了。</p>
+<p>然鹅，好事多磨，升级好，新上线的代码中包含的新依赖，总是无法成功。通过<code>npm ls package_name</code>查看看到了<code>UNMET DEPENDENCY</code>错误。</p>
+<h2><span id="2-解决方案">2. 解决方案</span></h2><ol>
+<li><p>清缓存(该方式验证有效)</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf node_modules/    <span class="comment"># 删除已安装的模块</span></span><br><span class="line"><span class="built_in">npm</span> cache clean --force        <span class="comment"># 清除 npm 内部缓存</span></span><br><span class="line"><span class="built_in">npm</span> install             <span class="comment"># 重新安装</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>升级npm版本</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf node_modules/    <span class="comment"># 删除已安装的模块</span></span><br><span class="line">sudo <span class="built_in">npm</span> update -g <span class="built_in">npm</span>  <span class="comment"># 更新 npm</span></span><br><span class="line"><span class="built_in">npm</span> install             <span class="comment"># 重新安装</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2><span id="参考链接">参考链接</span></h2><blockquote>
+<ol>
+<li><a href="https://stackoverflow.com/questions/20764881/why-does-npm-install-say-i-have-unmet-dependencies" target="_blank" rel="noopener">why-does-npm-install-say-i-have-unmet-dependencies</a></li>
+<li><a href="https://lellansin.wordpress.com/2014/02/27/npm-%E5%AE%89%E8%A3%85%E5%87%BA%E7%8E%B0-unmet-dependency-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_blank" rel="noopener">npm 安装出现 UNMET DEPENDENCY 的解决方案</a></li>
+</ol>
+</blockquote>
 
-
-                    
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/翻译/">翻译</a>
-    </div>
-
-                </div>
-            </div>
+        
         </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/10/23/第1章-ECMAScript-和-JavaScript-的未来/">第1章 ECMAScript 和 JavaScript 的未来</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/10/23/第1章-ECMAScript-和-JavaScript-的未来/">
-            <time datetime="2017-10-23T10:54:46.000Z" itemprop="datePublished">2017-10-23</time>
-        </a>
-    </div>
+        <footer class="article-footer">
+            <div class="share-container">
 
 
-                    
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/翻译/">翻译</a>
-    </div>
 
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/02/11/跟扎克伯格学习提高工作效率/">跟扎克伯格学习提高工作效率</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/02/11/跟扎克伯格学习提高工作效率/">
-            <time datetime="2017-02-11T03:44:27.000Z" itemprop="datePublished">2017-02-11</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/GROWING-SPACE/">GROWING_SPACE</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/他人经验总结/">他人经验总结</a>, <a class="tag-link" href="/tags/工作效率/">工作效率</a>, <a class="tag-link" href="/tags/有感/">有感</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/02/09/实现墨刀首页两个弹跳的圆的效果/">实现墨刀首页两个弹跳的圆的效果</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/02/09/实现墨刀首页两个弹跳的圆的效果/">
-            <time datetime="2017-02-09T06:59:53.000Z" itemprop="datePublished">2017-02-09</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/EXERCISE-SPACE/">EXERCISE_SPACE</a>
-    </div>
-
-                    
-                </div>
-            </div>
-        </div>
-    
 </div>
 
-    <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/page/2/">&laquo; 上一页</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/4/">下一页 &raquo;</a>
-    </nav>
+    <a data-url="http://verymuch.com/2018/05/11/npm-unmet-dependency-解决方案/" data-id="cjhj25qtp000l153yzv3dvog1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://verymuch.com/2018/05/11/npm-unmet-dependency-解决方案/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2018/05/11/npm-unmet-dependency-解决方案/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/05/11/机器学习资料/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    机器学习资料
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/02/09/如何在Array-forEach中实现break/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">如何在Array.forEach中实现break</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
 </section>
             
                 <aside id="sidebar">
@@ -563,11 +576,13 @@
     <script>
     var disqus_config = function () {
         
-        this.page.identifier = 'undefined';
+            this.page.url = 'http://verymuch.com/2018/05/11/npm-unmet-dependency-解决方案/';
+        
+        this.page.identifier = 'npm-unmet-dependency-解决方案';
     };
     (function() { 
         var d = document, s = d.createElement('script');  
-        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/count.js';
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();
