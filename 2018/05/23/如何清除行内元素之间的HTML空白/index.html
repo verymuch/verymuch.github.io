@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="歪马行空">
 <meta property="og:description" content=".Resolve {     width: 90%;     border: 1px solid #dd4b39;     color: white;   }   .Resolve span {     display:inline-block;     width: 50%;   }   .Resolve span:first-child {     height: 40px;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-23T12:00:17.810Z">
+<meta property="og:updated_time" content="2018-05-23T12:10:31.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何清除行内元素之间的HTML空白">
 <meta name="twitter:description" content=".Resolve {     width: 90%;     border: 1px solid #dd4b39;     color: white;   }   .Resolve span {     display:inline-block;     width: 50%;   }   .Resolve span:first-child {     height: 40px;">
@@ -359,7 +359,8 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"Resolve Resolve4"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>左侧行内元素<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>右侧行内元素<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>CSS：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.Resolve4</span> &#123;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: -<span class="number">0.333333em</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.Resolve4</span> <span class="selector-tag">span</span> &#123;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2><span id="解决方案5html注释推荐使用能够有效保持代码整齐并且不用额外添加css样式">解决方案5：HTML注释（推荐使用，能够有效保持代码整齐，并且不用额外添加css样式）</span></h2><p>换行的时候，我们可以使用html注释来抵消空格，这种情况下不用额外进行css处理。此外还有一个好处，可以加上文字注释，告知为什么会加入注释。</p>
+<h2><span id="解决方案5html注释推荐使用">解决方案5：HTML注释（推荐使用）</span></h2><p>换行的时候，我们可以使用html注释来抵消空格，这种情况下不用额外进行css处理。此外还有一个好处，可以加上文字注释，告知为什么会加入注释。</p>
+<p>推荐使用该方式，能够有效保持代码整齐，并且不用额外添加css样式。</p>
 <p>示例代码如下：</p>
 <div class="Resolve Resolve5">
    <span>左侧行内元素</span><!-- 消除行内元素换行导致的空白
@@ -379,7 +380,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/05/23/如何清除行内元素之间的HTML空白/" data-id="cjhj25qtr000n153y7qqpa3u4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/05/23/如何清除行内元素之间的HTML空白/" data-id="cjhj2h77y000t4i3ym3p8m0ee" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
