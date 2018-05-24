@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="歪马行空">
 <meta property="og:description" content=".Resolve {     width: 90%;     border: 1px solid #dd4b39;     color: white;   }   .Resolve span {     display:inline-block;     width: 50%;   }   .Resolve span:first-child {     height: 40px;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-23T12:10:31.261Z">
+<meta property="og:updated_time" content="2018-05-24T01:56:16.283Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何清除行内元素之间的HTML空白">
 <meta name="twitter:description" content=".Resolve {     width: 90%;     border: 1px solid #dd4b39;     color: white;   }   .Resolve span {     display:inline-block;     width: 50%;   }   .Resolve span:first-child {     height: 40px;">
@@ -300,7 +300,7 @@
 
 </style>
 
-<h2><span id="前言">前言</span></h2><p>相信大家应该都遇到过下面这个问题：“HTML源码中行内元素之间的空白显示在了屏幕上”。可能大家都有自己的小技巧来消除这些意料之外的空白。但是方法有很多，有时候不能满足于一种解法，毕竟不同的方法是有优劣的。就像我之前一直用的方法，今天总结了之后才发现还有更好的方法。废话不多说，接下来我给大家总结一下消除行内元素HTML源码空白的小技巧。</p>
+<h2><span id="前言">前言</span></h2><p>相信大家应该都遇到过下面这个问题：“<strong>HTML源码中行内元素之间的空白显示在了屏幕上</strong>”。可能大家都有自己的小技巧来消除这些意料之外的空白。但是方法有很多，有时候不能满足于一种解法，毕竟不同的方法是有优劣的。就像我之前一直用的方法，今天总结了之后才发现还有更好的方法。废话不多说，接下来我给大家总结一下消除行内元素HTML源码空白的小技巧。</p>
 <p>下文中以一个<code>div</code>中的两个<code>span</code>标签为例。我们将两个<code>div</code>内的两个<code>span</code>设为<code>display:inline-block;width:50%;</code>，会发现两个<code>span</code>元素并没有在同一行，这就是源码中的空白导致的。</p>
 <p>示例代码如下：</p>
 <div class="Resolve">
@@ -313,8 +313,8 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"Resolve"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>左侧行内元素<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>右侧行内元素<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>CSS：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.Resolve</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">90%</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#dd4b39</span>;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.Resolve</span> <span class="selector-tag">span</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>:inline-block;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.Resolve</span> <span class="selector-tag">span</span><span class="selector-pseudo">:first-child</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">40px</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#37b8ea</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.Resolve</span> <span class="selector-tag">span</span><span class="selector-pseudo">:last-child</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#5cb767</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2><span id="解决方案1源码中直接就写成一行">解决方案1：源码中直接就写成一行</span></h2><p>相信大家看到这句话的时候，会想这不是废话嘛。有时候我们就是为了代码的美观，才将两个span标签分两行显示的，写在一行根本就没解决问题好不好？</p>
-<p>当然，我觉得这并不是废话，之所以将其列为一种解决方案，是防止有的人不知道是什么原因导致的空白的显示。知道了这个原因，如果两个行内元素的横向宽度(此处指代码宽度)不大，写在一行也算是最快最直接的解决方法。</p>
+<h2><span id="解决方案1源码中直接就写成一行">解决方案1：源码中直接就写成一行</span></h2><p>相信大家看到这个解决方案的时候，会想这不是废话嘛。有时候我们就是为了代码的美观，才将两个span标签分两行显示的，写在一行根本就没解决问题好不好？</p>
+<p>不过，我觉得这并不是废话，之所以将其列为一种解决方案，是防止有的人不知道是什么原因导致的空白的显示。知道了这个原因，如果两个行内元素的横向宽度(此处指代码宽度)不大，写在一行也算是最快最直接的解决方法。</p>
 <p>示例代码如下：</p>
 <div class="Resolve Resolve1">
   <span>左侧行内元素</span><span>右侧行内元素</span>
@@ -335,7 +335,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"Resolve Resolve2"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>左侧行内元素<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>右侧行内元素<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>CSS：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.Resolve2</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.Resolve2</span> <span class="selector-tag">span</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这种情况在内部的行内元素字体大小比较统一时，处理起来较为方便，但如果包含的行内元素中存在多种字体大小，需要一一指定，较为繁琐。不过往往这种时候内部的多种字体大小也是单独指定。根据具体场景决定是否使用该情况即可。</p>
+<p>这种情况在内部的行内元素字体大小比较统一时，处理起来较为方便，但如果包含的行内元素中存在多种字体大小，需要一一指定，较为繁琐。不过往往这种时候内部的多种字体大小也是单独指定。可以根据具体场景决定是否使用该方案。</p>
 <h2><span id="解决方案3margin-left设为负值">解决方案3：margin-left设为负值</span></h2><p>如果行内元素为块级行内元素，则可以使用margin属性来抵消空白。在【解决方案2】中有提到行内元素之间的距离是<span class="text-highlight">字体大小的1/3倍</span>。所以我们只需要将第二个<code>span</code>元素的<code>margin-left</code>设置为<code>-0.333333em</code>即可。</p>
 <p>示例代码如下：</p>
 <div class="Resolve Resolve3">
@@ -359,8 +359,8 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"Resolve Resolve4"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>左侧行内元素<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>右侧行内元素<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>CSS：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.Resolve4</span> &#123;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: -<span class="number">0.333333em</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.Resolve4</span> <span class="selector-tag">span</span> &#123;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2><span id="解决方案5html注释推荐使用">解决方案5：HTML注释（推荐使用）</span></h2><p>换行的时候，我们可以使用html注释来抵消空格，这种情况下不用额外进行css处理。此外还有一个好处，可以加上文字注释，告知为什么会加入注释。</p>
-<p>推荐使用该方式，能够有效保持代码整齐，并且不用额外添加css样式。</p>
+<h2><span id="解决方案5html注释推荐使用">解决方案5：HTML注释（推荐使用）</span></h2><p>除了调整css样式之外，我们可以使用html注释来抵消空格，这种情况下不用额外进行css处理。此外笔者觉得还有一个好处，可以加上文字注释，告知为什么会加入注释。</p>
+<p><strong>推荐使用该方式，能够有效保持代码整齐，并且不用额外添加css样式</strong>。</p>
 <p>示例代码如下：</p>
 <div class="Resolve Resolve5">
    <span>左侧行内元素</span><!-- 消除行内元素换行导致的空白
@@ -380,7 +380,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/05/23/如何清除行内元素之间的HTML空白/" data-id="cjhj2h77y000t4i3ym3p8m0ee" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/05/23/如何清除行内元素之间的HTML空白/" data-id="cjhjwbz4z000psr3yf24hfsvh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
