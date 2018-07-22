@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>第三章 类、Symbol、对象和装饰器 | 歪马行空</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="到本章之前，我们已经学完了ES6语法方面的基本改进。现在可以将目标放在其他新增内容上了，如类和Symbol。类参考了传统基于类的编程范式，是一种表达原型链继承的新语法格式。Symbol和字符串、布尔值、数值一样，是一种新的Javascript原始值类型。类和Symbol能用来定义协议，本章我们将进行深入了解。了解类和S">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第三章 类、Symbol、对象和装饰器">
+<meta property="og:url" content="http://verymuch.com/2018/05/30/第三章-类、Symbol、对象和装饰器/index.html">
+<meta property="og:site_name" content="歪马行空">
+<meta property="og:description" content="到本章之前，我们已经学完了ES6语法方面的基本改进。现在可以将目标放在其他新增内容上了，如类和Symbol。类参考了传统基于类的编程范式，是一种表达原型链继承的新语法格式。Symbol和字符串、布尔值、数值一样，是一种新的Javascript原始值类型。类和Symbol能用来定义协议，本章我们将进行深入了解。了解类和Symbol之后，我们会简单讨论一下ES6中Object新增的内置静态方法">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-15T02:02:28.974Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第三章 类、Symbol、对象和装饰器">
+<meta name="twitter:description" content="到本章之前，我们已经学完了ES6语法方面的基本改进。现在可以将目标放在其他新增内容上了，如类和Symbol。类参考了传统基于类的编程范式，是一种表达原型链继承的新语法格式。Symbol和字符串、布尔值、数值一样，是一种新的Javascript原始值类型。类和Symbol能用来定义协议，本章我们将进行深入了解。了解类和Symbol之后，我们会简单讨论一下ES6中Object新增的内置静态方法">
+    
+
+    
+        <link rel="alternate" href="/" title="歪马行空" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/css/images/avatar2.jpg" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">歪马行空</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="https://github.com/verymuch">GitHub</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar0.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="https://github.com/verymuch">GitHub</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar0.jpg" />
+            <h2 id="name">verymuch</h2>
+            <h3 id="title">Web Developer ( FE )</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Beijing, China</span>
+            <a id="follow" target="_blank" href="https://github.com/verymuch/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                18
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                6
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/verymuch" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-第三章-类、Symbol、对象和装饰器" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            第三章 类、Symbol、对象和装饰器
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/05/30/第三章-类、Symbol、对象和装饰器/">
+            <time datetime="2018-05-30T06:24:57.000Z" itemprop="datePublished">2018-05-30</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><link rel="stylesheet" href="/css/custom.css"></p>
+<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/generate-toc.js"></script>
+
+<p>到本章之前，我们已经学完了<code>ES6</code>语法方面的基本改进。现在可以将目标放在其他新增内容上了，如类和<code>Symbol</code>。类参考了传统基于类的编程范式，是一种表达原型链继承的新语法格式。<code>Symbol</code>和字符串、布尔值、数值一样，是一种新的<code>Javascript</code>原始值类型。类和<code>Symbol</code>能用来定义协议，本章我们将进行深入了解。了解类和Symbol之后，我们会简单讨论一下<code>ES6</code>中<code>Object</code>新增的内置静态方法。</p>
+<h2><span id="31-类">3.1 类</span></h2><p><code>JavaScript</code>是一门基于原型的语言，类很大程度上可以认为是原型继承的一种语法糖。类与原型继承之间的最主要区别是前者可以继承其他类，这样我们就能够继承内置的<code>Array</code>对象，而在<code>ES6</code>之前想要这么做是很复杂的。</p>
+<p><code>class</code>关键字就像一种魔法。它使得<code>Javascript</code>对于习惯于其他范式的编程者们更具吸引力，这些编程者对于原型链可能并不完全熟悉，而<code>class</code>更易于理解。</p>
+<h3><span id="311-类的基本原理">3.1.1 类的基本原理</span></h3><p>想要学习一个新的语言特性，我们可以先找到语言中现有的此类概念，然后具体研究下新的特性是如何改进之前的使用场景的，这样做一直都是一个很好的学习方法。接下来，我们先看一个简单的基于原型的<code>JavaScript</code>构造函数，然后和<code>ES6</code>中的类语法进行比较。</p>
+<p>下面的这段代码展示了如何定义构造函数<code>Fruit</code>并在原型上添加两个方法。构造函数中有三个属性：<code>name</code>、表示水果卡路里量的<code>calories</code>，以及水果的块数<code>pieces</code>，默认为1。原型上存在两个方法：<code>.chop</code>和<code>.bite</code>。<code>.chop</code>方法会将水果多切出一块。而传入<code>.bite</code>方法的<code>person</code>会吃掉一块水果，并且其<code>satiety</code>饱食度会增加相应的值，值为剩余卡路里量除以剩余的水果块数。</p>
+<p>[P58 代码1]</p>
+<p>上述代码较为简单，从中我们能够看出：有一个构造函数，接受两个参数，有两个方法，和一些属性。下面这段代码展示了如何如何创建一个<code>Fruit</code>和<code>person</code>，并且将水果切成四份，然后让人吃掉其中三份。</p>
+<p>[P58 代码2，P59 代码1]</p>
+<p>下述代码展示了使用<code>class</code>语法的方法，从中可以看出，<code>constructor</code>函数显示声明在<code>Fruit</code>类，且方法使用了对象字面量方法定义语法。对比该方法和前面的基于原型的方法能够发现：定义方法时，省去了很多将引用显示指向<code>Fruit.prototype</code>的模板代码。实际上，将整个声明都写在<code>class</code>语句块内部还能够帮助读者理解整块代码的作用，能够更清晰地表达声明的类的意图。最后，将<code>constructor</code>显示声明为<code>Fruit</code>的一个成员方法使得<code>class</code>语法比基于原型的类语法更容易理解。</p>
+<p>[P59 代码2]</p>
+<p>有个较大的细节可能你还没有注意到——<code>Fruit</code>类中的方法声明之间没有逗号分隔。其实，这并不是因为文字编辑的疏忽而产生的错误，而是<code>class</code>语法中的一部分。这一差别能够使我们避免误解对象和类之间存在某些关联，实际上他们之间没有关联。并且这一区别也会使得类语法更适合做进一步的改动，如公有和私有类字段。</p>
+<p>基于类的方法和前面缩写的基于原型的代码是等价的：创建<code>Fruit</code>的方法一点也没变；<code>Fruit</code>的API方法也没有任何改变。上述我们实例化一个苹果，将其切成更小的4块，然后吃掉3块的代码在使用<code>class</code>语法定义的<code>Fruit</code>构造函数中依然有效。</p>
+<p>值得注意的是，和函数定义不同，类声明不会提升到所在作用域的顶部。所以在类声明到达并执行之前，无法进行实例化以及其他存取方式。</p>
+<p>[P60 代码1]</p>
+<p>与函数声明和函数表达式像是，除了前面所说的类声明语法，还可以通过表达式的方式声明类。在类表达式中可以省略类的名称，代码如下所示。</p>
+<p>[P60 代码2]</p>
+<p>类表达式能够很方便地通过函数返回，从而可以使用最小的代价建立一个类的工厂函数。如下例，我们可以通过箭头函数动态创建<code>JakePerson</code>类，箭头函数接受一个<code>name</code>参数，然后通过<code>super()</code>传入父类<code>Person</code>的构造函数中。</p>
+<p>[P60 代码3]</p>
+<p>后续我们会继续深入类的继承，现在先让我们更细致地研究下属性和方法。</p>
+<h3><span id="312-类的属性和方法">3.1.2 类的属性和方法</span></h3><p>需要指出的是，在<code>class</code>声明中，<code>constructor</code>方法的声明是可选的。下述代码是一个完整有效的类声明及与其对应的同名空构造函数。</p>
+<p>[P61 代码1]</p>
+<p>如下，传入<code>new Log()</code>的参数都会接受并作为<code>Log</code>中<code>constructor</code>方法的参数，可以使用这些参数初始化类的实例。</p>
+<p>[P61 代码2]</p>
+<p>下例的类中展示了如何在每个实例的构造过程中创建并初始化一个名为<code>count</code>的属性。<code>get next</code>方法表明<code>Counter</code>类的实例会有一个<code>next</code>属性，访问该属性属性时返回调用该方法的结果。</p>
+<p>[P61 代码3]</p>
+<p>这时，在下例中可以这样使用<code>Counter</code>类。每次访问<code>.next</code>属性时，<code>count</code>的值会自动加1。尽管很有用，但是这种做法通常更适合使用方法实现，而不是使用神奇的<code>get</code>属性存取器。并且我们要当心不要滥用属性存取器，使用一个滥用存取器的的对象会变得很混乱。</p>
+<p>[P61 代码4，P62 代码1]</p>
+<p>不过，当与<code>setter</code>方法一起使用时，存取器能够在对象和底层的数据存取之间搭建一条很有趣的桥梁。思考一下下例，通过传入存储的<code>key</code>值，我们可以从<code>localStorage</code>中存取JSON数据。</p>
+<p>[P62 代码2]</p>
+<p>接下来我们可以使用下例中的方式来使用<code>LocalStorage</code>类。任何赋值给<code>ls.data</code>的值都会转换为JSON对象字符串的形式，然后存入<code>localStorage</code>中。并且当属性值被读取的时候，通过同一个<code>key</code>值可以获取之前存储的内容，然后将其解析成JSON对象后返回。</p>
+<p>[P62 代码3]</p>
+<p>除了getters和setters外，还可以定义常规的实例方法，前面创建<code>Fruit</code>类的时候我们已经这么做了。下述代码中，创建了能够吃前面声明过的<code>Fruit</code>实例的<code>Person</code>类。然后实例化了一个<code>fruit</code>和<code>person</code>，并且让<code>person</code>吃了<code>fruit</code>。最终<code>person</code>的饱食度等于40，因为它吃光了整个水果。</p>
+<p>[P62 代码4，P63 代码1]</p>
+<p>有时候需要在类层添加静态方法，而不是在实例层添加成员方法。在ES6之前可以这样实现：实例方法显示添加在原型链上，而静态方法直接添加在构造函数上。</p>
+<p>[P63 代码2]</p>
+<p>类语法可以通过<code>static</code>关键字定义类似<code>Person.isPerson</code>的静态方法，使用方法和定义getter和setter时的<code>get</code>、<code>set</code>前缀类似。</p>
+<p>下例定义了<code>MathHelper</code>类，该类有一个名为<code>sum</code>的方法，该方法通过<code>Array#reduce</code>方法计算所有传入的数值参数的总和。</p>
+<p>[P63 代码3]</p>
+<p>最后，值得一提的是，我们也可以定义静态属性存取器，如<code>static get</code>、<code>static set</code>。这一功能迟早有用，尤其是在维护类的全局配置状态时或者在单例模式下使用类时。当然，这种时候你可能更倾向于使用普通对象，而不是创建一个不会实例化或者只实例化一次的类。毕竟，这就是JavaScript，一个高度动态的语言。</p>
+<h3><span id="313-类的继承">3.1.3 类的继承</span></h3><p>我们可以使用普通的JavaScript方法实现<code>Fruit</code>类的继承，但是看了下述代码后你会发现：声明子类时，为了将参数传入父类来保证正确初始化子类，引入了较为深奥的知识点，如<code>Parent.call(this)</code>；并且将父类原型的一个实例设为了子类的原型。关于原型继承在网上可以找到很多信息，此处我们不再详细讨论原型继承的细节。</p>
+<p>[P64 代码1]</p>
+<p>鉴于上面需要大家记住的“短命知识”（译者注：此处应该是指上述所说的call方法，提到这个深奥的知识点后，虽然需要大家记住，但是后面就不用了）和<code>Object.create</code>只在ES5之后可用，JavaScript开发者们过去习惯于借助库来解决原型继承问题。如Node.js中的<code>util.inherits</code>方法，就因为支持度原因比<code>Object.create</code>更受喜爱。</p>
+<p>[P64 代码2]</p>
+<p>除了具有<code>name</code>属性和已经赋值的<code>calories</code>属性，以及额外的<code>slice</code>方法外，<code>Banana</code>构造函数的使用方法和<code>Fruit</code>没有什么不同。其中，<code>slice</code>方法能够快速将香蕉实例切为12块。下述代码中展示了吃了一块之后的<code>Banana</code>的实际状态。</p>
+<p>[P64 代码2，P65 代码1]</p>
+<p>类统一了原型继承，但是到现在为止还存在很大的争议，因为很多库正在尝试使用更简单的方式来处理JavaScript中的原型继承。</p>
+<p><code>Fruit</code>类很适合继承。下述代码中我们创建了继承自<code>Fruit</code>类的<code>Banana</code>类。此时，这种语法能够清晰表达我们的意图，并且我们不用担心难以完全理解达到所需结果的原型继承。如果想要将参数转而传入给底层的<code>Fruit</code>构造函数时，可以使用<code>super</code>。<code>super</code>关键字也可以在父类中使用（如<code>super.chop</code>），并且限制只能在<code>constructor</code>中使用。</p>
+<p>[P65 代码2]</p>
+<p>尽管<code>class</code>关键字是静态的，但在声明类时仍然可以利用JavaScript的灵活和功能属性。任何返回构造函数的表达式都可以被继承。比如，我们可以创建一个构造函数工厂函数，然后用其作为基类。</p>
+<p>如下代码，定义了<code>createJuicyFruit</code>函数，该函数通过<code>super</code>调用将水果的<code>name</code>和<code>calories</code>转发到<code>Fruit</code>类中。然后，要做的就是创建<code>Plum</code>继承自中间类<code>JuicyFruit</code>类。</p>
+<p>[P65 代码3，P66 代码1]</p>
+<p>接下来，我们继续学习<code>Symbol</code>。虽然不是一种迭代或者流控制机制，但是学习<code>Symbol</code>对理解迭代机制至关重要，迭代机制将在后面的章节详细讨论。</p>
+<h2><span id="32-symbol">3.2 Symbol</span></h2><p><code>Symbol</code>是ES6中新增的原始值类型，是第七种数据类型。和字符串、数值一样，<code>Symbol</code>是一种独一无二的数据类型。但与字符串、数值不同的是，<code>Symbol</code>不具备字面量表示形式，诸如字符串中的<code>&#39;text&#39;</code>、数值中的<code>1</code>。<code>Symbol</code>的主要目的是用来实现协议。例如，迭代协议使用<code>Symbol</code>定义对象应该如何被迭代，这部分内容会在第四章的第二小节中学到。</p>
+<p><code>Symbol</code>有三种类型，每一种都使用不同的方式来访问。这三种类型分别是：本地<code>Symbol</code>，通过内置<code>Symbol</code>包装对象创建和通过存储引用和反射来访问；全局<code>Symbol</code>，通过另一种API创建，并且跨代码域共享；内置<code>Symbol</code>，用于定义内部语言行为。</p>
+<p>我们将会依次学习这三种类型，并在学习的过程中探索可能的使用方式。先从本地<code>Symbol</code>开始。</p>
+<h3><span id="321-本地symbol">3.2.1 本地Symbol</span></h3><p><code>Symbol</code>可以通过<code>Symbol</code>包装对象创建。下述代码中，我们创建了<code>first</code> Symbol值。</p>
+<p>[P66 代码2]</p>
+<p>对于<code>Number</code>和<code>String</code>我们可以通过<code>new</code>关键字来调用，但是当<code>new</code>和<code>Symbol</code>一起使用时会抛出<code>TypeError</code>异常。这样能够避免类似<code>new Number(3) !== Number(3)</code>的误解和混淆行为。从以下代码片段可以看出<code>new</code>和<code>Symbol</code>一起使用时所抛出的异常信息。</p>
+<p>[P67 代码1]</p>
+<p>为了更方便调试，我们可以在创建<code>Symbol</code>的时候使用描述。</p>
+<p>[P67 代码2]</p>
+<p>与数值或者字符串一样，<code>Symbol</code>值是不可变的。然而，与另两种数据类型不同，<code>Symbol</code>的值是独一无二的。如下述代码所示，描述并不会影响<code>Symnbol</code>值的唯一性。使用相同描述创建的<code>Symbol</code>值仍然是唯一的，互不相等的。</p>
+<p>[P67 代码3]</p>
+<p><code>Symbol</code>的<code>typeof</code>结果为<code>symbol</code>，是ES6中新增的结果。下述代码展示了<code>Symbol</code>新增的<code>typeof</code>值字符串。</p>
+<p>[P67 代码4]</p>
+<p><code>Symbol</code>可以用作对象的属性<code>key</code>值。如下所示，我们可以使用可计算属性，从而避免使用额外的语句来将名为<code>weapon</code>的<code>Symbol</code>值设为<code>character</code>对象的key值。此外，为了能够访问对应的<code>Symbol</code>属性，我们也需要保存用于创建所述属性的<code>Symbol</code>值的引用。</p>
+<p>[P67 代码5]</p>
+<p>常规的从对象中读取key值的方法都是没法获取到<code>Symbol</code>类型的key的。从下面代码可以看出，<code>for..in</code>、<code>Object.keys</code>、<code>Object.getOwnPropertyNames</code>均美不能获取到<code>Symbol</code>属性。</p>
+<p>[P68 代码1]</p>
+<p>这一表现的好处就是ES6之前写的、没有<code>Symbol</code>的代码，也不会突然意外地开始出现<code>Symbol</code>。同样地，如下所示，<code>Symbol</code>属性也不会出现在对象的JSON字符串化的结果中。</p>
+<p>[P68 代码2]</p>
+<p>虽然如此，<code>Symbol</code>并不是隐藏属性的一种安全机制。尽管在使用反射和序列化方法时不会出现<code>Symbol</code>属性，但<code>Symbol</code>可以通过专有的方法获取到，如下述代码片段所示。换句话说，<code>Symbol</code>虽然是不可枚举的，但是隐藏在了醒目的地方。通过<code>Object.getOwnPropertySymbols</code>可以获取给定对象的所有<code>Symbol</code> key。</p>
+<p>[P68 代码3]</p>
+<p>现在我们知道了<code>Symbol</code>的原理了，那么我们该如何使用它呢？</p>
+<h3><span id="322-symbol的实际用法">3.2.2 Symbol的实际用法</span></h3><p><code>Symbol</code>可以在某些库中用来将对象映射到DOM元素。如一个需要关联日历的API对象到DOM元素的库。ES6之前，并没有很好的方式来将DOM元素映射到对象。我们需要在DOM元素上添加一个属性指向API，但是这么做污染了DOM元素的常规属性，并不是一种好的方式。我们需要及其小心，避免所使用的属性值也被其他库所使用，甚至于更糟，所用属性在将来被语言本身所使用。？？？？并且这样需要使用一个数组查找表，其中包含每个<code>DOM/API</code>对条目。？？？？然而在持续长时间运行的应用中，数组查询表会变得越来越大，查询的速度也会越来越慢。</p>
+<p>而<code>Symbol</code>就不会存在这个问题。使用<code>Symbol</code>作为属性不用担心与将来的语言特性冲突，因为<code>Symbol</code>值是唯一的。下述代码展示了如何使用<code>Symbol</code>将DOM元素映射到日历API对象中。</p>
+<p>[P69 代码1]</p>
+<p>ES6中内置的<code>WeekMap</code>可以将对象映射到其他对象，且不需要借助数组或者在所有对应对象上添加额外的属性。和数组查询表不同，<code>WeakMap</code>查询的时间复杂度是常量O(1)。我们将在第五章学习<code>WeakMap</code>以及其他一系列ES6内置对象。</p>
+<h4><span id="使用symbol定义协议">使用<code>Symbol</code>定义协议</span></h4><p>前面我们说过<code>Symbol</code>可以用来定义协议。协议是一种定义行为的通信契约或约定。更具体点来说，库中可以使用<code>Symbol</code>，从而遵循库约定的对象也能够使用这个<code>Symbol</code>。</p>
+<p>思考如下代码，我们使用<code>toJSON</code>方法来决定对象通过<code>JSON.stringify</code>序列化后的结果。从结果能够看出，<code>character</code>对象字符串化的结果是<code>toJSON</code>方法返回的对象序列化后的结果。</p>
+<p>[P69 代码2，P70 代码1]</p>
+<p>相反，如下所示，如果<code>toJSON</code>不是一个函数，那么原始的<code>character</code>对象会被序列化，包括<code>toJSON</code>属性。之所以会存在这样的不一致性，是因为依赖常规属性来定义行为。</p>
+<p>[P70 代码2]</p>
+<p>如果使用<code>Symbol</code>来实现<code>toJSON</code>则会更好，因为这样就不会和其他对象key值产生冲突。由于<code>Symbol</code>是唯一的，不会被序列化，且除了显示调用<code>Object.getOwnPropertySymbols</code>不会暴露，那么在定义<code>JSON.stringify</code>和对象如何初始化之间的约定时，使用<code>Symbol</code>不失为一种更好的选择。下述代码即为一种可选方案，使用<code>Symbol</code>来定义<code>stringify</code>函数的序列化行为。</p>
+<p>[P70 代码3]</p>
+<p>使用<code>Symbol</code>值来定义<code>json</code>行为，需要在对象字面量中使用可计算属性名。这样还能保证该行为不会和其他用户定义的属性冲突，或者在无法预见的将来与语言特性冲突。此外，Symbol值<code>json</code>必须在<code>stringify</code>函数中能够被访问，这样才能自定义行为。如下所示，通过这行代码能够很容易地将Symbol值<code>json</code>暴露给<code>stringify</code>函数，也将<code>stringify</code>与改变其行为的<code>Symbol</code>值联系在了一起。</p>
+<p>[P71 代码1]</p>
+<p>这样暴露了<code>stringify</code>函数后，也就暴露了<code>Symbol</code>值<code>stringify.as</code>，这样用户只需要简单修改对象，使用自定义的<code>Symbol</code>，来微调<code>stringify</code>行为。</p>
+<p>？？？？与给<code>stringify</code>函数中传入可选参数截然不同，使用<code>Symbol</code>定义行为有以下几个优点。首先，给函数添加可选参数会影响其公共API，而修改函数的内部实现，从而支持<code>Symbol</code>，并不会影响公共API。如果每个<code>options</code>对象都有不同的属性会降低这一影响，但是每调用一次函数就要传入一个<code>options</code>对象，并不方便。</p>
+<p>另一个使用<code>Symbol</code>定义行为的好处是：我们无需更改除<code>Symbol</code>属性值值以外的任何东西，也无需更改实现该行为的内部代码实现机制，就能够对对象行为进行修改和自定义。并且使用<code>Symbol</code>作为属性不必担心与语言的新特性冲突。</p>
+<p>除了本地<code>Symbol</code>，还有一些全局注册的<code>Symbol</code>值，这些值在整个代码域内都能访问到。让我们一起看下具体有哪些吧。</p>
+<h3><span id="323-全局注册的symbol值">3.2.3 全局注册的<code>Symbol</code>值</span></h3><p>代码域是指JavaScript的执行上下文，如应用所在页面、页面中的<code>&lt;iframe&gt;</code>、通过<code>eval</code>执行的脚本以及各类worker–如web workder, service worker和shared worker[注释 1]。这些执行上下文都有自己所独有的全局对象。如，定义在页面中全局对象<code>window</code>上的全局变量，在<code>ServiceWorker</code>中时不可用的。相反地，全局注册的Symbol在所有这些代码作用域中时共享的。</p>
+<p>有以下两种方法来获取运行环境下全局注册的<code>Symbol</code>：<code>Symbol.for</code>和<code>Symbol.keyFor</code></p>
+<h4><span id="使用symbolforkey获取">使用<code>Symbol.for(key)</code>获取</span></h4><p><code>Symbol.for(key)</code>可以用来查找运行环境下全局注册的<code>Symbol</code> <code>key</code>值。如果全局注册下存在所传入<code>key</code>的Symbol，则返回该Symbol。如果不存在，则用传入的<code>key</code>新建一个，并在在全局注册。也就是说<code>Symbol.for(key)</code>是幂等的：使用给定的<code>key</code>查找Symbol，如果没有则创建一个并返回。</p>
+<p>以下代码中，第一个<code>Symbol.for</code>调用创建了一个标识为<code>&#39;example&#39;</code>的Symbol，并将其加入到了全局注册中，然后返回。第二个调用返回了同一个Symbol值，因为该<code>key</code>值已经在注册表中了，值为第一个调用所返回的Symbol值。</p>
+<p>[P72 代码1] </p>
+<p>全局注册的Symbol会通过<code>key</code>保持对Symbol值的引用。需要注意的是，当创建全局注册的Symbol时，所传入的<code>key</code>也会被用作<code>description</code>。试想一下，这些Symbol是全局可用的，如果我们想要减少潜在的命名冲突，就需要给Symbol的Key添加前缀，从而用于标识库和组件。</p>
+<h4><span id="使用symbolkeyforsymbol获取symbol-key">使用<code>Symbol.keyFor(symbol)</code>获取Symbol Key</span></h4><p><code>Symbol.keyFor(symbol)</code>能够返回一个Symbol类型值<code>symbol</code>在添加到全局注册时所关联的<code>key</code>。下例展示了这一用法：</p>
+<p>[P72 代码2]</p>
+<p>注意，如果symbol值没有全局注册，则该方法返回<code>undefined</code>。</p>
+<p>[P72 代码3]</p>
+<p>还需要记住一点，使用本地Symbol，即使描述相同，也不会匹配全局注册中的Symbol值。是因为本地Symbol值并不是全局注册的一部分，参考以下代码:</p>
+<p>[P73 代码1]</p>
+<p>到目前为止，已经学习了处理全局注册相关的API，现在我们来看一下一些注意事项吧。</p>
+<h4><span id="最佳实践与最佳实践">最佳实践与最佳实践</span></h4><p>全局注册意味着Symbol值在整个作用域内都可以访问到。全局注册在任何代码作用域内返回的都是同一个对象的引用。如下例，<code>Symbol.for</code> API在页面和<code>&lt;iframe&gt;</code>中返回的是同一个Symbol值。</p>
+<p>[P73 代码2]</p>
+<p>使用全局可用的Symbol需要做好权衡。一方面，全局Symbol使得类库能够方便地暴露其中的Symbol值，另一方面类库也可能会使用本地Symbol在其API上暴露Symbol值。显然，如果Symbol需要在任意两个不同的代码作用域中共享，如<code>ServiceWorker</code>和Web页面，这时Symbol注册很有用。同时，使用全局注册API，我们可以不必存储Symbol值的引用，因为同一个给定的key值会返回相同的Symbol值。需要注意的是，这些Symbol值在整个运行环境均可用，如果类似<code>each</code>或<code>contains</code>的自定义Symbol名，可以会导致意想不到的后果。</p>
+<p>此外，还有另外一种Symbol值：内置 well-known Symbol值。</p>
+<h3><span id="324-well-known-symbol">3.2.4 Well-Known Symbol</span></h3><p>前面我们已经学习了如何用<code>Symbol</code>函数和<code>Symbol.for</code>创建Symbol。接下来我们学习第三种也是最后一种Symbol：well-known Symbol。这些Symbol值是语言自带的，而不是由开发者自己创建，它们提供了内部语言行为的钩子，允许我们扩展或定制语言的某些在ES6之前无法操作的内部逻辑。</p>
+<p>Well-known symbol能够在不破坏现有代码的情况下，对语言进行扩展的。<code>Symbol.toPrimitive</code>是一个很好的例子，它能够赋值一个函数，使用该函数决定对象如何转换成原始值。函数接受一个<code>hint</code>参数，指定所有转换的初始类型，值可以为<code>&#39;string&#39;</code>、<code>&#39;number&#39;</code>或者<code>&#39;default&#39;</code>。</p>
+<p>[P74 代码1]</p>
+<p>还有一个例子是<code>Symbol.match</code>。如果将一个正则表达式的<code>Symbol.match</code>属性设为<code>false</code>，则当该正则传入<code>.startsWith</code>、<code>.endsWith</code>或者<code>.includes</code>时，会被当做字符串字面量。上述三个方法是ES6中新增的字符串方法。首先，<code>.startsWith</code>用与判断字符串是否以另一个字符串开头。其次，<code>.endsWith</code>表明字符串是否以另一个字符串结尾。最后，如果字符串包含另一个字符串，<code>.includes</code>方法返回<code>true</code>。如下代码，展示了如何使用<code>Symbol.match</code>比较字符串和正则正则表达式的字符串表示。</p>
+<p>[P75 代码1]</p>
+<p>如果正则表达式没有通过symbol修改，则<code>.startsWith</code>会抛出异常，因为该方法期望接受一个字符串参数，而不是正则表达式。</p>
+<h4><span id="跨作用域但不是全局注册">跨作用域但不是全局注册</span></h4><p>Well-know Symbol 在作用域共享。如下，当前窗口中的<code>Symbol.iterator</code>和<code>&lt;iframe&gt;</code>窗口中的引用相同。</p>
+<p>[P75 代码2]</p>
+<p>但需要注意的是，虽然well-known Symbol在代码作用域内共享，但它们并没有在全局注册。如下，当我们使用<code>Symbol.iterator</code>作为<code>key</code>在注册表中查询时，得到的值为<code>undefined</code>。这表明该Symbol值并不在全局注册中。</p>
+<p>[P75 代码3]</p>
+<p><code>Symbol.iterator</code>是well-known Symbol中最有用的之一，通过在任意对象上使用该Symbol定义一个函数，可以在不同的语言结构上使用，用来迭代序列。我们将在下一章深入学习<code>Symbol.iterator</code>，与迭代和迭代协议一起广泛使用它。</p>
+<h2><span id="33-对象的内置改进">3.3 对象的内置改进</span></h2><p>在第二章中，我们已经学习了对象字面量的语法增强部分，还有一些内置的Object静态方法没有提到。现在让我们来学一下这些方法。</p>
+<p>除了我们上面提到的<code>Object.getOwnPropertySymbols</code>，还有<code>Object.assign</code>、<code>Object.is</code>和<code>Object.setPrototypeOf</code>。</p>
+<h3><span id="331-使用objectassign扩展对象">3.3.1 使用Object.assign扩展对象</span></h3><p>给一个配置对象设置默认值时再常见不过的事情了。通常，库和设计良好的组件接口都有合理的缺省值，从而满足最频繁的使用场景。</p>
+<p>如一个MarkDown的类库，将MarkDown转为HTML只需要提供一个<code>input</code>参数。单纯地解析MarkDown是最常用的使用场景，所以类库不要求使用者提供其他任何选项。不过，类库可以支持一些不同的选项，用于调整解析行为。如允许<code>&lt;script&gt;</code>或<code>&lt;iframe&gt;</code>标签的选项，在代码块中高亮CSS关键字的选项。</p>
+<p>试想一下，我们需要提供如下这些默认值。</p>
+<p>[P76 代码1]</p>
+<p>一种方式是通过解构，将<code>defaults</code>对象设为<code>options</code>参数的默认值。这种情况下，当用户想要设置某一个选项时，必须提供每一个选项。</p>
+<p>[P76 代码2]</p>
+<p>所以默认值必须以某种方式和用户提供的配置进行合并。如下例所示，<code>Object.assign</code>能够进行这一合并操作。第一个参数为一个空对象<code>{}</code>，第二个参数<code>default</code>会被复制到这个空对象中，然后再复制<code>options</code>，最终返回改变后的空对象。这样<code>config</code>对象中就存在所有默认值以及用户提供的配置了。</p>
+<p>[P77 代码1]</p>
+<blockquote>
+<h4><span id="理解objectassign的目的">理解<code>Object.assign</code>的目的</span></h4><p><code>Object.assign</code>方式会改变它的第一个参数。参数格式是<code>(target, ...sources)</code>。每个源对象都会应用到目标对象上，每个源对象依次应用，源对象中的属性依次应用。</p>
+<p>考虑一下如下场景，如果不想<code>Object.assign</code>中传递一个空对象最为第一个参数，而是直接传入<code>defaults</code>和<code>options</code>。这样将会改变<code>defaults</code>对象的内容，由于<code>Object.assign</code>会改变第一个对象，这一过程会导致<code>defaults</code>中的部分默认值丢失，并额外增加一些错误的默认值。如下，函数<code>md</code>首次调用得到的结果和上例中的结果相同，但在这一过程中它会改变<code>defaults</code>，从而会影响后续的调用。</p>
+<p>[P77 代码2] </p>
+<p>鉴于此，最好每次调用<code>Object.assign</code>时都传入一个全新的对象作为第一个参数。</p>
+</blockquote>
+<p>对于任意有默认值的属性，如果用户提供了新的值，则以用户提供的为准。<code>Object.assign</code>的工作原理如下。首先，获取传入的第一个参数，我们可以称其为<code>target</code>；然后，获取其他参数，可以称其为<code>sources</code>，遍历<code>sources</code>的所有key。对于<code>sources</code>中的每一个源对象，其中所有的属性值都会被遍历，然后赋值给<code>target</code>对象。最后，最后一个参数，在下例中是<code>options</code>对象，会重写之前已赋值的值。代码如下所示：</p>
+<p>[P77 代码3 - P78 代码1]</p>
+<p>在<code>Object.assgin</code>添加进语言之前，这一个功能在民间JavaScript中有很多相似的实现方式，名字诸如<code>assgin</code>或<code>extend</code>等。<code>Object.assign</code>方法统一了这些可选方案。</p>
+<p>需要注意的是，<code>Object.assign</code>只会遍历自身可枚举属性，包括字符串和symbol属性。</p>
+<p>[P78 代码2]</p>
+<p>然而<code>Object.assign</code>并不能满足每种需求。很多民间实现方法能够支持深度赋值，但是<code>Object.assign</code>并不会递归对象。值为对象的属性会被直接赋给<code>target</code>，而不是递归赋值对象中的每一个属性。</p>
+<p>如下例所示，你可以期望<code>f</code>属性会被添加到<code>target.a</code>上，同时<code>a.c</code>和<code>a.d</code>原封不动，但是<code>Object.assign</code>后，<code>a.c</code>和<code>a.d</code>会丢失掉。</p>
+<p>[P78 代码3]</p>
+<p>同样地，数组也不会被特别对待，也不会递归遍历复制。如下例所示，如果你期待<code>Object.assign</code>能够进行递归，那么结果就会出乎你的意料了，你所期待的<code>d</code>并不会出现在结果数组的第三个位置上。</p>
+<p>[P78 代码4]</p>
+<p>在书写本书时，有一个处于第三阶段的ECMAScript提案[注释 2]，该提案实现了在对象中进行展开，与在数组中展开可遍历对象相似。在一个对象中展开另一个对象与<code>Object.assign</code>函数调用效果等价。</p>
+<p>如下代码展示了一些在对象中展开另一对象与<code>Object.assign</code>对比的使用情况。可以看出，使用对象展开更加简洁，在情况允许时，可以优先选择该方式。</p>
+<p>[P79 代码1]</p>
+<p>与对象扩展对应，还有一个包含对象rest属性的提案，与对象中的rest模式相似。我们可以在对象解构中使用对象rest。</p>
+<p>如下例，使用对象rest能得到一个对象，对象中包含所有在参数列表中没有显示指明名称的属性。注意，与数组rest模式相同，对象rest只能在解构的最后一个位置。</p>
+<p>[P79 代码2]</p>
+<p>在变量声明语句中解构对象时，也可以使用相似的方式。下例中，每个在结构中没有显示解构的属性都会被放到<code>meta</code>对象中。</p>
+<p>[P79 代码3 P80 代码1]</p>
+<p>我们将在第九章深入学习对象的rest与展开。</p>
+<h3><span id="332-使用objectis进行对象比较">3.3.2 使用<code>Object.is</code>进行对象比较</span></h3><p><code>Object.is</code>方法与严格相等比较运算符<code>===</code>有些不同。大部分情况下，<code>Object.is(a, b)</code>与<code>a === b</code>是等价的。但是有两种情况会不同：即<code>NaN</code>、<code>-0</code>和<code>+0</code>。该算法在ECMAScript规范中被称为<code>SameValue</code>。</p>
+<p>当<code>NaN</code>和<code>NaN</code>比较时，严格相等运算符返回<code>false</code>，因为<code>NaN</code>不等于它自身。然而，<code>Object.is</code>方法则返回<code>true</code>。</p>
+<p>[P80 代码2]</p>
+<p>相似地，当<code>-0</code>与<code>+0</code>进行比较式，<code>===</code>运算符得到的结果是<code>true</code>，而<code>Object.is</code>返回<code>false</code>。</p>
+<p>[P80 代码3]</p>
+<p>这些差别看起来不大，但是当需要处理<code>NaN</code>时，总是很麻烦。因为<code>NaN</code>有一些独特的行为，如<code>typeof NaN</code>的结果是<code>&#39;number&#39;</code>，自身不等于自身。</p>
+<h3><span id="333-objectsetprototypeof">3.3.3 Object.setPrototypeOf</span></h3><p>字如其意，<code>Object.setPrototypeOf</code>的功能就是名字所表达的意思：用于设置一个对象的原型引用到另一个对象。相比于使用遗留的特性<code>__proto</code>来设置原型，更推荐使用<code>Object.setPrototypeOf</code>。</p>
+<p>在ES6之前，ES5引入了<code>Object.create</code>。如下所示，使用该方法能够创建一个新的对象，新对象以传入的原型参数为原型。</p>
+<p>[P81 代码1]</p>
+<p>不过，<code>Object.create</code>只适用于创建新的对象。而使用<code>Object.setPrototypeOf</code>可以改改变已有对象的原型。如下所示：</p>
+<p>[P81 代码2]</p>
+<p>但是需要注意，相比于<code>Object.create</code>，使用<code>Object.setPrototypeOf</code>有很多性能问题，所以当决定在整个代码库中使用<code>Object.setPrototypeOf</code></p>
+<blockquote>
+<p>性能问题
+使用<code>Object.setPrototypeOf</code>修改对象的原型是一个很耗费性能的操作。之前需要仔细考虑之后再做决定。以下是Mozilla开发者网络文档中对此事的看法:
+由于现代JavaScript引擎优化属性访问的特性，在任何浏览器和JavaScript引擎中，修改对象的原型都是一个很慢的操作。对于改变继承的影响是很微妙与深远的，不仅仅是<code>obj.__proto = ...</code>这一语句的时间消耗，还会影响访问原型被改变的对象的所有代码。如果你比较在意性能，那你最好避免给对象设置原型。相反，可以使用<code>Object.create</code>创建一个基于期望原型的新对象。
+– Mozilla开发者网络</p>
+</blockquote>
+<h2><span id="34-装饰器">3.4 装饰器</span></h2><p>和大多数编程语言一样，装饰器绝对不是一个新的概念。在现代编程语言中，这种模式相当普遍：C#中有<em>attributes</em>，Java中叫<code>annotations</code>，Python中时<code>decorators</code>，其他语言也都存在这一模式。在TC39工作中，有一个关于装饰器的提案[注释 3]，现在处于第二阶段。</p>
+<h2><span id="341-初识javascript装饰器">3.4.1 初识JavaScript装饰器</span></h2><p>JavaScript装饰器语法与Python中的装饰器很相似。JavaScript装饰器可以用于类以及任何静态定义的属性，如果对象字面量声明或类声明中的属性，哪怕它们是<code>get</code>/<code>set</code>存取器或者<code>static</code>属性也没问题。</p>
+<p>该提案通过<code>@</code>定义<em>decorator</em>装饰器，后跟一些列点连接的标识符和一个可选参数列表。下面是一些语法示例：</p>
+<ul>
+<li><code>@decorators.frozen</code>是一个合法装饰器</li>
+<li><code>@decorators.frozen(true)</code>是一个合法装饰器</li>
+<li><code>@decorators().frozen()</code>存在语法错误</li>
+<li><code>@decorators[&#39;frozen&#39;]</code>存在语法错误</li>
+</ul>
+<p>类声明和类成员可以添加0到多个装饰器。</p>
+<p>[P82 代码1]</p>
+<p>装饰器是通过函数实现的。成员装饰器函数具有成员描述符并返回成员描述符。成员描述符与属性描述符相似，但是形态不同。如下代码，即为装饰器提案中所定义的成员描述符接口。可选参数<code>finisher</code>方法接受一个类构造函数，允许我们执行与属性被修饰的类相关的操作。</p>
+<p>[P83 代码1]</p>
+<p>如下例，我们定义了一个<code>readonly</code>成员装饰器函数，用来将被装饰的成员状态变成不可写。借助对象rest与对象扩展操作，我们将属性描述符修改成不可变状态，而其余成员描述符保持不变。</p>
+<p>[P83 代码2]</p>
+<p>类装饰器函数接受如下三个参数：<code>ctor</code>参数，该参数指向被装饰的类构造函数；<code>heritage</code>参数，如果被修饰的类继承了其他类，则包含该父类；<code>merbers</code>数组，修饰类的成员装饰器列表。</p>
+<p>如下代码所示，通过在被装饰类的每一个成员描述符上复用上述<code>readonly</code>成员装饰器，可以实现一个类级别的装饰器<code>readonlyMembers</code>。</p>
+<p>[P83 代码3]</p>
+<h3><span id="342-堆叠装饰器及不变性警告">3.4.2 堆叠装饰器及不变性警告</span></h3><p>在不变性的问题上，我们可能会试图从装饰器中返回一个新的属性描述符，而不修改原始描述符。虽然出发点是好的，但可能会产生意想不到的效果，因为同一个类或类成员可以装饰多次。</p>
+<p>如果代码中的每个装饰器都没有考虑所接受的<code>descriptor</code>参数，直接返回一个全新的<code>descriptor</code>，那么，事实上，它们将失去新描述符返回之前的所有修饰。</p>
+<p>我们应该仔细重视所提供的<code>descriptor</code>。创建返回一个基于所给<code>descriptor</code>原始参数的<code>descriptor</code>。</p>
+<h3><span id="343-使用实例c中的attributes">3.4.3 使用实例：C#中的Attributes</span></h3><p>很久以前，我第一次接触C#是在Ultima Online服务器仿真器[注释 5]中，是使用开源C#代码——RunUO编写的。RunUO是我曾经使用过的最好的代码库，它使用C#实现的。</p>
+<p>它们将服务器软件分发为可执行文件和一系列的<code>.cs</code>文件。这些runuo可执行文件会在运行时编译，并动态混合到应用程序中。这样我们就不再需要Visual Studio IDE(也不需要msbuild)，也不需要任何编程知识来编辑这些<code>.cs</code>文件中的“脚本”。以上这些使得RunUO为新手开发者提供了一个完美的学习环境。</p>
+<p>RunUO高度依赖于反射。RunUO的开发者为了使用户能实现定制，投入了很大的精力。这些用户不需要研究编程，只对改变游戏中的一些谢姐感兴趣，如，龙的火焰能够造成多大的伤害以及它喷射火球的频率。良好的开发者体验是RunUO设计哲学中很重要的一部分。通过复制一个怪物文件，使其继承<code>Dragon</code>类，重写几个属性来改变它的色调、伤害输出等，就可以创建一个新种类的龙。</p>
+<p>与能够便捷创建新的怪物一样，<code>非玩家角色</code>（游戏中俚语是NPC），他们也依赖反射为游戏管理员提供功能。管理员可以在游戏内运行命令，点击一个物品或怪物来查看或改变属性，而不需要离开游戏。</p>
+<p>[P85 图1 从Ultima Online客户端在游戏内改变RunUO的属性]</p>
+<p>不过，并不是类中的每一个属性都可以在游戏内进行操作。有些属性仅限于内部使用，或者不支持在运行时编辑。RunUO有一个<code>CommandPropertyAttribute</code>装饰器[注释 6]，用于定义属性是否可以在游戏内编辑，同时要求制定读操作与写操作所需的访问级别。这一装饰器在RunUO的代码库中得到了广泛的使用[注释 7]。</p>
+<p><code>PlayerMobile</code>类用来控制玩家角色如何工作，非常适合查看这些属性。<code>PlayerMobile</code>有很多属性在游戏内对于管理员和审核人都是可访问的[注释 8]。下面是一些getter和setter属性，但只有第一个具有<code>CommandProperty</code>属性，这就使得该属性在游戏中对游戏主是可访问的。</p>
+<p>[P86 代码1]</p>
+<p>c#属性和JavaScript之间一个有趣的区别是，c#中的反射允许我们使用<code>MemberInfo#getCustomAttributes</code>从对象中提取所有自定义属性。在显示允许管理员查看或修改游戏对象的属性的对话框时，RunUO就是利用该方法提取关于游戏中应该可以访问的每个属性的信息。</p>
+<h3><span id="344-在javascript中标记属性">3.4.4 在JavaScript中标记属性</span></h3><p>在JavaScript中，没有从属性上获取自定义特性的方法，至少在现有的提案草案中没有。也就是说，JavaScript是一种高度动态的语言，创建这种“标签”并不麻烦。用“command property”来装饰<code>Dog</code>并不会和RunUO与c#有什么不同。由于JavaScript装饰器没有反射[注释 9]，我们需要用一个运行时Symbol值来保存给定类的命令属性数组。</p>
+<p>[P86 代码2]</p>
+<p>与C#相比，<code>commandProperty</code>函数需要稍微复杂一点。</p>
+<p>[P87 代码1]</p>
+<p><code>Dog</code>类中可以存在任意多必要的命令属性，并且每个命令属性都会列举在一个Symbol属性中。想要查找给定类的命令属性，通过以下函数即可获取。该函数通过Symbol属性获取命令属性列表，并提供了默认值<code>[]</code>。该函数会返回原始列表的副本，以防止用户意外地对其进行更改。</p>
+<p>[P87 代码2]</p>
+<p>这样我们就可以遍历已知的安全命令属性，并在运行时，通过一个简单的UI呈现一种修改这些属性的方法。装饰器是实现将属性标记为特定用例的特殊属性这一协议最干净的一种方式，它偶尔依赖于某种启发式来进行中断或者使用某种限制性的命名约定，而不用保存能够被修改的属性长列表。</p>
+<p>在下一章中，我们将介绍ES6中的更多特性，如何使用Promise和生成器进行流程控制，以及如何迭代JavaScript对象。</p>
+<blockquote>
+<p>注1 Worker是在浏览器中执行后台任务的一种方式。启动程序通过message，即使在不同的执行上下文，也能够所和初始化的worker进行通信。
+注2 从GitHub（<a href="https://github.com/tc39/proposal-promise-finally）中能够查看该草案。" target="_blank" rel="noopener">https://github.com/tc39/proposal-promise-finally）中能够查看该草案。</a>
+注3 从GitHUb（<a href="https://mjavascript.com/out/decorators）中能够查看该草案。" target="_blank" rel="noopener">https://mjavascript.com/out/decorators）中能够查看该草案。</a>
+注4 通过<code>[]</code>访问属性是不允许的，因为这样编译器会难以消除语法歧义。
+注5 Ultima Online是一款几十年前的基于终极宇宙的虚拟角色扮演类游戏。
+注6 RunUO的git仓库（<a href="https://mjavascript.com/out/runuo-attributes）中有`CommandPropertyAttribute`的定义。" target="_blank" rel="noopener">https://mjavascript.com/out/runuo-attributes）中有`CommandPropertyAttribute`的定义。</a>
+注7 <code>CommandPropertyAttribute</code>在整个代码库中广泛使用，仅在RunUO核心中就标记了200多个属性。
+注8 在<code>PlayerMobile.cs</code>类（<a href="https://mjavascript.com/out/runuo-playermobile）中找到许多`CommandProperty`属性的用法示例。" target="_blank" rel="noopener">https://mjavascript.com/out/runuo-playermobile）中找到许多`CommandProperty`属性的用法示例。</a>
+注9 现代JavaScript还没有考虑实现JavaScript装饰器的反射功能，因为这样需要引擎在内存中存储更多的元数据。不过，我们可以使用Symbol和列表来完成使用原生反射的需求。</p>
+</blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://verymuch.com/2018/05/30/第三章-类、Symbol、对象和装饰器/" data-id="cjjx4nz5j000pu13ygyb0bbgp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://verymuch.com/2018/05/30/第三章-类、Symbol、对象和装饰器/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2018/05/30/第三章-类、Symbol、对象和装饰器/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/07/22/css性能优化的9个技巧/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    css性能优化的7个技巧
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/05/23/如何清除行内元素之间的HTML空白/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">如何清除行内元素之间的HTML空白</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/22/css性能优化的9个技巧/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/07/22/css性能优化的9个技巧/" class="title">css性能优化的7个技巧</a></p>
+                            <p class="item-date"><time datetime="2018-07-22T15:49:10.000Z" itemprop="datePublished">2018-07-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/30/第三章-类、Symbol、对象和装饰器/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/05/30/第三章-类、Symbol、对象和装饰器/" class="title">第三章 类、Symbol、对象和装饰器</a></p>
+                            <p class="item-date"><time datetime="2018-05-30T06:24:57.000Z" itemprop="datePublished">2018-05-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/23/如何清除行内元素之间的HTML空白/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/align.gif)" alt="如何清除行内元素之间的HTML空白" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/05/23/如何清除行内元素之间的HTML空白/" class="title">如何清除行内元素之间的HTML空白</a></p>
+                            <p class="item-date"><time datetime="2018-05-23T10:00:48.000Z" itemprop="datePublished">2018-05-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/15/如何建立数据库索引/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/search_index.gif)" alt="如何建立数据库索引" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/05/15/如何建立数据库索引/" class="title">如何建立数据库索引</a></p>
+                            <p class="item-date"><time datetime="2018-05-15T10:14:58.000Z" itemprop="datePublished">2018-05-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/11/机器学习资料/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/robot-learning.gif)" alt="机器学习资料" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/05/11/机器学习资料/" class="title">机器学习资料</a></p>
+                            <p class="item-date"><time datetime="2018-05-11T07:42:04.000Z" itemprop="datePublished">2018-05-11</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/EXERCISE-SPACE/">EXERCISE_SPACE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GROWING-SPACE/">GROWING_SPACE</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS小技巧/">CSS小技巧</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/他人经验总结/">他人经验总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作效率/">工作效率</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/有感/">有感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/沉淀/">沉淀</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CSS小技巧/" style="font-size: 10px;">CSS小技巧</a> <a href="/tags/他人经验总结/" style="font-size: 10px;">他人经验总结</a> <a href="/tags/工作效率/" style="font-size: 10px;">工作效率</a> <a href="/tags/有感/" style="font-size: 10px;">有感</a> <a href="/tags/沉淀/" style="font-size: 20px;">沉淀</a> <a href="/tags/翻译/" style="font-size: 15px;">翻译</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 verymuch<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://verymuch.com/2018/05/30/第三章-类、Symbol、对象和装饰器/';
+        
+        this.page.identifier = '第三章-类、Symbol、对象和装饰器';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

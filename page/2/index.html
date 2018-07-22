@@ -160,7 +160,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                16
+                18
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -213,6 +213,288 @@
 
             
             <section id="main">
+    <article id="post-npm-unmet-dependency-解决方案" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/05/11/npm-unmet-dependency-解决方案/">npm unmet dependency 解决方案</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/05/11/npm-unmet-dependency-解决方案/">
+            <time datetime="2018-05-11T03:49:44.000Z" itemprop="datePublished">2018-05-11</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/沉淀/">沉淀</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><link rel="stylesheet" href="/css/custom.css"></p>
+<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/generate-toc.js"></script>
+
+<h2><span id="1-引言">1. 引言</span></h2><p>之前使用框架，一直需要编译后发布，代码库中因此就有了一大堆编译后的文件，每次更新服务端的代码都会导致眼花缭乱。最近就升级了下服务器上的node版本，然后在服务端进行编译，这样就不用维护编译后的代码了。</p>
+<p>然鹅，好事多磨，升级好，新上线的代码中包含的新依赖，总是无法成功。通过<code>npm ls package_name</code>查看看到了<code>UNMET DEPENDENCY</code>错误。</p>
+<h2><span id="2-解决方案">2. 解决方案</span></h2><ol>
+<li><p>清缓存(该方式验证有效)</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf node_modules/    <span class="comment"># 删除已安装的模块</span></span><br><span class="line"><span class="built_in">npm</span> cache clean --force        <span class="comment"># 清除 npm 内部缓存</span></span><br><span class="line"><span class="built_in">npm</span> install             <span class="comment"># 重新安装</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>升级npm版本</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf node_modules/    <span class="comment"># 删除已安装的模块</span></span><br><span class="line">sudo <span class="built_in">npm</span> update -g <span class="built_in">npm</span>  <span class="comment"># 更新 npm</span></span><br><span class="line"><span class="built_in">npm</span> install             <span class="comment"># 重新安装</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2><span id="参考链接">参考链接</span></h2><blockquote>
+<ol>
+<li><a href="https://stackoverflow.com/questions/20764881/why-does-npm-install-say-i-have-unmet-dependencies" target="_blank" rel="noopener">why-does-npm-install-say-i-have-unmet-dependencies</a></li>
+<li><a href="https://lellansin.wordpress.com/2014/02/27/npm-%E5%AE%89%E8%A3%85%E5%87%BA%E7%8E%B0-unmet-dependency-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_blank" rel="noopener">npm 安装出现 UNMET DEPENDENCY 的解决方案</a></li>
+</ol>
+</blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://verymuch.com/2018/05/11/npm-unmet-dependency-解决方案/" data-id="cjjx4nz5g000ku13yduzfb6jf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://verymuch.com/2018/05/11/npm-unmet-dependency-解决方案/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2018/05/11/npm-unmet-dependency-解决方案/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-如何在Array-forEach中实现break" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/02/09/如何在Array-forEach中实现break/">如何在Array.forEach中实现break</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/02/09/如何在Array-forEach中实现break/">
+            <time datetime="2018-02-09T01:39:23.000Z" itemprop="datePublished">2018-02-09</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/沉淀/">沉淀</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><p><link rel="stylesheet" href="/css/custom.css"></p>
+<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/generate-toc.js"></script>
+
+<p>使用<code>for in</code>遍历对象时，会遍历原型链上的可枚举实行，而这些往往会导致一些意想不到的问题。</p>
+<p>鉴于上面这个原因，我们团队在之前的几个项目里，通过<code>eslint</code>禁止在代码中使用<code>for in</code>。虽然在大部分情况，我们都能按照约定不使用<code>for in</code>，但是偶尔仍会需要在<code>forEach</code>中中断循环的情况。</p>
+<p>有需求就有解决方案。</p>
+<p>遇到这个问题时，笔者最简单的思路就是，在<code>forEach</code>外层设置标志位为<code>false</code>，然后在需要break时，将标志位置为<code>true</code>，循环内判断<code>true</code>则直接返回。这样做虽然能够减少循环内部的逻辑处理，但是还是会空跑整个循环，造成资源浪费。</p>
+<p>既然自己想的方法是最简单的，并且存在弊端，那么就搜搜其他大神的有哪些思路吧。于是乎就有了以下的总结：</p></p>
+            <p class="article-more-link">
+                <a href="/2018/02/09/如何在Array-forEach中实现break/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://verymuch.com/2018/02/09/如何在Array-forEach中实现break/" data-id="cjjx4nz5f000ju13yybq6kf6z" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://verymuch.com/2018/02/09/如何在Array-forEach中实现break/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2018/02/09/如何在Array-forEach中实现break/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-Node路径解析浅析" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -268,7 +550,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/01/10/Node路径解析浅析/" data-id="cjhjwbz4x000nsr3ym1g3be43" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/01/10/Node路径解析浅析/" data-id="cjjx4nz5e000iu13yvftn9189" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -392,7 +674,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/01/03/CSS-Mixin/" data-id="cjhjwbz4v000lsr3y889ruez4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/01/03/CSS-Mixin/" data-id="cjjx4nz5d000hu13y7pn23t92" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -524,7 +806,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2017/12/30/第2章-ES6基础-总结与扩展/" data-id="cjhjwbz4w000msr3yph557baf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2017/12/30/第2章-ES6基础-总结与扩展/" data-id="cjjx4nz5d000gu13yhj9264cg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -602,285 +884,6 @@
 
 
 
-    <article id="post-Data-URL简介与使用" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/12/14/Data-URL简介与使用/">Data URL简介与使用</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/12/14/Data-URL简介与使用/">
-            <time datetime="2017-12-14T00:34:41.000Z" itemprop="datePublished">2017-12-14</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/沉淀/">沉淀</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><p><link rel="stylesheet" href="/css/custom.css"></p>
-<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/generate-toc.js"></script>
-
-<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p><code>Data URL</code>，是以<code>data:</code>模式为前缀的URL，允许内容的创建者将较小的文件嵌入到文档中。与常规的URL使用场合类似（下面会具体介绍可以将Data URL用在哪些地方）。</p>
-<p><code>Data URL</code>由<strong><code>data:</code>前缀、MIME类型（表明数据类型）、<code>base64</code>标志位（如果是文本，则可选）以及数据本身四部分组成</strong>。</p>
-<p>语法格式如下：
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data:[<span class="string">&lt;mediatype&gt;</span>][<span class="symbol">;base64</span>],data</span><br></pre></td></tr></table></figure></p>
-<p><code>mediatype</code>是一个MIME（Multipurpose Internet Mail Extension）类型字符串，如<code>image/jpeg</code>表示一个JPEG图片文件。如果省略，默认值为<code>text/plain;charset=US-ASCII</code>。</p></p>
-            <p class="article-more-link">
-                <a href="/2017/12/14/Data-URL简介与使用/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://verymuch.com/2017/12/14/Data-URL简介与使用/" data-id="cjhjwbz4u000ksr3ygwebjh06" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="http://verymuch.com/2017/12/14/Data-URL简介与使用/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2017/12/14/Data-URL简介与使用/">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-escape、encodeURI和encodeURIComponent的区别与使用" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/">escape、encodeURI和encodeURIComponent的区别与使用</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/">
-            <time datetime="2017-12-12T14:51:18.000Z" itemprop="datePublished">2017-12-12</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/沉淀/">沉淀</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><!-- 自定义通用样式，及覆盖样式 -->
-<p><link rel="stylesheet" href="/css/custom.css"></p>
-<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/generate-toc.js"></script>
-
-<h2 id="1-escape"><a href="#1-escape" class="headerlink" title="1. escape"></a>1. escape</h2><p>escape是对字符串(string)进行编码(而另外两种是对URL)，作用是让它们在所有电脑上可读。编码之后的效果是%XX或者%uXXXX这种形式。其 <code>ASCII字母、数字、@*/+</code>，这几个字符不会被编码，其余的都会。</p>
-<p class="text-highlight">注意，当需要对URL编码时，请忘记这个方法，这个方法是针对字符串使用的，不适用于URL。</p>
-
-<p>在实际工作中使用较少，可以先了解功能，待有需求时再使用。</p>
-<h2 id="2-encodeURI-和-encodeURIComponent"><a href="#2-encodeURI-和-encodeURIComponent" class="headerlink" title="2. encodeURI 和 encodeURIComponent"></a>2. encodeURI 和 encodeURIComponent</h2><p>对URL编码是常见的事，所以这两个方法应该是实际中要特别注意的。</p>
-<p>它们都是编码URL，<strong>唯一区别</strong>就是编码的字符范围：</p>
-<ol>
-<li><code>encodeURI</code>方法不会对下列字符编码<code>ASCII字母、数字、~!@#$&amp;*()=:/,;?+&#39;</code></li>
-<li><code>encodeURIComponent</code>方法不会对下列字符编码<code>ASCII字母、数字、~!*()&#39;</code></li>
-</ol>
-<p>由此可见<code>encodeURIComponent</code>比<code>encodeURI</code>编码范围更大。如，<code>encodeURIComponent</code>会把<code>http://</code>编码 <code>http%3A%2F%2F</code>而<code>encodeURI</code>却不会。</p></p>
-            <p class="article-more-link">
-                <a href="/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://verymuch.com/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/" data-id="cjhjwbz4u000jsr3y4gmfjgyg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="http://verymuch.com/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2017/12/12/escape、encodeURI和encodeURIComponent的区别与使用/">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
     <nav id="page-nav">
         <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
     </nav>
@@ -897,10 +900,48 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/05/23/如何清除行内元素之间的HTML空白/" class="thumbnail">
+                            <a href="/2018/07/22/css性能优化的9个技巧/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/07/22/css性能优化的9个技巧/" class="title">css性能优化的7个技巧</a></p>
+                            <p class="item-date"><time datetime="2018-07-22T15:49:10.000Z" itemprop="datePublished">2018-07-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/30/第三章-类、Symbol、对象和装饰器/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/05/30/第三章-类、Symbol、对象和装饰器/" class="title">第三章 类、Symbol、对象和装饰器</a></p>
+                            <p class="item-date"><time datetime="2018-05-30T06:24:57.000Z" itemprop="datePublished">2018-05-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/23/如何清除行内元素之间的HTML空白/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/align.gif)" alt="如何清除行内元素之间的HTML空白" class="thumbnail-image"></span>
     
 </a>
 
@@ -919,7 +960,7 @@
                             <a href="/2018/05/15/如何建立数据库索引/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/search_index.gif)" alt="如何建立数据库索引" class="thumbnail-image"></span>
     
 </a>
 
@@ -938,7 +979,7 @@
                             <a href="/2018/05/11/机器学习资料/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/robot-learning.gif)" alt="机器学习资料" class="thumbnail-image"></span>
     
 </a>
 
@@ -948,44 +989,6 @@
                             <p class="item-category"></p>
                             <p class="item-title"><a href="/2018/05/11/机器学习资料/" class="title">机器学习资料</a></p>
                             <p class="item-date"><time datetime="2018-05-11T07:42:04.000Z" itemprop="datePublished">2018-05-11</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/05/11/npm-unmet-dependency-解决方案/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://satyr.io/80x80/80/edf4ef?text=UNMET)" alt="npm unmet dependency 解决方案" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/05/11/npm-unmet-dependency-解决方案/" class="title">npm unmet dependency 解决方案</a></p>
-                            <p class="item-date"><time datetime="2018-05-11T03:49:44.000Z" itemprop="datePublished">2018-05-11</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/02/09/如何在Array-forEach中实现break/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://satyr.io/80x80/80/edf4ef?text=break)" alt="如何在Array.forEach中实现break" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/02/09/如何在Array-forEach中实现break/" class="title">如何在Array.forEach中实现break</a></p>
-                            <p class="item-date"><time datetime="2018-02-09T01:39:23.000Z" itemprop="datePublished">2018-02-09</time></p>
                         </div>
                     </li>
                 
@@ -1007,7 +1010,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
