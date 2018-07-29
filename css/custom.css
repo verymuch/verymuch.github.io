@@ -1,5 +1,9 @@
 @import './custom-toc.css';
 
+#container {
+  font-size: 16px;
+}
+
 .text-highlight {
   color: red;
 }
