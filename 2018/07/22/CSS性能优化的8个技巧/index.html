@@ -5,18 +5,18 @@
     
     <title>CSS性能优化的8个技巧 | 歪马行空</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="本文作者：高峰，360奇舞团前端工程师，W3C性能工作组成员，同时参与WOT工作组的学习。  我们都知道对于网站来说，性能至关重要，CSS作为页面渲染和内容展现的重要环节，影响着用户对整个网站的第一体验，与其相关的性能优化是不容忽视的。 对于性能优化我们常常在项目完成时才去考虑，经常被推迟到项目的末期，这时优化的范围往">
+    <meta name="description" content="本文作者：高峰，360奇舞团前端工程师，W3C性能工作组成员，同时参与WOT工作组的学习。  我们都知道对于网站来说，性能至关重要，CSS作为页面渲染和内容展现的重要环节，影响着用户对整个网站的第一体验，因此，与其相关的性能优化是不容忽视的。 对于性能优化我们常常在项目完成时才去考虑，经常被推迟到项目的末期，这时优化的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSS性能优化的8个技巧">
 <meta property="og:url" content="http://verymuch.com/2018/07/22/CSS性能优化的8个技巧/index.html">
 <meta property="og:site_name" content="歪马行空">
-<meta property="og:description" content="本文作者：高峰，360奇舞团前端工程师，W3C性能工作组成员，同时参与WOT工作组的学习。  我们都知道对于网站来说，性能至关重要，CSS作为页面渲染和内容展现的重要环节，影响着用户对整个网站的第一体验，与其相关的性能优化是不容忽视的。 对于性能优化我们常常在项目完成时才去考虑，经常被推迟到项目的末期，这时优化的范围往往会缩小很多，最终大多数只是简单进行下文件压缩和缓存策略的调整。相">
+<meta property="og:description" content="本文作者：高峰，360奇舞团前端工程师，W3C性能工作组成员，同时参与WOT工作组的学习。  我们都知道对于网站来说，性能至关重要，CSS作为页面渲染和内容展现的重要环节，影响着用户对整个网站的第一体验，因此，与其相关的性能优化是不容忽视的。 对于性能优化我们常常在项目完成时才去考虑，经常被推迟到项目的末期，这时优化的范围往往会缩小很多，最终大多数只是简单进行下文件压缩和缓存策略的调">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://p0.qhimg.com/t010bcab368577e12de.jpg">
-<meta property="og:updated_time" content="2018-07-29T14:15:00.278Z">
+<meta property="og:updated_time" content="2018-07-30T00:07:28.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS性能优化的8个技巧">
-<meta name="twitter:description" content="本文作者：高峰，360奇舞团前端工程师，W3C性能工作组成员，同时参与WOT工作组的学习。  我们都知道对于网站来说，性能至关重要，CSS作为页面渲染和内容展现的重要环节，影响着用户对整个网站的第一体验，与其相关的性能优化是不容忽视的。 对于性能优化我们常常在项目完成时才去考虑，经常被推迟到项目的末期，这时优化的范围往往会缩小很多，最终大多数只是简单进行下文件压缩和缓存策略的调整。相">
+<meta name="twitter:description" content="本文作者：高峰，360奇舞团前端工程师，W3C性能工作组成员，同时参与WOT工作组的学习。  我们都知道对于网站来说，性能至关重要，CSS作为页面渲染和内容展现的重要环节，影响着用户对整个网站的第一体验，因此，与其相关的性能优化是不容忽视的。 对于性能优化我们常常在项目完成时才去考虑，经常被推迟到项目的末期，这时优化的范围往往会缩小很多，最终大多数只是简单进行下文件压缩和缓存策略的调">
 <meta name="twitter:image" content="http://p0.qhimg.com/t010bcab368577e12de.jpg">
     
 
@@ -260,17 +260,19 @@
 <blockquote>
 <p>本文作者：高峰，360奇舞团前端工程师，W3C性能工作组成员，同时参与WOT工作组的学习。</p>
 </blockquote>
-<p>我们都知道对于网站来说，性能至关重要，CSS作为页面渲染和内容展现的重要环节，影响着用户对整个网站的第一体验，与其相关的性能优化是不容忽视的。</p>
+<p>我们都知道对于网站来说，性能至关重要，CSS作为页面渲染和内容展现的重要环节，影响着用户对整个网站的第一体验，因此，与其相关的性能优化是不容忽视的。</p>
 <p>对于性能优化我们常常在项目完成时才去考虑，经常被推迟到项目的末期，这时优化的范围往往会缩小很多，最终大多数只是简单进行下文件压缩和缓存策略的调整。相信大多数人对此深有体会。</p>
 <p>笔者认为，为了更多地避免这一情况，首先要重视起性能优化相关的工作，将其贯穿到整个产品设计与开发中。其次，就是了解性能相关的内容，在项目开发过程中，自然而然地进行性能优化。最后，也是最最重要的，那就是从现在开始实施优化。</p>
-<p>本文将<strong>从CSS的编写、减小文件大小、引用三方面依次介绍CSS性能优化的8个技巧</strong>，借此帮助大家对CSS性能优化形成一个整体认识，从而能够在编写和使用时多使用更高效的方法，在过程中就开始优化，而不用等到项目的最后阶段。</p>
+<p>本文将<strong>从CSS的编写、减小CSS文件大小、CSS文件引用三方面依次介绍CSS性能优化的8个技巧</strong>，借此帮助大家对CSS性能优化形成一个整体认识，从而能够在编写和使用时多使用更高效的方法，在过程中就开始优化，而不用等到项目的最后阶段。</p>
 <a id="more"></a>
 <p>在正式开始之前，需要大家对于<a href="https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/" target="_blank" rel="noopener">浏览器的工作原理</a>有些一定的了解，需要的小伙伴可以先简单了解下。</p>
+<hr>
+
 <p>首先我们要介绍CSS编写相关的<strong>3个技巧</strong>。</p>
-<h2><span id="1-编写技巧1有选择地使用选择器">1. 编写技巧1：有选择地使用选择器</span></h2><p>大多数朋友应该都知道CSS选择器的匹配是从右向左进行的，这一策略导致了不同种类的选择器之间的性能也存在差异。相比于<code>#markdown-content-h3</code>，显然使用<code>#markdown .content h3</code>时，浏览器生成渲染树（render-tree）所要花费的时间更多。因为后者需要先找到DOM中的所有<code>h3</code>元素，再过滤掉祖先元素不是<code>.content</code>的，最后过滤掉<code>.content</code>的祖先不是<code>#markdown</code>的。试想，如果嵌套的层级更多，页面中的元素更多，那么匹配所要花费的时间代价自然更高。</p>
+<h2><span id="1-编写技巧1有选择地使用选择器">1. 编写技巧1：有选择地使用选择器</span></h2><p>大多数朋友应该都知道<strong>CSS选择器的匹配是从右向左进行的</strong>，这一策略导致了不同种类的选择器之间的性能也存在差异。相比于<code>#markdown-content-h3</code>，显然使用<code>#markdown .content h3</code>时，浏览器生成渲染树（render-tree）所要花费的时间更多。因为后者需要先找到DOM中的所有<code>h3</code>元素，再过滤掉祖先元素不是<code>.content</code>的，最后过滤掉<code>.content</code>的祖先不是<code>#markdown</code>的。试想，如果嵌套的层级更多，页面中的元素更多，那么匹配所要花费的时间代价自然更高。</p>
 <p>不过现代浏览器在这一方面做了很多优化，不同选择器的性能差别并不明显，甚至可以说差别甚微。此外不同选择器在<a href="https://benfrain.com/css-performance-revisited-selectors-bloat-expensive-styles/#h-H1_1" target="_blank" rel="noopener">不同浏览器中的性能表现</a>也不完全统一，在编写CSS的时候无法兼顾每种浏览器。<strong>鉴于这两点原因，我们在使用选择器时，只需要记住以下几点，其他的可以全凭喜好</strong>。</p>
 <ol>
-<li>保持简单，不要使用嵌套过多过复杂的选择器。</li>
+<li>保持简单，不要使用嵌套过多过于复杂的选择器。</li>
 <li>通配符和属性选择器效率最低，需要匹配的元素最多，尽量避免使用。</li>
 <li>不要使用类选择器和ID选择器修饰元素标签，如<code>h3#markdown-content</code>，这样多此一举，还会降低效率。</li>
 <li>不要为了追求速度而放弃可读性与可维护性。</li>
@@ -308,27 +310,30 @@
 <p>最后需要注意的是，用户的设备可能并没有想象中的那么好，至少不会有我们的开发机器好。我们可以借助Chrome的开发者工具进行CPU降速后，然后进行相关的测试，降速方法如下图所示。</p>
 <p><img src="http://p1.qhimg.com/t010c0379dfa0bd8162.png" alt="如何开启Chrome的CPU降速"></p>
 <p>如果需要在移动端访问的，最好将速度限制更低，移动端的性能往往更差。</p>
-<p>前面已经讨论了在CSS编写时，可以用来提升性能的3个技巧，接下来我们讨论减小文件的大小的<strong>2个技巧</strong>。</p>
-<h2><span id="4-减小文件大小技巧1文件压缩">4. 减小文件大小技巧1：文件压缩</span></h2><p>文件压缩是性能优化时最容易想到，也最容易实现的方法，并且这一方案效果显著。</p>
+<hr>
+
+<p>前面已经讨论了在CSS编写时，可以用来提升性能的3个技巧，接下来我们讨论减小CSS文件大小的<strong>2个技巧</strong>。</p>
+<h2><span id="4-减小css文件大小技巧1文件压缩">4. 减小CSS文件大小技巧1：文件压缩</span></h2><p>文件压缩是性能优化时最容易想到，也最容易实现的方法，并且这一方案效果显著。</p>
 <p>文件的大小会直接影响浏览器的加载速度，这一点在网络较差时表现地尤为明显。相信大家都早已习惯对CSS进行压缩，现在的构建工具，如webpack、gulp/grunt、rollup等也都支持CSS压缩功能。压缩后的文件能够明显减小，大大降低了浏览器的加载时间。</p>
-<h2><span id="5-减小文件大小技巧2去除无用css">5. 减小文件大小技巧2：去除无用CSS</span></h2><p>虽然文件压缩能够降低文件大小。但CSS文件通常只会去除无用的空格，这样就限制了CSS文件的压缩比例。那么这时我们应该怎么办呢？</p>
+<h2><span id="5-减小css文件大小技巧2去除无用css">5. 减小CSS文件大小技巧2：去除无用CSS</span></h2><p>虽然文件压缩能够降低文件大小。但CSS文件通常只会去除无用的空格，这样就限制了CSS文件的压缩比例。那么这时我们应该怎么办呢？</p>
 <p>如果压缩后的文件仍然超出了预期的大小，那么我们可以试着找到并删除代码中无用的CSS。</p>
 <p>一般情况下，会存在这两种无用的CSS代码：一种是不同元素或者其他情况下的重复代码，一种是整个页面内没有生效的CSS代码。对于前者，在编写的代码时候，我们应该尽可能地提取公共类，减少重复。对于后者，在不同开发者进行代码维护的过程中，总会产生不再使用的CSS的代码。这个情况如果手动来删除这些代码，显然是不明智的。我们可以借助<a href="https://github.com/uncss/uncss" target="_blank" rel="noopener">Uncss</a>库来进行。Uncss可以用来移除样式表中的无用CSS，并且支持多文件和JavaScript注入的CSS。</p>
 <p>去除了无用CSS后的代码，不仅能够使浏览器下载更少的代码，也能减少浏览器所需解析的样式。这对性能来说是很大的提升。</p>
-<p>前面已经说完了编写CSS和减小文件相关的性能优化技巧，下面我们讨论CSS引用时有<strong>3个优化技巧</strong>。</p>
-<h2><span id="6-引用技巧1不要使用import">6. 引用技巧1：不要使用@import</span></h2><p>首先需要强调的是，不要使用@import引入CSS。主要有以下两点原因。</p>
+<hr>
+
+<p>前面已经说完了编写CSS和减小文件相关的性能优化技巧，下面我们讨论CSS引用时的<strong>3个优化技巧</strong>。</p>
+<h2><span id="6-css文件引用技巧1不要使用import">6. CSS文件引用技巧1：不要使用@import</span></h2><p>首先需要强调的是，不要使用@import引入CSS。主要有以下两点原因。</p>
 <p>首先，使用@import引入CSS会影响浏览器的并行下载。使用@import引用的CSS文件只有在引用它的那个css文件被下载、解析之后，浏览器才会知道还有另外一个css需要下载，这时才去下载，然后下载后开始解析、构建render tree等一系列操作。这就导致浏览器无法并行下载所需的样式文件。</p>
 <p>其次，多个@import会导致下载顺序紊乱。在IE中，@import会引发资源文件的下载顺序被打乱，即<strong>排列在@import后面的js文件先于@import下载，并且打乱甚至破坏@import自身的并行下载</strong>。</p>
 <p>所以不要使用这一方法，使用link标签就行了。</p>
-<h2><span id="7-引用技巧2关键csscritical-css">7. 引用技巧2：关键CSS（Critical CSS）</span></h2><p>内联能使CSS更快速地下载。内联意味着直接将外部CSS资源插入到HTML文档中。这种方式适合于较小的资源，使用它会有显著的不同。</p>
-<p>当使用外部CSS文件时，必须在HTML文档下载完成后再分别下载它们。而内联CSS减少了浏览器在开始页面呈现之前所需下载的数据量。</p>
-<p>但是这种方式并不适合用于内联大的CSS文件。因为初始拥塞窗口存在限制（通常是 14.6kB，压缩后大小），如果所需的数据量超出了这一限制，系统就需要在服务器和浏览器之间进行更多次的往返，这样并不能更快地渲染页面。我们应当只将渲染首屏（above the fold）内容所需的样式（即Critical CSS，可以称之为首屏关键CSS）内联到HTML中。</p>
+<h2><span id="7-css文件引用技巧2首屏关键csscritical-css">7. CSS文件引用技巧2：首屏关键CSS（Critical CSS）</span></h2><p>内联能使CSS更快速地下载。内联意味着直接将外部CSS资源插入到HTML文档中。当使用外部CSS文件时，必须在HTML文档下载完成后再分别下载它们。而内联CSS减少了浏览器在开始页面呈现之前所需下载的数据量。</p>
+<p>但是这种方式并不适合用于内联大的CSS文件。因为初始拥塞窗口存在限制（通常是 14.6kB，压缩后大小），如果所需的数据量超出了这一限制，系统就需要在服务器和浏览器之间进行更多次的往返，这样并不能更快地渲染页面。我们应当<strong>只将渲染首屏（above the fold）内容所需的样式（即Critical CSS，可以称之为首屏关键CSS）内联到HTML中</strong>。</p>
 <p>Github上有一个项目<a href="https://github.com/filamentgroup/criticalCSS" target="_blank" rel="noopener">Critical CSS</a>，可以帮助我们将属于首屏的样式提取出来，可以通过gulp/grunt来使用。</p>
-<h2><span id="8-引用技巧3异步加载css">8. 引用技巧3：异步加载CSS</span></h2><p>CSS会阻塞渲染，在CSS文件请求、下载、解析完成之前，浏览器将不会渲染任何已处理的内容。有时，这种阻塞是必须的，因为我们并不希望在所需的CSS加载之前，浏览器就开始渲染页面。那么将首屏关键CSS内联后，剩余的CSS内容的阻塞渲染就不是必须的了，可以异步加载。</p>
+<h2><span id="8-css文件引用技巧3异步加载css">8. CSS文件引用技巧3：异步加载CSS</span></h2><p>CSS会阻塞渲染，在CSS文件请求、下载、解析完成之前，浏览器将不会渲染任何已处理的内容。有时，这种阻塞是必须的，因为我们并不希望在所需的CSS加载之前，浏览器就开始渲染页面。那么将首屏关键CSS内联后，剩余的CSS内容的阻塞渲染就不是必需的了，可以异步加载。</p>
 <p>那么如何实现CSS的异步加载呢？有以下四种方式可以实现浏览器异步加载CSS。</p>
 <p>第一种方式是使用JavaScript动态创建样式表link元素，并插入到DOM中。</p>
   <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建link标签</span></span><br><span class="line"><span class="keyword">const</span> myCSS = <span class="built_in">document</span>.createElement( <span class="string">"link"</span> );</span><br><span class="line">myCSS.rel = <span class="string">"stylesheet"</span>;</span><br><span class="line">myCSS.href = <span class="string">"mystyles.css"</span>;</span><br><span class="line"><span class="comment">// 插入到header的最后位置</span></span><br><span class="line"><span class="built_in">document</span>.head.insertBefore( myCSS, <span class="built_in">document</span>.head.childNodes[ <span class="built_in">document</span>.head.childNodes.length - <span class="number">1</span> ].nextSibling );</span><br></pre></td></tr></table></figure>
-<p>第二种方式是将link元素的<code>media</code>属性设置为用户浏览器不识别的媒体类型（或查询），如<code>media=&quot;print&quot;</code>，甚至可以是完全不存在的类型<code>media=&quot;noexist&quot;</code>。对浏览器来说，如果样式表不适用于当前媒体类型，则优先级会被放低，会在不阻塞页面渲染的情况下再进行下载。</p>
+<p>第二种方式是将link元素的<code>media</code>属性设置为用户浏览器不匹配的媒体类型（或媒体查询），如<code>media=&quot;print&quot;</code>，甚至可以是完全不存在的类型<code>media=&quot;noexist&quot;</code>。对浏览器来说，如果样式表不适用于当前媒体类型，其优先级会被放低，会在不阻塞页面渲染的情况下再进行下载。</p>
 <p>当然，这么做只是为了实现CSS的异步加载，别忘了在文件加载完成之后，将<code>media</code>的值设为<code>screen</code>或<code>all</code>，从而让浏览器开始解析CSS。</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link <span class="attribute">rel</span>=<span class="string">"stylesheet"</span> <span class="attribute">href</span>=<span class="string">"mystyles.css"</span> <span class="attribute">media</span>=<span class="string">"noexist"</span> <span class="attribute">onload</span>=<span class="string">"this.media='all'"</span>&gt;</span><br></pre></td></tr></table></figure>
 <p>与第二种方式相似，我们还可以通过<code>rel</code>属性将<code>link</code>元素标记为<code>alternate</code>可选样式表，也能实现浏览器异步加载。同样别忘了加载完成之后，将<code>rel</code>改回去。</p>
@@ -337,12 +342,12 @@
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link <span class="attribute">rel</span>=<span class="string">"preload"</span> <span class="attribute">href</span>=<span class="string">"mystyles.css"</span> <span class="attribute">as</span>=<span class="string">"style"</span> <span class="attribute">onload</span>=<span class="string">"this.rel='stylesheet'"</span>&gt;</span><br></pre></td></tr></table></figure>
 <p>注意，<code>as</code>是必须的。忽略<code>as</code>属性，或者错误的<code>as</code>属性会使<code>preload</code>等同于<code>XHR</code>请求，浏览器不知道加载的是什么内容，因此此类资源加载优先级会非常低。<code>as</code>的可选值可以参考<a href="https://www.w3.org/TR/preload/" target="_blank" rel="noopener">标准文档</a>。</p>
 <p>看起来，<code>rel=&quot;preload&quot;</code>的用法和上面两种没什么区别，都是通过更改某些属性，使得浏览器异步加载CSS文件但不解析，直到加载完成并将修改还原，才开始解析。</p>
-<p>但是它们之间其实有一个很重要的不同点，那就是使用preload，比使用不匹配的<code>media</code>方法能够更早地开始加载CSS。所以尽管这一标准的支持度还不完善，仍建议优先使用该方法。</p>
+<p>但是它们之间其实有一个很重要的不同点，那就是<strong>使用preload，比使用不匹配的<code>media</code>方法能够更早地开始加载CSS</strong>。所以尽管这一标准的支持度还不完善，仍建议优先使用该方法。</p>
 <p>该标准现在已经是候选标准，相信浏览器会逐渐支持该标准。在各浏览器的支持度如下图所示。</p>
 <p><img src="http://p7.qhimg.com/t01da661adcd2a13043.png" alt="preload支持度"></p>
 <p>可以看出这一方法在现在的浏览器中支持度不算乐观，不过我们可以通过<a href="https://github.com/filamentgroup/loadCSS/tree/v2.0.1#loadcss" target="_blank" rel="noopener">loadCSS</a>进行polyfill，感兴趣的小伙伴可以点击链接详细了解。</p>
 <h2><span id="总结">总结</span></h2><p>至此，我们介绍完了CSS性能优化的8个技巧，在了解这些技巧之后，CSS的性能优化可以从现在就开始进行了。Let’s go!</p>
-<h2><span id="致谢">致谢</span></h2><p>感谢性能组成员@hxl(黄小璐)、@刘宇晨的辛苦审校，感谢你们的建议，让我的文章更加完善。</p>
+<h2><span id="致谢">致谢</span></h2><p>特别感谢性能组成员@hxl(黄小璐)、@刘宇晨的辛苦审校，感谢你们对于文章结构和内容的建议。</p>
 <h2><span id="参考文章">参考文章</span></h2><blockquote>
 <ol>
 <li><a href="https://css-tricks.com/efficiently-rendering-css/#article-header-id-4" target="_blank" rel="noopener">Efficiently Rendering CSS</a></li>
@@ -366,7 +371,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/07/22/CSS性能优化的8个技巧/" data-id="cjk0e76tf0000433yu202iq6r" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/07/22/CSS性能优化的8个技巧/" data-id="cjk7ingwg0009rj3y1kdbwgsn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
