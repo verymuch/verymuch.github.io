@@ -13,7 +13,7 @@
 <meta property="og:description" content="本文作者：高峰，360奇舞团前端工程师，W3C性能工作组成员，同时参与WOT工作组的学习。  我们都知道对于网站来说，性能至关重要，CSS作为页面渲染和内容展现的重要环节，影响着用户对整个网站的第一体验，因此，与其相关的性能优化是不容忽视的。 对于性能优化我们常常在项目完成时才去考虑，经常被推迟到项目的末期，甚至到暴露出严重的性能问题时才进行性能优化，相信大多数人对此深有体会。 笔者">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://p0.qhimg.com/t010bcab368577e12de.jpg">
-<meta property="og:updated_time" content="2018-07-31T15:33:03.086Z">
+<meta property="og:updated_time" content="2018-07-31T15:36:35.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS性能优化的8个技巧">
 <meta name="twitter:description" content="本文作者：高峰，360奇舞团前端工程师，W3C性能工作组成员，同时参与WOT工作组的学习。  我们都知道对于网站来说，性能至关重要，CSS作为页面渲染和内容展现的重要环节，影响着用户对整个网站的第一体验，因此，与其相关的性能优化是不容忽视的。 对于性能优化我们常常在项目完成时才去考虑，经常被推迟到项目的末期，甚至到暴露出严重的性能问题时才进行性能优化，相信大多数人对此深有体会。 笔者">
@@ -299,7 +299,7 @@
 <p>当然，这个情况如果手动删除，显然是很低效的。我们可以借助<a href="https://github.com/uncss/uncss" target="_blank" rel="noopener">Uncss</a>库来进行。Uncss可以用来移除样式表中的无用CSS，并且支持多文件和JavaScript注入的CSS。</p>
 <hr>
 
-<p>前面已经说完了实践型的4个优化技巧，下面我们简单介绍下<strong>建议型的四个技巧</strong>。</p>
+<p>前面已经说完了实践型的4个优化技巧，下面我们介绍下<strong>建议型的四个技巧</strong>。</p>
 <h2><span id="1-有选择地使用选择器">1. 有选择地使用选择器</span></h2><p>大多数朋友应该都知道<strong>CSS选择器的匹配是从右向左进行的</strong>，这一策略导致了不同种类的选择器之间的性能也存在差异。相比于<code>#markdown-content-h3</code>，显然使用<code>#markdown .content h3</code>时，浏览器生成渲染树（render-tree）所要花费的时间更多。因为后者需要先找到DOM中的所有<code>h3</code>元素，再过滤掉祖先元素不是<code>.content</code>的，最后过滤掉<code>.content</code>的祖先不是<code>#markdown</code>的。试想，如果嵌套的层级更多，页面中的元素更多，那么匹配所要花费的时间代价自然更高。</p>
 <p><strong>不过现代浏览器在这一方面做了很多优化，不同选择器的性能差别并不明显，甚至可以说差别甚微。此外不同选择器在<a href="https://benfrain.com/css-performance-revisited-selectors-bloat-expensive-styles/#h-H1_1" target="_blank" rel="noopener">不同浏览器中的性能表现</a>也不完全统一，在编写CSS的时候无法兼顾每种浏览器</strong>。鉴于这两点原因，我们在使用选择器时，只需要记住以下几点，其他的可以全凭喜好。</p>
 <ol>
@@ -363,7 +363,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/07/22/CSS性能优化的8个技巧/" data-id="cjk9v6cpj000v3n3y87ttwgsd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/07/22/CSS性能优化的8个技巧/" data-id="cjk9v81sg000s4r3y0r9bdbcs" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
