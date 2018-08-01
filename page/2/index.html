@@ -160,11 +160,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                18
+                6
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                6
+                2
                 <span>标签</span>
             </div>
         </div>
@@ -213,7 +213,7 @@
 
             
             <section id="main">
-    <article id="post-npm-unmet-dependency-解决方案" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -221,7 +221,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2018/05/11/npm-unmet-dependency-解决方案/">npm unmet dependency 解决方案</a>
+            <a class="article-title" href="/2017/01/07/hello-world/">Hello World</a>
         </h1>
     
 
@@ -230,19 +230,14 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/05/11/npm-unmet-dependency-解决方案/">
-            <time datetime="2018-05-11T03:49:44.000Z" itemprop="datePublished">2018-05-11</time>
+        <a href="/2017/01/07/hello-world/">
+            <time datetime="2017-01-07T00:40:48.000Z" itemprop="datePublished">2017-01-07</time>
         </a>
     </div>
 
 
                         
                         
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/沉淀/">沉淀</a>
-    </div>
-
                     </div>
                 
             </header>
@@ -250,163 +245,9 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            
-            <p><link rel="stylesheet" href="/css/custom.css"></p>
-<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/generate-toc.js"></script>
-
-<h2><span id="1-引言">1. 引言</span></h2><p>之前使用框架，一直需要编译后发布，代码库中因此就有了一大堆编译后的文件，每次更新服务端的代码都会导致眼花缭乱。最近就升级了下服务器上的node版本，然后在服务端进行编译，这样就不用维护编译后的代码了。</p>
-<p>然鹅，好事多磨，升级好，新上线的代码中包含的新依赖，总是无法成功。通过<code>npm ls package_name</code>查看看到了<code>UNMET DEPENDENCY</code>错误。</p>
-<h2><span id="2-解决方案">2. 解决方案</span></h2><ol>
-<li><p>清缓存(该方式验证有效)</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf node_modules/    <span class="comment"># 删除已安装的模块</span></span><br><span class="line"><span class="built_in">npm</span> cache clean --force        <span class="comment"># 清除 npm 内部缓存</span></span><br><span class="line"><span class="built_in">npm</span> install             <span class="comment"># 重新安装</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>升级npm版本</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf node_modules/    <span class="comment"># 删除已安装的模块</span></span><br><span class="line">sudo <span class="built_in">npm</span> update -g <span class="built_in">npm</span>  <span class="comment"># 更新 npm</span></span><br><span class="line"><span class="built_in">npm</span> install             <span class="comment"># 重新安装</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2><span id="参考链接">参考链接</span></h2><blockquote>
-<ol>
-<li><a href="https://stackoverflow.com/questions/20764881/why-does-npm-install-say-i-have-unmet-dependencies" target="_blank" rel="noopener">why-does-npm-install-say-i-have-unmet-dependencies</a></li>
-<li><a href="https://lellansin.wordpress.com/2014/02/27/npm-%E5%AE%89%E8%A3%85%E5%87%BA%E7%8E%B0-unmet-dependency-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_blank" rel="noopener">npm 安装出现 UNMET DEPENDENCY 的解决方案</a></li>
-</ol>
-</blockquote>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://verymuch.com/2018/05/11/npm-unmet-dependency-解决方案/" data-id="cjjx4nz5g000ku13yduzfb6jf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="http://verymuch.com/2018/05/11/npm-unmet-dependency-解决方案/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2018/05/11/npm-unmet-dependency-解决方案/">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-如何在Array-forEach中实现break" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/02/09/如何在Array-forEach中实现break/">如何在Array.forEach中实现break</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/02/09/如何在Array-forEach中实现break/">
-            <time datetime="2018-02-09T01:39:23.000Z" itemprop="datePublished">2018-02-09</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/沉淀/">沉淀</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><p><link rel="stylesheet" href="/css/custom.css"></p>
-<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/generate-toc.js"></script>
-
-<p>使用<code>for in</code>遍历对象时，会遍历原型链上的可枚举实行，而这些往往会导致一些意想不到的问题。</p>
-<p>鉴于上面这个原因，我们团队在之前的几个项目里，通过<code>eslint</code>禁止在代码中使用<code>for in</code>。虽然在大部分情况，我们都能按照约定不使用<code>for in</code>，但是偶尔仍会需要在<code>forEach</code>中中断循环的情况。</p>
-<p>有需求就有解决方案。</p>
-<p>遇到这个问题时，笔者最简单的思路就是，在<code>forEach</code>外层设置标志位为<code>false</code>，然后在需要break时，将标志位置为<code>true</code>，循环内判断<code>true</code>则直接返回。这样做虽然能够减少循环内部的逻辑处理，但是还是会空跑整个循环，造成资源浪费。</p>
-<p>既然自己想的方法是最简单的，并且存在弊端，那么就搜搜其他大神的有哪些思路吧。于是乎就有了以下的总结：</p></p>
+            <p><p>Welcome to <a href="http://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p></p>
             <p class="article-more-link">
-                <a href="/2018/02/09/如何在Array-forEach中实现break/#more">查看更多</a>
+                <a href="/2017/01/07/hello-world/#more">查看更多</a>
             </p>
         
         </div>
@@ -417,7 +258,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/02/09/如何在Array-forEach中实现break/" data-id="cjjx4nz5f000ju13yybq6kf6z" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2017/01/07/hello-world/" data-id="cjkah8u44000rg73y86d9h80h" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -485,396 +326,7 @@
 
             
     
-        <a href="http://verymuch.com/2018/02/09/如何在Array-forEach中实现break/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2018/02/09/如何在Array-forEach中实现break/">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-Node路径解析浅析" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/01/10/Node路径解析浅析/">Node路径解析浅析</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/01/10/Node路径解析浅析/">
-            <time datetime="2018-01-10T09:08:05.000Z" itemprop="datePublished">2018-01-10</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/沉淀/">沉淀</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><p><link rel="stylesheet" href="/css/custom.css"></p>
-<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/generate-toc.js"></script>
-
-<h2 id="1-疑惑"><a href="#1-疑惑" class="headerlink" title="1. 疑惑"></a>1. 疑惑</h2><p>这两天看了下之前项目里的webpack配置，想将之前的alias命名统一起来，遂在alias命名前统一使用<code>_</code>开头，这样在项目中看到这样的引用一眼就能知道是通过别名查找的。如下图所示，<code>css</code>目录在<code>fesrc</code>目录下，webpack配置所在目录与fesrc平级，在配置中如果使用相对路径，应该使用<code>_css: path.resolve(&#39;../fesrc/css&#39;)</code>，但是试一下就会发现这么做webpack无法找到指定目录。相反如下图用法，使用<code>_css: path.resolve(&#39;./fesrc/css&#39;)</code>则能够找到。因此，我猜想可能是相对于运行该文件的目录，就了解并总结了一下相关的内容。</p>
-<p><img src="/images/webpack-alias-bug.png" alt="webpack alias 配置"></p></p>
-            <p class="article-more-link">
-                <a href="/2018/01/10/Node路径解析浅析/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://verymuch.com/2018/01/10/Node路径解析浅析/" data-id="cjjx4nz5e000iu13yvftn9189" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="http://verymuch.com/2018/01/10/Node路径解析浅析/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2018/01/10/Node路径解析浅析/">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-CSS-Mixin" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/01/03/CSS-Mixin/">CSS Mixin</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/01/03/CSS-Mixin/">
-            <time datetime="2018-01-03T07:43:49.000Z" itemprop="datePublished">2018-01-03</time>
-        </a>
-    </div>
-
-
-                        
-                        
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p><link rel="stylesheet" href="/css/custom.css"></p>
-<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/generate-toc.js"></script>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://verymuch.com/2018/01/03/CSS-Mixin/" data-id="cjjx4nz5d000hu13y7pn23t92" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="http://verymuch.com/2018/01/03/CSS-Mixin/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2018/01/03/CSS-Mixin/">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-第2章-ES6基础-总结与扩展" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/12/30/第2章-ES6基础-总结与扩展/">第2章 ES6基础(总结与扩展)</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/12/30/第2章-ES6基础-总结与扩展/">
-            <time datetime="2017-12-30T14:01:04.000Z" itemprop="datePublished">2017-12-30</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/沉淀/">沉淀</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><p><link rel="stylesheet" href="/css/custom.css"></p>
-<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/generate-toc.js"></script>
-
-<h2 id="2-3-解构赋值"><a href="#2-3-解构赋值" class="headerlink" title="2.3 解构赋值"></a>2.3 解构赋值</h2><p>解构赋值是ES6中最灵活最有表现力的特性之一。同时，它也最为简单。它可以将对象的属性值绑定到任意多的变量上。解构赋值可以用于<strong>对象</strong>、<strong>数组</strong>以及<strong>函数参数列表</strong>中。</p></p>
-            <p class="article-more-link">
-                <a href="/2017/12/30/第2章-ES6基础-总结与扩展/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://verymuch.com/2017/12/30/第2章-ES6基础-总结与扩展/" data-id="cjjx4nz5d000gu13yhj9264cg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="http://verymuch.com/2017/12/30/第2章-ES6基础-总结与扩展/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2017/12/30/第2章-ES6基础-总结与扩展/">评论</a>
+        <a href="http://verymuch.com/2017/01/07/hello-world/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2017/01/07/hello-world/">评论</a>
     
 
         </footer>
@@ -885,7 +337,7 @@
 
 
     <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
+        <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
     </nav>
 </section>
             
@@ -900,7 +352,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/07/22/css性能优化的9个技巧/" class="thumbnail">
+                            <a href="/2018/08/01/WoT-Standard-学习笔记/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -911,18 +363,18 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/07/22/css性能优化的9个技巧/" class="title">css性能优化的7个技巧</a></p>
-                            <p class="item-date"><time datetime="2018-07-22T15:49:10.000Z" itemprop="datePublished">2018-07-22</time></p>
+                            <p class="item-title"><a href="/2018/08/01/WoT-Standard-学习笔记/" class="title">WoT Standard 学习笔记</a></p>
+                            <p class="item-date"><time datetime="2018-08-01T01:53:08.000Z" itemprop="datePublished">2018-08-01</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/05/30/第三章-类、Symbol、对象和装饰器/" class="thumbnail">
+                            <a href="/2018/07/22/CSS性能优化的8个技巧/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(http://p8.qhimg.com/t014cfb1e928f66ba72.jpg)" alt="CSS性能优化的8个技巧" class="thumbnail-image"></span>
     
 </a>
 
@@ -930,8 +382,8 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/05/30/第三章-类、Symbol、对象和装饰器/" class="title">第三章 类、Symbol、对象和装饰器</a></p>
-                            <p class="item-date"><time datetime="2018-05-30T06:24:57.000Z" itemprop="datePublished">2018-05-30</time></p>
+                            <p class="item-title"><a href="/2018/07/22/CSS性能优化的8个技巧/" class="title">CSS性能优化的8个技巧</a></p>
+                            <p class="item-date"><time datetime="2018-07-22T15:49:10.000Z" itemprop="datePublished">2018-07-22</time></p>
                         </div>
                     </li>
                 
@@ -957,10 +409,10 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/05/15/如何建立数据库索引/" class="thumbnail">
+                            <a href="/2018/02/09/如何在Array-forEach中实现break/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/search_index.gif)" alt="如何建立数据库索引" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/jump-out.gif)" alt="如何在Array.forEach中实现break" class="thumbnail-image"></span>
     
 </a>
 
@@ -968,18 +420,18 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/05/15/如何建立数据库索引/" class="title">如何建立数据库索引</a></p>
-                            <p class="item-date"><time datetime="2018-05-15T10:14:58.000Z" itemprop="datePublished">2018-05-15</time></p>
+                            <p class="item-title"><a href="/2018/02/09/如何在Array-forEach中实现break/" class="title">如何在Array.forEach中实现break</a></p>
+                            <p class="item-date"><time datetime="2018-02-09T01:39:23.000Z" itemprop="datePublished">2018-02-09</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/05/11/机器学习资料/" class="thumbnail">
+                            <a href="/2017/12/14/Data-URL简介与使用/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/robot-learning.gif)" alt="机器学习资料" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/URL.png)" alt="Data URL简介与使用" class="thumbnail-image"></span>
     
 </a>
 
@@ -987,8 +439,8 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/05/11/机器学习资料/" class="title">机器学习资料</a></p>
-                            <p class="item-date"><time datetime="2018-05-11T07:42:04.000Z" itemprop="datePublished">2018-05-11</time></p>
+                            <p class="item-title"><a href="/2017/12/14/Data-URL简介与使用/" class="title">Data URL简介与使用</a></p>
+                            <p class="item-date"><time datetime="2017-12-14T00:34:41.000Z" itemprop="datePublished">2017-12-14</time></p>
                         </div>
                     </li>
                 
@@ -1001,7 +453,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/EXERCISE-SPACE/">EXERCISE_SPACE</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/GROWING-SPACE/">GROWING_SPACE</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"></ul>
         </div>
     </div>
 
@@ -1010,7 +462,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1019,7 +471,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS小技巧/">CSS小技巧</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/他人经验总结/">他人经验总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作效率/">工作效率</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/有感/">有感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/沉淀/">沉淀</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/翻译/">翻译</a><span class="tag-list-count">2</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS小技巧/">CSS小技巧</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/沉淀/">沉淀</a><span class="tag-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -1028,7 +480,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/CSS小技巧/" style="font-size: 10px;">CSS小技巧</a> <a href="/tags/他人经验总结/" style="font-size: 10px;">他人经验总结</a> <a href="/tags/工作效率/" style="font-size: 10px;">工作效率</a> <a href="/tags/有感/" style="font-size: 10px;">有感</a> <a href="/tags/沉淀/" style="font-size: 20px;">沉淀</a> <a href="/tags/翻译/" style="font-size: 15px;">翻译</a>
+            <a href="/tags/CSS小技巧/" style="font-size: 10px;">CSS小技巧</a> <a href="/tags/沉淀/" style="font-size: 20px;">沉淀</a>
         </div>
     </div>
 
