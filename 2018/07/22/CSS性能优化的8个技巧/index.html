@@ -6,6 +6,7 @@
     <title>CSS性能优化的8个技巧 | 歪马行空</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="本文作者：高峰，360奇舞团前端工程师，W3C性能工作组成员，同时参与WOT工作组的学习。  我们都知道对于网站来说，性能至关重要，CSS作为页面渲染和内容展现的重要环节，影响着用户对整个网站的第一体验。因此，与其相关的性能优化是不容忽视的。 对于性能优化我们常常在项目完成时才去考虑，经常被推迟到项目的末期，甚至到暴露">
+<meta name="keywords" content="CSS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSS性能优化的8个技巧">
 <meta property="og:url" content="http://verymuch.com/2018/07/22/CSS性能优化的8个技巧/index.html">
@@ -13,7 +14,7 @@
 <meta property="og:description" content="本文作者：高峰，360奇舞团前端工程师，W3C性能工作组成员，同时参与WOT工作组的学习。  我们都知道对于网站来说，性能至关重要，CSS作为页面渲染和内容展现的重要环节，影响着用户对整个网站的第一体验。因此，与其相关的性能优化是不容忽视的。 对于性能优化我们常常在项目完成时才去考虑，经常被推迟到项目的末期，甚至到暴露出严重的性能问题时才进行性能优化，相信大多数人对此深有体会。 笔者">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://p8.qhimg.com/t014cfb1e928f66ba72.jpg">
-<meta property="og:updated_time" content="2018-08-01T03:42:21.603Z">
+<meta property="og:updated_time" content="2018-08-13T10:50:43.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS性能优化的8个技巧">
 <meta name="twitter:description" content="本文作者：高峰，360奇舞团前端工程师，W3C性能工作组成员，同时参与WOT工作组的学习。  我们都知道对于网站来说，性能至关重要，CSS作为页面渲染和内容展现的重要环节，影响着用户对整个网站的第一体验。因此，与其相关的性能优化是不容忽视的。 对于性能优化我们常常在项目完成时才去考虑，经常被推迟到项目的末期，甚至到暴露出严重的性能问题时才进行性能优化，相信大多数人对此深有体会。 笔者">
@@ -166,11 +167,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                5
+                6
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                2
+                3
                 <span>标签</span>
             </div>
         </div>
@@ -243,6 +244,11 @@
 
                         
                         
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/CSS/">CSS</a>
+    </div>
+
                     </div>
                 
             </header>
@@ -275,7 +281,7 @@
 <p>既然内联CSS能够使页面渲染的开始时间提前，那么是否可以内联所有的CSS呢？答案显然是否定的，这种方式并不适用于内联较大的CSS文件。因为<a href="https://tylercipriani.com/blog/2016/09/25/the-14kb-in-the-tcp-initial-window/" target="_blank" rel="noopener">初始拥塞窗口</a><sup>3</sup>存在限制（TCP相关概念，通常是 14.6kB，压缩后大小），如果内联CSS后的文件超出了这一限制，系统就需要在服务器和浏览器之间进行更多次的往返，这样并不能提前页面渲染时间。因此，我们应当<strong>只将渲染首屏内容所需的关键CSS内联到HTML中</strong>。</p>
 <p>既然已经知道内联首屏关键CSS能够优化性能了，那下一步就是如何确定首屏关键CSS了。显然，我们不需要手动确定哪些内容是首屏关键CSS。Github上有一个项目<a href="https://github.com/filamentgroup/criticalCSS" target="_blank" rel="noopener">Critical CSS</a><sup>4</sup>，可以将属于首屏的关键样式提取出来，大家可以看一下该项目，结合自己的构建工具进行使用。当然为了保证正确，大家最好再亲自确认下提取出的内容是否有缺失。</p>
 <p>不过内联CSS有一个缺点，内联之后的CSS不会进行缓存，每次都会重新下载。不过如上所说，如果我们将内联后的文件大小控制在了14.6kb以内，这似乎并不是什么大问题。</p>
-<p>如上，我们已经介绍了为什么要内联关键CSS以及如何内联，那么剩下的CSS我们怎么处理好呢？建议使用外部CSS引入剩余CSS，这样能够启用缓存，除此之外还可以异步加载它们。</p>
+<p>如上，我们已经介绍了为什么要内联关键CSS以及如何内联，那么剩下的CSS我们怎么处理好呢？<strong>建议使用外部CSS引入剩余CSS，这样能够启用缓存，除此之外还可以异步加载它们</strong>。</p>
 <h2><span id="2-异步加载css">2. 异步加载CSS</span></h2><p>CSS会阻塞渲染，在CSS文件请求、下载、解析完成之前，浏览器将不会渲染任何已处理的内容。有时，这种阻塞是必须的，因为我们并不希望在所需的CSS加载之前，浏览器就开始渲染页面。那么将首屏关键CSS内联后，剩余的CSS内容的阻塞渲染就不是必需的了，可以使用外部CSS，并且异步加载。</p>
 <p>那么如何实现CSS的异步加载呢？有以下四种方式可以实现浏览器异步加载CSS。</p>
 <p>第一种方式是使用JavaScript动态创建样式表link元素，并插入到DOM中。</p>
@@ -385,7 +391,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/07/22/CSS性能优化的8个技巧/" data-id="cjkaleb6w000t7m3yktiq6vd2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/07/22/CSS性能优化的8个技巧/" data-id="cjl1n1jlx000szz3ymsx6n0r1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -462,6 +468,15 @@
         
 <nav id="article-nav">
     
+        <a href="/2018/08/19/W3C标准导读之标准化过程/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    W3C标准导读之【标准化过程】
+                
+            </div>
+        </a>
+    
     
         <a href="/2018/05/23/如何清除行内元素之间的HTML空白/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
@@ -495,6 +510,25 @@
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/19/W3C标准导读之标准化过程/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/08/19/W3C标准导读之标准化过程/" class="title">W3C标准导读之【标准化过程】</a></p>
+                            <p class="item-date"><time datetime="2018-08-19T13:40:37.000Z" itemprop="datePublished">2018-08-19</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -572,25 +606,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/01/07/hello-world/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://p6.qhimg.com/t01559a4f6ea74e587a.jpg)" alt="Hello World" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/01/07/hello-world/" class="title">Hello World</a></p>
-                            <p class="item-date"><time datetime="2017-01-07T00:40:48.000Z" itemprop="datePublished">2017-01-07</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -609,7 +624,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -618,7 +633,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS小技巧/">CSS小技巧</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/沉淀/">沉淀</a><span class="tag-list-count">2</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -627,7 +642,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/CSS小技巧/" style="font-size: 10px;">CSS小技巧</a> <a href="/tags/沉淀/" style="font-size: 20px;">沉淀</a>
+            <a href="/tags/CSS/" style="font-size: 20px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a>
         </div>
     </div>
 
