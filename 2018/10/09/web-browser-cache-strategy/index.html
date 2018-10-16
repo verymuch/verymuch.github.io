@@ -5,22 +5,22 @@
     
     <title>浏览器缓存策略 | 歪马行空</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="前言众所周知，在Web开发中，缓存很重要、很有用。但同时其也很复杂。 本文将从以下5个方面全面地介绍下缓存相关的内容。  浏览器中缓存的使用策略。 必知必会的缓存基本知识。 各种缓存方式的优缺点。 缓存的最佳实践。 小试牛刀，看看你掌握了没有？">
+    <meta name="description" content="前言众所周知，在Web开发中，缓存很重要、很有用。但同时其也很复杂。 本文将从以下5个方面全面地介绍下缓存相关的内容。  缓存的判断策略 必知必会的缓存基础 各类缓存的优缺点 缓存的最佳实践 小试牛刀，看看你掌握了没有？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器缓存策略">
 <meta property="og:url" content="http://verymuch.com/2018/10/09/web-browser-cache-strategy/index.html">
 <meta property="og:site_name" content="歪马行空">
-<meta property="og:description" content="前言众所周知，在Web开发中，缓存很重要、很有用。但同时其也很复杂。 本文将从以下5个方面全面地介绍下缓存相关的内容。  浏览器中缓存的使用策略。 必知必会的缓存基本知识。 各种缓存方式的优缺点。 缓存的最佳实践。 小试牛刀，看看你掌握了没有？">
+<meta property="og:description" content="前言众所周知，在Web开发中，缓存很重要、很有用。但同时其也很复杂。 本文将从以下5个方面全面地介绍下缓存相关的内容。  缓存的判断策略 必知必会的缓存基础 各类缓存的优缺点 缓存的最佳实践 小试牛刀，看看你掌握了没有？">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://p6.qhimg.com/t01b2e220e85e43405e.png">
-<meta property="og:image" content="http://p6.qhimg.com/t01a90d516dbc0e5bc6.png">
+<meta property="og:image" content="http://p3.qhimg.com/t01ce32ad8eab945a87.png">
+<meta property="og:image" content="http://p6.qhimg.com/t01a58418ea83d38ca1.png">
 <meta property="og:image" content="http://p5.qhimg.com/t01d532b7d32bb9e86c.png">
 <meta property="og:image" content="http://p4.qhimg.com/t013d3b2d30c5f32a69.png">
 <meta property="og:image" content="http://p4.qhimg.com/t0186607030ed25a32b.png">
 <meta property="og:image" content="http://p2.qhimg.com/t014c0409d8f7dbf22c.png">
 <meta property="og:image" content="http://p2.qhimg.com/t01d200661ae3d4b1ae.png">
 <meta property="og:image" content="http://p0.qhimg.com/t013235a81cbaeed0cf.png">
-<meta property="og:image" content="http://p9.qhimg.com/t01f619b947ceec0846.png">
+<meta property="og:image" content="http://p4.qhimg.com/t011df7bbf3fa5b7d16.png">
 <meta property="og:image" content="http://p6.qhimg.com/t01814d14cf95c9d80d.png">
 <meta property="og:image" content="http://p2.qhimg.com/t013a99f89320b5141e.png">
 <meta property="og:image" content="http://p2.qhimg.com/t01a6808c9517773efa.png">
@@ -28,14 +28,13 @@
 <meta property="og:image" content="http://p3.qhimg.com/t0174f2ab6f3e4852df.png">
 <meta property="og:image" content="http://p9.qhimg.com/t013cf0d5c313d91bdf.png">
 <meta property="og:image" content="http://p5.qhimg.com/t0171f354163c89aca0.png">
-<meta property="og:image" content="http://p5.qhimg.com/t0171f354163c89aca0.png">
 <meta property="og:image" content="http://p0.qhimg.com/t01d971d0dcf74b6704.png">
 <meta property="og:image" content="http://p1.qhimg.com/t018ffe20955180535f.png">
-<meta property="og:updated_time" content="2018-10-16T12:15:46.868Z">
+<meta property="og:updated_time" content="2018-10-16T16:33:12.800Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器缓存策略">
-<meta name="twitter:description" content="前言众所周知，在Web开发中，缓存很重要、很有用。但同时其也很复杂。 本文将从以下5个方面全面地介绍下缓存相关的内容。  浏览器中缓存的使用策略。 必知必会的缓存基本知识。 各种缓存方式的优缺点。 缓存的最佳实践。 小试牛刀，看看你掌握了没有？">
-<meta name="twitter:image" content="http://p6.qhimg.com/t01b2e220e85e43405e.png">
+<meta name="twitter:description" content="前言众所周知，在Web开发中，缓存很重要、很有用。但同时其也很复杂。 本文将从以下5个方面全面地介绍下缓存相关的内容。  缓存的判断策略 必知必会的缓存基础 各类缓存的优缺点 缓存的最佳实践 小试牛刀，看看你掌握了没有？">
+<meta name="twitter:image" content="http://p3.qhimg.com/t01ce32ad8eab945a87.png">
     
 
     
@@ -284,32 +283,40 @@
 <h2><span id="前言">前言</span></h2><p>众所周知，在Web开发中，缓存很重要、很有用。但同时其也很复杂。</p>
 <p>本文将从以下5个方面全面地介绍下缓存相关的内容。</p>
 <ol>
-<li>浏览器中缓存的使用策略。</li>
-<li>必知必会的缓存基本知识。</li>
-<li>各种缓存方式的优缺点。</li>
-<li>缓存的最佳实践。</li>
+<li>缓存的判断策略</li>
+<li>必知必会的缓存基础</li>
+<li>各类缓存的优缺点</li>
+<li>缓存的最佳实践</li>
 <li>小试牛刀，看看你掌握了没有？</li>
 </ol>
 <a id="more"></a>
 <h2><span id="一-缓存的判断策略">一、缓存的判断策略</span></h2><p>浏览器对于所请求资源的缓存处理有一套完整的机制，主要包含以下三个策略：<strong>存储策略、过期策略、协商策略</strong>。</p>
-<p>其中，存储策略发生在收到请求响应后，用于决定是否缓存相应资源；过期策略发生在请求前，用于判断缓存是否过期；协商策略发生在请求中，用于判断缓存资源是否更新。</p>
-<p>具体的判断流程如下：
-<img src="http://p6.qhimg.com/t01b2e220e85e43405e.png" alt="浏览器缓存判断策略"></p>
-<p>上面所说的缓存判断流程是完整的流程。但是在浏览器中访问资源的方式不同也会导致判断流程的不同。</p>
-<p>浏览器下访问资源的方式主要有以下6种：</p>
+<p>其中，<strong>存储策略发生在收到请求响应后，用于决定是否缓存相应资源；过期策略发生在请求前，用于判断缓存是否过期；协商策略发生在请求中，用于判断缓存资源是否更新。</strong></p>
+<p>浏览器在应用缓存策略时，具体的判断流程如下：
+<img src="http://p3.qhimg.com/t01ce32ad8eab945a87.png" alt="浏览器缓存判断策略"></p>
+<p>上图中的缓存判断流程是浏览器在应用缓存时完整的判断流程。但是在浏览器中访问资源的方式不同也会导致判断流程的不同。<strong>判断流程会根据不同方式跳过一些流程。</strong></p>
+<p>浏览器下访问资源的方式主要有以下7种：</p>
 <ol>
 <li>(新标签)地址栏回车</li>
 <li>链接跳转</li>
 <li>前进、后退</li>
+<li>从收藏栏打开链接</li>
+<li>(window.open)新开窗口</li>
 <li>刷新（Command + R / F5）</li>
 <li>强制刷新（Command + Shift + R / Ctrl + F5）</li>
-<li>新开窗口</li>
 </ol>
-<p>使用这六种方式访问资源时，应用缓存的策略会有一些不同。如下图所示。不同访问方式会有从不同的步骤判断开始。此处不做验证，相信大家看了后面的内容，能够自行验证的。
-<img src="http://p6.qhimg.com/t01a90d516dbc0e5bc6.png" alt="不同访问方式下的浏览器资源判断"></p>
-<p>此外，这里提一个概念，webkit资源分为主资源和派生资源。主资源是地址栏输入的URL请求返回的资源，派生资源是主资源中所引用的JS、CSS、图片等资源。</p>
-<p>在Chrome下刷新时，只有主资源会如上图所示，派生资源与新标签打开类似，会判断缓存是否过期。而在Firefox下，当前页面刷新，所有资源都会如上图所示。下文会利用Chrome的这一特点在当前页刷新，派生资源会缓存进行测试。不然每次都需要打开新标签较为繁琐。</p>
-<h2><span id="二-必知必会的缓存基础">二、必知必会的缓存基础</span></h2><p>HTTP中与缓存有关的字段主要如下表所示。</p>
+<p>使用这7种方式访问资源时，应用缓存的策略会有一些不同。</p>
+<p>需要注意的是，除此之外，还有一种特殊情况。即在当前地址栏，不改变内容，直接回车，等同于刷新当前页。但是在当前页点击跳转到自身，和链接跳转一致，并不会等同于刷新。</p>
+<p>如下图所示。通过上述8种方式访问资源，会从不同的缓存应用判断步骤开始。此处不做验证，相信大家看了后面的内容，能够自行验证的。
+<img src="http://p6.qhimg.com/t01a58418ea83d38ca1.png" alt="不同访问方式下的浏览器资源判断"></p>
+<blockquote>
+<p>本文配有测试脚本，代码在<a href="https://github.com/verymuch/learning-web-cache" target="_blank" rel="noopener">github</a>上。下文会按照测试脚本进行述说，使用说明见下载链接。验证上述内容，可以执行<code>node cache-ETag+max-age.js</code>，会同时开启<code>ETag</code>和<code>max-age</code>，然后触发相应的动作，通过Network面板和node日志即可验证，此处篇幅有限先不赘述。</p>
+</blockquote>
+<p>此外，这里提一个概念，webkit资源分为<strong>主资源和派生资源</strong>。主资源是地址栏输入的URL请求返回的资源，派生资源是主资源中所引用的JS、CSS、图片等资源。</p>
+<p>在Chrome下刷新时，只有主资源的缓存应用方式如上图所示，<strong>派生资源的缓存应用方式与新标签打开类似，会判断缓存是否过期</strong>。强缓存生效时的区别在于新标签打开为<code>from disk cache</code>，而当前页刷新派生资源是<code>from memory cache</code>。</p>
+<p>而在Firefox下，当前页面刷新，所有资源都会如上图所示。下文也会利用Chrome的这一特点在当前页刷新，派生资源会使用缓存进行测试。不然每次都需要打开新标签较为繁琐。</p>
+<h2><span id="二-必知必会的缓存基础">二、必知必会的缓存基础</span></h2><p>HTTP中与缓存有关的字段主要有以下10个，如下表所示。为明确表示其功能及用法，下表中分别区分了存储策略、过期策略、协商策略、请求头、响应头。</p>
+<!-- ![缓存相关头字段表格](http://p0.qhimg.com/t0150916ff62c7bb4b5.png) -->
 <table class="article-entry--center">
   <thead>
     <tr>
@@ -318,18 +325,19 @@
       <th>存储策略</th>
       <th>过期策略</th>
       <th>协商策略</th>
+      <th>请求头</th>
+      <th>响应头</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td colspan="5">缓存相关头字段</td>
-    </tr>
     <tr>
       <td>Expires</td>
       <td>指定缓存的过期时间，值为某一时刻（绝对时间）。在指定时刻后过期</td>
       <td>✓</td>
       <td>✓</td>
       <td></td>
+      <td></td>
+      <td>✓</td>
     </tr>
     <tr>
       <td>Cache-Control</td>
@@ -337,21 +345,24 @@
       <td>✓</td>
       <td>✓</td>
       <td></td>
+      <td>✓</td>
+      <td>✓</td>
     </tr>
     <tr>
       <td>Pragma</td>
       <td>指定缓存机制(http1.0字段)</td>
+      <td></td>
+      <td></td>
+      <td></td>
       <td>✓</td>
       <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td colspan="5">验证相关头字段</td>
     </tr>
     <tr>
       <td>Last-Modified</td>
       <td>资源最后修改时间</td>
+      <td>乄</td>
       <td></td>
+      <td>✓</td>
       <td></td>
       <td>✓</td>
     </tr>
@@ -361,6 +372,8 @@
       <td></td>
       <td></td>
       <td>✓</td>
+      <td>✓</td>
+      <td></td>
     </tr>
     <tr>
       <td>If-Unmodified-Since</td>
@@ -368,11 +381,15 @@
       <td></td>
       <td></td>
       <td>✓</td>
+      <td>✓</td>
+      <td></td>
     </tr>
     <tr>
       <td>ETag</td>
       <td>请求资源的唯一标识字符串</td>
       <td></td>
+      <td></td>
+      <td>✓</td>
       <td></td>
       <td>✓</td>
     </tr>
@@ -382,6 +399,8 @@
       <td></td>
       <td></td>
       <td>✓</td>
+      <td>✓</td>
+      <td></td>
     </tr>
     <tr>
       <td>If-None-Match</td>
@@ -389,32 +408,31 @@
       <td></td>
       <td></td>
       <td>✓</td>
+      <td>✓</td>
+      <td></td>
     </tr>
   </tbody>
 </table>
 
-<p>缓存分为强缓存和弱缓存（又称为协商缓存）。其中强缓存包括<code>Expires</code>和<code>Cache-Control</code>，主要是在过期策略生效时缓存。强缓存包括<code>Last-Modified</code>和<code>ETag</code>，主要是在协商策略后应用的缓存。</p>
-<p>强弱缓存之前的只要区别<strong>在于获取资源时是否会发送请求</strong>。</p>
-<h3><span id="21-expires">2.1 Expires</span></h3><p>如上所述，<code>Expires</code>指定缓存的过期时间，为绝对时间，即某一时刻。参考本地时间进行比对，在指定时刻后过期。<strong>RFC 2616建议最大值不要超过1年</strong>。</p>
-<p><code>Expire</code>头字段是响应头字段，格式如下：<code>Expires: Sat Oct 20 2018 00:00:00 GMT+0800 (CST)</code>。</p>
+<p>注：乄表示半对，<code>Last-Modified</code>之所以是半对，是因为有可能会触发启发式缓存，也会缓存文件。具体见下文。</p>
 <blockquote>
-<p>注：本文配有测试脚本，代码在<a href="https://github.com/verymuch/learning-web-cache" target="_blank" rel="noopener">github</a>上。下文会按照测试脚本进行述说，使用说明见下载链接。</p>
+<p>缓存又分为强缓存和弱缓存（又称为协商缓存）。其中强缓存包括<code>Expires</code>和<code>Cache-Control</code>，主要是在过期策略生效时应用的缓存。弱缓存包括<code>Last-Modified</code>和<code>ETag</code>，是在协商策略后应用的缓存。强弱缓存之间的主要区别在于<strong>获取资源时是否会发送请求</strong>。</p>
 </blockquote>
+<h3><span id="21-expires">2.1 Expires</span></h3><p>如上所述，<code>Expires</code>指定缓存的过期时间，为绝对时间，即某一时刻。参考本地时间进行比对，在指定时刻后过期。<strong><a href="https://tools.ietf.org/html/rfc2616" target="_blank" rel="noopener">RFC 2616</a>建议最大值不要超过1年</strong>。</p>
+<p><code>Expire</code>头字段是响应头字段，格式如下：<code>Expires: Sat Oct 20 2018 00:00:00 GMT+0800 (CST)</code>。</p>
 <p>可以尝试以下步骤进行验证：</p>
 <ol>
 <li>执行<code>node cache-Expires.js</code>，该脚本会给请求的资源设定<code>Expires</code>，值为：”2018-10-20 00:00:00”。</li>
-<li><p>访问地址<code>http://localhost:1030/</code>，开启Network Tab，查看avatar.jpg图片，Expires值如下所示。</p>
-<p><img src="http://p5.qhimg.com/t01d532b7d32bb9e86c.png" alt="Expires缓存设置"></p>
-</li>
-<li><p>再次刷新会看到该资源已经被缓存，size栏显示为<code>(from memory cache)</code>。此时修改本地时间，将时间修改为“2018-10-15 00:00:00”，再刷新，会发现缓存仍然有效。</p>
-<p><img src="http://p4.qhimg.com/t013d3b2d30c5f32a69.png" alt="Expires缓存生效"></p>
-</li>
-<li><p>如果将本地时间修改为“2018-10-25 00:00:00”，再刷新，会发现图片不再使用缓存，而是重新获取了。</p>
-<p><img src="http://p4.qhimg.com/t0186607030ed25a32b.png" alt="Expires缓存过期，重新获取"></p>
-</li>
+<li>访问地址<code>http://localhost:1030/</code>，开启Network Tab，查看avatar.jpg图片，Expires值如下所示。
+<img src="http://p5.qhimg.com/t01d532b7d32bb9e86c.png" alt="Expires缓存设置"></li>
+<li>再次刷新会看到该资源已经被缓存，size栏显示为<code>(from memory cache)</code>。此时修改本地时间，将时间修改为“2018-10-15 00:00:00”，再刷新，会发现缓存仍然有效。
+<img src="http://p4.qhimg.com/t013d3b2d30c5f32a69.png" alt="Expires缓存生效"></li>
+<li>如果将本地时间修改为“2018-10-25 00:00:00”，再刷新，会发现图片不再使用缓存，而是重新获取了，因为本地时间超过了设定值。
+<img src="http://p4.qhimg.com/t0186607030ed25a32b.png" alt="Expires缓存过期，重新获取"></li>
 </ol>
-<h3><span id="22-cache-control">2.2 Cache-Control</span></h3><p>如上，Cache-Control用于指定资源的缓存机制，可以同时在请求头和响应头中设定，涉及上述三个策略中的两个策略：<strong>存储策略、过期策略</strong>。</p>
-<p><code>Cache-Control</code>的语法如下：<code>Cache-Control: cache-directive[,cache-directive]</code>。<code>cache-directive</code>为缓存指令，<strong>大小写不敏感</strong>，共12种为HTTP缓存标准相关，如下表所示。其中请求指令7种，响应指令9种。<code>Cache-Control</code>可以设置多个缓存指令，以逗号<code>,</code>分隔。</p>
+<h3><span id="22-cache-control">2.2 Cache-Control</span></h3><p><code>Cache-Control</code>用于指定资源的缓存机制，可以同时在请求头和响应头中设定，涉及上述三个策略中的两个策略：<strong>存储策略、过期策略</strong>。</p>
+<p><code>Cache-Control</code>的语法如下：<code>Cache-Control: cache-directive[,cache-directive]</code>。<code>cache-directive</code>为缓存指令，<strong>大小写不敏感</strong>，共有12个与HTTP缓存标准相关，如下表所示。其中请求指令7种，响应指令9种。<code>Cache-Control</code>可以设置多个缓存指令，以逗号<code>,</code>分隔。</p>
+<!-- ![Cache-Control 指令表](http://p3.qhimg.com/t011802c8bd2e967108.png) -->
 <table class="article-entry--center">
   <thead>
     <tr>
@@ -541,56 +559,53 @@
   </tbody>
 </table>
 
-
-<h4><span id="231-cache-directive大小写不敏感">2.3.1 cache-directive大小写不敏感</span></h4><p>如上，cache-directive指令大小写不敏感，所以在设置Cache-Control时，指令可以不区分大小写。不过建议统一使用小写。</p>
-<p>验证如下：</p>
+<h4><span id="231-cache-directive大小写不敏感">2.3.1 cache-directive大小写不敏感</span></h4><p>如上，cache-directive指令大小写不敏感，所以在设置Cache-Control时，指令可以不区分大小写。不过建议统一使用小写。验证如下：</p>
 <ol>
 <li>执行<code>node cache-directive-case-insensitive.js</code>，会服务端会将<code>max-age</code>写成大写，如下<code>Cache-Control: MAX-AGE=86400</code>。</li>
 <li>再次请求浏览器会发现缓存同样会生效。</li>
 </ol>
 <h4><span id="232-在请求头中的max-age">2.3.2 在请求头中的max-age</span></h4><p>max-age在请求头中的主要应用为<code>max-age=0</code>表示不使用缓存。Chrome和Firefox浏览器下的刷新操作（Command+ R / F5）均是在请求头上添加了<code>max-age=0</code>指令，表示<strong>不使用强缓存，但允许协商缓存</strong>（在介绍了协商缓存的<code>Last-Modified</code>和<code>ETag</code>之后，可以自行验证下这一点）。</p>
-<p>刷新<code>max-age=0</code>验证如下：</p>
+<p>刷新时<code>Cache-Control</code>为<code>max-age=0</code>验证如下：</p>
 <ol>
 <li>单独访问图片资源<code>http://localhost:1030/avatar.jpg</code>，开启Network</li>
-<li>刷新，可在响应头中看到上述内容。如下图所示。（Firefox下相同，不单独验证）。
+<li>刷新，可在响应头中看到上述内容。如下图所示。（Firefox下相同，不单独验证，主要最开始提到的主资源和派生资源在两个浏览器中表现形式的不同）。
 <img src="http://p2.qhimg.com/t014c0409d8f7dbf22c.png" alt="Chrome下刷新时，请求中的max-age值"></li>
 </ol>
 <p>此外，经验证，Chrome和Firefox均对<code>max-age</code>&gt;0的情况支持不好。</p>
 <ol>
-<li>在Firefox下，通过<code>Modify Headers</code>插件（Chrome和Firefox下均有类似插件）给请求添加<code>max-age=7200</code>。</li>
-<li>执行<code>node cache-max-age.js</code>，单独访问图片资源<code>http://localhost:1030</code>，先强刷保证资源更新。</li>
+<li>在Chrome下，通过<code>Modify Headers</code>插件（Chrome和Firefox下均有类似插件）给请求添加<code>max-age=7200</code>。</li>
+<li>执行<code>node cache-max-age.js</code>，访问<code>http://localhost:1030</code>，先强刷保证资源更新。</li>
 <li>打开NetWork，查看<code>avatar.jpg</code>，刷新，会发现，资源访问仍然走的是缓存。如果按照规范的定义应该是不生效。
 <img src="http://p2.qhimg.com/t01d200661ae3d4b1ae.png" alt="max-age &gt; 0 在Chrome/Firefox下无效"></li>
 </ol>
-<h4><span id="233-max-age与expires">2.3.3 max-age与Expires</span></h4><p>Cache-Control中的<code>max-age</code>指令用于指定缓存过期的相对时间。资源达到指定时间后过期。该功能与Expires类似。但<strong>其优先级高于Expires</strong>，如果同时设置max-age和Expires，max-age生效，忽略Expires。</p>
-<p>验证如下：</p>
+<h4><span id="233-max-age与expires">2.3.3 max-age与Expires</span></h4><p>Cache-Control中的<code>max-age</code>指令用于指定缓存过期的相对时间。资源达到指定时间后过期。该功能与Expires类似。但<strong>其优先级高于Expires</strong>，如果同时设置max-age和Expires，max-age生效，忽略Expires。验证如下：</p>
 <ol>
 <li>执行<code>node cache-max-age+Expires.js</code>，会同时设置<code>Cache-Control: max-age=86400</code> / <code>Expires: Mon Oct 20 2018 00:00:00 GMT+0800 (CST)</code>，如下所示。
 <img src="http://p0.qhimg.com/t013235a81cbaeed0cf.png" alt="同时设置max-age和Expires"></li>
 <li>刷新，然后再把本地时间改成当前时间延后2小时(不超过20号)，会发现缓存生效。(以下两步不再附截图，与上述示例类似)。</li>
-<li>如果将时间改为两天后（假设20号离现在大于两天，否则结果相反），会发现缓存不在生效，因为超出了max-age的限制。</li>
+<li>如果将时间改为两天后（假设20号离现在大于两天，否则结果相反），会发现缓存不再生效，因为超出了max-age的限制。</li>
 </ol>
 <p>相反，可以再试一下，max-age的有效时间大于Expires的情况，会发现依然是max-age生效。</p>
-<h4><span id="234-no-cache和no-store">2.3.4 no-cache和no-store</span></h4><p>有一点需要注意的是，no-cache并不是指不缓存文件，no-store才是指不缓存文件。no-cache仅仅是表明不使用缓存。 ？？？？要改下</p>
-<h3><span id="23-pragma">2.3 Pragma</span></h3><p>http1.0字段, 通常设置为<code>Pragma:no-cache</code>, 作用与<code>Cache-Control:no-cache</code>相同。当在浏览器进行强刷（Comand + Shift + R / Ctrl + F5）或在NetWork面板内勾选禁用缓存（Disable Caches）时，会自动带上<code>Pragma:no-cache</code>和<code>Cache-Control:no-cache</code>。如下图所示。</p>
-<p><img src="http://p9.qhimg.com/t01f619b947ceec0846.png" alt="强刷浏览器自动设置no-cache"></p>
-<h3><span id="24-last-modifiedif-modified-sinceif-unmodified-since">2.4 Last-Modified/If-Modified-Since/If-Unmodified-Since</span></h3><p><code>Last-Modified</code>用于标记请求资源的最后一次修改时间。语法格式为：<code>Last-Modified: &lt;day-name&gt;，&lt;day&gt; &lt;month&gt; &lt;year&gt; &lt;hour&gt;:&lt;minute&gt;:&lt;second&gt; GMT</code>，即GMT(格林尼治标准时间)。可用 new Date().toGMTString()获取当前GMT时间。由于Last-Modified只能精确到秒，因此不适合会在一秒内多次改变的资源。</p>
-<p>如果Expires，Cache-Control: max-age，或 Cache-Control:s-maxage都没有在响应头中出现，并且也没有其它缓存的设置，那么浏览器默认会采用一个启发式的算法，通常会取响应头的Date_value - Last-Modified_value值的10%作为缓存时间，且启发式缓存只在设了<code>Last-Modified</code>时触发。验证如下：</p>
+<h4><span id="234-no-cache和no-store">2.3.4 no-cache和no-store</span></h4><p>还有一点需要注意的是，no-cache并不是指不缓存文件，<strong>no-store才是指不缓存文件</strong>。no-cache仅仅是表明跳过强缓存，强制进入协商策略。</p>
+<h3><span id="23-pragma">2.3 Pragma</span></h3><p>http1.0字段, 通常设置为<code>Pragma:no-cache</code>, 作用与<code>Cache-Control:no-cache</code>相同。当在浏览器进行强刷（Comand + Shift + R / Ctrl + F5）或在NetWork面板内勾选禁用缓存（Disable Caches）时，会自动带上<code>Pragma:no-cache</code>和<code>Cache-Control:no-cache</code>，<strong>并且不会带上协商策略中所涉及的信息（下面介绍的<code>If-Modified-Since</code>/<code>If-None-Match</code>）</strong>。这是不会使用任何缓存，重新获取资源。如下图所示。</p>
+<p><img src="http://p4.qhimg.com/t011df7bbf3fa5b7d16.png" alt="强刷浏览器自动设置no-cache"></p>
+<h3><span id="24-last-modifiedif-modified-sinceif-unmodified-since">2.4 Last-Modified/If-Modified-Since/If-Unmodified-Since</span></h3><p><code>Last-Modified</code>用于标记请求资源的最后一次修改时间。语法格式为：<code>Last-Modified: &lt;day-name&gt;，&lt;day&gt; &lt;month&gt; &lt;year&gt; &lt;hour&gt;:&lt;minute&gt;:&lt;second&gt; GMT</code>，即GMT(格林尼治标准时间)。可用 new Date().toGMTString()获取当前GMT时间。由于Last-Modified只能精确到秒，因此不适合在一秒内多次改变的资源。</p>
+<p>如果Expires，Cache-Control: max-age，或 Cache-Control:s-maxage都没有在响应头中出现，并且设置了<code>Last-Modified</code>时，那么浏览器默认会采用一个启发式的算法，即<strong>启发式缓存</strong>。通常会取响应头的Date_value - Last-Modified_value值的10%作为缓存时间。验证如下：</p>
 <ol>
 <li>执行<code>node cache-Last-Modified.js</code>，服务器会获取资源的最后修改时间，设置为<code>Last-Modified</code>的值。访问<code>localhost:1030</code>，查看<code>avatar.jpg</code>，如下图所示：
 <img src="http://p6.qhimg.com/t01814d14cf95c9d80d.png" alt="Last-Modified设定"></li>
 <li>刷新浏览器，会发现图片会从缓存获取。</li>
 <li>通过启发式缓存的公司可以计算出缓存的时间，修改本地时间超过缓存时间后，再刷新，会发现缓存失效。</li>
 </ol>
-<h4><span id="241-if-modified-since">2.4.1 If-Modified-Since</span></h4><p>返回的资源带有<code>Last-Modified</code>标识时，再次请求该资源，浏览器会自动带上<code>If-Modified-Since</code>，值为返回的Last-Modified值。请求到达服务器后，服务器进行判断，如果从上次更新后没有再更新，则返回304。如果更新了则重新返回。验证如下：</p>
+<h4><span id="241-if-modified-since">2.4.1 If-Modified-Since</span></h4><p>返回的资源带有<code>Last-Modified</code>标识时，再次请求该资源，浏览器会自动带上<code>If-Modified-Since</code>，值为返回的<code>Last-Modified</code>值。请求到达服务器后，服务器进行判断，如果从上次更新后没有再更新，则返回304。如果更新了则重新返回。验证如下：</p>
 <ol>
-<li>执行<code>node cache-Last-Modified.js</code>，服务器会获取资源的最后修改时间，设置为<code>Last-Modified</code>的值。如下图所示：
+<li>执行<code>node cache-Last-Modified.js</code>，服务器会获取资源的最后修改时间，设置为<code>Last-Modified</code>的值。如下图所示，并且注意看一下资源的大小。
 <img src="http://p2.qhimg.com/t013a99f89320b5141e.png" alt="Last-Modified设定">
 <img src="http://p2.qhimg.com/t01a6808c9517773efa.png" alt="请求资源大小"></li>
 <li>刷新页面，再次查看NetWork。会发现请求头中带上了<code>If-Modified-Since</code>。如果服务器判断资源未改变，则返回304，此外由于服务器返回304，资源会从缓存获取，所以资源大小也减少了，如下所示。
 <img src="http://p0.qhimg.com/t01d195bed860fb752c.png" alt="304 资源未修改">
 <img src="http://p3.qhimg.com/t0174f2ab6f3e4852df.png" alt="304 请求资源大小"></li>
-<li>修改<code>index.html</code>文件的内容，再次刷新。会发现返回变成200，html内容更新了，并且返回了新的Last-Modified，资源大小也相应地改变了。
+<li>修改<code>index.html</code>文件的内容，再次刷新。会发现返回变成200，html内容更新了，并且返回了新的<code>Last-Modified</code>的值，资源大小也相应地改变了。
 <img src="http://p9.qhimg.com/t013cf0d5c313d91bdf.png" alt="修改资源文件，内容刷新">
 <img src="http://p5.qhimg.com/t0171f354163c89aca0.png" alt="修改后资源大小"></li>
 </ol>
@@ -604,11 +619,10 @@
 <li>与<code>If-Range</code>字段同时使用时，可以用来保证新的片段请求来自一个未修改的文档。</li>
 </ol>
 <h3><span id="25-etagif-matchif-none-match">2.5 ETag/If-Match/If-None-Match</span></h3><p>ETag是请求资源在服务器的唯一标识，浏览器可以根据ETag值缓存数据。在再次请求时通过<code>If-None-Match</code>携带上次的ETag值，如果值不变，则返回304，如果改变你则返回新的内容。</p>
-<p>需要注意的是，ETag和If-None-Match的值均能为双引号包裹的。如下：</p>
-<p><img src="http://p5.qhimg.com/t0171f354163c89aca0.png" alt="ETag值双引号包裹"></p>
+<p>需要注意的是，ETag和If-None-Match的值均为双引号包裹的。</p>
 <p>验证步骤与<code>Last-Modified</code>相似。执行<code>node cache-ETag.js</code>即可。此处不再详述。</p>
 <p><code>If-Match</code>判断逻辑逻辑与<code>If-None-Match</code>相反。</p>
-<p>最后，<code>ETag</code>的优先级高于<code>Last-Modified</code>。当<code>ETag</code>和<code>Last-Modified</code>，<code>ETag</code>优先级更高，需要服务端实现。验证如下，其中服务端判断优先级：</p>
+<p>最后，<strong><code>ETag</code>的优先级高于<code>Last-Modified</code></strong>。当<code>ETag</code>和<code>Last-Modified</code>，<code>ETag</code>优先级更高，但不会忽略<code>Last-Modified</code>，需要服务端实现。验证如下，其中服务端判断优先级：</p>
 <ol>
 <li>执行<code>node cache-ETag+Last-Modified.js</code>。服务端会在资源的响应头中，同时设置<code>ETag</code>和<code>Last-Modified</code>。如下图：
 <img src="http://p0.qhimg.com/t01d971d0dcf74b6704.png" alt="同时设置ETag和Last-Modified"></li>
@@ -616,6 +630,7 @@
 <img src="http://p1.qhimg.com/t018ffe20955180535f.png" alt="ETag生效，优先级更高"></li>
 </ol>
 <h2><span id="三-缓存的优缺点">三、缓存的优缺点</span></h2><p>好了，通过长长的第二部分，我们简单介绍了一下HTTP Cache的基础知识。下面我再汇总一下各类缓存之间的优缺点吧。如下表所示：</p>
+<!-- ![缓存优缺点表](http://p4.qhimg.com/t015c20f794a728db55.png) -->
 <table class="article-entry--center">
   <thead>
     <tr>
@@ -675,7 +690,7 @@
 <h2><span id="四-最佳实践">四、最佳实践</span></h2><p>从上面各类缓存的优缺点可以看出，每一种缓存都不是完美的。所以<strong>建议像下面这样做</strong>：</p>
 <ol>
 <li>不要缓存HTML，避免缓存后用户无法及时获取到更新内容。</li>
-<li>使用<code>Cache-Control</code>和<code>ETag</code>来控制HTML中所使用的静态资源的缓存。一般是将<code>Cache-Control</code>设成一个比较大的值，然后用<code>ETag</code>进行验证。</li>
+<li>使用<code>Cache-Control</code>和<code>ETag</code>来控制HTML中所使用的静态资源的缓存。一般是将<code>Cache-Control</code>的<code>max-age</code>设成一个比较大的值，然后用<code>ETag</code>进行验证。</li>
 <li>使用签名或者版本来区分静态资源。这样静态资源会生成不同的资源访问链接，不会产生修改之后无法感知的情况。</li>
 </ol>
 <p>还有两个本文没有介绍的内容，但是不建议大家使用：</p>
@@ -683,15 +698,26 @@
 <li>使用HTML的meta标签来指定缓存行为</li>
 <li>使用查询字符串来避免缓存。因为缓存有一些<a href="https://gtmetrix.com/remove-query-strings-from-static-resources.html" target="_blank" rel="noopener">已知的问题</a>，使用查询字符串会导致有些代理服务器不缓存资源。</li>
 </ol>
-<h2><span id="五-小试牛刀看看你掌握了没有">五、小试牛刀，看看你掌握了没有？</span></h2><p>这里准备找两道缓存相关的题，还没找好。。。</p>
+<h2><span id="五-小试牛刀看看你掌握了没有">五、小试牛刀，看看你掌握了没有？</span></h2><p>如果首次访问<code>localhost:1030</code>时，页面中 avatar.png 响应头信息如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line"><span class="keyword">Cache</span>-Control: <span class="keyword">no</span>-<span class="keyword">cache</span></span><br><span class="line"><span class="keyword">Content</span>-<span class="keyword">Type</span>: image/png</span><br><span class="line"><span class="keyword">Last</span>-Modified: Tue, <span class="number">16</span> <span class="keyword">Oct</span> <span class="number">2018</span> <span class="number">11</span>:<span class="number">42</span>:<span class="number">28</span> GMT</span><br><span class="line"><span class="keyword">Accept</span>-Ranges: <span class="keyword">bytes</span></span><br><span class="line"><span class="built_in">Date</span>: Tue, <span class="number">16</span> <span class="keyword">Oct</span> <span class="number">2018</span> <span class="number">15</span>:<span class="number">57</span>:<span class="number">21</span> GMT</span><br></pre></td></tr></table></figure>
+<p>问题1：请问当刷新该页面后，avatar.png如何二次加载？</p>
+<p>问题2：如果将上述信息中的<code>Cache-Control</code>设置为 private，那么结果又会如何呢？</p>
+<p>大家先回忆下上面的内容，思考一下。</p>
+<p>好了公布答案。</p>
+<p>问题1：会带着<code>If-Modified-Since</code>和服务端进行验证。未改变返回304，改变返回200.
+问题2：<code>Cache-Control</code>设置为 private，这时候会触发启发式缓存，则再次刷新时，avatar.png命中强缓存，从缓存中换取。</p>
 <h2><span id="总结">总结</span></h2><p>好了，文章到此结束，希望能对大家有帮助。</p>
 <h2><span id="参考链接">参考链接</span></h2><blockquote>
 <ol>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control" target="_blank" rel="noopener">MDN | Cache-Control
 </a></li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzA3NTYzODYzMg==&amp;mid=2653578381&amp;idx=1&amp;sn=3f676e2b2e08bcff831c69d31cf51c51&amp;key=dde62796d24517c892043e67f2520e046c13fc0558822ef7ba7fbe8003ddde05e22230fb4ccb2c31133df2a507940c5d4561c7b4f4570969a47cf1388ff57e4bfea70a3810f3fc805e2a5d9aa3192439&amp;ascene=0&amp;uin=MTM4MjU5NzA0MA%3D%3D&amp;devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.11.6+build(15G1212" target="_blank" rel="noopener">彻底弄懂 Http 缓存机制 - 基于缓存策略三要素分解法</a>&amp;version=12010110&amp;nettype=WIFI&amp;fontScale=100&amp;pass_ticket=n3plsW%2FV7Vb6O9hKzPNig5MYpXUoJo3tNUNxhJ5Jh6e9AS%2BRXmvJPbIzUeUmL3S2)</li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzA3NTYzODYzMg==&amp;mid=2653578381&amp;idx=1&amp;sn=3f676e2b2e08bcff831c69d31cf51c51&amp;key=dde62796d24517c892043e67f2520e046c13fc0558822ef7ba7fbe8003ddde05e22230fb4ccb2c31133df2a507940c5d4561c7b4f4570969a47cf1388ff57e4bfea70a3810f3fc805e2a5d9aa3192439&amp;ascene=0&amp;uin=MTM4MjU5NzA0MA%3D%3D&amp;devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.11.6+build&amp;version=12010110&amp;nettype=WIFI&amp;fontScale=100&amp;pass_ticket=n3plsW%2FV7Vb6O9hKzPNig5MYpXUoJo3tNUNxhJ5Jh6e9AS%2BRXmvJPbIzUeUmL3S2" target="_blank" rel="noopener">彻底弄懂 Http 缓存机制 - 基于缓存策略三要素分解法</a></li>
 <li><a href="https://segmentfault.com/a/1190000011286027" target="_blank" rel="noopener">由memoryCache和diskCache产生的浏览器缓存机制的思考</a></li>
 <li><a href="https://medium.com/@codebyamir/a-web-developers-guide-to-browser-caching-cc41f3b73e7c" target="_blank" rel="noopener">A Web Developer’s Guide to Browser Caching</a></li>
+<li><a href="http://louiszhai.github.io/2017/04/07/http-cache/" target="_blank" rel="noopener">浏览器缓存机制剖析</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching" target="_blank" rel="noopener">HTTP 缓存</a></li>
+<li><a href="https://techblog.thescore.com/2014/11/19/are-your-cache-control-directives-doing-what-they-are-supposed-to-do/" target="_blank" rel="noopener">Are Your Cache-Control Directives Doing What They Are Supposed to Do?</a></li>
+<li><a href="https://tools.ietf.org/html/rfc7234#section-5.2.1" target="_blank" rel="noopener">Hypertext Transfer Protocol</a></li>
 </ol>
 </blockquote>
 
@@ -704,7 +730,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/10/09/web-browser-cache-strategy/" data-id="cjnboylpu000uhv3ypky1kuz6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/10/09/web-browser-cache-strategy/" data-id="cjnby5rb8000xsq3yh8wmhg96" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
