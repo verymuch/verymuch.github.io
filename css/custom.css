@@ -38,5 +38,10 @@ button {
 
 /* 重置样式 */
 .article-entry td {
-  padding: 0;
+  /* padding: 0; */
+}
+
+.article-entry--center th,
+.article-entry--center td {
+  text-align: center;
 }
