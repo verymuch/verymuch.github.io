@@ -13,7 +13,7 @@
 <meta property="og:description" content="前言众所周知，在Web开发中，缓存很重要、很有用。但同时其也很复杂。 本文将从以下5个方面全面地介绍下缓存相关的内容。  浏览器中缓存的使用策略。 必知必会的缓存基本知识。 各种缓存方式的优缺点。 缓存的最佳实践。 小试牛刀，看看你掌握了没有？">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://p6.qhimg.com/t01b2e220e85e43405e.png">
-<meta property="og:image" content="http://p9.qhimg.com/t016fc11a3d5d630288.png">
+<meta property="og:image" content="http://p6.qhimg.com/t01a90d516dbc0e5bc6.png">
 <meta property="og:image" content="http://p5.qhimg.com/t01d532b7d32bb9e86c.png">
 <meta property="og:image" content="http://p4.qhimg.com/t013d3b2d30c5f32a69.png">
 <meta property="og:image" content="http://p4.qhimg.com/t0186607030ed25a32b.png">
@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://p5.qhimg.com/t0171f354163c89aca0.png">
 <meta property="og:image" content="http://p0.qhimg.com/t01d971d0dcf74b6704.png">
 <meta property="og:image" content="http://p1.qhimg.com/t018ffe20955180535f.png">
-<meta property="og:updated_time" content="2018-10-16T09:39:25.451Z">
+<meta property="og:updated_time" content="2018-10-16T11:52:06.967Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器缓存策略">
 <meta name="twitter:description" content="前言众所周知，在Web开发中，缓存很重要、很有用。但同时其也很复杂。 本文将从以下5个方面全面地介绍下缓存相关的内容。  浏览器中缓存的使用策略。 必知必会的缓存基本知识。 各种缓存方式的优缺点。 缓存的最佳实践。 小试牛刀，看看你掌握了没有？">
@@ -298,7 +298,7 @@
 <p>上面所说的缓存判断流程是完整的流程。但是在浏览器中访问资源的方式不同也会导致判断流程的不同。</p>
 <p>浏览器下访问资源的方式主要有以下6种：</p>
 <ol>
-<li>地址栏回车</li>
+<li>(新标签)地址栏回车</li>
 <li>链接跳转</li>
 <li>前进、后退</li>
 <li>刷新（Command + R / F5）</li>
@@ -306,9 +306,9 @@
 <li>新开窗口</li>
 </ol>
 <p>使用这六种方式访问资源时，应用缓存的策略会有一些不同。如下图所示。不同访问方式会有从不同的步骤判断开始。此处不做验证，相信大家看了后面的内容，能够自行验证的。
-<img src="http://p9.qhimg.com/t016fc11a3d5d630288.png" alt="不同访问方式下的浏览器资源判断"></p>
+<img src="http://p6.qhimg.com/t01a90d516dbc0e5bc6.png" alt="不同访问方式下的浏览器资源判断"></p>
 <p>此外，这里提一个概念，webkit资源分为主资源和派生资源。主资源是地址栏输入的URL请求返回的资源，派生资源是主资源中所引用的JS、CSS、图片等资源。</p>
-<p>在Chrome下刷新时，只有主资源会如上图所示，派生资源与新标签打开类似，会判断缓存。而在Firefox下，当前页面刷新，所有资源都会如上图所示。下文会利用Chrome的这一特点在当前页刷新，派生资源会缓存进行测试。不然每次都需要打开新标签较为繁琐。</p>
+<p>在Chrome下刷新时，只有主资源会如上图所示，派生资源与新标签打开类似，会判断缓存是否过期。而在Firefox下，当前页面刷新，所有资源都会如上图所示。下文会利用Chrome的这一特点在当前页刷新，派生资源会缓存进行测试。不然每次都需要打开新标签较为繁琐。</p>
 <h2><span id="二-必知必会的缓存基础">二、必知必会的缓存基础</span></h2><p>HTTP中与缓存有关的字段主要如下表所示。</p>
 <table class="article-entry--center">
   <thead>
@@ -704,7 +704,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/10/09/web-browser-cache-strategy/" data-id="cjnbjevtm000xu23yrya3kujt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/10/09/web-browser-cache-strategy/" data-id="cjnbo46rz000u4w3ypqxwoch4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
