@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://p5.qhimg.com/t0171f354163c89aca0.png">
 <meta property="og:image" content="http://p0.qhimg.com/t01d971d0dcf74b6704.png">
 <meta property="og:image" content="http://p1.qhimg.com/t018ffe20955180535f.png">
-<meta property="og:updated_time" content="2018-10-16T11:52:06.967Z">
+<meta property="og:updated_time" content="2018-10-16T12:15:46.868Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器缓存策略">
 <meta name="twitter:description" content="前言众所周知，在Web开发中，缓存很重要、很有用。但同时其也很复杂。 本文将从以下5个方面全面地介绍下缓存相关的内容。  浏览器中缓存的使用策略。 必知必会的缓存基本知识。 各种缓存方式的优缺点。 缓存的最佳实践。 小试牛刀，看看你掌握了没有？">
@@ -398,7 +398,7 @@
 <h3><span id="21-expires">2.1 Expires</span></h3><p>如上所述，<code>Expires</code>指定缓存的过期时间，为绝对时间，即某一时刻。参考本地时间进行比对，在指定时刻后过期。<strong>RFC 2616建议最大值不要超过1年</strong>。</p>
 <p><code>Expire</code>头字段是响应头字段，格式如下：<code>Expires: Sat Oct 20 2018 00:00:00 GMT+0800 (CST)</code>。</p>
 <blockquote>
-<p>注：本文配有测试脚本，代码在[github]上。下文会按照测试脚本进行述说，使用说明见下载链接。</p>
+<p>注：本文配有测试脚本，代码在<a href="https://github.com/verymuch/learning-web-cache" target="_blank" rel="noopener">github</a>上。下文会按照测试脚本进行述说，使用说明见下载链接。</p>
 </blockquote>
 <p>可以尝试以下步骤进行验证：</p>
 <ol>
@@ -571,7 +571,7 @@
 <li>如果将时间改为两天后（假设20号离现在大于两天，否则结果相反），会发现缓存不在生效，因为超出了max-age的限制。</li>
 </ol>
 <p>相反，可以再试一下，max-age的有效时间大于Expires的情况，会发现依然是max-age生效。</p>
-<h4><span id="234-no-cache和no-store">2.3.4 no-cache和no-store</span></h4><p>有一点需要注意的是，no-cache并不是指不缓存文件，no-store才是指不缓存文件。no-cache仅仅是表明不使用缓存。</p>
+<h4><span id="234-no-cache和no-store">2.3.4 no-cache和no-store</span></h4><p>有一点需要注意的是，no-cache并不是指不缓存文件，no-store才是指不缓存文件。no-cache仅仅是表明不使用缓存。 ？？？？要改下</p>
 <h3><span id="23-pragma">2.3 Pragma</span></h3><p>http1.0字段, 通常设置为<code>Pragma:no-cache</code>, 作用与<code>Cache-Control:no-cache</code>相同。当在浏览器进行强刷（Comand + Shift + R / Ctrl + F5）或在NetWork面板内勾选禁用缓存（Disable Caches）时，会自动带上<code>Pragma:no-cache</code>和<code>Cache-Control:no-cache</code>。如下图所示。</p>
 <p><img src="http://p9.qhimg.com/t01f619b947ceec0846.png" alt="强刷浏览器自动设置no-cache"></p>
 <h3><span id="24-last-modifiedif-modified-sinceif-unmodified-since">2.4 Last-Modified/If-Modified-Since/If-Unmodified-Since</span></h3><p><code>Last-Modified</code>用于标记请求资源的最后一次修改时间。语法格式为：<code>Last-Modified: &lt;day-name&gt;，&lt;day&gt; &lt;month&gt; &lt;year&gt; &lt;hour&gt;:&lt;minute&gt;:&lt;second&gt; GMT</code>，即GMT(格林尼治标准时间)。可用 new Date().toGMTString()获取当前GMT时间。由于Last-Modified只能精确到秒，因此不适合会在一秒内多次改变的资源。</p>
@@ -704,7 +704,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/10/09/web-browser-cache-strategy/" data-id="cjnbo46rz000u4w3ypqxwoch4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/10/09/web-browser-cache-strategy/" data-id="cjnboylpu000uhv3ypky1kuz6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
