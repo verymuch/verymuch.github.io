@@ -14,7 +14,7 @@
 <meta property="og:description" content=".Resolve {     width: 90%;     border: 1px solid #dd4b39;     color: white;   }   .Resolve span {     display:inline-block;     width: 50%;   }   .Resolve span:first-child {     height: 40px;">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://verymuch.com/images/align.gif">
-<meta property="og:updated_time" content="2018-08-13T10:50:37.603Z">
+<meta property="og:updated_time" content="2018-11-12T00:36:45.214Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何清除行内元素之间的HTML空白">
 <meta name="twitter:description" content=".Resolve {     width: 90%;     border: 1px solid #dd4b39;     color: white;   }   .Resolve span {     display:inline-block;     width: 50%;   }   .Resolve span:first-child {     height: 40px;">
@@ -172,7 +172,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                8
+                9
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -310,9 +310,9 @@
 
 </style>
 
-<h2><span id="前言">前言</span></h2><p>相信大家应该都遇到过下面这个问题：“<strong>HTML源码中行内元素之间的空白显示在了屏幕上</strong>”。可能大家都有自己的小技巧来消除这些意料之外的空白。但是方法有很多，有时候不能满足于一种解法，毕竟不同的方法是有优劣的。就像我之前一直用的方法，今天总结了之后才发现还有更好的方法。废话不多说，接下来我给大家总结一下消除行内元素HTML源码空白的小技巧。</p>
-<p>下文中以一个<code>div</code>中的两个<code>span</code>标签为例。我们将两个<code>div</code>内的两个<code>span</code>设为<code>display:inline-block;width:50%;</code>，会发现两个<code>span</code>元素并没有在同一行，这就是源码中的空白导致的。</p>
-<p>示例代码如下：</p>
+<h2><span id="前言">前言</span></h2><p>相信大家应该都遇到过下面这个问题：“<strong>HTML源码中行内元素之间的空白显示在了屏幕上</strong>”。可能大家都有自己的小技巧来消除这些意料之外的空白。但是方法有很多，有时候不能满足于一种方法，不同的方法适合于不同的场景。就像我之前一直用的方法，今天总结了之后才发现还有更好的方法。废话不多说，接下来我给大家总结一下消除行内元素HTML源码空白的小技巧。</p>
+<p>下文中以一个<code>div</code>中的两个<code>span</code>标签为例。我们将两个<code>div</code>内的两个<code>span</code>设为<code>display:inline-block;width:50%;</code>，会发现两个<code>span</code>元素并没有在同一行，这就是<strong>源码中的空白导致的</strong>。</p>
+<p>示例图与代码如下：</p>
 <div class="Resolve">
   <span>左侧行内元素</span>
   <span>右侧行内元素</span>
@@ -325,7 +325,7 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.Resolve</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">90%</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#dd4b39</span>;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.Resolve</span> <span class="selector-tag">span</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>:inline-block;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.Resolve</span> <span class="selector-tag">span</span><span class="selector-pseudo">:first-child</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">40px</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#37b8ea</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.Resolve</span> <span class="selector-tag">span</span><span class="selector-pseudo">:last-child</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#5cb767</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2><span id="解决方案1源码中直接就写成一行">解决方案1：源码中直接就写成一行</span></h2><p>相信大家看到这个解决方案的时候，会想这不是废话嘛。有时候我们就是为了代码的美观，才将两个span标签分两行显示的，写在一行根本就没解决问题好不好？</p>
 <p>不过，我觉得这并不是废话，之所以将其列为一种解决方案，是防止有的人不知道是什么原因导致的空白的显示。知道了这个原因，如果两个行内元素的横向宽度(此处指代码宽度)不大，写在一行也算是最快最直接的解决方法。</p>
-<p>示例代码如下：</p>
+<p>示例图与代码如下：</p>
 <div class="Resolve Resolve1">
   <span>左侧行内元素</span><span>右侧行内元素</span>
 </div>
@@ -333,9 +333,9 @@
 
 <p>HTML：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"Resolve Resolve1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>左侧行内元素<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>右侧行内元素<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2><span id="解决方案2font-size-0-笔者一直使用的方法">解决方案2：font-size: 0; （笔者一直使用的方法）</span></h2><p>问题中<code>span</code>标签之间的空白是因为换行符/Tab制表符/空格等产生的间隔，并且据笔者测试，得出这个距离是<span class="text-highlight">字体大小的1/3倍</span>（请先记住这个值）。那么既然空格和字体大小<code>font-size</code>相关。那么也可以通过字体大小来消除这个空隙。</p>
+<h2><span id="解决方案2font-size-0-笔者一直使用的方法">解决方案2：font-size: 0; （笔者一直使用的方法）</span></h2><p>问题中<code>span</code>标签之间的空白是因为换行符/Tab制表符/空格等产生的间隔，并且据笔者测试，得出这个距离是<span class="text-highlight"><strong>字体大小的1/3倍</strong></span>（请先记住这个值）。那么既然空格和字体大小<code>font-size</code>相关。那么也可以通过字体大小来消除这个空隙。</p>
 <p>在父级元素上设置<code>font-size: 0;</code>，然后再在内部的<code>span</code>设置需要的字体大小即可。</p>
-<p>示例代码如下：</p>
+<p>示例图与代码如下：</p>
 <div class="Resolve Resolve2">
   <span>左侧行内元素</span>
   <span>右侧行内元素</span>
@@ -347,7 +347,7 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.Resolve2</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.Resolve2</span> <span class="selector-tag">span</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这种情况在内部的行内元素字体大小比较统一时，处理起来较为方便，但如果包含的行内元素中存在多种字体大小，需要一一指定，较为繁琐。不过往往这种时候内部的多种字体大小也是单独指定。可以根据具体场景决定是否使用该方案。</p>
 <h2><span id="解决方案3margin-left设为负值">解决方案3：margin-left设为负值</span></h2><p>如果行内元素为块级行内元素，则可以使用margin属性来抵消空白。在【解决方案2】中有提到行内元素之间的距离是<span class="text-highlight">字体大小的1/3倍</span>。所以我们只需要将第二个<code>span</code>元素的<code>margin-left</code>设置为<code>-0.333333em</code>即可。</p>
-<p>示例代码如下：</p>
+<p>示例图与代码如下：</p>
 <div class="Resolve Resolve3">
   <span>左侧行内元素</span>
   <span>右侧行内元素</span>
@@ -357,9 +357,9 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"Resolve Resolve3"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>左侧行内元素<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>右侧行内元素<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>CSS：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.Resolve3</span> <span class="selector-tag">span</span><span class="selector-pseudo">:last-child</span> &#123;</span><br><span class="line">  <span class="attribute">margin-left</span>: -<span class="number">0.333333em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>不过从上面可以看出，最右边还会存在一点点的白边误差。这是由于<code>margin-left</code>的计算精度导致的。</p>
-<h2><span id="解决方案4letter-spacing消除文字间距离">解决方案4：letter-spacing消除文字间距离</span></h2><p>同方案2、方案3，我们还可以通过<code>letter-spacing</code>改变行内元素之间空隙的大小，将<code>letter-spacing</code>设为<code>-0.333333em</code>即可。但是与<code>font-size</code>一样，改变<code>letter-spacing</code>时会改变内部子元素的间隙，需要手动矫正。</p>
-<p>示例代码如下：</p>
+<p>不过从上面可以看出，最右边还会存在一点点的白边误差。这是由于<code>margin-left</code>的计算精度导致的。所以为避免效果误差，不建议使用该方法。</p>
+<h2><span id="解决方案4letter-spacing消除文字间距离">解决方案4：letter-spacing消除文字间距离</span></h2><p>同方案2、方案3，我们还可以通过<code>letter-spacing</code>改变行内元素之间空隙的大小，将<code>letter-spacing</code>设为<code>-0.333333em</code>即可。但是与<code>font-size</code>一样，改变<code>letter-spacing</code>时会改变内部子元素的间隙，需要在子元素内手动进行矫正。</p>
+<p>示例图与代码如下：</p>
 <div class="Resolve Resolve4">
   <span>左侧行内元素</span>
   <span>右侧行内元素</span>
@@ -371,7 +371,7 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.Resolve4</span> &#123;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: -<span class="number">0.333333em</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.Resolve4</span> <span class="selector-tag">span</span> &#123;</span><br><span class="line">  <span class="attribute">letter-spacing</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2><span id="解决方案5html注释推荐使用">解决方案5：HTML注释（推荐使用）</span></h2><p>除了调整css样式之外，我们可以使用html注释来抵消空格，这种情况下不用额外进行css处理。此外笔者觉得还有一个好处，可以加上文字注释，告知为什么会加入注释。</p>
 <p><strong>推荐使用该方式，能够有效保持代码整齐，并且不用额外添加css样式</strong>。</p>
-<p>示例代码如下：</p>
+<p>示例图与代码如下：</p>
 <div class="Resolve Resolve5">
    <span>左侧行内元素</span><!-- 消除行内元素换行导致的空白
 --><span>右侧行内元素</span>
@@ -379,7 +379,7 @@
 
 <p>HTML：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"Resolve Resolve5"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>左侧行内元素<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="comment">&lt;!-- 消除行内元素换行导致的空白</span></span><br><span class="line"><span class="comment">--&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>右侧行内元素<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2><span id="总结">总结</span></h2><p>以上就是解决行内元素间HTML空白的5种方案，虽然这些方案都不是很理想，但是有时候在特定的情况下，我们往往需要其中之一作为解决方案。</p>
+<h2><span id="总结">总结</span></h2><p>以上就是消除行内元素间HTML空白的5种方案，虽然这些方案都不是很理想，但是有时候在特定的情况下，我们往往需要其中之一作为解决方案。</p>
 
         
         </div>
@@ -390,7 +390,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/05/23/如何清除行内元素之间的HTML空白/" data-id="cjnby5rb8000wsq3yedspvblu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/05/23/如何清除行内元素之间的HTML空白/" data-id="cjqlmgnpr0004oq3y7pwhutfv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -477,9 +477,9 @@
         </a>
     
     
-        <a href="/2018/02/09/如何在Array-forEach中实现break/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/02/09/跳出forEach/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">如何在Array.forEach中实现break</div>
+            <div class="article-nav-title">跳出forEach</div>
         </a>
     
 </nav>
@@ -513,6 +513,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2019/01/06/ES-Module-And-Questions/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/01/06/ES-Module-And-Questions/" class="title">ES模块基础用法及常见问题</a></p>
+                            <p class="item-date"><time datetime="2019-01-06T11:18:47.000Z" itemprop="datePublished">2019-01-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/10/09/web-browser-cache-strategy/" class="thumbnail">
     
     
@@ -524,7 +543,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/10/09/web-browser-cache-strategy/" class="title">浏览器缓存策略</a></p>
+                            <p class="item-title"><a href="/2018/10/09/web-browser-cache-strategy/" class="title">浏览器缓存策略之扫盲篇</a></p>
                             <p class="item-date"><time datetime="2018-10-09T07:45:32.000Z" itemprop="datePublished">2018-10-09</time></p>
                         </div>
                     </li>
@@ -586,25 +605,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/05/23/如何清除行内元素之间的HTML空白/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/align.gif)" alt="如何清除行内元素之间的HTML空白" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/05/23/如何清除行内元素之间的HTML空白/" class="title">如何清除行内元素之间的HTML空白</a></p>
-                            <p class="item-date"><time datetime="2018-05-23T10:00:48.000Z" itemprop="datePublished">2018-05-23</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -623,7 +623,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -669,7 +669,7 @@
         <footer id="footer">
     <!-- <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 verymuch<br>
+            &copy; 2019 verymuch<br>
             Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
         </div>
     </div> -->

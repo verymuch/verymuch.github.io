@@ -3,17 +3,17 @@
 <head>
     <meta charset="utf-8">
     
-    <title>浏览器缓存策略 | 歪马行空</title>
+    <title>浏览器缓存策略之扫盲篇 | 歪马行空</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="前言众所周知，在Web开发中，缓存很重要、很有用。但同时其也很复杂。 本文将从以下5个方面全面地介绍下缓存相关的内容。  缓存的判断策略 必知必会的缓存基础 各类缓存的优缺点 缓存的最佳实践 小试牛刀，看看你掌握了没有？">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浏览器缓存策略">
+<meta property="og:title" content="浏览器缓存策略之扫盲篇">
 <meta property="og:url" content="http://verymuch.com/2018/10/09/web-browser-cache-strategy/index.html">
 <meta property="og:site_name" content="歪马行空">
 <meta property="og:description" content="前言众所周知，在Web开发中，缓存很重要、很有用。但同时其也很复杂。 本文将从以下5个方面全面地介绍下缓存相关的内容。  缓存的判断策略 必知必会的缓存基础 各类缓存的优缺点 缓存的最佳实践 小试牛刀，看看你掌握了没有？">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://p3.qhimg.com/t01ce32ad8eab945a87.png">
-<meta property="og:image" content="http://p6.qhimg.com/t01a58418ea83d38ca1.png">
+<meta property="og:image" content="http://p7.qhimg.com/t0165f74b42fc87a808.png">
 <meta property="og:image" content="http://p5.qhimg.com/t01d532b7d32bb9e86c.png">
 <meta property="og:image" content="http://p4.qhimg.com/t013d3b2d30c5f32a69.png">
 <meta property="og:image" content="http://p4.qhimg.com/t0186607030ed25a32b.png">
@@ -30,9 +30,9 @@
 <meta property="og:image" content="http://p5.qhimg.com/t0171f354163c89aca0.png">
 <meta property="og:image" content="http://p0.qhimg.com/t01d971d0dcf74b6704.png">
 <meta property="og:image" content="http://p1.qhimg.com/t018ffe20955180535f.png">
-<meta property="og:updated_time" content="2018-10-16T16:33:12.800Z">
+<meta property="og:updated_time" content="2018-10-15T03:22:18.115Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浏览器缓存策略">
+<meta name="twitter:title" content="浏览器缓存策略之扫盲篇">
 <meta name="twitter:description" content="前言众所周知，在Web开发中，缓存很重要、很有用。但同时其也很复杂。 本文将从以下5个方面全面地介绍下缓存相关的内容。  缓存的判断策略 必知必会的缓存基础 各类缓存的优缺点 缓存的最佳实践 小试牛刀，看看你掌握了没有？">
 <meta name="twitter:image" content="http://p3.qhimg.com/t01ce32ad8eab945a87.png">
     
@@ -188,7 +188,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                8
+                9
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -248,7 +248,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            浏览器缓存策略
+            浏览器缓存策略之扫盲篇
         </h1>
     
 
@@ -305,10 +305,9 @@
 <li>刷新（Command + R / F5）</li>
 <li>强制刷新（Command + Shift + R / Ctrl + F5）</li>
 </ol>
-<p>使用这7种方式访问资源时，应用缓存的策略会有一些不同。</p>
-<p>需要注意的是，除此之外，还有一种特殊情况。即在当前地址栏，不改变内容，直接回车，等同于刷新当前页。但是在当前页点击跳转到自身，和链接跳转一致，并不会等同于刷新。</p>
-<p>如下图所示。通过上述8种方式访问资源，会从不同的缓存应用判断步骤开始。此处不做验证，相信大家看了后面的内容，能够自行验证的。
-<img src="http://p6.qhimg.com/t01a58418ea83d38ca1.png" alt="不同访问方式下的浏览器资源判断"></p>
+<p>使用这7种方式访问资源时，应用缓存的策略会有一些不同。如下图所示。通过上述7种方式访问资源，会从不同的缓存应用判断步骤开始。此处不做验证，相信大家看了后面的内容，能够自行验证的。
+<img src="http://p7.qhimg.com/t0165f74b42fc87a808.png" alt="不同访问方式下的浏览器资源判断"></p>
+<p>需要注意的是，Chrome中在当前地址栏，不改变内容，直接回车，等同于刷新当前页，而在Firefox下与其他在地址栏回车一样。这一点比较特殊，需要适当区分下。</p>
 <blockquote>
 <p>本文配有测试脚本，代码在<a href="https://github.com/verymuch/learning-web-cache" target="_blank" rel="noopener">github</a>上。下文会按照测试脚本进行述说，使用说明见下载链接。验证上述内容，可以执行<code>node cache-ETag+max-age.js</code>，会同时开启<code>ETag</code>和<code>max-age</code>，然后触发相应的动作，通过Network面板和node日志即可验证，此处篇幅有限先不赘述。</p>
 </blockquote>
@@ -698,15 +697,20 @@
 <li>使用HTML的meta标签来指定缓存行为</li>
 <li>使用查询字符串来避免缓存。因为缓存有一些<a href="https://gtmetrix.com/remove-query-strings-from-static-resources.html" target="_blank" rel="noopener">已知的问题</a>，使用查询字符串会导致有些代理服务器不缓存资源。</li>
 </ol>
-<h2><span id="五-小试牛刀看看你掌握了没有">五、小试牛刀，看看你掌握了没有？</span></h2><p>如果首次访问<code>localhost:1030</code>时，页面中 avatar.png 响应头信息如下：</p>
+<h2><span id="五-小试牛刀看看你掌握了没有">五、小试牛刀，看看你掌握了没有？</span></h2><p>看了这么多内容，是时候来看看成果了。那么一起看下下面的问题吧。</p>
+<p>如果首次访问<code>localhost:1030</code>时，页面中 avatar.png 响应头信息如下：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line"><span class="keyword">Cache</span>-Control: <span class="keyword">no</span>-<span class="keyword">cache</span></span><br><span class="line"><span class="keyword">Content</span>-<span class="keyword">Type</span>: image/png</span><br><span class="line"><span class="keyword">Last</span>-Modified: Tue, <span class="number">16</span> <span class="keyword">Oct</span> <span class="number">2018</span> <span class="number">11</span>:<span class="number">42</span>:<span class="number">28</span> GMT</span><br><span class="line"><span class="keyword">Accept</span>-Ranges: <span class="keyword">bytes</span></span><br><span class="line"><span class="built_in">Date</span>: Tue, <span class="number">16</span> <span class="keyword">Oct</span> <span class="number">2018</span> <span class="number">15</span>:<span class="number">57</span>:<span class="number">21</span> GMT</span><br></pre></td></tr></table></figure>
 <p>问题1：请问当刷新该页面后，avatar.png如何二次加载？</p>
 <p>问题2：如果将上述信息中的<code>Cache-Control</code>设置为 private，那么结果又会如何呢？</p>
 <p>大家先回忆下上面的内容，思考一下。</p>
+<blockquote>
+<p>试题来源：<a href="https://mp.weixin.qq.com/s?__biz=MzA3NTYzODYzMg==&amp;mid=2653578381&amp;idx=1&amp;sn=3f676e2b2e08bcff831c69d31cf51c51&amp;key=dde62796d24517c892043e67f2520e046c13fc0558822ef7ba7fbe8003ddde05e22230fb4ccb2c31133df2a507940c5d4561c7b4f4570969a47cf1388ff57e4bfea70a3810f3fc805e2a5d9aa3192439&amp;ascene=0&amp;uin=MTM4MjU5NzA0MA%3D%3D&amp;devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.11.6+build&amp;version=12010110&amp;nettype=WIFI&amp;fontScale=100&amp;pass_ticket=n3plsW%2FV7Vb6O9hKzPNig5MYpXUoJo3tNUNxhJ5Jh6e9AS%2BRXmvJPbIzUeUmL3S2" target="_blank" rel="noopener">彻底弄懂 Http 缓存机制 - 基于缓存策略三要素分解法</a>。在此致谢。</p>
+</blockquote>
 <p>好了公布答案。</p>
-<p>问题1：会带着<code>If-Modified-Since</code>和服务端进行验证。未改变返回304，改变返回200.
-问题2：<code>Cache-Control</code>设置为 private，这时候会触发启发式缓存，则再次刷新时，avatar.png命中强缓存，从缓存中换取。</p>
+<p>问题1：会带着<code>If-Modified-Since</code>和服务端进行验证。未改变返回304，改变返回200。</p>
+<p>问题2：<code>Cache-Control</code>设置为 private，这时候会触发启发式缓存，则再次刷新时，avatar.png命中强缓存，从缓存中换取。</p>
 <h2><span id="总结">总结</span></h2><p>好了，文章到此结束，希望能对大家有帮助。</p>
+<h2><span id="致谢">致谢</span></h2><p>感谢《深入浅出Vue.js》作者<a href="https://github.com/berwin" target="_blank" rel="noopener">刘博文</a>对本文提出的宝贵建议。</p>
 <h2><span id="参考链接">参考链接</span></h2><blockquote>
 <ol>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control" target="_blank" rel="noopener">MDN | Cache-Control
@@ -730,7 +734,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/10/09/web-browser-cache-strategy/" data-id="cjnby5rb8000xsq3yh8wmhg96" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/10/09/web-browser-cache-strategy/" data-id="cjqlmgnpw000aoq3y7w5gi68k" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -807,6 +811,15 @@
         
 <nav id="article-nav">
     
+        <a href="/2019/01/06/ES-Module-And-Questions/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    ES模块基础用法及常见问题
+                
+            </div>
+        </a>
+    
     
         <a href="/2018/08/29/从撒狗粮带你了解WoT连接场景/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
@@ -844,6 +857,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2019/01/06/ES-Module-And-Questions/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/01/06/ES-Module-And-Questions/" class="title">ES模块基础用法及常见问题</a></p>
+                            <p class="item-date"><time datetime="2019-01-06T11:18:47.000Z" itemprop="datePublished">2019-01-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/10/09/web-browser-cache-strategy/" class="thumbnail">
     
     
@@ -855,7 +887,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/10/09/web-browser-cache-strategy/" class="title">浏览器缓存策略</a></p>
+                            <p class="item-title"><a href="/2018/10/09/web-browser-cache-strategy/" class="title">浏览器缓存策略之扫盲篇</a></p>
                             <p class="item-date"><time datetime="2018-10-09T07:45:32.000Z" itemprop="datePublished">2018-10-09</time></p>
                         </div>
                     </li>
@@ -917,25 +949,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/05/23/如何清除行内元素之间的HTML空白/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/align.gif)" alt="如何清除行内元素之间的HTML空白" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/05/23/如何清除行内元素之间的HTML空白/" class="title">如何清除行内元素之间的HTML空白</a></p>
-                            <p class="item-date"><time datetime="2018-05-23T10:00:48.000Z" itemprop="datePublished">2018-05-23</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -954,7 +967,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1000,7 +1013,7 @@
         <footer id="footer">
     <!-- <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 verymuch<br>
+            &copy; 2019 verymuch<br>
             Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
         </div>
     </div> -->
