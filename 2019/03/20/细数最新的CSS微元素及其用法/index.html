@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>细数CSS伪元素及其用法 | 歪马行空</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="引言CSS中有两个很常见的概念，伪类和伪元素。 伪类用于在页面中的元素处于某个状态时，为其添加指定的样式。 伪元素会创建一个抽象的伪元素，这个元素不是DOM中的真实元素，但是会在最终的渲染树中，我们可以为其添加样式。 最常规的区分伪类和伪元素的方法是：想要实现伪类的效果可以通过添加类来实现，但是想要实现伪元素的等价效果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="细数CSS伪元素及其用法">
+<meta property="og:url" content="http://verymuch.com/2019/03/20/细数最新的CSS微元素及其用法/index.html">
+<meta property="og:site_name" content="歪马行空">
+<meta property="og:description" content="引言CSS中有两个很常见的概念，伪类和伪元素。 伪类用于在页面中的元素处于某个状态时，为其添加指定的样式。 伪元素会创建一个抽象的伪元素，这个元素不是DOM中的真实元素，但是会在最终的渲染树中，我们可以为其添加样式。 最常规的区分伪类和伪元素的方法是：想要实现伪类的效果可以通过添加类来实现，但是想要实现伪元素的等价效果只能创建实际的DOM节点。 此外，伪类是使用单冒号:，伪元素使用是双冒号">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://p0.qhimg.com/t0132539fc584f4ad64.png">
+<meta property="og:image" content="http://p7.qhimg.com/t01ab69821d22fe9427.png">
+<meta property="og:image" content="http://p2.qhimg.com/t01b5169338f4d74fe9.png">
+<meta property="og:image" content="http://p1.qhimg.com/t0160d558882af78a29.png">
+<meta property="og:image" content="http://p4.qhimg.com/t01b41bf71611e3b4ad.png">
+<meta property="og:image" content="http://p0.qhimg.com/t01f60cc74cffe065d5.png">
+<meta property="og:image" content="http://p6.qhimg.com/t01b0018805155c151c.png">
+<meta property="og:image" content="http://p4.qhimg.com/t01161934c1acc9d68f.png">
+<meta property="og:image" content="http://p3.qhimg.com/t018df68977e4e5eb69.png">
+<meta property="og:image" content="http://p2.qhimg.com/t01c2ea1fa19a2683a8.png">
+<meta property="og:image" content="http://p8.qhimg.com/t011001903fb568784f.png">
+<meta property="og:updated_time" content="2019-03-20T10:44:14.539Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="细数CSS伪元素及其用法">
+<meta name="twitter:description" content="引言CSS中有两个很常见的概念，伪类和伪元素。 伪类用于在页面中的元素处于某个状态时，为其添加指定的样式。 伪元素会创建一个抽象的伪元素，这个元素不是DOM中的真实元素，但是会在最终的渲染树中，我们可以为其添加样式。 最常规的区分伪类和伪元素的方法是：想要实现伪类的效果可以通过添加类来实现，但是想要实现伪元素的等价效果只能创建实际的DOM节点。 此外，伪类是使用单冒号:，伪元素使用是双冒号">
+<meta name="twitter:image" content="http://p0.qhimg.com/t0132539fc584f4ad64.png">
+    
+
+    
+        <link rel="alternate" href="/" title="歪马行空" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/css/images/avatar2.jpg" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">歪马行空</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="https://github.com/verymuch">GitHub</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar0.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="https://github.com/verymuch">GitHub</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar0.jpg" />
+            <h2 id="name">verymuch</h2>
+            <h3 id="title">Web Developer ( FE )</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Beijing, China</span>
+            <a id="follow" target="_blank" href="https://github.com/verymuch/">关注我</a>
+            <div style="text-align: center;font-size: 12px;color: orange;">
+                <span id="busuanzi_container_site_pv">
+                    总访问量<span id="busuanzi_value_site_pv"></span>次
+                </span>
+            </div>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                14
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                4
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/verymuch" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-细数最新的CSS微元素及其用法" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            细数CSS伪元素及其用法
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2019/03/20/细数最新的CSS微元素及其用法/">
+            <time datetime="2019-03-20T03:29:11.000Z" itemprop="datePublished">2019-03-20</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                        <span id="busuanzi_container_page_pv">
+                            <i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><link rel="stylesheet" href="/css/custom.css"></p>
+<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/generate-toc.js"></script>
+
+<h2><span id="引言">引言</span></h2><p>CSS中有两个很常见的概念，伪类和伪元素。</p>
+<p>伪类用于在页面中的元素处于某个状态时，为其添加指定的样式。</p>
+<p>伪元素会创建一个抽象的伪元素，这个元素不是DOM中的真实元素，但是会在最终的渲染树中，我们可以为其添加样式。</p>
+<p>最常规的区分伪类和伪元素的方法是：想要实现伪类的效果可以通过添加类来实现，但是想要实现伪元素的等价效果只能创建实际的DOM节点。</p>
+<p>此外，伪类是使用单冒号<code>:</code>，伪元素使用是双冒号<code>:</code>。</p>
+<p>伪元素可以分为排版伪元素、突出显示伪元素、tree-abiding伪元素。下面我们一起看看具体都有哪些吧。</p>
+<blockquote>
+<p>本文主要介绍<a href="https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#window-interface" target="_blank" rel="noopener">CSS Pseudo-Elements Module Level 4</a>涉及的伪元素，因为该标准仍处于草案阶段，所以会存在变动的可能。本文旨在带大家了解有哪些现在以及将来可用的伪类。看兴趣的可以持续跟进。</p>
+</blockquote>
+<a id="more"></a>
+<h2><span id="第一类排版伪元素">第一类：排版伪元素</span></h2><h3><span id="1-first-line伪元素">1. <code>::first-line</code>伪元素</span></h3><p>这个伪元素大家应该很熟悉，因为早在CSS2.1中就存在了。它用于描述所属源元素的第一格式化行。可以定义这一行的样式。</p>
+<p>如下面的CSS和HTML代码，其对应的效果如图所示。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span><span class="selector-pseudo">::first-line</span> &#123;</span><br><span class="line">  <span class="attribute">text-transform</span>: uppercase;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quisquam ipsum sunt doloribus accusamus quae atque quaerat quam deleniti beatae, ipsam nobis dignissimos fugiat reiciendis error deserunt. Odio, eligendi placeat.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://p0.qhimg.com/t0132539fc584f4ad64.png" alt="首行伪元素的基础效果"></p>
+<blockquote>
+<p>第一格式化行被截断的位置与元素的宽度、字体大小等很多因素有关，本文的截图均只为了展示效果而截取的。</p>
+</blockquote>
+<p>虽然在DOM中看不到，但实际上，上面的这段HTML代码会通过添加虚拟标签的方式进行修改。如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">p::first-line</span>&gt;</span>Lorem ipsum dolor sit amet consectetur adipisicing elit.<span class="tag">&lt;/<span class="name">p::first-line</span>&gt;</span> Necessitatibus quisquam ipsum sunt doloribus accusamus quae atque quaerat quam deleniti beatae, ipsam nobis dignissimos fugiat reiciendis error deserunt. Odio, eligendi placeat.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果<code>::first-line</code>伪元素的应用会截断真实的元素，这个时候会在截断的位置前先闭合标签，在截断位置之后再重新添加开标签。对比如下两段代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 无伪元素 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quisquam ipsum sunt doloribus accusamus quae atque quaerat quam deleniti beatae, ipsam nobis dignissimos fugiat reiciendis error deserunt.<span class="tag">&lt;/<span class="name">span</span>&gt;</span> Odio, eligendi placeat.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 有伪元素 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">p::first-line</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>Lorem ipsum dolor sit amet consectetur adipisicing elit.<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p::first-line</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span> Necessitatibus quisquam ipsum sunt doloribus accusamus quae atque quaerat quam deleniti beatae, ipsam nobis dignissimos fugiat reiciendis error deserunt.<span class="tag">&lt;/<span class="name">span</span>&gt;</span> Odio, eligendi placeat.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4><span id="11-如何确定第一格式化行">1.1 如何确定第一格式化行</span></h4><p>需要注意的是，<code>::first-line</code>伪元素只有应用在块级容器上才有效，且必须出现在相同流中的块级子孙元素中（即没有定位和浮动）。</p>
+<p>如下所示，DIV的首行就是P元素的首行</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Lorem ipsum<span class="tag">&lt;/<span class="name">p</span>&gt;</span> dolor sit amet consectetur adipisicing elit. Omnis asperiores voluptatem sit ipsa ex fugit provident tenetur eum pariatur impedit cumque corrupti iste expedita, esse nulla ad et excepturi. Iste!</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 等价抽象代码 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">div::first-line</span>&gt;</span>Lorem ipsum<span class="tag">&lt;/<span class="name">div::first-line</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span> dolor sit amet consectetur adipisicing elit. Omnis asperiores voluptatem sit ipsa ex fugit provident tenetur eum pariatur impedit cumque corrupti iste expedita, esse nulla ad et excepturi. Iste!</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://p7.qhimg.com/t01ab69821d22fe9427.png" alt="内嵌块级元素的首行"></p>
+<p>此外，display值为<code>table-cell</code>和<code>inline-block</code>的元素的内容，不能作为祖先元素的第一格式化行内容。</p>
+<p>如下所示，如果将上面HTML代码中P改为<code>display: inline-block</code>，则其不会应用首行效果。</p>
+<p>如下所示，可以看出Lorem ipsum仍为小写：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"display: inline-block;"</span>&gt;</span>Lorem ipsum<span class="tag">&lt;/<span class="name">p</span>&gt;</span> dolor sit amet consectetur adipisicing elit. Omnis asperiores voluptatem sit ipsa ex fugit</span><br><span class="line">  provident tenetur eum pariatur impedit cumque corrupti iste expedita, esse nulla ad et excepturi. Iste!</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 等价抽象代码 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"display: inline-block;"</span>&gt;</span>Lorem ipsum<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">div::first-line</span>&gt;</span> dolor sit amet consectetur adipisicing elit. Omnis<span class="tag">&lt;/<span class="name">div::first-line</span>&gt;</span> asperiores voluptatem sit ipsa ex fugit</span><br><span class="line">  provident tenetur eum pariatur impedit cumque corrupti iste expedita, esse nulla ad et excepturi. Iste!</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://p2.qhimg.com/t01b5169338f4d74fe9.png" alt="内嵌非块级元素的首行"></p>
+<h4><span id="12-可以用于first-line伪元素的样式">1.2 可以用于<code>::first-line</code>伪元素的样式</span></h4><p><code>::first-line</code>生成的伪元素的行为类似于一个行级元素，还有一些其他限制。主要有以下样式可以应用于其上：</p>
+<ul>
+<li>所有的字体属性</li>
+<li><code>color</code>和<code>opacity</code>属性</li>
+<li>所有的背景属性</li>
+<li>可以应用于行级元素的排版属性</li>
+<li>文字装饰属性</li>
+<li>可以用于行级元素的行布局属性</li>
+<li>其他一些规范中特别指定可以应用的属性</li>
+</ul>
+<p>此外，浏览器厂商有可能额外应用其他属性。</p>
+<h3><span id="2-first-letter伪元素">2. <code>::first-letter</code>伪元素</span></h3><p><code>::first-letter</code>伪元素代表所属源元素的第一格式化行的第一个排版字符单元，并且其前面没有任何其他内容。</p>
+<p><code>::first-letter</code>常用于下沉首字母效果。</p>
+<p>如下，我们可以创建一个下沉两行的段落。第一种方法，是[CSS-INLINE-3]:(<a href="https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#biblio-css-inline-3)中引入的，浏览器尚不支持。我们可以通过第二种方法实现同样的效果。" target="_blank" rel="noopener">https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#biblio-css-inline-3)中引入的，浏览器尚不支持。我们可以通过第二种方法实现同样的效果。</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>“Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos hic vero reprehenderit sunt temporibus?</span><br><span class="line">  Doloribus consequatur quo illo porro quae recusandae autem eos. Corrupti itaque alias nam eius animi illum.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!<span class="selector-tag">--</span> <span class="selector-tag">initial-letter</span>(尚不支持) <span class="selector-tag">--</span>&gt;</span><br><span class="line"><span class="selector-tag">p</span><span class="selector-pseudo">::first-letter</span> &#123; <span class="attribute">initial-letter</span>: <span class="number">2</span>; &#125;</span><br><span class="line"></span><br><span class="line">&lt;!<span class="selector-tag">--</span> 普通实现 <span class="selector-tag">--</span>&gt;</span><br><span class="line"><span class="selector-tag">h3</span> + <span class="selector-tag">p</span><span class="selector-pseudo">::first-letter</span> &#123; </span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">32px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">15px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://p1.qhimg.com/t0160d558882af78a29.png" alt="首字母下沉效果"></p>
+<p>注意，第一个排版字符单元前的标点符号（可以是多个标点符号）也要包含在<code>::first-letter</code>伪元素内。<a href="https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#biblio-css3text" target="_blank" rel="noopener">CSS3 TEXT</a>中规定，一个排版字符单元可以包含超过一个的Unicode码点。不同的语言也可以有额外的规则决定如何处理。</p>
+<p>如果将要放入<code>::first-letter</code>伪元素的字符不在同一个元素中，如<code>&lt;p&gt;“&lt;em&gt;L</code>中的<code>&quot;L</code>，浏览器可以选择一个元素创建伪元素，也可以两个都创建，或者都不创建。</p>
+<p>在chrome下效果如下，还是挺奇怪的。所以尽量避免该情况。</p>
+<p><img src="http://p4.qhimg.com/t01b41bf71611e3b4ad.png" alt="伪元素中的字符不在同一个元素内"></p>
+<p>此外，如果块元素的首字母不在行首（如由于双向重新排序），则浏览器不需要创建伪元素。</p>
+<h4><span id="21-如何确定首字母">2.1 如何确定首字母</span></h4><p>首字母必须出现在第一格式化行内。</p>
+<p>如下所示，将<code>b</code>标签改为<code>display: inline-block;</code>，则其不会出现在第一格式化行内，所以首字母无效果。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>“<span class="tag">&lt;<span class="name">b</span> <span class="attr">style</span>=<span class="string">"display: inline-block;"</span>&gt;</span>Lorem<span class="tag">&lt;/<span class="name">b</span>&gt;</span>” ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos hic vero reprehenderit sunt temporibus?</span><br><span class="line">  Doloribus consequatur quo illo porro quae recusandae autem eos. Corrupti itaque alias nam eius animi illum.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://p0.qhimg.com/t01f60cc74cffe065d5.png" alt="首字母不在首行内无效果"></p>
+<p>目前，<code>::first-letter</code>只可用于块级元素，未来可能会允许应用到更多的<code>display</code>类型中。</p>
+<p>伪元素的虚拟标签应当紧跟在首字母之前，哪怕这个首字母是在子孙元素，这一点和<code>::first-line</code>类似。</p>
+<p>如下例，首字母首字母在子孙元素中，首字母的并没有加粗，因为伪元素是添加到span标签内部的，所以字重是正常的。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123; <span class="attribute">line-height</span>: <span class="number">1.1</span> &#125;</span><br><span class="line"><span class="selector-tag">p</span><span class="selector-pseudo">::first-letter</span> &#123; <span class="attribute">font-size</span>: <span class="number">2em</span>; <span class="attribute">font-weight</span>: normal &#125;</span><br><span class="line"><span class="selector-tag">span</span> &#123; <span class="attribute">font-weight</span>: bold &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>Lorem ipsum<span class="tag">&lt;/<span class="name">span</span>&gt;</span> dolor sit amet consectetur adipisicing elit. Magni possimus rerum eaque architecto, adipisci neque odio, recusandae sapiente placeat ullam velit ratione esse aut expedita quae earum. Velit, dignissimos accusamus?<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://p6.qhimg.com/t01b0018805155c151c.png" alt="首字母在子孙元素的样式覆盖"></p>
+<p>如果元素有<code>::before</code>或者<code>::after</code>，则<code>::first-letter</code>伪元素也可以应用到其<code>content</code>值中。</p>
+<p>如果元素是列表项（即<code>display: list-item</code>），则首字母会应用在标记符号后面。如下图：</p>
+<p><img src="http://p4.qhimg.com/t01161934c1acc9d68f.png" alt="列表项的首字母"></p>
+<p>如果列表项的显示位置在内部（即<code>list-style-position: inside</code>），浏览器可以选择忽略<code>::first-letter</code>伪元素。</p>
+<h4><span id="22-可以用于first-letter伪元素的样式">2.2 可以用于<code>::first-letter</code>伪元素的样式</span></h4><p><code>::first-line</code>生成的伪元素的行为类似于一个行级元素，还有一些其他限制。主要有以下样式可以应用于其上：</p>
+<ul>
+<li>所有的字体属性</li>
+<li><code>color</code>和<code>opacity</code>属性</li>
+<li>所有的背景属性</li>
+<li>可以应用于行级元素的排版属性</li>
+<li>文字装饰属性</li>
+<li>可以用于行级元素的行布局属性</li>
+<li>margin和padding属性</li>
+<li>border和box-shadow</li>
+<li>其他一些规范中特别指定可以应用的属性</li>
+</ul>
+<p>同样，浏览器厂商有可能额外应用其他属性。</p>
+<h2><span id="第二类突出显示伪元素">第二类：突出显示伪元素</span></h2><p>突出显示伪元素表示文档中特定状态的部分，通常采用不同的样式展示该状态。如页面内容的选中。</p>
+<p>突出显示伪元素不需要在元素树中有体现，并且可以任意跨越元素边界而不考虑其嵌套结构。</p>
+<p>突出显示伪元素主要有以下几类：</p>
+<ol>
+<li><code>::selection</code>与<code>::inactive-selection</code></li>
+</ol>
+<p>这两个伪元素表示用户在文档中选取的内容。<code>::selection</code>表示有效的选择，相反，<code>::inactive-selection</code>表示无效的选择（如当窗口无效，无法相应选中事件时）</p>
+<p>如下图所示，我们可以定义页面中选中内容的样式，输入框中的内容也可以。</p>
+<p><img src="http://p3.qhimg.com/t018df68977e4e5eb69.png" alt="选中高亮样式"></p>
+<p>请原谅我也无法触发<code>::inactive-selection</code>。大家知道它是干啥的就行了。</p>
+<ol>
+<li><code>::spelling-error</code></li>
+</ol>
+<p><code>::spelling-error</code>表示浏览器识别为拼写错误的文本部分。</p>
+<ol>
+<li><code>::grammar-error</code></li>
+</ol>
+<p><code>::grammar-error</code>表示浏览器识别为语法错误的文本部分。</p>
+<p><code>::spelling-error</code>和<code>::grammar-error</code>暂时均无实现。一方面，不同的语言的语法与拼写较为复杂。另一方面，<code>::spelling-error</code>和<code>::grammar-error</code>还可能会导致用户隐私的泄露，如用户名和地址等。所以浏览器实现必须避免读取这类突出显示内容的样式。</p>
+<h3><span id="可以应用到突出显示类伪元素的样式">可以应用到突出显示类伪元素的样式</span></h3><p>对于突出显示类伪元素，我们只可以应用不影响布局的属性。如下：</p>
+<ul>
+<li><code>color</code></li>
+<li><code>background-color</code></li>
+<li><code>cursor</code></li>
+<li><code>caret-color</code></li>
+<li><code>caret-color</code></li>
+<li><code>text-decoration</code>及其相关属性</li>
+<li><code>text-shadow</code></li>
+<li><code>stroke-color</code>/<code>fill-color</code>/<code>stroke-width</code></li>
+</ul>
+<blockquote>
+<p>草案中对这里可以应用的属性还有待确认，所以会存在一定的增减。现阶段，也只有color和background得到了支持。</p>
+</blockquote>
+<h2><span id="第三类存在于元素树中的伪元素">第三类：存在于元素树中的伪元素</span></h2><p>这类伪元素会一直存在于元素树中，它们汇集成源元素的任何属性。</p>
+<h3><span id="内容生成伪元素beforeafter">内容生成伪元素：<code>::before</code>/<code>::after</code></span></h3><p>当<code>::before</code>/<code>::after</code>伪元素的<code>content</code>属性不为<code>&#39;none&#39;</code>时，这两类伪元素就会生成一个盒子，作为源元素的子元素，可以和DOM树中的元素一样定义样式。所以可以添加任意的样式。</p>
+<p><code>::before</code>是在源元素的实际内容前添加伪元素。<code>::after</code>是在源元素的实际内容后添加伪元素。</p>
+<p>正如上文提到的，与常规的元素一样，<code>::before</code>和<code>::after</code>两个伪元素可以包含<code>::first-line</code>和<code>::first-letter</code>。</p>
+<h3><span id="列表项标记伪元素markder">列表项标记伪元素：<code>::markder</code></span></h3><p><code>::markder</code>可以用于定义列表项标记的样式。</p>
+<p>如下，我们可以分开定义列表项及其内容的颜色。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">li</span>&#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">li</span><span class="selector-pseudo">::marker</span> &#123; </span><br><span class="line">  <span class="attribute">color</span>:green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://p2.qhimg.com/t01c2ea1fa19a2683a8.png" alt="自定义列表项标记颜色"></p>
+<blockquote>
+<p>该伪元素暂时只有safari支持，尝试的话请使用safari。可以用于该伪元素的属性也有限，包括所有字体样式、<code>color</code>以及<code>text-combine-upright</code>，有待以后扩充。</p>
+</blockquote>
+<h3><span id="输入框占位伪元素placeholder">输入框占位伪元素：<code>::placeholder</code></span></h3><p><code>::placeholder</code>表示输入框内占位提示文字。可以定义其样式。</p>
+<p>如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">::placeholder</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://p8.qhimg.com/t011001903fb568784f.png" alt="输入框占位伪元素样式"></p>
+<p>所有可以应用到<code>::first-line</code>伪元素的样式也可以用于<code>::placeholder</code>上。</p>
+<blockquote>
+<p>注意还有一个<code>:placeholder-shown</code>伪类，它主要用于定义显示了占位文字的元元素本身的样式，而不是占位文字的样式。</p>
+</blockquote>
+<h2><span id="总结">总结</span></h2><p>本文列举了<a href="https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#window-interface" target="_blank" rel="noopener">CSS Pseudo-Elements Module Level 4</a>中的所有伪元素类型，虽然有些还没有得到支持，但是这也是伪元素的一种需求，如果你也有相同的需求，可以持续关注（见链接：<a href="https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#window-interface）。" target="_blank" rel="noopener">https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#window-interface）。</a></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://verymuch.com/2019/03/20/细数最新的CSS微元素及其用法/" data-id="cjth2xmi60013jt4s8m24wlr6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://verymuch.com/2019/03/20/细数最新的CSS微元素及其用法/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2019/03/20/细数最新的CSS微元素及其用法/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/03/20/first-line/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    (no title)
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2019/01/18/CSS的“层”峦“叠”翠/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">CSS的“层”峦“叠”翠</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/20/highlight-pe/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/03/20/highlight-pe/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2019-03-20T09:37:55.129Z" itemprop="datePublished">2019-03-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/20/first-letter/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/03/20/first-letter/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2019-03-20T07:58:04.797Z" itemprop="datePublished">2019-03-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/20/first-line/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/03/20/first-line/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2019-03-20T06:26:52.315Z" itemprop="datePublished">2019-03-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/20/细数最新的CSS微元素及其用法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/03/20/细数最新的CSS微元素及其用法/" class="title">细数CSS伪元素及其用法</a></p>
+                            <p class="item-date"><time datetime="2019-03-20T03:29:11.000Z" itemprop="datePublished">2019-03-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/01/18/CSS的“层”峦“叠”翠/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://p5.qhimg.com/t016a34c4e389a7abb8.jpg)" alt="CSS的“层”峦“叠”翠" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/01/18/CSS的“层”峦“叠”翠/" class="title">CSS的“层”峦“叠”翠</a></p>
+                            <p class="item-date"><time datetime="2019-01-18T09:59:47.000Z" itemprop="datePublished">2019-01-18</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WoT/">WoT</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CSS/" style="font-size: 20px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/WoT/" style="font-size: 10px;">WoT</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <!-- <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2019 verymuch<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div> -->
+    <!-- <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://verymuch.com/2019/03/20/细数最新的CSS微元素及其用法/';
+        
+        this.page.identifier = '细数最新的CSS微元素及其用法';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

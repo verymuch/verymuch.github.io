@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>CSS的“层”峦“叠”翠 | 歪马行空</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前言提起，z-index大家脑海里可能会立刻浮现这样的知识点：“z-index的值大小控制元素在Z轴上显示的层级，z-index越大显示的层级越高（也就是在最上层，离观察者越近），没有指定的按照出现顺序堆叠，此外z-index不能跨父元素比较。 z-index的使用似乎就是这么简单，对吧？ 我们先看如下例1： 12&a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS的“层”峦“叠”翠">
+<meta property="og:url" content="http://verymuch.com/2019/01/18/CSS的“层”峦“叠”翠/index.html">
+<meta property="og:site_name" content="歪马行空">
+<meta property="og:description" content="前言提起，z-index大家脑海里可能会立刻浮现这样的知识点：“z-index的值大小控制元素在Z轴上显示的层级，z-index越大显示的层级越高（也就是在最上层，离观察者越近），没有指定的按照出现顺序堆叠，此外z-index不能跨父元素比较。 z-index的使用似乎就是这么简单，对吧？ 我们先看如下例1： 12&amp;lt;div class=&quot;box box1&quot;&amp;gt;DIV#1，z-in">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://p5.qhimg.com/t016a34c4e389a7abb8.jpg">
+<meta property="og:updated_time" content="2019-02-25T03:12:57.910Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS的“层”峦“叠”翠">
+<meta name="twitter:description" content="前言提起，z-index大家脑海里可能会立刻浮现这样的知识点：“z-index的值大小控制元素在Z轴上显示的层级，z-index越大显示的层级越高（也就是在最上层，离观察者越近），没有指定的按照出现顺序堆叠，此外z-index不能跨父元素比较。 z-index的使用似乎就是这么简单，对吧？ 我们先看如下例1： 12&amp;lt;div class=&quot;box box1&quot;&amp;gt;DIV#1，z-in">
+<meta name="twitter:image" content="http://p5.qhimg.com/t016a34c4e389a7abb8.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="歪马行空" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/css/images/avatar2.jpg" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">歪马行空</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="https://github.com/verymuch">GitHub</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar0.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="https://github.com/verymuch">GitHub</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar0.jpg" />
+            <h2 id="name">verymuch</h2>
+            <h3 id="title">Web Developer ( FE )</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Beijing, China</span>
+            <a id="follow" target="_blank" href="https://github.com/verymuch/">关注我</a>
+            <div style="text-align: center;font-size: 12px;color: orange;">
+                <span id="busuanzi_container_site_pv">
+                    总访问量<span id="busuanzi_value_site_pv"></span>次
+                </span>
+            </div>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                14
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                4
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/verymuch" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-CSS的“层”峦“叠”翠" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            CSS的“层”峦“叠”翠
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2019/01/18/CSS的“层”峦“叠”翠/">
+            <time datetime="2019-01-18T09:59:47.000Z" itemprop="datePublished">2019-01-18</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                        <span id="busuanzi_container_page_pv">
+                            <i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><link rel="stylesheet" href="/css/custom.css"></p>
+<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/generate-toc.js"></script>
+
+<h2><span id="前言">前言</span></h2><p>提起，z-index大家脑海里可能会立刻浮现这样的知识点：“z-index的值大小控制元素在Z轴上显示的层级，z-index越大显示的层级越高（也就是在最上层，离观察者越近），没有指定的按照出现顺序堆叠，此外z-index不能跨父元素比较。</p>
+<p>z-index的使用似乎就是这么简单，对吧？</p>
+<p>我们先看如下例1：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box box1"</span>&gt;</span>DIV#1，z-index为2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box box2"</span>&gt;</span>DIV#2，z-index为auto<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>HTML中有如下两个元素，DIV#1的z-index为<code>2</code>，DIV#2向右向上偏移。问：它们谁会显示在上面？</p>
+<p><img src="http://p9.qhimg.com/t01901b512bb409202d.png" alt="示例1 - 用法引导"></p>
+<!-- codepen示例代码 -->
+<p></p><p class="codepen" data-height="331" data-theme-id="light" data-default-tab="result" data-user="verymuch" data-slug-hash="jdNwOW" style="height: 331px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS的“层”峦“叠”翠 - 示例1 - 用法导引">
+  <span>点击<a href="https://codepen.io/verymuch/pen/jdNwOW/" target="_blank" rel="noopener">
+  CSS的“层”峦“叠”翠 - 示例1 - 用法导引</a> 进行编辑 (<a href="https://codepen.io/verymuch" target="_blank" rel="noopener">@verymuch</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> --><p></p>
+<p>如上所示，z-index为2的元素并没有显示在第二个元素上面。这似乎很奇怪，那到底是为什么呢？</p>
+<p>如果你也对此存在困扰，那就和我一起往下看吧。笔者将逐步引导大家深入理解z-index的用法。</p>
+<a id="more"></a>
+<h2><span id="一-没有使用z-index时元素如何堆叠">一、没有使用z-index时，元素如何堆叠？</span></h2><p>首先，我们先了解下默认情况下，元素的堆叠，即在没有使用z-index时，元素是如何堆叠的。</p>
+<p>如果没有给任何元素指定z-index，则元素按照如下顺序进行堆叠（由下到上，由远及近）。</p>
+<ol>
+<li>根元素的背景和边框</li>
+<li>非定位的后代块元素，按照在HTML中的出现顺序进行堆叠</li>
+<li>定位的后代块元素，按照在HTML中的出现顺序进行堆叠</li>
+</ol>
+<blockquote>
+<p>注：定位的元素即为position的值不是static的元素</p>
+</blockquote>
+<p><img src="http://p2.qhimg.com/t017ac57b1fd7e12d2c.png" alt="示例2 - 无z-index时的默认堆叠"></p>
+<!-- codepen示例 -->
+<p></p><p class="codepen" data-height="610" data-theme-id="light" data-default-tab="result" data-user="verymuch" data-slug-hash="KJPvpQ" style="height: 610px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS的“层”峦“叠”翠 - 示例2 - 无z-index时的默认堆叠">
+  <span>点击<a href="https://codepen.io/verymuch/pen/KJPvpQ/" target="_blank" rel="noopener">
+  CSS的“层”峦“叠”翠 - 示例2 - 无z-index时的默认堆叠</a> 进行编辑 (<a href="https://codepen.io/verymuch" target="_blank" rel="noopener">@verymuch</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> --><p></p>
+<p>如上例2所示，定位的元素（DIV#1、DIV#2、DIV#3与DIV#4）按照出现的顺序堆叠。非定位的元素（DIV#5与DIV#6）虽然出现在后面，但是会被定位的元素遮盖，不过它们本身是按照出现顺序堆叠的。</p>
+<p>注意，<strong>当使用<code>order</code>属性改变<code>flex</code>元素子元素的出现顺序时，对于堆叠规则也有同样的影响。</strong></p>
+<p>如下例3所示，当将DIV#2的order改为-1后，它出现的位置为第一个，其堆叠顺序也被DIV#1所遮盖。</p>
+<p><img src="http://p2.qhimg.com/t01538f9d79432b61a0.png" alt="示例3 - flex中order对出现顺序的影响"></p>
+<p></p><p class="codepen" data-height="307" data-theme-id="light" data-default-tab="result" data-user="verymuch" data-slug-hash="RvbjQX" style="height: 307px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS的“层”峦“叠”翠 - 示例3 - flex中order对出现顺序的影响">
+  <span>点击<a href="https://codepen.io/verymuch/pen/RvbjQX/" target="_blank" rel="noopener">
+  CSS的“层”峦“叠”翠 - 示例3 - flex中order对出现顺序的影响</a> 进行编辑 (<a href="https://codepen.io/verymuch" target="_blank" rel="noopener">@verymuch</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> --><p></p>
+<h2><span id="二-浮动块默认如何堆叠">二、浮动块默认如何堆叠</span></h2><p>如果存在浮动块，浮动块的堆叠顺序会介于无定位元素和定位元素之间。即：</p>
+<ol>
+<li>根元素的背景和边框</li>
+<li>非定位的后代块元素，按照在HTML中的出现顺序进行堆叠</li>
+<li><strong>浮动块</strong></li>
+<li>定位的后代块元素，按照在HTML中的出现顺序进行堆叠</li>
+</ol>
+<p>我们稍微修改下示例2中的代码，将DIV#1和DIV#3改为浮动元素。可以看到如下例4所示，浮动元素的堆叠顺序高于非定位元素，低于定位元素。</p>
+<p><img src="http://p0.qhimg.com/t013a0e89d8a7b66bd9.png" alt="示例4 - 浮动块的堆叠"> </p>
+<p></p><p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="verymuch" data-slug-hash="pGogMq" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS的“层”峦“叠”翠 - 示例4 - 浮动块的堆叠">
+  <span>点击<a href="https://codepen.io/verymuch/pen/pGogMq/" target="_blank" rel="noopener">
+  CSS的“层”峦“叠”翠 - 示例4 - 浮动块的堆叠</a> 进行编辑 (<a href="https://codepen.io/verymuch" target="_blank" rel="noopener">@verymuch</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> --><p></p>
+<p>此外，还有一点小改动，不知道你有没有注意到，我们将非定位元素中的文本内容改为了左对齐，但其内容并没有被浮动元素覆盖。这其实是浮动元素的标准效果——环绕效果。这一行为也可以列为堆叠顺序之一。顺序如下：</p>
+<ol>
+<li>根元素的背景和边框</li>
+<li>非定位的后代块元素，按照在HTML中的出现顺序进行堆叠</li>
+<li>浮动块</li>
+<li><strong>非定位元素的后代行内元素</strong></li>
+<li>定位的后代块元素，按照在HTML中的出现顺序进行堆叠</li>
+</ol>
+<p>为了让大家清晰的理解上面所说的非定位元素的后代行内元素。大家可以看下例5。DIV#1为浮动元素，所以其层级高于在其后出现的DIV#2。此时DIV#1向右偏移，可以看见DIV#2中的行内文字元素(可以为纯文字节点)层级高于DIV#1。</p>
+<p><img src="http://p9.qhimg.com/t0171cbc60777b42f35.png" alt="示例5 - 非定位元素的后代行内元素"></p>
+<p></p><p class="codepen" data-height="200" data-theme-id="light" data-default-tab="result" data-user="verymuch" data-slug-hash="PVoOoX" style="height: 200px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS的“层”峦“叠”翠 - 示例5 - 非定位元素的后代行内元素">
+  <span>点击<a href="https://codepen.io/verymuch/pen/PVoOoX/" target="_blank" rel="noopener">
+  CSS的“层”峦“叠”翠 - 示例5 - 非定位元素的后代行内元素</a> 进行编辑 (<a href="https://codepen.io/verymuch" target="_blank" rel="noopener">@verymuch</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> --><p></p>
+<h2><span id="三-使用z-index自定义堆叠顺序">三、使用z-index自定义堆叠顺序</span></h2><p>以上是CSS中对于各类元素的默认排序，那我们能否自定义排序呢？答案显然是肯定的。使用z-index可以自定义堆叠顺序。</p>
+<p>z-index的值可以为整数（正数、负数、0均可）。使用方法很简单。</p>
+<p>需要注意以下三点：</p>
+<ol>
+<li>未指定z-index，默认为auto</li>
+<li>如果z-index相同，则按照默认规则比较</li>
+<li>z-index<strong>只能用于定位了的元素</strong>(暂时这么说，下文会追加解释)。<em>这也解释了本文开头的例1为什么不生效了。因为z-index对普通元素没有效果。</em></li>
+</ol>
+<p>如下例6，我们修改了例2中元素的z-index。</p>
+<p><strong>我们会发现DIV#5和DIV#6并不受z-index的影响</strong>。主要体现在两个方面，首先DIV#5的z-index大于DIV#6，但是显示却低于#DIV#6；其次是DIV#5的z-index小于DIV#4，但是仍显示在其上面。</p>
+<p>而对于定位的元素，z-index对其有影响，堆叠顺序与数字大小符合。</p>
+<p><img src="http://p8.qhimg.com/t0139f74dafdba629fa.png" alt="示例6 - 使用z-index自定义堆叠顺序"> </p>
+<p></p><p class="codepen" data-height="605" data-theme-id="light" data-default-tab="result" data-user="verymuch" data-slug-hash="bzGYqb" style="height: 605px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS的“层”峦“叠”翠 - 示例6 - 使用z-index自定义堆叠顺序">
+  <span>点击<a href="https://codepen.io/verymuch/pen/bzGYqb/" target="_blank" rel="noopener">
+  CSS的“层”峦“叠”翠 - 示例6 - 使用z-index自定义堆叠顺序</a> 进行编辑 (<a href="https://codepen.io/verymuch" target="_blank" rel="noopener">@verymuch</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> --><p></p>
+<p>好了，相信通过上述内容，大家对于z-index应该有了一定的了解，但是以上仅仅是基本知识，关于堆叠远远没有这么简单。</p>
+<p>想要彻底了解z-index，我们还要了解一下CSS堆叠的一个重要概念————堆叠上下文。</p>
+<h2><span id="四-堆叠上下文">四、堆叠上下文</span></h2><p>堆叠上下文是HTML中的三维概念，它抽象出了一个z轴，z轴垂直于显示器，指向用户（假设用户面朝显示区域）。</p>
+<p>在前面的内容中，之所以有些元素的渲染顺序会受到z-index影响，是因为它们都因为某种原因产生了一个<strong>堆叠上下文</strong>，而不仅仅是上文提到的定位的元素。</p>
+<p><strong>那么到底什么情况下会产生堆叠上下文呢？其实堆叠上下文的生成主要受到元素的属性所影响。</strong></p>
+<p>如果任何一个元素满足一下条件之一，就会生成一个堆叠上下文。</p>
+<ol>
+<li>文档的根元素（HTML）默认为一个堆叠上下文</li>
+<li><code>position</code>值为”absolute”或”relative”，且z-index指定了除了auto以外值的元素</li>
+<li><code>position</code>值为”fixed”或”sticky”</li>
+<li>弹性布局的子元素，且z-index指定了除了auto以外值的元素</li>
+<li><code>opacity</code>的值小于的元素</li>
+<li><code>mix-blend-mode</code>的值不是<code>normal</code>的元素</li>
+<li>以下属性值不为”none”的元素<ul>
+<li>transform</li>
+<li>filter</li>
+<li>perspective</li>
+<li>clip-path</li>
+<li>mask / mask-image / mask-border</li>
+</ul>
+</li>
+<li><code>isolation</code>值为”isolate”的元素</li>
+<li><code>-webkit-overflow-scrolling</code>值为”touch”的元素</li>
+<li><code>will-change</code>指定了除初始值以外的任何属性的元素</li>
+<li><code>contain</code>值为”layout”/“paint”及含义其中之一的组合值的元素</li>
+</ol>
+<p>如上所述，有11种情况会生成堆叠上下文，对于堆叠上下文可以通过z-index指定其堆叠的顺序（注意这里不是上面说的只对定位元素生效了）。</p>
+<p>对于堆叠上下文我们需要知道以下几点：</p>
+<ol>
+<li>在每个堆叠上下文内部，子元素的堆叠规则遵循上面所讲的基本规则。</li>
+<li>堆叠上下文可以包含在其他堆叠上下文内部，它们会创建一个堆叠上下文层级结构。</li>
+<li>堆叠上下文的层级结构与HTML的元素不同，因为对于没有创建堆叠上下文的元素会被父元素同化。<strong>堆叠上下文的层级只包括创建了堆叠上下文的元素</strong>。</li>
+<li>堆叠上下文独立于其兄弟元素，在处理自身内部堆叠时，只考虑其后代元素。内部堆叠完成后，将当前堆叠上下文当成一个整体，考虑在父堆叠上下文中的堆叠顺序。通俗的说，<strong>子堆叠上下文的z-index值只在父堆叠上下文中有意义。</strong></li>
+</ol>
+<p>注意，第四条和文章开头提到的“z-index不能跨父元素比较”是不等价的，因为其限制了必须是堆叠上下文。</p>
+<p>针对这几点，我们看一下例7。大家可以先看一下是否理解。然后我们再讲解一下。</p>
+<p><img src="http://p8.qhimg.com/t01a65ff345704b4310.png" alt="示例7 - 存在多级堆叠上下文时，元素的堆叠"></p>
+<p></p><p class="codepen" data-height="701" data-theme-id="0" data-default-tab="result" data-user="verymuch" data-slug-hash="QYbPvN" style="height: 701px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS的“层”峦“叠”翠 - 示例7 - 存在多级堆叠上下文时，元素的堆叠">
+  <span>点击<a href="https://codepen.io/verymuch/pen/QYbPvN/" target="_blank" rel="noopener">
+  CSS的“层”峦“叠”翠 - 示例7 - 存在多级堆叠上下文时，元素的堆叠</a> 进行编辑 (<a href="https://codepen.io/verymuch" target="_blank" rel="noopener">@verymuch</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> --><p></p>
+<p>示例7中，堆叠上下文的层级结构如下：</p>
+<ul>
+<li>root<ul>
+<li>DIV#1</li>
+<li>DIV#2<ul>
+<li>DIV#4</li>
+<li>DIV#5</li>
+<li>DIV#6</li>
+</ul>
+</li>
+<li>DIV#3</li>
+<li>DIV#8</li>
+</ul>
+</li>
+</ul>
+<p>其中DIV#4, DIV#5, DIV#6是DIV#2的子元素，可见其堆叠顺序被限制在DIV#2中，z-index的值只在DIV#2内部有效，然后DIV#2又作为一个整体与DIV#1，DIV#3按照上述规则进行堆叠。</p>
+<p>DIV#7被根元素同化，DIV#8与DIV#1, DIV#2, DIV#3按照上述规则进行堆叠。在其三之上。</p>
+<p>其实有个小方法能够帮助大家更好地判断如何堆叠，那就是把堆叠上下文的层级结构类比为版本号。如下：</p>
+<ul>
+<li>root<ul>
+<li>DIV#1 (V3)</li>
+<li>DIV#2 (V2)<ul>
+<li>DIV#4 (V2.1)</li>
+<li>DIV#5 (V2.3)</li>
+<li>DIV#6 (V2.4)</li>
+</ul>
+</li>
+<li>DIV#3 (V1)</li>
+<li>DIV#8 (V4)</li>
+</ul>
+</li>
+</ul>
+<p>如上，类比成版本号之后，我们就能很方便的判断出谁上谁下啦。</p>
+<h2><span id="五-注意事项">五、注意事项</span></h2><h3><span id="1-z-index-0与z-index-auto并不相同">1. <code>z-index: 0</code>与<code>z-index: auto</code>并不相同。</span></h3><p>通常情况下，相邻的两个元素，如果其z-index值分别为<code>0</code>和<code>auto</code>，看上去没什么区别的。如下例8所示。</p>
+<p>DIV#1的z-index值为0，其堆叠顺序并没有高于DIV#2，而是和出现顺序相同。</p>
+<p><img src="http://p9.qhimg.com/t0180f2ab512f55e244.png" alt="示例8 - zindex: 0 和 auto 的区别"></p>
+<p></p><p class="codepen" data-height="265" data-theme-id="0" data-default-tab="result" data-user="verymuch" data-slug-hash="omKOmM" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS的“层”峦“叠”翠 - 示例8 - zindex: 0 和 auto 的区别">
+  <span>点击<a href="https://codepen.io/verymuch/pen/omKOmM/" target="_blank" rel="noopener">
+  CSS的“层”峦“叠”翠 - 示例8 - zindex: 0 和 auto 的区别</a> 进行编辑 (<a href="https://codepen.io/verymuch" target="_blank" rel="noopener">@verymuch</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> --><p></p>
+<p>但是实际上，这两种情况并不相同。上面提到，当元素“<code>position</code>值为”absolute”或”relative”，且z-index指定了除了auto以外值”时，元素会产生一个堆叠上下文，虽然元素本身堆叠顺序没有影响，但是其子元素的堆叠顺序会有影响。如下例9所示。</p>
+<p>因为DIV#1的z-index值不为auto，其产生了堆叠上下文，所以其子元素被限制在其内部，低于DIV#2(如果z-index是auto的话，DIV#3会高与DIV#2)。</p>
+<p><img src="http://p6.qhimg.com/t013271819e3dd047a2.png" alt="示例9 - zindex: 0 和 auto 的区别（2）"></p>
+<p></p><p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="verymuch" data-slug-hash="yZmrWg" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS的“层”峦“叠”翠 - 示例9 - zindex: 0 和 auto 的区别（2）">
+  <span>点击<a href="https://codepen.io/verymuch/pen/yZmrWg/" target="_blank" rel="noopener">
+  CSS的“层”峦“叠”翠 - 示例9 - zindex: 0 和 auto 的区别（2）</a> 进行编辑 (<a href="https://codepen.io/verymuch" target="_blank" rel="noopener">@verymuch</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> --><p></p>
+<h3><span id="2-不要滥用z-index将堆叠上下文的层级结构打平">2. 不要滥用<code>z-index</code>，将堆叠上下文的层级结构打平</span></h3><p>笔者之所以这样建议，是因为当堆叠上下文的层级结构比较复杂时，简单的修改某个元素的z-index或者其他属性，会导致一些无法预知的影响。</p>
+<p>如下例时所示，DIV#2是DIV#1的子元素，DIV#4是DIV#3的子元素，DIV#1和DIV#3不是堆叠上下文，则DIV#2与DIV#4的堆叠顺序与它们的z-index值对应。</p>
+<p><img src="http://p5.qhimg.com/t01b4385b3b982323d0.png" alt="示例10 - zindex造成的影响"></p>
+<p></p><p class="codepen" data-height="309" data-theme-id="0" data-default-tab="result" data-user="verymuch" data-slug-hash="zbOwxP" style="height: 309px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS的“层”峦“叠”翠 - 示例10 - zindex造成的影响">
+  <span>点击<a href="https://codepen.io/verymuch/pen/zbOwxP/" target="_blank" rel="noopener">
+  CSS的“层”峦“叠”翠 - 示例10 - zindex造成的影响</a> 进行编辑 (<a href="https://codepen.io/verymuch" target="_blank" rel="noopener">@verymuch</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> --><p></p>
+<p>但如果我们在某些时候需要调整DIV#3的z-index，如将其调整成<code>z-index: 4;</code>，那么结果就完全不一样了。如下例11所示，DIV#4高于DIV#2了。</p>
+<p><img src="http://p7.qhimg.com/t014fbc7fb2ca27f66c.png" alt="示例11 - zindex造成的影响（2）"></p>
+<p></p><p class="codepen" data-height="344" data-theme-id="0" data-default-tab="result" data-user="verymuch" data-slug-hash="WmejjG" style="height: 344px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS的“层”峦“叠”翠 - 示例11 - zindex造成的影响（2）">
+  <span>See the Pen <a href="https://codepen.io/verymuch/pen/WmejjG/" target="_blank" rel="noopener">
+  CSS的“层”峦“叠”翠 - 示例11 - zindex造成的影响（2）</a> by verymuch (<a href="https://codepen.io/verymuch" target="_blank" rel="noopener">@verymuch</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<!-- <script async src="https://static.codepen.io/assets/embed/ei.js"></script> --><p></p>
+<p>所以笔者建议，大家一定要慎用，基于对堆叠上下文的理解基础上，把握好页面中堆叠上下文的层级结构，尽量保持比较浅的层级结构，最好能与HTML层级结构一致，保证自己能够时刻知道如何进行修改与调整。</p>
+<h2><span id="总结">总结</span></h2><p>以上，笔者从元素的默认堆叠顺序，讲到了堆叠上下文的生成。对上述内容了解之后，就能够很好地应对开发中所遇到的层级问题了。不过还是建议大家在开发前，提前规划好z-index的使用。避免最后自己无法掌控。</p>
+<h2><span id="参考文献">参考文献</span></h2><blockquote>
+<ol>
+<li><a href="https://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/" target="_blank" rel="noopener">深入理解CSS中的层叠上下文和层叠顺序</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index" target="_blank" rel="noopener">Understanding CSS z-index</a></li>
+</ol>
+</blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://verymuch.com/2019/01/18/CSS的“层”峦“叠”翠/" data-id="cjth2xmi40010jt4sg3s7pp1i" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://verymuch.com/2019/01/18/CSS的“层”峦“叠”翠/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2019/01/18/CSS的“层”峦“叠”翠/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/03/20/细数最新的CSS微元素及其用法/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    细数CSS伪元素及其用法
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2019/01/06/ES-Module-And-Questions/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">ES模块基础用法及常见使用问题</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/20/highlight-pe/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/03/20/highlight-pe/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2019-03-20T09:37:55.129Z" itemprop="datePublished">2019-03-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/20/first-letter/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/03/20/first-letter/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2019-03-20T07:58:04.797Z" itemprop="datePublished">2019-03-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/20/first-line/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/03/20/first-line/" class="title"></a></p>
+                            <p class="item-date"><time datetime="2019-03-20T06:26:52.315Z" itemprop="datePublished">2019-03-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/20/细数最新的CSS微元素及其用法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/03/20/细数最新的CSS微元素及其用法/" class="title">细数CSS伪元素及其用法</a></p>
+                            <p class="item-date"><time datetime="2019-03-20T03:29:11.000Z" itemprop="datePublished">2019-03-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/01/18/CSS的“层”峦“叠”翠/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://p5.qhimg.com/t016a34c4e389a7abb8.jpg)" alt="CSS的“层”峦“叠”翠" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/01/18/CSS的“层”峦“叠”翠/" class="title">CSS的“层”峦“叠”翠</a></p>
+                            <p class="item-date"><time datetime="2019-01-18T09:59:47.000Z" itemprop="datePublished">2019-01-18</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WoT/">WoT</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CSS/" style="font-size: 20px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/WoT/" style="font-size: 10px;">WoT</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <!-- <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2019 verymuch<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div> -->
+    <!-- <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://verymuch.com/2019/01/18/CSS的“层”峦“叠”翠/';
+        
+        this.page.identifier = 'CSS的“层”峦“叠”翠';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
