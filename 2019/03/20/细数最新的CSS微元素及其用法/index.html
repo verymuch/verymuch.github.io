@@ -5,12 +5,12 @@
     
     <title>细数CSS伪元素及其用法 | 歪马行空</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="引言CSS中有两个很常见的概念，伪类和伪元素。 伪类用于在页面中的元素处于某个状态时，为其添加指定的样式。 伪元素会创建一个抽象的伪元素，这个元素不是DOM中的真实元素，但是会在最终的渲染树中，我们可以为其添加样式。 最常规的区分伪类和伪元素的方法是：想要实现伪类的效果可以通过添加类来实现，但是想要实现伪元素的等价效果">
+    <meta name="description" content="引言CSS中有两个很常见的概念，伪类和伪元素。 伪类用于在页面中的元素处于某个状态时，为其添加指定的样式。 伪元素会创建一个抽象的伪元素，这个元素不是DOM中的真实元素，但是会存在于最终的渲染树中，我们可以为其添加样式。 最常规的区分伪类和伪元素的方法是：实现伪类的效果可以通过添加类来实现，但是想要实现伪元素的等价效果">
 <meta property="og:type" content="article">
 <meta property="og:title" content="细数CSS伪元素及其用法">
 <meta property="og:url" content="http://verymuch.com/2019/03/20/细数最新的CSS微元素及其用法/index.html">
 <meta property="og:site_name" content="歪马行空">
-<meta property="og:description" content="引言CSS中有两个很常见的概念，伪类和伪元素。 伪类用于在页面中的元素处于某个状态时，为其添加指定的样式。 伪元素会创建一个抽象的伪元素，这个元素不是DOM中的真实元素，但是会在最终的渲染树中，我们可以为其添加样式。 最常规的区分伪类和伪元素的方法是：想要实现伪类的效果可以通过添加类来实现，但是想要实现伪元素的等价效果只能创建实际的DOM节点。 此外，伪类是使用单冒号:，伪元素使用是双冒号">
+<meta property="og:description" content="引言CSS中有两个很常见的概念，伪类和伪元素。 伪类用于在页面中的元素处于某个状态时，为其添加指定的样式。 伪元素会创建一个抽象的伪元素，这个元素不是DOM中的真实元素，但是会存在于最终的渲染树中，我们可以为其添加样式。 最常规的区分伪类和伪元素的方法是：实现伪类的效果可以通过添加类来实现，但是想要实现伪元素的等价效果只能创建实际的DOM节点。 此外，伪类是使用单冒号:，伪元素使用是双冒号">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://p0.qhimg.com/t0132539fc584f4ad64.png">
 <meta property="og:image" content="http://p7.qhimg.com/t01ab69821d22fe9427.png">
@@ -23,10 +23,10 @@
 <meta property="og:image" content="http://p3.qhimg.com/t018df68977e4e5eb69.png">
 <meta property="og:image" content="http://p2.qhimg.com/t01c2ea1fa19a2683a8.png">
 <meta property="og:image" content="http://p8.qhimg.com/t011001903fb568784f.png">
-<meta property="og:updated_time" content="2019-03-20T10:48:38.881Z">
+<meta property="og:updated_time" content="2019-03-20T11:09:11.727Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="细数CSS伪元素及其用法">
-<meta name="twitter:description" content="引言CSS中有两个很常见的概念，伪类和伪元素。 伪类用于在页面中的元素处于某个状态时，为其添加指定的样式。 伪元素会创建一个抽象的伪元素，这个元素不是DOM中的真实元素，但是会在最终的渲染树中，我们可以为其添加样式。 最常规的区分伪类和伪元素的方法是：想要实现伪类的效果可以通过添加类来实现，但是想要实现伪元素的等价效果只能创建实际的DOM节点。 此外，伪类是使用单冒号:，伪元素使用是双冒号">
+<meta name="twitter:description" content="引言CSS中有两个很常见的概念，伪类和伪元素。 伪类用于在页面中的元素处于某个状态时，为其添加指定的样式。 伪元素会创建一个抽象的伪元素，这个元素不是DOM中的真实元素，但是会存在于最终的渲染树中，我们可以为其添加样式。 最常规的区分伪类和伪元素的方法是：实现伪类的效果可以通过添加类来实现，但是想要实现伪元素的等价效果只能创建实际的DOM节点。 此外，伪类是使用单冒号:，伪元素使用是双冒号">
 <meta name="twitter:image" content="http://p0.qhimg.com/t0132539fc584f4ad64.png">
     
 
@@ -275,15 +275,15 @@
 
 <h2><span id="引言">引言</span></h2><p>CSS中有两个很常见的概念，伪类和伪元素。</p>
 <p>伪类用于在页面中的元素处于某个状态时，为其添加指定的样式。</p>
-<p>伪元素会创建一个抽象的伪元素，这个元素不是DOM中的真实元素，但是会在最终的渲染树中，我们可以为其添加样式。</p>
-<p>最常规的区分伪类和伪元素的方法是：想要实现伪类的效果可以通过添加类来实现，但是想要实现伪元素的等价效果只能创建实际的DOM节点。</p>
-<p>此外，伪类是使用单冒号<code>:</code>，伪元素使用是双冒号<code>:</code>。</p>
-<p>伪元素可以分为排版伪元素、突出显示伪元素、tree-abiding伪元素。下面我们一起看看具体都有哪些吧。</p>
+<p>伪元素会创建一个抽象的伪元素，这个元素不是DOM中的真实元素，但是会存在于最终的渲染树中，我们可以为其添加样式。</p>
+<p>最常规的区分伪类和伪元素的方法是：<strong>实现伪类的效果可以通过添加类来实现，但是想要实现伪元素的等价效果只能创建实际的DOM节点。</strong></p>
+<p>此外，伪类是使用单冒号<code>:</code>，伪元素使用是双冒号<code>::</code>。</p>
+<p>伪元素可以分为排版伪元素、突出显示伪元素、树中伪元素三类。下面我们一起看看具体都有哪些吧。</p>
 <blockquote>
-<p>本文主要介绍<a href="https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#window-interface" target="_blank" rel="noopener">CSS Pseudo-Elements Module Level 4</a>涉及的伪元素，因为该标准仍处于草案阶段，所以会存在变动的可能。本文旨在带大家了解有哪些现在以及将来可用的伪类。看兴趣的可以持续跟进。</p>
+<p>本文主要介绍<a href="https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#window-interface" target="_blank" rel="noopener">CSS Pseudo-Elements Module Level 4</a>涉及的伪元素，因为该标准仍处于草案阶段，所以会存在变动的可能。本文旨在带大家了解有哪些现在以及将来可用的伪类。有兴趣的可以持续跟进。</p>
 </blockquote>
 <a id="more"></a>
-<h2><span id="第一类排版伪元素">第一类：排版伪元素</span></h2><h3><span id="1-first-line伪元素">1. <code>::first-line</code>伪元素</span></h3><p>这个伪元素大家应该很熟悉，因为早在CSS2.1中就存在了。它用于描述所属源元素的第一格式化行。可以定义这一行的样式。</p>
+<h2><span id="第一类排版伪元素">第一类：排版伪元素</span></h2><h3><span id="1-first-line伪元素">1. <code>::first-line</code>伪元素</span></h3><p>这个伪元素大家应该很熟悉，因为早在CSS2.1中就存在了。它表示所属源元素的第一格式化行。可以定义这一行的样式。</p>
 <p>如下面的CSS和HTML代码，其对应的效果如图所示。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span><span class="selector-pseudo">::first-line</span> &#123;</span><br><span class="line">  <span class="attribute">text-transform</span>: uppercase;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus quisquam ipsum sunt doloribus accusamus quae atque quaerat quam deleniti beatae, ipsam nobis dignissimos fugiat reiciendis error deserunt. Odio, eligendi placeat.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -298,12 +298,12 @@
 <h4><span id="11-如何确定第一格式化行">1.1 如何确定第一格式化行</span></h4><p>需要注意的是，<code>::first-line</code>伪元素只有应用在块级容器上才有效，且必须出现在相同流中的块级子孙元素中（即没有定位和浮动）。</p>
 <p>如下所示，DIV的首行就是P元素的首行</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Lorem ipsum<span class="tag">&lt;/<span class="name">p</span>&gt;</span> dolor sit amet consectetur adipisicing elit. Omnis asperiores voluptatem sit ipsa ex fugit provident tenetur eum pariatur impedit cumque corrupti iste expedita, esse nulla ad et excepturi. Iste!</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 等价抽象代码 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">div::first-line</span>&gt;</span>Lorem ipsum<span class="tag">&lt;/<span class="name">div::first-line</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span> dolor sit amet consectetur adipisicing elit. Omnis asperiores voluptatem sit ipsa ex fugit provident tenetur eum pariatur impedit cumque corrupti iste expedita, esse nulla ad et excepturi. Iste!</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://p7.qhimg.com/t01ab69821d22fe9427.png" alt="内嵌块级元素的首行"></p>
-<p>此外，display值为<code>table-cell</code>和<code>inline-block</code>的元素的内容，不能作为祖先元素的第一格式化行内容。</p>
-<p>如下所示，如果将上面HTML代码中P改为<code>display: inline-block</code>，则其不会应用首行效果。</p>
+<p><img src="http://p7.qhimg.com/t01ab69821d22fe9427.png" alt="内嵌块级元素的首行效果"></p>
+<p>如果display值为<code>table-cell</code>和<code>inline-block</code>的元素的内容，不能作为祖先元素的第一格式化行内容。</p>
+<p>如下所示，如果将上面HTML代码中p标签改为<code>display: inline-block</code>，则其不会应用首行效果。</p>
 <p>如下所示，可以看出Lorem ipsum仍为小写：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"display: inline-block;"</span>&gt;</span>Lorem ipsum<span class="tag">&lt;/<span class="name">p</span>&gt;</span> dolor sit amet consectetur adipisicing elit. Omnis asperiores voluptatem sit ipsa ex fugit</span><br><span class="line">  provident tenetur eum pariatur impedit cumque corrupti iste expedita, esse nulla ad et excepturi. Iste!</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 等价抽象代码 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"display: inline-block;"</span>&gt;</span>Lorem ipsum<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">div::first-line</span>&gt;</span> dolor sit amet consectetur adipisicing elit. Omnis<span class="tag">&lt;/<span class="name">div::first-line</span>&gt;</span> asperiores voluptatem sit ipsa ex fugit</span><br><span class="line">  provident tenetur eum pariatur impedit cumque corrupti iste expedita, esse nulla ad et excepturi. Iste!</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://p2.qhimg.com/t01b5169338f4d74fe9.png" alt="内嵌非块级元素的首行"></p>
+<p><img src="http://p2.qhimg.com/t01b5169338f4d74fe9.png" alt="内嵌非块级元素的首行效果"></p>
 <h4><span id="12-可以用于first-line伪元素的样式">1.2 可以用于<code>::first-line</code>伪元素的样式</span></h4><p><code>::first-line</code>生成的伪元素的行为类似于一个行级元素，还有一些其他限制。主要有以下样式可以应用于其上：</p>
 <ul>
 <li>所有的字体属性</li>
@@ -315,9 +315,9 @@
 <li>其他一些规范中特别指定可以应用的属性</li>
 </ul>
 <p>此外，浏览器厂商有可能额外应用其他属性。</p>
-<h3><span id="2-first-letter伪元素">2. <code>::first-letter</code>伪元素</span></h3><p><code>::first-letter</code>伪元素代表所属源元素的第一格式化行的第一个排版字符单元，并且其前面没有任何其他内容。</p>
+<h3><span id="2-first-letter伪元素">2. <code>::first-letter</code>伪元素</span></h3><p><code>::first-letter</code>伪元素代表所属源元素的第一格式化行的第一个排版字符单元，且其前面不能有任何其他内容。</p>
 <p><code>::first-letter</code>常用于下沉首字母效果。</p>
-<p>如下，我们可以创建一个下沉两行的段落。第一种方法，是[CSS-INLINE-3]:(<a href="https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#biblio-css-inline-3)中引入的，浏览器尚不支持。我们可以通过第二种方法实现同样的效果。" target="_blank" rel="noopener">https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#biblio-css-inline-3)中引入的，浏览器尚不支持。我们可以通过第二种方法实现同样的效果。</a></p>
+<p>如下，我们可以创建一个下沉两行的段落。第一种方法，是<a href="https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#biblio-css-inline-3" target="_blank" rel="noopener">CSS-INLINE-3</a>中引入的，浏览器尚不支持。我们可以通过第二种方法实现同样的效果。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>“Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos hic vero reprehenderit sunt temporibus?</span><br><span class="line">  Doloribus consequatur quo illo porro quae recusandae autem eos. Corrupti itaque alias nam eius animi illum.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!<span class="selector-tag">--</span> <span class="selector-tag">initial-letter</span>(尚不支持) <span class="selector-tag">--</span>&gt;</span><br><span class="line"><span class="selector-tag">p</span><span class="selector-pseudo">::first-letter</span> &#123; <span class="attribute">initial-letter</span>: <span class="number">2</span>; &#125;</span><br><span class="line"></span><br><span class="line">&lt;!<span class="selector-tag">--</span> 普通实现 <span class="selector-tag">--</span>&gt;</span><br><span class="line"><span class="selector-tag">h3</span> + <span class="selector-tag">p</span><span class="selector-pseudo">::first-letter</span> &#123; </span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">32px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">15px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="http://p1.qhimg.com/t0160d558882af78a29.png" alt="首字母下沉效果"></p>
@@ -348,29 +348,28 @@
 <li>可以应用于行级元素的排版属性</li>
 <li>文字装饰属性</li>
 <li>可以用于行级元素的行布局属性</li>
-<li>margin和padding属性</li>
-<li>border和box-shadow</li>
+<li><code>margin</code>和<code>padding</code>属性</li>
+<li><code>border</code>和<code>box-shadow</code></li>
 <li>其他一些规范中特别指定可以应用的属性</li>
 </ul>
 <p>同样，浏览器厂商有可能额外应用其他属性。</p>
 <h2><span id="第二类突出显示伪元素">第二类：突出显示伪元素</span></h2><p>突出显示伪元素表示文档中特定状态的部分，通常采用不同的样式展示该状态。如页面内容的选中。</p>
-<p>突出显示伪元素不需要在元素树中有体现，并且可以任意跨越元素边界而不考虑其嵌套结构。</p>
+<p>突出显示伪元素<strong>不需要在元素树中有体现，并且可以任意跨越元素边界而不考虑其嵌套结构</strong>。</p>
 <p>突出显示伪元素主要有以下几类：</p>
 <ol>
-<li><code>::selection</code>与<code>::inactive-selection</code></li>
-</ol>
+<li><p><code>::selection</code>与<code>::inactive-selection</code></p>
 <p>这两个伪元素表示用户在文档中选取的内容。<code>::selection</code>表示有效的选择，相反，<code>::inactive-selection</code>表示无效的选择（如当窗口无效，无法相应选中事件时）</p>
 <p>如下图所示，我们可以定义页面中选中内容的样式，输入框中的内容也可以。</p>
 <p><img src="http://p3.qhimg.com/t018df68977e4e5eb69.png" alt="选中高亮样式"></p>
 <p>请原谅我也无法触发<code>::inactive-selection</code>。大家知道它是干啥的就行了。</p>
-<ol>
-<li><code>::spelling-error</code></li>
+</li>
+<li><p><code>::spelling-error</code></p>
+<p><code>::spelling-error</code>表示浏览器识别为拼写错误的文本部分。暂无实现。</p>
+</li>
+<li><p><code>::grammar-error</code></p>
+<p><code>::grammar-error</code>表示浏览器识别为语法错误的文本部分。暂无实现。</p>
+</li>
 </ol>
-<p><code>::spelling-error</code>表示浏览器识别为拼写错误的文本部分。</p>
-<ol>
-<li><code>::grammar-error</code></li>
-</ol>
-<p><code>::grammar-error</code>表示浏览器识别为语法错误的文本部分。</p>
 <p><code>::spelling-error</code>和<code>::grammar-error</code>暂时均无实现。一方面，不同的语言的语法与拼写较为复杂。另一方面，<code>::spelling-error</code>和<code>::grammar-error</code>还可能会导致用户隐私的泄露，如用户名和地址等。所以浏览器实现必须避免读取这类突出显示内容的样式。</p>
 <h3><span id="可以应用到突出显示类伪元素的样式">可以应用到突出显示类伪元素的样式</span></h3><p>对于突出显示类伪元素，我们只可以应用不影响布局的属性。如下：</p>
 <ul>
@@ -386,11 +385,11 @@
 <blockquote>
 <p>草案中对这里可以应用的属性还有待确认，所以会存在一定的增减。现阶段，也只有color和background得到了支持。</p>
 </blockquote>
-<h2><span id="第三类存在于元素树中的伪元素">第三类：存在于元素树中的伪元素</span></h2><p>这类伪元素会一直存在于元素树中，它们汇集成源元素的任何属性。</p>
-<h3><span id="内容生成伪元素beforeafter">内容生成伪元素：<code>::before</code>/<code>::after</code></span></h3><p>当<code>::before</code>/<code>::after</code>伪元素的<code>content</code>属性不为<code>&#39;none&#39;</code>时，这两类伪元素就会生成一个盒子，作为源元素的子元素，可以和DOM树中的元素一样定义样式。所以可以添加任意的样式。</p>
+<h2><span id="第三类存在于元素树中的伪元素树中伪元素">第三类：存在于元素树中的伪元素：树中伪元素</span></h2><p>这类伪元素会一直存在于元素树中，它们汇集成源元素的任何属性。</p>
+<h3><span id="1-内容生成伪元素beforeafter">1. 内容生成伪元素：<code>::before</code>/<code>::after</code></span></h3><p>当<code>::before</code>/<code>::after</code>伪元素的<code>content</code>属性不为<code>&#39;none&#39;</code>时，这两类伪元素就会生成一个元素，作为源元素的子元素，<strong>可以和DOM树中的元素一样定义样式</strong>。</p>
 <p><code>::before</code>是在源元素的实际内容前添加伪元素。<code>::after</code>是在源元素的实际内容后添加伪元素。</p>
 <p>正如上文提到的，与常规的元素一样，<code>::before</code>和<code>::after</code>两个伪元素可以包含<code>::first-line</code>和<code>::first-letter</code>。</p>
-<h3><span id="列表项标记伪元素markder">列表项标记伪元素：<code>::markder</code></span></h3><p><code>::markder</code>可以用于定义列表项标记的样式。</p>
+<h3><span id="2-列表项标记伪元素marker">2. 列表项标记伪元素：<code>::marker</code></span></h3><p><code>::markder</code>可以用于定义列表项标记的样式。</p>
 <p>如下，我们可以分开定义列表项及其内容的颜色。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">li</span>&#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">li</span><span class="selector-pseudo">::marker</span> &#123; </span><br><span class="line">  <span class="attribute">color</span>:green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -398,15 +397,20 @@
 <blockquote>
 <p>该伪元素暂时只有safari支持，尝试的话请使用safari。可以用于该伪元素的属性也有限，包括所有字体样式、<code>color</code>以及<code>text-combine-upright</code>，有待以后扩充。</p>
 </blockquote>
-<h3><span id="输入框占位伪元素placeholder">输入框占位伪元素：<code>::placeholder</code></span></h3><p><code>::placeholder</code>表示输入框内占位提示文字。可以定义其样式。</p>
+<h3><span id="3-输入框占位伪元素placeholder">3. 输入框占位伪元素：<code>::placeholder</code></span></h3><p><code>::placeholder</code>表示输入框内占位提示文字。可以定义其样式。</p>
 <p>如：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">::placeholder</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="http://p8.qhimg.com/t011001903fb568784f.png" alt="输入框占位伪元素样式"></p>
-<p>所有可以应用到<code>::first-line</code>伪元素的样式也可以用于<code>::placeholder</code>上。</p>
+<p><strong>所有可以应用到<code>::first-line</code>伪元素的样式都可以用于<code>::placeholder</code>上。</strong>可以参考上面的内容。</p>
 <blockquote>
 <p>注意还有一个<code>:placeholder-shown</code>伪类，它主要用于定义显示了占位文字的元元素本身的样式，而不是占位文字的样式。</p>
 </blockquote>
-<h2><span id="总结">总结</span></h2><p>本文列举了<a href="https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#window-interface" target="_blank" rel="noopener">CSS Pseudo-Elements Module Level 4</a>中的所有伪元素类型，虽然有些还没有得到支持，但是这也是伪元素的一种需求，如果你也有相同的需求，可以持续关注（见链接：<a href="https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#window-interface）。" target="_blank" rel="noopener">https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#window-interface）。</a></p>
+<h2><span id="总结">总结</span></h2><p>本文列举了<a href="https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#window-interface" target="_blank" rel="noopener">CSS Pseudo-Elements Module Level 4</a>中的所有伪元素类型。</p>
+<p>首先，详细介绍了排版类伪元素，这一类大家的使用场景较多，支持度也较好。</p>
+<p>其次，介绍了突出显示类伪元素，主要可以用于选中样式的修改，其他的尚未得到支持。</p>
+<p>最后，介绍了树中伪元素，包括<code>::before</code>/<code>::after</code>/<code>::marker</code>/<code>::placeholder</code></p>
+<p>虽然有些伪元素没有得到支持，或者可以应用的属性优先，但是CSS工作中正在进行一定的扩展。有兴趣的同学们可以持续关注。</p>
+<p>CSS Pseudo-Elements Module Level 4：<a href="https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#window-interface。" target="_blank" rel="noopener">https://www.w3.org/TR/2019/WD-css-pseudo-4-20190225/#window-interface。</a></p>
 
         
         </div>
@@ -417,7 +421,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2019/03/20/细数最新的CSS微元素及其用法/" data-id="cjth33hx10012lc4ski5zi2j4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2019/03/20/细数最新的CSS微元素及其用法/" data-id="cjth3zjs6001etz4sgv16gr1j" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
