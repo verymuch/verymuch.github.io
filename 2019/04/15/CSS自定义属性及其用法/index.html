@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>CSS自定义属性及其用法 | 歪马行空</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="大家可能不一定都用过CSS自定义属性（ CSS Custom Properties ），但是一定都用过预处理器中的变量。这也是CSS自定义属性有时候被称作CSS变量的原因。 但由于预处理器中变量的使用位置可以不局限在属性值，但是自定义属性只能作为属性值使用，所以其准确名称是CSS自定义属性，而不是CSS变量。 下面我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS自定义属性及其用法">
+<meta property="og:url" content="http://verymuch.com/2019/04/15/CSS自定义属性及其用法/index.html">
+<meta property="og:site_name" content="歪马行空">
+<meta property="og:description" content="大家可能不一定都用过CSS自定义属性（ CSS Custom Properties ），但是一定都用过预处理器中的变量。这也是CSS自定义属性有时候被称作CSS变量的原因。 但由于预处理器中变量的使用位置可以不局限在属性值，但是自定义属性只能作为属性值使用，所以其准确名称是CSS自定义属性，而不是CSS变量。 下面我们先从预处理器说起。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://p5.qhimg.com/t010354f98b40a72158.gif">
+<meta property="og:image" content="http://p2.qhimg.com/t01798e5d4c75bea3b8.png">
+<meta property="og:image" content="http://p5.qhimg.com/t01b36ee4b32405795f.png">
+<meta property="og:image" content="http://p4.qhimg.com/t0134e9c2742ab4e387.png">
+<meta property="og:updated_time" content="2019-04-15T09:54:37.894Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS自定义属性及其用法">
+<meta name="twitter:description" content="大家可能不一定都用过CSS自定义属性（ CSS Custom Properties ），但是一定都用过预处理器中的变量。这也是CSS自定义属性有时候被称作CSS变量的原因。 但由于预处理器中变量的使用位置可以不局限在属性值，但是自定义属性只能作为属性值使用，所以其准确名称是CSS自定义属性，而不是CSS变量。 下面我们先从预处理器说起。">
+<meta name="twitter:image" content="http://p5.qhimg.com/t010354f98b40a72158.gif">
+    
+
+    
+        <link rel="alternate" href="/" title="歪马行空" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/css/images/avatar2.jpg" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">歪马行空</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="https://github.com/verymuch">GitHub</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar0.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="https://github.com/verymuch">GitHub</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar0.jpg" />
+            <h2 id="name">verymuch</h2>
+            <h3 id="title">Web Developer ( FE )</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Beijing, China</span>
+            <a id="follow" target="_blank" href="https://github.com/verymuch/">关注我</a>
+            <div style="text-align: center;font-size: 12px;color: orange;">
+                <span id="busuanzi_container_site_pv">
+                    总访问量<span id="busuanzi_value_site_pv"></span>次
+                </span>
+            </div>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                14
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                5
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/verymuch" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-CSS自定义属性及其用法" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            CSS自定义属性及其用法
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2019/04/15/CSS自定义属性及其用法/">
+            <time datetime="2019-04-15T08:32:06.000Z" itemprop="datePublished">2019-04-15</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                        <span id="busuanzi_container_page_pv">
+                            <i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><link rel="stylesheet" href="/css/custom.css"></p>
+<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/generate-toc.js"></script>
+
+<p>大家可能不一定都用过CSS自定义属性（<a href="https://www.w3.org/TR/2015/CR-css-variables-1-20151203/" target="_blank" rel="noopener"> CSS Custom Properties </a>），但是一定都用过预处理器中的变量。这也是CSS自定义属性有时候被称作CSS变量的原因。</p>
+<p>但由于预处理器中变量的使用位置可以不局限在属性值，但是自定义属性只能作为属性值使用，所以其准确名称是CSS自定义属性，而不是CSS变量。</p>
+<p>下面我们先从预处理器说起。</p>
+<a id="more"></a>
+<h2><span id="一-预处理器中的变量">一、预处理器中的变量</span></h2><p>如果大家用过预处理器的话，一定会有这样的感触。设计师给的某个颜色值，只需要给其定义一个语义化的变量名，就可以在页面的任何（适当的）地方使用了，而不用记住或者复制粘贴这一色值。这样做的好处也是很明显，那就是当这一色值在多处使用需要修改时，直接修改变量的值即可。这就是预处理器中的变量的优势所在：<strong>减少复制粘贴，易于修改</strong>。</p>
+<p>不过撇开优点不谈，预处理器的变量也有一些缺点和限制，如下：</p>
+<ol>
+<li><strong>不能动态修改变量</strong>：预处理器是在编译时进行变量的处理，编译后变量其实就不存在了。</li>
+<li><strong>没有DOM结构，无法级联继承</strong>。</li>
+<li><strong>不能用JavaScript进行读写</strong>。</li>
+</ol>
+<p>看到这里大家都一定会想，既然预处理器变量有这些缺点，那是不是CSS的自定义属性就能做到这些呢？想知道的话，和我一起往下进行吧。</p>
+<h2><span id="二-如何定义自定义属性">二、如何定义自定义属性</span></h2><h3><span id="21-自定义属性名">2.1 自定义属性名</span></h3><p>CSS自定义属性的语法格式为<code>--*</code>，双横线加上具体的自定义属性名，属性名是一个合法的CSS<a href="https://www.w3.org/TR/css-syntax-3/#identifier" target="_blank" rel="noopener">标识符</a>即可。</p>
+<p>自定义属性没有具体的CSS含义，其用途完全由作者和使用者决定。自定义属性可以<strong>应用于任何元素，其可以被继承，并且支持级联，不支持动画</strong>。</p>
+<p>注意：与CSS属性不同，自定义属性是<strong>大小写敏感的</strong>。</p>
+<blockquote>
+<p>CSS不会被<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/all" target="_blank" rel="noopener"><code>all</code></a>属性重置，将来可能会定义一个重置所有变量的属性。</p>
+</blockquote>
+<h3><span id="22-自定义属性值">2.2 自定义属性值</span></h3><p>自定义属性值的要求可以说是非常地宽松，可以是任何有效的CSS值，如颜色、字符、布局的值、甚至是表达式。</p>
+<p>既然自定义属性值的要求如此宽松，那我们只需要知道有哪些情况不允许即可。</p>
+<p>只要自定义属性值不存在以下几种情况即为合法：无效字符值、无效url值、未配对的<code>)</code>/<code>]</code>/<code>}</code>、不能在最外层出现<code>;</code>、不能出现<code>!</code>。</p>
+<blockquote>
+<p>有个例外，自定义属性后面可以跟<code>!important</code>，但是这个<code>!important</code>其实并没有卵用，因为在进行属性值检测前就会将其移除。</p>
+</blockquote>
+<p>下面我们来看个自定义属性的例子，大家觉得下面这个是一个合法的自定义属性吗？</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--foo: if(x &gt; 5) this.width = 10;</span><br></pre></td></tr></table></figure>
+<p>答案是这是一个合法的自定义属性，但显然它并没有任何用处，因为将其用于其他任何常规属性是都是无效的。</p>
+<h3><span id="23-如何使用变量">2.3 如何使用变量</span></h3><p>通过<code>var()</code>函数，自定义属性的值可以用作另一个属性的值。<code>var()</code>的语法格式如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var() = var( <span class="tag">&lt;<span class="name">custom-property-name</span>&gt;</span> [, <span class="tag">&lt;<span class="name">declaration-value</span>&gt;</span> ]? )</span><br></pre></td></tr></table></figure>
+<p>其中第一个参数为自定义属性名，第二个参数为后备值。当传入的自定义属性无效或者不存在时，会使用后备值。</p>
+<p><strong><code>var()</code>可以用在属性值中的任何部分，但是不能用在属性名、选择器以及其他除属性值以外的地方。</strong></p>
+<p>注意，后备值允许逗号，如<code>var(--foo, red, blud)</code>会定义一个<code>red, blue</code>的后备值，也就是说第一个逗号之后的都会被当做默认值。</p>
+<p>好了，我们已经知道了<code>var()</code>的基础用法，那么<code>var()</code>是如何替换成具体值的呢？</p>
+<ol>
+<li>如果自定义属性的值为初始值以外的任何值，则直接将<code>var()</code>替换为对应的值。</li>
+<li>否则，如果<code>var()</code>函数有后备值，则替换成后备值，如果后备值中也有<code>var()</code>则同样进行替换。</li>
+<li>否则在计算值过程中，<code>var()</code>就是无效的。</li>
+</ol>
+<h3><span id="24-注意事项">2.4 注意事项</span></h3><h4><span id="1-自定义属性与动画">1. 自定义属性与动画</span></h4><p>上面有提到自定义属性不能用于动画。其实自定义属性可以出现在<code>@keyframs</code>中，但其行为较为特殊，会导致动画瑕疵，因为其只会在指定帧影响使用了自定义属性的可动画属性。如下所示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">  <span class="selector-pseudo">:root</span> &#123;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">--custom-color</span>: <span class="selector-id">#0f0</span>;</span></span><br><span class="line"><span class="undefined">    --custom-width: 200px;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="css">  <span class="selector-class">.box</span> &#123;</span></span><br><span class="line"><span class="undefined">    color: var(--custom-color);</span></span><br><span class="line"><span class="undefined">    width: var(--custom-width);</span></span><br><span class="line"><span class="undefined">    border: 1px solid grey;</span></span><br><span class="line"><span class="undefined">    animation: linear 3s scale-width;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="css">  @<span class="keyword">keyframes</span> scale-width &#123;</span></span><br><span class="line"><span class="undefined">    50% &#123;</span></span><br><span class="line"><span class="undefined">	  --custom-width: 400px;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi rerum labore numquam quo magni, modi quas dolores maiores alias! Consequatur optio error fugit velit, et veritatis quidem unde fuga nostrum?<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://p5.qhimg.com/t010354f98b40a72158.gif" alt=""></p>
+<p>可以看出，类<code>.box</code>元素<code>div</code>的宽度只发生了两次改变，这说明自定义属性无法进行动画，但是会在固定帧时生效，从而影响相关的属性。</p>
+<h4><span id="2-自定义属性大小写敏感">2. 自定义属性大小写敏感</span></h4><p>如下例所示，两个div内的字体颜色不一样，可以看出CSS自定义属性大小写敏感性。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">  <span class="selector-pseudo">:root</span> &#123;</span></span><br><span class="line"><span class="undefined">    --custom-color: red;</span></span><br><span class="line"><span class="undefined">    --CUSTOM-COLOR: green;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="css">  <span class="selector-class">.box--1</span> &#123;</span></span><br><span class="line"><span class="undefined">    color: var(--custom-color);</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="css">  <span class="selector-class">.box--2</span> &#123;</span></span><br><span class="line"><span class="undefined">    color: var(--CUSTOM-COLOR);</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box--1"</span>&gt;</span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi rerum labore numquam quo magni, modi quas dolores maiores alias! Consequatur optio error fugit velit, et veritatis quidem unde fuga nostrum?<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box--2"</span>&gt;</span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi rerum labore numquam quo magni, modi quas dolores maiores alias! Consequatur optio error fugit velit, et veritatis quidem unde fuga nostrum?<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://p2.qhimg.com/t01798e5d4c75bea3b8.png" alt=""></p>
+<h4><span id="3-自定义属性不能作为一个独立属性值的一部分">3. 自定义属性不能作为一个独立属性值的一部分</span></h4><p>自定义属性不能作为一个独立属性值的一部分， 如下所示：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.foo</span> &#123;</span><br><span class="line">  <span class="attribute">--gap</span>: <span class="number">20</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="built_in">var</span>(--gap)<span class="built_in">px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最终的并不是想象中的<code>margin-top: 20px</code>，而是<code>margin-top: 20 px</code>，而这是一个无效的值。这时我们可以用<code>calc()</code>函数来实现，如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.foo</span> &#123;</span><br><span class="line">  <span class="attribute">--gap</span>: <span class="number">20</span>;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="built_in">calc</span>(var(--gap) * <span class="number">1px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id="4-循环依赖">4. 循环依赖</span></h4><p>既然能通过<code>var()</code>使用变量，不知道大家是不是和我一样会有这样的疑问，如果使用变量的时候产生了闭环咋办呢？</p>
+<p>其实大家可以放心，CSS规范在定义自定义属性的时候已经考虑到了这一点。规范中将其称为<strong>依赖循环</strong>，如果自定义属性引用自己，或者两个以上的属性互相引用则会导致依赖循环。如下所示</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  <span class="comment">/* 自定义属性引用自己 */</span></span><br><span class="line">  <span class="attribute">--self</span>: <span class="built_in">calc</span>(var(--self) + <span class="number">10px</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 两个自定义属性互相引用 */</span></span><br><span class="line">  <span class="attribute">--one</span>: <span class="built_in">calc</span>(var(--two) + <span class="number">20px</span>);</span><br><span class="line">  <span class="attribute">--two</span>: <span class="built_in">calc</span>(var(--one) - <span class="number">20px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实对于依赖循环的处理也没有想象中的复杂，如果在计算属性的时候，发现了依赖依赖循环，则<strong>依赖循环中的所有自定义属性值都使用初始值代替</strong>。</p>
+<p>需要注意的是，<strong>自定义属性是在计算值时解析其中的<code>var()</code>函数的，这一步是在值继承之前</strong>。所以只有同一元素上的多个自定义属性相互引用时才会导致依赖循环；元素树中父级元素上的自定义属性不会导致子孙元素自定义属性的循环依赖。</p>
+<p>如下所示，<code>two</code>中的<code>—-bar</code>在被<code>three</code>继承前值已经为<code>calc(10px + 10px)</code>，所以最终<code>three</code>中<code>--foo</code>的值为<code>30px</code>，并不会导致循环依赖。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;one&gt;<span class="xml"><span class="tag">&lt;<span class="name">two</span>&gt;</span><span class="tag">&lt;<span class="name">three</span> /&gt;</span><span class="tag">&lt;/<span class="name">two</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">one</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">one   &#123; --foo: <span class="number">10</span>px; &#125;</span><br><span class="line">two   &#123; --bar: calc(<span class="keyword">var</span>(--foo) + <span class="number">10</span>px); &#125;</span><br><span class="line">three &#123; --foo: calc(<span class="keyword">var</span>(--bar) + <span class="number">10</span>px); &#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="三-自定义属性的优势">三、自定义属性的优势</span></h2><p>前面提到了预处理器中，自定义属性有三个局限或缺点。那么CSS引入的自定义属性是否具备了相应的特性呢。是的，CSS自定义属性是具备的。</p>
+<ol>
+<li><strong>可以动态修改自定义属性</strong></li>
+<li><strong>有DOM结构的概念，可以级联继承</strong>。</li>
+<li><strong>可以用JavaScript进行读写</strong>。</li>
+</ol>
+<h3><span id="31-动态修改自定义属性">3.1 动态修改自定义属性</span></h3><p>我们先看下下例中SCSS代码和CSS自定义属性的对比：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SCSS</span></span><br><span class="line"><span class="variable">$custom-size</span>: <span class="number">16px</span>;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">media</span> (min-width: 1000px) &#123;</span><br><span class="line">  <span class="variable">$custom-size</span>: <span class="number">28px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line"> <span class="attribute">font-size</span>: <span class="variable">$custom-size</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// CSS自定义属性</span></span><br><span class="line">:root &#123;</span><br><span class="line">  --custom-size: <span class="number">16px</span>;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> (min-width: 1000px) &#123;</span><br><span class="line">  :root &#123;</span><br><span class="line">    --custom-size: <span class="number">28px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: var(--custom-size)；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你实际试一下的话，你会发现使用SCSS预编译器时，在视口宽度变化时，并不能改变字体大小。而使用自定义属性时，当窗口宽度大于1000px时，字体会相应变大。</p>
+<h3><span id="32-有dom结构的概念可以级联继承">3.2 有DOM结构的概念，可以级联继承</span></h3><p>CSS自定义属性时存在DOM结构的概念，并且可以继承。如下例所示：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">:root &#123;</span><br><span class="line">  <span class="comment">--custom-color: red;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">div</span> &#123;</span><br><span class="line">  <span class="comment">--custom-color: green;</span></span><br><span class="line">&#125;</span><br><span class="line">p &#123;</span><br><span class="line">  color: var(<span class="comment">--custom-color)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;<span class="keyword">div</span>&gt;&lt;p&gt;Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi rerum labore numquam quo magni, modi quas dolores maiores <span class="built_in">alias</span>! Consequatur optio <span class="keyword">error</span> fugit velit, et veritatis quidem unde fuga nostrum?&lt;/p&gt;&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;p&gt;Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi rerum labore numquam quo magni, modi quas dolores maiores <span class="built_in">alias</span>! Consequatur optio <span class="keyword">error</span> fugit velit, et veritatis quidem unde fuga nostrum?&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>其中第一个div内的p标签内的颜色为绿色，因为自定义属性继承了div中的值，而第二个p标签中文字颜色即为红色，因为它的值来自全局的<code>:root</code>中的自定义属性。</p>
+<p><img src="http://p5.qhimg.com/t01b36ee4b32405795f.png" alt=""></p>
+<h3><span id="32-使用javascript进行读写">3.2 使用JavaScript进行读写</span></h3><p>我们可以通过<code>window.getComputedStyle(element)</code>的方法<code>getPropertyValue</code>获取属性值，通过<code>el.style.setProperty</code>来设置属性值。</p>
+<p>如下所示，我们可以先获取当前元素的字体大小，然后再对其进行修改：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">:root &#123;</span><br><span class="line">  --custom-font-size: 12px;</span><br><span class="line">&#125;</span><br><span class="line">p &#123;</span><br><span class="line">  font-size: var(--custom-font-size);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"p1"</span>&gt;</span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa, pariatur maiores esse perspiciatis quam itaque modi impedit soluta, reiciendis voluptatem non obcaecati dolorum eveniet ad reprehenderit hic eligendi maxime repudiandae.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> el = <span class="built_in">document</span>.getElementById(<span class="string">'p1'</span>)</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> currSize = <span class="built_in">window</span>.getComputedStyle(el).getPropertyValue(<span class="string">'--custom-font-size'</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 计算新的大小</span></span><br><span class="line">  <span class="keyword">const</span> newSize = ( currSize.split(<span class="string">'px'</span>)[<span class="number">0</span>] * <span class="number">2</span>) + <span class="string">'px'</span></span><br><span class="line"></span><br><span class="line">  el.style.setProperty(<span class="string">'--custom-font-size'</span>, newSize)</span><br><span class="line">&#125;, <span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
+<p>执行如上代码，会发现，三秒后，字体的的大小会增大一倍，这就是通过JavaScript对自定义属性操作的结果。</p>
+<h2><span id="四-兼容性">四、兼容性</span></h2><p><img src="http://p4.qhimg.com/t0134e9c2742ab4e387.png" alt="">
+如图所示，目前主流的浏览器对于自定义属性都已经有了很好的兼容性。所以如果你的产品只用兼容现代浏览器，而且可以通过类似<code>postcss-css-variables</code>的插件来实现兼容，那么你就完全可以用起来了。或者也可以通过优雅降级的方式分别加载带有CSS自定义属性和不带有CSS自定义属性的代码。</p>
+<h2><span id="总结">总结</span></h2><p>本文介绍了CSS自定义属性的用法及其所具备的几个优势，但限于篇幅有限，本文没有介绍CSS自定属性的使用场景。其实CSS自定义属非常适合用来实现主题的切换，感兴趣的可以自己参考一下。</p>
+<h2><span id="参考链接">参考链接</span></h2><blockquote>
+<ol>
+<li><a href="https://www.w3.org/TR/2015/CR-css-variables-1-20151203/" target="_blank" rel="noopener">https://www.w3.org/TR/2015/CR-css-variables-1-20151203/</a></li>
+<li><a href="https://www.smashingmagazine.com/2017/04/start-using-css-custom-properties/" target="_blank" rel="noopener">https://www.smashingmagazine.com/2017/04/start-using-css-custom-properties/</a></li>
+<li><a href="https://www.smashingmagazine.com/2018/05/css-custom-properties-strategy-guide/" target="_blank" rel="noopener">https://www.smashingmagazine.com/2018/05/css-custom-properties-strategy-guide/</a></li>
+<li><a href="https://www.w3cplus.com/css3/start-using-css-custom-properties.html" target="_blank" rel="noopener">https://www.w3cplus.com/css3/start-using-css-custom-properties.html</a></li>
+</ol>
+</blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://verymuch.com/2019/04/15/CSS自定义属性及其用法/" data-id="cjw8x8ryn001l0z4s5s7p4aya" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://verymuch.com/2019/04/15/CSS自定义属性及其用法/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2019/04/15/CSS自定义属性及其用法/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/03/20/细数最新的CSS微元素及其用法/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">细数CSS伪元素及其用法</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/04/15/CSS自定义属性及其用法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/04/15/CSS自定义属性及其用法/" class="title">CSS自定义属性及其用法</a></p>
+                            <p class="item-date"><time datetime="2019-04-15T08:32:06.000Z" itemprop="datePublished">2019-04-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/03/20/细数最新的CSS微元素及其用法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/03/20/细数最新的CSS微元素及其用法/" class="title">细数CSS伪元素及其用法</a></p>
+                            <p class="item-date"><time datetime="2019-03-20T03:29:11.000Z" itemprop="datePublished">2019-03-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/01/18/CSS的“层”峦“叠”翠/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://p5.qhimg.com/t016a34c4e389a7abb8.jpg)" alt="CSS的“层”峦“叠”翠" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/01/18/CSS的“层”峦“叠”翠/" class="title">CSS的“层”峦“叠”翠</a></p>
+                            <p class="item-date"><time datetime="2019-01-18T09:59:47.000Z" itemprop="datePublished">2019-01-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/01/06/ES-Module-And-Questions/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/01/06/ES-Module-And-Questions/" class="title">ES模块基础用法及常见使用问题</a></p>
+                            <p class="item-date"><time datetime="2019-01-06T11:18:47.000Z" itemprop="datePublished">2019-01-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/09/web-browser-cache-strategy/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/10/09/web-browser-cache-strategy/" class="title">浏览器缓存策略之扫盲篇</a></p>
+                            <p class="item-date"><time datetime="2018-10-09T07:45:32.000Z" itemprop="datePublished">2018-10-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WoT/">WoT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/沉淀/">沉淀</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CSS/" style="font-size: 20px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/WoT/" style="font-size: 10px;">WoT</a> <a href="/tags/沉淀/" style="font-size: 20px;">沉淀</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <!-- <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2019 verymuch<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div> -->
+    <!-- <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://verymuch.com/2019/04/15/CSS自定义属性及其用法/';
+        
+        this.page.identifier = 'CSS自定义属性及其用法';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
