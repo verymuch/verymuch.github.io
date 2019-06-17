@@ -3,21 +3,25 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Hello World | 歪马行空</title>
+    <title>base64原理浅析 | 歪马行空</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troublesho">
+    <meta name="description" content="前言上一次，我写了一篇《Data URL的简介与使用》，该文章主要介绍了什么是Data URL，其优缺点及可以如何使用。其中有一个隐含在文中的重要概念，那就是Data URL是Base64编码的，且Base64编码的数据体积通常是原数据的体积4/3。 不知道大家会不会有这样的疑问：  为什么图片转成Base64编码，就">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://verymuch.com/2017/01/07/hello-world/index.html">
+<meta property="og:title" content="base64原理浅析">
+<meta property="og:url" content="http://verymuch.com/2019/06/17/base64原理浅析/index.html">
 <meta property="og:site_name" content="歪马行空">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="前言上一次，我写了一篇《Data URL的简介与使用》，该文章主要介绍了什么是Data URL，其优缺点及可以如何使用。其中有一个隐含在文中的重要概念，那就是Data URL是Base64编码的，且Base64编码的数据体积通常是原数据的体积4/3。 不知道大家会不会有这样的疑问：  为什么图片转成Base64编码，就可以直接内联到HTML中显示呢？ 为什么Base64编码后，体积会增大">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://p6.qhimg.com/t01559a4f6ea74e587a.jpg">
-<meta property="og:updated_time" content="2017-01-10T11:04:50.000Z">
+<meta property="og:image" content="http://p8.qhimg.com/t01cd05728cc2469e0a.png">
+<meta property="og:image" content="http://p7.qhimg.com/t011686deb97b16adb2.png">
+<meta property="og:image" content="http://p5.qhimg.com/t01d01e6b27d3c890ef.png">
+<meta property="og:image" content="http://p0.qhimg.com/t016bbb78cbf25acb9b.png">
+<meta property="og:image" content="http://p0.qhimg.com/t01155296dad2b34aa0.png">
+<meta property="og:updated_time" content="2019-06-17T02:36:31.187Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
-<meta name="twitter:image" content="http://p6.qhimg.com/t01559a4f6ea74e587a.jpg">
+<meta name="twitter:title" content="base64原理浅析">
+<meta name="twitter:description" content="前言上一次，我写了一篇《Data URL的简介与使用》，该文章主要介绍了什么是Data URL，其优缺点及可以如何使用。其中有一个隐含在文中的重要概念，那就是Data URL是Base64编码的，且Base64编码的数据体积通常是原数据的体积4/3。 不知道大家会不会有这样的疑问：  为什么图片转成Base64编码，就可以直接内联到HTML中显示呢？ 为什么Base64编码后，体积会增大">
+<meta name="twitter:image" content="http://p8.qhimg.com/t01cd05728cc2469e0a.png">
     
 
     
@@ -223,7 +227,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-base64原理浅析" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -231,7 +235,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Hello World
+            base64原理浅析
         </h1>
     
 
@@ -240,8 +244,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/01/07/hello-world/">
-            <time datetime="2017-01-07T00:40:48.000Z" itemprop="datePublished">2017-01-07</time>
+        <a href="/2019/06/17/base64原理浅析/">
+            <time datetime="2019-06-17T02:35:57.000Z" itemprop="datePublished">2019-06-17</time>
         </a>
     </div>
 
@@ -259,16 +263,38 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+            <p><link rel="stylesheet" href="/css/custom.css"></p>
+<script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/generate-toc.js"></script> 
+
+<h2><span id="前言">前言</span></h2><p>上一次，我写了一篇<a href="http://verymuch.site/2017/12/14/Data-URL%E7%AE%80%E4%BB%8B%E4%B8%8E%E4%BD%BF%E7%94%A8/" target="_blank" rel="noopener">《Data URL的简介与使用》</a>，该文章主要介绍了什么是Data URL，其优缺点及可以如何使用。其中有一个隐含在文中的重要概念，那就是Data URL是Base64编码的，且Base64编码的数据体积通常是原数据的体积4/3。</p>
+<p>不知道大家会不会有这样的疑问：</p>
+<ol>
+<li>为什么图片转成Base64编码，就可以直接内联到HTML中显示呢？</li>
+<li>为什么Base64编码后，体积会增大1/3呢？</li>
+</ol>
+<p>如果你对此也有疑问的话，就往下一看究竟吧。</p>
 <a id="more"></a>
-<h2><span id="quick-start">Quick Start</span></h2><h3><span id="create-a-new-post">Create a new post</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3><span id="run-server">Run server</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3><span id="generate-static-files">Generate static files</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3><span id="deploy-to-remote-sites">Deploy to remote sites</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h2><span id="为什么base64编码可以内联到html中">为什么Base64编码可以内联到HTML中？</span></h2><p>我们知道HTTP协议是文本协议，不同于常规的二进制协议那样直接进行二进制传输。Base64编码是<strong>从二进制到字符的过程，可用于在HTTP环境下传递较长的标识信息。</strong></p>
+<h2><span id="什么是base64编码">什么是Base64编码</span></h2><p>首先Base64是一种编码算法，为什么叫做Base64呢？其实原因也很简单，是因为该算法共包含64个字符。包括大小写拉丁字母各26个、数字10个、加号<code>+</code>和斜杠<code>/</code>，共64个字符。此外还有等号<code>=</code>用来作为后缀用途。</p>
+<p>字符与索引的对应关系如下图所示。</p>
+<p><img src="http://p8.qhimg.com/t01cd05728cc2469e0a.png" alt="Base64编码算法支持的64个可打印字符"></p>
+<p>但，为什么Base64编码算法只支持64个字符呢？</p>
+<p>首先，我们先回顾下ASCII码。ASCII码的范围是0-127，其中0-31和127是控制字符，共33个。其余95个，即32-126是可打印字符，包括数字、大小写字母、常用符号等。如下图所示，图片来源（<a href="https://zh.wikipedia.org/wiki/ASCII" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/ASCII</a>）。</p>
+<p><img src="http://p7.qhimg.com/t011686deb97b16adb2.png" alt="ASCII码中的控制字符（部分）"></p>
+<p><img src="http://p5.qhimg.com/t01d01e6b27d3c890ef.png" alt="ASCII码中的可打印字符"></p>
+<p>早期的一些传输协议，例如邮件传输协议SMTP，只能传输可打印的ASCII字符。这样原本的8bit字节码（0-255）就会超出使用范围，从而到这无法传输。</p>
+<p>这时，就产生了Base64编码，它利用<strong>6bit字符来表达原本的8bit字符</strong>。</p>
+<h2><span id="base64编码原理">Base64编码原理</span></h2><p>上面我们知道了什么是Base64编码，知道了其包含的64个字符。它主要是通过6bit字符来表达原本的8bit字符。接下来我们一起学习下这一过程是如何进行的。</p>
+<p>首先，6bit显然不够容纳8bit的数据。6和8的最小公倍数是24，所以我们用4个Base64字符刚好能够表示三个传统的8bit字符。如下所示，字符串<code>Man</code>的编码图解如下：</p>
+<p><img src="http://p0.qhimg.com/t016bbb78cbf25acb9b.png" alt="字符串\`Man\`的编码图解"></p>
+<p><code>Man</code>的编码结果为<code>TWFu</code>，显然，Base64编码会多1/3的长度，这也解释了文中开头的疑问，为什么Base64编码后的体积会大1/3。</p>
+<p><code>Man</code>这个字符串的长度刚好是3，我们能用4个Base64来表示。如果待编码的字符串长度不是三的倍数时应该怎么处理呢？</p>
+<p>这是需要做一个特殊处理，假设带编码字符串长度为10。这前9个字符可以用12个Base64字符表示。第10个字符的前6bit作为一个Base64字符，<strong>剩下的2bit后面需要先补0，补到6位（此处补4个0）</strong>作为第二个Base64字符，至于第三个和第四个Base64字符，虽然没有相对应的内容，我们仍需<strong>以<code>=</code>填充</strong>。</p>
+<p>如下图所示，<code>A</code>对应的Base64编码为<code>QQ+==</code>，<code>BC</code>对应的Base64编码为<code>QkM=</code>。</p>
+<p><img src="http://p0.qhimg.com/t01155296dad2b34aa0.png" alt="字符串\`A\`和\`BC\`的编码图解"></p>
+<p>最后的问题就是解码啦，解码的过程比较简单。<strong>去掉末尾的等号<code>=</code>。剩下的Base64字符，每8bit组成一个8bit字节，最后剩余不足8位的丢弃即可。</strong></p>
+<h2><span id="总结">总结</span></h2><p>本文篇幅较短，旨在简单介绍Base64编码原理。相信看完之后，大家一定能够理解为什么Base64编码后体积会增大1/3，而不再是死记硬背这一特点。至少有这个收获就够啦。</p>
 
         
         </div>
@@ -279,7 +305,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2017/01/07/hello-world/" data-id="cjwzrtcil0000ezkj11un5sgn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2019/06/17/base64原理浅析/" data-id="cjwzrtcj3000iezkjclwyjo6x" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -347,7 +373,7 @@
 
             
     
-        <a href="http://verymuch.com/2017/01/07/hello-world/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2017/01/07/hello-world/">评论</a>
+        <a href="http://verymuch.com/2019/06/17/base64原理浅析/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2019/06/17/base64原理浅析/">评论</a>
     
 
         </footer>
@@ -356,15 +382,11 @@
         
 <nav id="article-nav">
     
-        <a href="/2017/01/07/个人管理：培养良好的生活、学习和工作习惯/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    个人管理：培养良好的生活、学习和工作习惯
-                
-            </div>
-        </a>
     
+        <a href="/2019/04/15/CSS自定义属性及其用法/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">CSS自定义属性及其用法</div>
+        </a>
     
 </nav>
 
@@ -564,9 +586,9 @@
     <script>
     var disqus_config = function () {
         
-            this.page.url = 'http://verymuch.com/2017/01/07/hello-world/';
+            this.page.url = 'http://verymuch.com/2019/06/17/base64原理浅析/';
         
-        this.page.identifier = 'hello-world';
+        this.page.identifier = 'base64原理浅析';
     };
     (function() { 
         var d = document, s = d.createElement('script');  
