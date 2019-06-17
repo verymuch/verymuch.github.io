@@ -165,11 +165,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                14
+                18
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                5
+                10
                 <span>标签</span>
             </div>
         </div>
@@ -280,7 +280,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/08/29/从撒狗粮带你了解WoT连接场景/" data-id="cjw8x8ryk001h0z4skjzh3l8k" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/08/29/从撒狗粮带你了解WoT连接场景/" data-id="cjwiutn6g0016xykj8tpnhbp2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -414,7 +414,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/08/19/W3C标准导读之标准化过程/" data-id="cjw8x8ryi001c0z4sv0eepuqr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/08/19/W3C标准导读之标准化过程/" data-id="cjwiutn6l001exykjfmjftpks" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -558,7 +558,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/07/22/CSS性能优化的8个技巧/" data-id="cjw8x8ryh001b0z4s1ivp4pxj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/07/22/CSS性能优化的8个技巧/" data-id="cjwiutn6g0015xykjcr75q2o7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -740,7 +740,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/05/23/如何清除行内元素之间的HTML空白/" data-id="cjw8x8ryg00190z4skury7eyg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/05/23/如何清除行内元素之间的HTML空白/" data-id="cjwiutn6b000vxykjdyfvbl6j" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -818,7 +818,7 @@
 
 
 
-    <article id="post-跳出forEach" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-如何建立数据库索引" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -826,7 +826,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2018/02/09/跳出forEach/">跳出forEach</a>
+            <a class="article-title" href="/2018/05/15/如何建立数据库索引/">如何建立数据库索引</a>
         </h1>
     
 
@@ -835,19 +835,14 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/02/09/跳出forEach/">
-            <time datetime="2018-02-09T01:39:23.000Z" itemprop="datePublished">2018-02-09</time>
+        <a href="/2018/05/15/如何建立数据库索引/">
+            <time datetime="2018-05-15T10:14:58.000Z" itemprop="datePublished">2018-05-15</time>
         </a>
     </div>
 
 
                         
                         
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Javascript/">Javascript</a>
-    </div>
-
                         <span id="busuanzi_container_page_pv">
                             <i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
                         </span>
@@ -862,9 +857,13 @@
 <script src="http://lib.baomitu.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/generate-toc.js"></script>
 
-<p>使用<code>for...in</code>遍历对象时，会遍历原型链上的可枚举属性，这可能会导致一些意想不到的问题。所以你一定收到过这样的建议，使用数组的<code>forEach</code>来代替<code>for...in</code>循环。</p></p>
+<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p>建立索引的目标是为了使数据库应用程序可以更快地查找数据。</p>
+<p>索引分单列索引和组合索引。<strong>单列索引</strong>，即一个索引只包含单个列，一个表可以有多个单列索引，但这不是组合索引。<strong>组合索引</strong>，即一个索引包含多个列。</p>
+<p>创建索引时，你需要确保该索引是应用在    SQL 查询语句的条件(一般作为 WHERE 子句的条件)。</p>
+<p>实际上，索引也是一张表，该表保存了主键与索引字段，并指向实体表的记录。</p>
+<p>虽然索引能够大大提升查询速录，但过多的使用索引将会造成滥用。因为索引也会有它的缺点：索引会降低更新表的速度，如对表进行<code>INSERT</code>、<code>UPDATE</code>和<code>DELETE</code>。因为更新表时，MySQL不仅要保存数据，还要保存一下索引文件。</p></p>
             <p class="article-more-link">
-                <a href="/2018/02/09/跳出forEach/#more">查看更多</a>
+                <a href="/2018/05/15/如何建立数据库索引/#more">查看更多</a>
             </p>
         
         </div>
@@ -875,7 +874,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2018/02/09/跳出forEach/" data-id="cjw8x8ryf00180z4szbh203z5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2018/05/15/如何建立数据库索引/" data-id="cjwzoiwm90002x6kj8ssvmux1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -943,7 +942,7 @@
 
             
     
-        <a href="http://verymuch.com/2018/02/09/跳出forEach/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2018/02/09/跳出forEach/">评论</a>
+        <a href="http://verymuch.com/2018/05/15/如何建立数据库索引/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://verymuch.com/2018/05/15/如何建立数据库索引/">评论</a>
     
 
         </footer>
@@ -954,7 +953,7 @@
 
 
     <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
+        <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
     </nav>
 </section>
             
@@ -1070,7 +1069,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GROWING-SPACE/">GROWING_SPACE</a><span class="category-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -1079,7 +1078,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -1088,7 +1087,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WoT/">WoT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/沉淀/">沉淀</a><span class="tag-list-count">2</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WoT/">WoT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/习惯/">习惯</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/他人经验总结/">他人经验总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作效率/">工作效率</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/有感/">有感</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/每日/">每日</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/沉淀/">沉淀</a><span class="tag-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -1097,7 +1096,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/CSS/" style="font-size: 20px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/WoT/" style="font-size: 10px;">WoT</a> <a href="/tags/沉淀/" style="font-size: 20px;">沉淀</a>
+            <a href="/tags/CSS/" style="font-size: 20px;">CSS</a> <a href="/tags/Javascript/" style="font-size: 10px;">Javascript</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/WoT/" style="font-size: 10px;">WoT</a> <a href="/tags/习惯/" style="font-size: 10px;">习惯</a> <a href="/tags/他人经验总结/" style="font-size: 10px;">他人经验总结</a> <a href="/tags/工作效率/" style="font-size: 10px;">工作效率</a> <a href="/tags/有感/" style="font-size: 20px;">有感</a> <a href="/tags/每日/" style="font-size: 10px;">每日</a> <a href="/tags/沉淀/" style="font-size: 20px;">沉淀</a>
         </div>
     </div>
 
