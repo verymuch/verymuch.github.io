@@ -17,7 +17,7 @@
 <meta property="og:image" content="http://p5.qhimg.com/t01d01e6b27d3c890ef.png">
 <meta property="og:image" content="http://p0.qhimg.com/t016bbb78cbf25acb9b.png">
 <meta property="og:image" content="http://p0.qhimg.com/t01155296dad2b34aa0.png">
-<meta property="og:updated_time" content="2019-06-17T02:36:31.187Z">
+<meta property="og:updated_time" content="2019-06-19T03:33:13.777Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="base64原理浅析">
 <meta name="twitter:description" content="前言上一次，我写了一篇《Data URL的简介与使用》，该文章主要介绍了什么是Data URL，其优缺点及可以如何使用。其中有一个隐含在文中的重要概念，那就是Data URL是Base64编码的，且Base64编码的数据体积通常是原数据的体积4/3。 不知道大家会不会有这样的疑问：  为什么图片转成Base64编码，就可以直接内联到HTML中显示呢？ 为什么Base64编码后，体积会增大">
@@ -291,7 +291,7 @@
 <p><code>Man</code>的编码结果为<code>TWFu</code>，显然，Base64编码会多1/3的长度，这也解释了文中开头的疑问，为什么Base64编码后的体积会大1/3。</p>
 <p><code>Man</code>这个字符串的长度刚好是3，我们能用4个Base64来表示。如果待编码的字符串长度不是三的倍数时应该怎么处理呢？</p>
 <p>这是需要做一个特殊处理，假设带编码字符串长度为10。这前9个字符可以用12个Base64字符表示。第10个字符的前6bit作为一个Base64字符，<strong>剩下的2bit后面需要先补0，补到6位（此处补4个0）</strong>作为第二个Base64字符，至于第三个和第四个Base64字符，虽然没有相对应的内容，我们仍需<strong>以<code>=</code>填充</strong>。</p>
-<p>如下图所示，<code>A</code>对应的Base64编码为<code>QQ+==</code>，<code>BC</code>对应的Base64编码为<code>QkM=</code>。</p>
+<p>如下图所示，<code>A</code>对应的Base64编码为<code>QQ==</code>，<code>BC</code>对应的Base64编码为<code>QkM=</code>。</p>
 <p><img src="http://p0.qhimg.com/t01155296dad2b34aa0.png" alt="字符串\`A\`和\`BC\`的编码图解"></p>
 <p>最后的问题就是解码啦，解码的过程比较简单。<strong>去掉末尾的等号<code>=</code>。剩下的Base64字符，每8bit组成一个8bit字节，最后剩余不足8位的丢弃即可。</strong></p>
 <h2><span id="总结">总结</span></h2><p>本文篇幅较短，旨在简单介绍Base64编码原理。相信看完之后，大家一定能够理解为什么Base64编码后体积会增大1/3，而不再是死记硬背这一特点。至少有这个收获就够啦。</p>
@@ -305,7 +305,7 @@
 
 </div>
 
-    <a data-url="http://verymuch.com/2019/06/17/base64原理浅析/" data-id="cjwzrtcj3000iezkjclwyjo6x" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://verymuch.com/2019/06/17/base64原理浅析/" data-id="cjx2om039000zkakjmbrycrcm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
